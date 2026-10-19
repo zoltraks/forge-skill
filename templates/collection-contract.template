@@ -1,0 +1,104 @@
+# Member Contract
+
+## Purpose
+
+> **Scope:** The behavior contract shared by every member skill of this collection.
+> **Key items:** bare activation, shared procedure filenames, update check, review modes,
+> repository conventions, member-owned variance.
+
+Each member skill is an external repository that owns its own files - this file records
+the conventions all members share, so collection maintenance can tell recorded variance
+from drift and a new member can conform without reverse-engineering its siblings.
+
+A member's own `AGENTS.md` and `SKILL.md` stay authoritative for that member - when this
+file and a member disagree, the member's documents win and the disagreement is either a
+recorded variance or drift that the member's own review resolves.
+
+## Activation
+
+Every member answers a bare `use <member>` request through `process/skill-activation.md` -
+the same filename in every member. The procedure carries the same section skeleton:
+Purpose, When This Applies, Procedure, Enablement Response, What Does Not Apply, and
+Relation To The Modes.
+
+The bare activation is informational standby: it reports the skill's name, version, and
+operation roster, then waits for the named task - it never resumes plans, edits, or runs
+operations on assumption.
+
+## Update Check
+
+Every member runs its `scripts/check-update.py` once per session, before any other step
+of a loaded skill, and never repeats it within the session.
+
+The check reports the upstream tip as a full `tip_sha` commit hash plus `tip_date`. The
+update path applies that reported commit with `git merge --ff-only <tip_sha>` - gated on
+the reported state (`ahead=0`, `dirty=no`) - then re-reads `SKILL.md` and any loaded rule
+files. The merge fast-forwards to the reported `tip_sha`, never a later tip, and applies
+upstream content without cryptographic verification - the trust anchor is the
+remote-tracking ref the `tip_sha` was reported from.
+
+A member on a detached HEAD reports `NO-UPSTREAM`. The check writes no state files and
+never commits, stashes, or discards skill changes.
+
+## Shared Procedures
+
+Three procedure filenames are shared across every member's `process/` directory:
+
+| File                          | Role                                              |
+|-------------------------------|---------------------------------------------------|
+| `process/skill-activation.md` | Bare-activation standby procedure                 |
+| `process/json-exchange.md`    | JSON parameter exchange format                    |
+| `process/session-review.md`   | Member session review the collection delegates to |
+
+A member may carry additional procedures beside them - the shared filenames exist so the
+collection and cross-member maintenance can locate the common surface by name.
+
+## Review Modes
+
+Every member's session review accepts the same two flags:
+
+- `autonomous` - also `automatic`, `unattended`, or `non-interactive` - resolves every
+  review gate to the recommended option and reports each resolution inline. It never
+  commits.
+- `verbose` - reports the full option list and the rationale at every surface.
+
+The collection's own session review passes both flags down to every delegated member
+review.
+
+Members generated through Forge additionally document `fully autonomous` in
+`process/decision-modes.md` - zero question surfaces with safe skipping and partial
+reporting - and the collection forwards that flag unchanged.
+
+## Repository Conventions
+
+- `AGENTS.md` is the agent-facing maintenance entry point. `SKILL.md` is the runtime
+  contract and carries frontmatter `name`, `description`, and `metadata.version`.
+- `evals/evals.json` holds behavioral regression prompts. Routing and gate changes
+  extend it.
+- A gitignored `work/` directory holds local artifacts. Shipped files never reference it.
+- A change set bumps the member's version at most once between commits. The cadence and
+  numbering format follow the member's own versioning document.
+- The agent never commits automatically - it proposes a one-sentence commit message and
+  leaves the commit to the user.
+- Prose prefers a comma or period between clauses. A spaced hyphen marks an aside or a
+  definitional separator, never a clause join.
+- Findings and shipped examples stay anonymized - no real names, paths, or project
+  identifiers supplied with a request.
+
+## Member-Owned Variance
+
+Variance is legitimate when the member's own documents record it.
+
+A member that gains or changes a shared-contract surface keeps the shared semantics - new
+variance is recorded in the member's own documents and reported to the collection's
+session review, which updates this file.
+
+## Relation To The Collection
+
+`process/session-review.md` partitions lessons by owner and delegates member lessons to
+each member's `process/session-review.md` - this file is the shared baseline that the
+delegation relies on, and it overrides nothing inside a member.
+
+The index may load several members on one task - each member still runs only its own
+procedures and never reaches into a sibling's directory, so a member's documents assume
+nothing about which siblings are active beside it.

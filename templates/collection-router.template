@@ -1,0 +1,102 @@
+---
+name: {{collection-name}}
+description: >-
+  {{collection-description}}
+license: MIT
+compatibility: >-
+  Designed for agent coding environments with file system access (Claude Code,
+  Claude Desktop, Windsurf, Devin, and similar). Requires the ability to read
+  text files. No network access required.
+metadata:
+  version: "{{skill-version}}"
+  author: {{skill-author}}
+---
+
+# {{collection-title}}
+
+> **Type:** Collection index and router
+> **Purpose:** {{collection-purpose}}
+
+## Contents
+
+| Section             | What it covers                              |
+|---------------------|---------------------------------------------|
+| Skills              | Member skill roster and routing             |
+| Layout              | Repository directory roles                  |
+| Usage               | How an agent consumes this index            |
+| Improvement         | Session review for the index and members    |
+| Enablement Response | What a bare activation prints for the human |
+
+## Skills
+
+| Skill | Path | Purpose |
+|-------|------|---------|
+{{member-table}}
+
+Member skills are always external repositories, arriving as git submodules cloned from
+their own repositories - never as sources authored inside the collection.
+
+New skills are added under `skills/<name>/` and registered here and in `README.md` in
+the same change set.
+
+## Layout
+
+| Path                         | Role                                         |
+|------------------------------|----------------------------------------------|
+| `AGENTS.md`                  | Agent entry point for maintaining the repo   |
+| `README.md`                  | Human-facing overview and directory tree     |
+| `process/member-contract.md` | Shared member-skill behavior contract        |
+| `process/session-review.md`  | Collection-level session-review procedure    |
+| `process/synchronization.md` | Member and collection fetch/merge/push       |
+| `skills/<name>/`             | One directory per member skill package       |
+| `work/`                      | Gitignored local workspace, dated daily dirs |
+
+## Usage
+
+- Member submodules must be fetched before any use. Whenever a skill is going to be
+  used - a bare collection activation or a request naming a member - first run
+  `git submodule update --init` in the collection root. A skill whose files are not
+  on disk cannot be loaded, routed to, or reported on.
+- Read the member skill's own `SKILL.md` before acting - it is the runtime contract
+  for that skill.
+- A request naming a member skill loads that skill directly, fetching its submodule
+  first if needed. This index only disambiguates requests that name no member.
+- A task that names no member is matched against every member's description, not
+  just the closest one - all members whose scope covers part of the task are
+  fetched and loaded together, and each applies its own procedures to the part it
+  covers. Picking a single recommended member and stopping there is wrong when
+  several members are applicable.
+- A bare `use {{collection-name}}` request enables every member in roster order:
+  fetch any unfetched members first, load each fetched member's `SKILL.md` and run
+  its own bare-activation procedure, then answer once with the Enablement Response
+  below and wait for the named task - the index performs no operation itself.
+- A request to merge remote, synchronize, or update the collection and its members
+  runs `process/synchronization.md` - fetch every remote first, fast-forward the
+  collection then each member, reconcile pins, and push members before the
+  collection.
+- Maintenance work on the collection itself starts from `AGENTS.md`, not from this
+  file.
+
+## Improvement
+
+- "improve {{collection-name}}", "improve the collection", or "review the session for
+  lessons" aimed at the collection runs `process/session-review.md`: lessons are
+  partitioned by owner, member lessons are delegated to each member's own
+  session-review procedure in roster order, and index lessons pass an approval gate
+  before touching root files.
+- "improve <member>" skips the index and runs that member's own procedure directly.
+- `autonomous`, `fully autonomous`, and `verbose` flags on the request apply to the
+  root gates and are passed down to every delegated member review - they grant no
+  member extra permissions.
+
+## Enablement Response
+
+A bare activation answers the human with one message: a status line naming the
+collection and its `metadata.version`, a roster line per member with the member's
+own version and purpose (or a "not initialized - run `git submodule update --init`"
+hint for an unfetched member), and a prompt for the task.
+
+The member skills' own enablement responses are folded into the roster lines rather
+than printed one after another.
+
+The response is informational only: after printing it, wait for the task.

@@ -1,0 +1,57 @@
+# Collection Session Review
+
+## Purpose
+
+> **Scope:** Collection-level session review - partition lessons by owner, delegate
+> member lessons, gate index lessons
+> **Key items:** gather, partition, delegation, index gate, ordering
+
+Follow it when the request asks to improve the collection from the session -
+"improve {{collection-name}}", "improve the collection", "review the session for
+lessons" aimed at the index.
+
+## Modes
+
+`autonomous` and `verbose` flags on the request apply to the root gates and are
+passed down to every delegated member review. A `fully autonomous` request resolves
+root gates with no question surfaces and skips - never grants - member actions that
+need permission.
+
+## Procedure
+
+### Gather
+
+List what failed, surprised, or needed a workaround in the session, across member
+boundaries.
+
+### Partition
+
+Assign each durable lesson an owner:
+
+- A lesson about a member's own rules or behavior belongs to that member.
+- A lesson about routing, the roster, the contract, or collection conventions
+  belongs to the index.
+
+### Delegate
+
+For each member-owned lesson, in roster order: enter the member's checkout and run
+its own `process/session-review.md` with the session's flags. The collection never
+patches a member's files on its own authority - a member change is committed by the
+user in the member repository before the collection re-pins.
+
+### Index Gate
+
+Report the index-owned findings and ask to apply, adjust, or cancel - under
+autonomous mode this resolves to Apply with a recorded decision, under fully
+autonomous mode it applies only when no permission boundary is crossed.
+
+### Apply And Validate
+
+Apply index lessons to root files within the registration and version rules, then
+run the available checks and report each result or skip honestly.
+
+## Boundaries
+
+- Never commit automatically - propose commit messages for the member repositories
+  first, then the collection last.
+- Member pins move only after the member's public commit exists.

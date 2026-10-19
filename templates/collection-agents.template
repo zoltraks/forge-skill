@@ -1,0 +1,80 @@
+# Agent Instructions
+
+## Purpose
+
+> **Scope:** Agent-facing entry point for authoring and maintaining this repository.
+> **Key items:** repository layout, skill registration, local workspace, improvement,
+> boundaries.
+
+This repository is {{collection-title}}, a collection of Agent Skills packages.
+
+Each member skill lives under `skills/<name>/` and carries its own `SKILL.md` router
+read by agents that use the skill.
+
+The root `SKILL.md` is the collection index - it lists member skills and routes to
+them.
+
+This file is the entry point for agents that modify the collection.
+
+## Repository Layout
+
+| Path                         | Role                                          |
+|------------------------------|-----------------------------------------------|
+| `SKILL.md`                   | Collection index and router to member skills  |
+| `AGENTS.md`                  | This file - agent entry point for maintenance |
+| `README.md`                  | Human-facing overview and directory tree      |
+| `process/member-contract.md` | Shared member-skill behavior contract         |
+| `process/session-review.md`  | Collection-level session-review procedure     |
+| `process/synchronization.md` | Member and collection fetch/merge/push        |
+| `skills/<name>/`             | One directory per member skill package        |
+| `work/`                      | Gitignored local workspace (see below)        |
+
+## Adding a Skill
+
+- Create `skills/<name>/` with its own `SKILL.md` carrying valid frontmatter (`name`,
+  `description`, `metadata.version`).
+- Register the skill in the root `SKILL.md` skills table and mirror it in the
+  `README.md` tree in the same change set.
+- Keep each skill self-contained: a member skill never reaches into a sibling skill's
+  directory or into `work/`.
+- Member skills are always external repositories: each skill's contents live and change
+  only in its own repository, the collection records the pinned submodule commit, and a
+  skill's files are never authored or edited inside the collection.
+
+## Local Workspace
+
+Temporary files, research scratch, and throwaway scripts live in the gitignored `work/`
+directory, organized by date: `work/YYYY-MM/YYYY-MM-DD/` for the day the artifact was
+created.
+
+Shipped files never reference `work/` content.
+
+## Improving the Collection
+
+- "improve {{collection-name}}" or "improve the collection" runs
+  `process/session-review.md` - gather, partition by owner, delegate member lessons,
+  gate index lessons, apply, validate, report.
+- A member lesson is applied only through that member's own session-review procedure,
+  running against the member's repository checkout.
+- An index lesson changes only root files, within the registration and version rules
+  in Boundaries below.
+
+## Boundaries
+
+- A bare `work on {{collection-name}}` request that names no operation is standby -
+  read this file and `SKILL.md`, confirm readiness, and wait for the named operation.
+- Never embed real names, paths, or project identifiers supplied with a request -
+  create anonymized examples instead.
+- Member skills keep the shared review-mode convention and the behavior contract in
+  `process/member-contract.md`. A member that gains or changes this surface keeps the
+  shared semantics and records any deliberate variance in its own documents.
+- The collection version is stored once, in `metadata.version` of the root `SKILL.md`.
+  Member versions are read from each member's own `SKILL.md` at load time, never
+  copied into collection documents.
+- Any change to a project document bumps that project's version, but at most once
+  between two commits.
+- In prose, prefer a comma or a period between clauses - a spaced hyphen (` - `) marks
+  an aside or a definitional separator, never a clause join.
+- Do not claim validation that did not run.
+- Never commit automatically - propose a one-sentence commit message and let the user
+  commit.

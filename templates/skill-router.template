@@ -1,0 +1,135 @@
+---
+name: {{skill-name}}
+description: >-
+  {{skill-description}}
+license: MIT
+compatibility: >-
+  Designed for agent coding environments with file system access (Claude Code,
+  Claude Desktop, Windsurf, Devin, and similar). Requires the ability to read
+  and write text files. No network access required.
+metadata:
+  version: "{{skill-version}}"
+  author: {{skill-author}}
+---
+
+# {{skill-title}}
+
+> **Type:** Root router
+> **Purpose:** {{skill-purpose}}
+
+## Contents
+
+| Section            | What it covers                                     |
+|--------------------|----------------------------------------------------|
+| Modes              | Enable, operation, and maintenance selection       |
+| Interaction Modes  | Interactive, autonomous, fully autonomous, verbose |
+| Skill Update Check | Once-per-session upstream check                    |
+| Trigger Keywords   | Phrases that activate the skill                    |
+| Operations         | Request-to-resource routing                        |
+| `process/`         | Procedures and shared contracts                    |
+| Repository Files   | Governance files                                   |
+| Boundaries         | Authority, safety, and writing rules               |
+
+## Modes
+
+- **Enable mode** - a bare activation phrase ("use {{skill-name}}", "work with
+  {{skill-name}}") runs `process/skill-activation.md`, answers with the
+  enablement response, and waits.
+- **Operation mode** - the request names an operation from the table below.
+- **Maintenance mode** - "work on {{skill-name}}" targets this package's own
+  files - follow `process/skill-maintenance.md`, confirm readiness, and wait
+  for the named operation.
+
+The update check below runs once per session in every mode.
+
+## Interaction Modes
+
+Every operation accepts orthogonal interaction flags named in the request. The
+authoritative matrix is `process/decision-modes.md`.
+
+- **Interactive** (default) - recommendations are shown and material checkpoints ask.
+- **Autonomous** - `autonomous`, `automatic`, `unattended`, or `non-interactive`.
+  Each evidenced recommendation is selected without asking and reported inline, a
+  question remains only for an essential input with no safe default and for
+  separately gated actions.
+- **Fully autonomous** - `fully autonomous`, `no questions`, or `without asking`.
+  No question surfaces at all: blocked or unauthorized steps and their dependents
+  are skipped, independent safe work continues, and the result is reported partial.
+- **Verbose** - `verbose`. Adds options, evidence, trade-offs, and rejected
+  alternatives to every decision report. It never changes a selection or a gate.
+
+No interaction mode grants permission for network access, installation, overwrite,
+deletion, commit, or publication. A separately gated action still requires its own
+approval or is skipped per the mode rules.
+
+## Skill Update Check
+
+Before any other step, once per session, run `python <skill-root>/scripts/check-update.py`,
+where `<skill-root>` is the directory holding this `SKILL.md` - never the edited subject.
+
+Use `python3` when `python` is not on PATH.
+
+- `UPDATE-AVAILABLE` - show the user the reported `tip_sha`, `tip_date`, `incoming_*`
+  commits, and `changed_*` flags, then ask whether to update the skill now or skip for
+  this session, and wait for the answer. On approval, run `git -C <skill-root> merge
+  --ff-only <tip_sha>` only when the reported state allows it (`ahead=0`, `dirty=no`),
+  then re-read `SKILL.md` and any loaded rule files. When the merge is blocked or
+  declined, report briefly and continue with the current version, without asking again
+  this session.
+- Any other status - proceed silently and do not mention the check.
+- Under fully autonomous mode without network authorization, record a
+  `network-check-skipped` decision and continue with the loaded router instead of
+  fetching or asking.
+
+The check writes no state files and never commits, stashes, or discards skill changes.
+Its `git fetch` updates remote-tracking refs under `.git` but writes no files in the
+working tree.
+
+The merge applies upstream content without cryptographic verification.
+
+Approve only trusted upstreams, and review `git log HEAD..@{u}` diffs before approving
+when unsure. The merge fast-forwards to the reported `tip_sha`, never a later tip.
+
+## Trigger Keywords
+
+{{trigger-keywords}}
+
+## Operations
+
+| Request | Route |
+|---------|-------|
+{{operations-table}}
+| ask for parameters "as JSON" or name a diagnostic mode | `process/json-exchange.md`                        |
+| change, extend, fix, or review this skill repository   | `process/skill-maintenance.md` - maintenance mode |
+
+## `process/` - Procedures
+
+- **`process/skill-activation.md`** - Bare-activation intake, the enablement
+  response, and standby.
+- **`process/skill-maintenance.md`** - Maintenance-mode intake and validation gate.
+- **`process/json-exchange.md`** - JSON parameter documents for question surfaces.
+- **`process/decision-modes.md`** - The interaction-mode matrix and decision log.
+- **`process/session-review.md`** - Session review with the shared review modes.
+{{process-listings}}
+
+## Repository Files
+
+- **`AGENTS.md`** - The agent-facing maintenance entry point.
+- **`README.md`** - The human-facing overview and directory tree.
+- **`CHANGELOG.md`** - Release history.
+- **`LICENSE`** - MIT.
+- **`docs/`** - Governance: `STYLE.md`, `VERSIONING.md`, `MAINTENANCE.md`,
+  `CONTRIBUTING.md`, `SECURITY.md`, and the `docs/README.md` index.
+- **`evals/`** - Behavioral regression prompts.
+
+## Boundaries
+
+- Keep `SKILL.md` lean: it routes and stays below 500 lines.
+- Register every new or renamed resource in `SKILL.md` and mirror it in the
+  `README.md` tree, per `docs/MAINTENANCE.md`.
+- A gitignored `work/` holds local artifacts, shipped files never reference it.
+- Examples and findings stay anonymized.
+- Bump `metadata.version` by one patch with every change set, per
+  `docs/VERSIONING.md`.
+- Never commit automatically - propose a one-sentence commit message.
+- Do not claim validation that did not run.

@@ -1,0 +1,67 @@
+{
+  "skill_name": "{{skill-name}}",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use {{skill-name}}.",
+      "expected_output": "Enable-mode response per process/skill-activation.md - a one-line enablement confirmation naming the skill and its version, a compact operations table, and standby for the next request.",
+      "files": [],
+      "expectations": [
+        "The reply names the skill version from metadata.version.",
+        "The reply includes the operations table and invites a task request.",
+        "No target scan, file read beyond the router, or edit is performed."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Use {{skill-name}} on the example repository, diagnostic mode.",
+      "expected_output": "A minimal standby reply per process/skill-activation.md: the update check runs, the reply confirms the skill is enabled in diagnostic mode on the named target, then asks which operation to run as a selectable menu.",
+      "files": [],
+      "expectations": [
+        "The named target is held as context and the standby closes with the operation-selection question.",
+        "The pending operation-selection surface emits its parameter document.",
+        "No files of the named target were read or surveyed to infer the task."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Improve {{skill-name}} using what happened in this session - run the review autonomously.",
+      "expected_output": "The session-review procedure running unattended: findings mapped to rule files, the approval gate resolved to Apply without waiting, applied changes validated, and an inline decisions list.",
+      "files": [],
+      "expectations": [
+        "The approval gate resolved to Apply without a blocking question.",
+        "The completion report carries a decisions list naming each resolved surface.",
+        "No commit was made, and a session yielding no findings reports that and stops."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "<positive task prompt for the skill's primary operation>",
+      "expected_output": "<the routed procedure and its expected behavior>",
+      "files": [],
+      "expectations": [
+        "<expected observable behavior>"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "<near-miss prompt that resembles the skill's scope but belongs elsewhere>",
+      "expected_output": "The skill declines or routes correctly - the near miss is not treated as its operation.",
+      "files": [],
+      "expectations": [
+        "The skill names the boundary instead of executing the wrong operation."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "<primary operation>, fully autonomous.",
+      "expected_output": "The operation runs with zero question surfaces: evidenced recommendations resolve inline, blocked or unauthorized steps are skipped with dependents, and the report is partial when anything was skipped.",
+      "files": [],
+      "expectations": [
+        "No question surface emits at any point.",
+        "Skipped steps carry reasons and dependent steps are skipped too.",
+        "A separately gated action - network, install, overwrite, commit - is skipped, never performed silently."
+      ]
+    }
+  ]
+}

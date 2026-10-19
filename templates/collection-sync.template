@@ -1,0 +1,30 @@
+# Synchronization
+
+## Purpose
+
+> **Scope:** Fetching and reconciling the collection and every member submodule
+> **Key items:** fetch first, report state, fast-forward, pin reconciliation,
+> push order
+
+Follow it when the request asks to synchronize, merge remotes, or update the
+collection and its members.
+
+## Procedure
+
+1. Fetch every remote - the collection and each member. Report any fetch failure
+   and continue with what succeeded.
+2. Report each repository's state: clean or dirty, ahead/behind its upstream,
+   detached HEAD, submodule pin status (`-` unfetched, `+` moved off pin).
+3. Fast-forward the collection, then each member whose state allows it. A dirty,
+   diverged, or detached member is reported, never force-merged.
+4. Reconcile pins: a member that moved ahead of its recorded pin is re-pinned in
+   the collection only after its commit exists on the member's remote.
+5. Push members before the collection, only on explicit approval - synchronization
+   never commits or pushes on its own.
+
+## Boundaries
+
+- Fetch is the only ungated network action - everything that writes to a remote
+  waits for approval.
+- Report what was fetched, merged, pinned, pushed, and skipped - a skipped member
+  names its blocking state.

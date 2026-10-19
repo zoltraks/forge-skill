@@ -1,0 +1,31 @@
+# Contributing
+
+## Purpose
+
+> **Scope:** How to report issues and propose changes to {{skill-name}}
+> **Key items:** issue reporting, development setup, pull-request rules, AI policy
+
+## Issues
+
+Report bugs and proposals through the repository's issue tracker. Include what you
+asked, what happened, and what you expected.
+
+## Setup
+
+No build step and no dependencies beyond Python 3.10+. Edit documents per
+`docs/STYLE.md`, run the suite in `docs/MAINTENANCE.md`, and propose a
+one-sentence commit message.
+
+## Pull Requests
+
+- One coherent change set per pull request.
+- Follow the registration contract in `docs/MAINTENANCE.md` - router, README
+  tree, Contents tables, and evals move together.
+- The full validation suite must pass or name what was skipped and why.
+- Version bumps follow `docs/VERSIONING.md` - one patch per change set.
+
+## AI-Assisted Changes
+
+Agent-assisted changes are welcome under the same rules: style compliance,
+registration completeness, honest validation reporting, and anonymized examples.
+The proposing human owns the diff.

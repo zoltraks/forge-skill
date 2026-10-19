@@ -1,0 +1,48 @@
+# {{collection-title}}
+
+{{collection-description}}
+
+## Members
+
+| Skill | Path | Purpose |
+|-------|------|---------|
+{{member-table}}
+
+## Directory Tree
+
+```
+{{collection-name}}/
+├── SKILL.md          # Collection index and router
+├── AGENTS.md         # Agent entry point for maintaining the collection
+├── README.md         # This file
+├── process/          # member-contract, session-review, synchronization
+├── skills/           # Member skill packages (git submodules)
+│   └── <member>/
+└── work/             # Gitignored local workspace
+```
+
+## Installation
+
+Clone the collection, then fetch the members:
+
+```bash
+git submodule update --init
+```
+
+Each member is an independent repository pinned as a submodule - members publish
+in their own repositories first, then the collection re-pins.
+
+## Usage
+
+Activate the collection through your agent environment's skill mechanism:
+
+```text
+use {{collection-name}}
+```
+
+A memberless task is matched against every member whose description covers it -
+several members may work together. Name a member directly to use it alone.
+
+## License
+
+MIT - see each member's own `LICENSE`.

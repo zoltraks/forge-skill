@@ -1,0 +1,69 @@
+# Agent Instructions
+
+## Purpose
+
+> **Scope:** Agent-facing entry point for authoring and maintaining this skill repository.
+> **Key items:** governing documents, boundaries, local workspace, validation, improvement.
+
+This repository is the {{skill-title}}, an Agent Skills package. {{skill-purpose}}
+
+`SKILL.md` is the runtime router read by agents that use the skill.
+
+This file is the entry point for agents that modify the skill.
+
+## Governing Documents
+
+| Document               | Owns                                                                |
+|------------------------|---------------------------------------------------------------------|
+| `docs/CONTRIBUTING.md` | Issue reporting, development setup, pull-request rules              |
+| `docs/STYLE.md`        | Prose, tables, headings, and encoding for the skill's own documents |
+| `docs/MAINTENANCE.md`  | Directory roles, file naming, registration, validation procedures   |
+| `docs/VERSIONING.md`   | Version format, bump rules, and release anchoring                   |
+| `docs/SECURITY.md`     | Vulnerability reporting and trust boundaries                        |
+| `docs/README.md`       | Index of the repository-governance documents under `docs/`          |
+
+Keep each rule in its owning document and link to it instead of duplicating it.
+
+## Boundaries
+
+- Maintenance-mode work on this repository follows `process/skill-maintenance.md` -
+  the operation machinery does not apply to the skill's own files.
+- Keep `SKILL.md` lean: it routes and stays below 500 lines.
+- Register every new or renamed resource in `SKILL.md` and mirror it in the `README.md`
+  tree, per `docs/MAINTENANCE.md`.
+- Follow `docs/STYLE.md` for every shipped file: H1 plus Purpose, one sentence per
+  paragraph, prose wrapped at 100 characters, tables aligned by source width.
+- Never embed example files, paths, or project names supplied with a request - create
+  anonymized skill-owned examples instead, per `docs/MAINTENANCE.md`.
+- Keep `evals/evals.json` in sync when a change alters skill behavior.
+- Bump `metadata.version` by one patch with every change set, per `docs/VERSIONING.md`
+  - the version moves at most once until the set is committed.
+- A request that names no concrete operation authorizes analysis and proposals only.
+- Do not claim validation that did not run.
+- Never commit automatically - propose a one-sentence commit message without trailers.
+- A bare `work on {{skill-name}}` request that names no operation is standby - read
+  this file, `SKILL.md`, and `process/skill-activation.md`, confirm readiness, and
+  wait for the named operation.
+
+## Local Workspace
+
+Local working artifacts live in the gitignored `work/` directory, organized as
+`work/YYYY-MM/YYYY-MM-DD/`.
+
+Shipped skill files never depend on workspace content and never reference it.
+
+## Validation
+
+Run the skill-maintenance suite before proposing a change:
+
+```
+python3 scripts/validate-skill.py .
+git diff --check
+```
+
+Changes that alter skill behavior also exercise the regression prompts in
+`evals/evals.json`.
+
+## Skill Improvement
+
+A request to improve the skill from this session follows `process/session-review.md`.

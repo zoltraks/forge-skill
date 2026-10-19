@@ -1,0 +1,142 @@
+{
+  "skill_name": "forge-skill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use forge.",
+      "expected_output": "Enable-mode response per process/skill-activation.md - a one-line enablement confirmation naming the skill and its version, a compact operations table, and standby for the next request.",
+      "files": [],
+      "expectations": [
+        "The reply names the skill version from metadata.version.",
+        "The reply includes the operations table and invites a task request.",
+        "No repository scan, file read beyond the router, or edit is performed."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Forge a skill for municipal permit workflows from this handbook.pdf.",
+      "expected_output": "Routes to process/forge-workflow.md - the five-phase pipeline opens a dated run workspace, inventories the PDF, attempts conversion per process/source-conversion.md, and proceeds through research, architecture, staged generation, and finalization.",
+      "files": [],
+      "expectations": [
+        "The run state ledger is created before phase work begins.",
+        "The PDF converts through an approved converter or records a blocked status with a reason - never silently.",
+        "Converted text stays in the gitignored run workspace.",
+        "Generation renders into staging and validates before touching the target.",
+        "No commit, push, or install happens without approval."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Create a skill collection for our support tooling with two members, autonomously.",
+      "expected_output": "Collection mode of process/forge-workflow.md - the index templates render beside two complete single-skill member generations, with member-first publication steps reported at the end.",
+      "files": [],
+      "expectations": [
+        "Both member skills carry the full single-skill contract including decision-modes.md.",
+        "The collection roster, README tree, and member directories match one to one.",
+        "Routine decisions resolve inline with recorded reasons - no unnecessary questions.",
+        "Member sources are not authored as plain files inside the collection checkout.",
+        "The delivery report names the user-side pin and publish steps."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Analyze this book.pdf for a new skill - do not generate yet.",
+      "expected_output": "Phases 0-1 of process/forge-workflow.md only - brief, plan, conversion, extraction, and an evidence report in the run workspace.",
+      "files": [],
+      "expectations": [
+        "No template rendering or target writing occurs.",
+        "Evidence items carry source ids and locations.",
+        "The phase-1 checkpoint resolves per the active interaction mode."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Summarize this PDF for me.",
+      "expected_output": "Near miss - Forge declines or clarifies: summarizing a document is not skill creation. The request is redirected or confirmed before any pipeline work.",
+      "files": [],
+      "expectations": [
+        "The skill names the boundary instead of running the forge pipeline.",
+        "No run workspace or state ledger is created for a pure summary request."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Forge a skill for incident triage from this runbook.md, fully autonomous.",
+      "expected_output": "The full pipeline runs with zero question surfaces - decisions resolve inline, and any step needing permission is skipped with dependents and the run reported partial.",
+      "files": [],
+      "expectations": [
+        "No question surface emits at any point.",
+        "Each decision records surface, value or skip, evidence tier, reason, mode, and impact.",
+        "A markdown source needs no converter; the run can complete without network.",
+        "The completion report carries a Decisions recap and an honest partial/complete status."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Forge a skill from this docx, fully autonomous, verbose.",
+      "expected_output": "Zero question surfaces with expanded reporting - each decision lists options, evidence, trade-offs, and rejected alternatives; a missing converter is skipped with its dependents rather than installed.",
+      "files": [],
+      "expectations": [
+        "Verbose adds full options and rationale to every decision row.",
+        "An unapproved converter is not installed or fetched.",
+        "If conversion was the only source, generation is reported blocked and no ungrounded skill is claimed."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Generate the skill from the recorded analysis in the last forge run.",
+      "expected_output": "Resume path - the ledger loads, source fingerprints and artifacts verify, and phases 2-4 run from the recorded evidence.",
+      "files": [],
+      "expectations": [
+        "The run resumes from the first phase not proven complete.",
+        "Mismatched inputs trigger a fresh run or a mode-appropriate resolution, never silent reuse.",
+        "No phase is skipped on file existence alone."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Improve forge-skill using what happened in this session - run the review autonomously.",
+      "expected_output": "The session-review procedure running unattended: findings mapped to rule files, the approval gate resolved to Apply without waiting, applied changes validated, and an inline decisions list.",
+      "files": [],
+      "expectations": [
+        "The agent loaded process/session-review.md and followed it in autonomous mode.",
+        "The approval gate resolved to Apply without a blocking question.",
+        "The completion report carries a decisions list naming each resolved surface.",
+        "No commit was made, and a session yielding no findings reports that and stops."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Use forge on the examples repository, diagnostic mode.",
+      "expected_output": "A minimal standby reply per process/skill-activation.md: the update check runs, the reply confirms the skill is enabled in diagnostic mode on the named target, then asks which operation to run as a selectable menu.",
+      "files": [],
+      "expectations": [
+        "The reply folds the diagnostic flag into the opening sentence.",
+        "The pending operation-selection surface emits its parameter document.",
+        "No files of the named target were read or surveyed to infer the task."
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "Update checkout-skill with the new fraud-detection chapter.",
+      "expected_output": "The update-skill operation - the new source is analyzed and mapped against the existing skill's sections, delivering a proposed fold-in report without modifying the target skill.",
+      "files": [],
+      "expectations": [
+        "The existing skill's files are not written.",
+        "The proposal names which files would gain what and why, with evidence.",
+        "Automatic rewriting is reported as a deferred capability, not attempted."
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "Give me the forge intake parameters as JSON.",
+      "expected_output": "A parameter document per process/json-exchange.md - description, context fields, and an intake array with only the surfaces actually pending.",
+      "files": [],
+      "expectations": [
+        "Parameter objects keep the fixed key order with default last.",
+        "Only pending surfaces emit - no invented questions.",
+        "A returned filled document is applied without re-asking."
+      ]
+    }
+  ]
+}

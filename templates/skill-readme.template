@@ -1,0 +1,34 @@
+# {{skill-title}}
+
+{{skill-purpose}}
+
+## Operations
+
+| Operation | What it covers |
+|-----------|----------------|
+{{operations-table}}
+
+## Directory Tree
+
+```
+{{skill-name}}/
+├── SKILL.md          # Runtime router - modes, update check, operations, boundaries
+├── AGENTS.md         # Agent entry point for maintaining this repository
+├── README.md         # This file
+├── CHANGELOG.md      # Release history
+├── LICENSE           # MIT
+├── process/          # Procedures and shared contracts
+├── scripts/          # Mechanical tools
+├── docs/             # Governance documents
+└── evals/            # Behavioral regression prompts
+```
+
+## Usage
+
+Activate through your agent environment's skill mechanism, then name the task.
+Every operation accepts `autonomous`, `fully autonomous`, and `verbose` flags -
+see `process/decision-modes.md`.
+
+## License
+
+MIT - see `LICENSE`.

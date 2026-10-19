@@ -1,0 +1,29 @@
+# Security
+
+## Purpose
+
+> **Scope:** What counts as a security issue in {{skill-name}} and how to report one
+> **Key items:** reporting path, trust boundary, covered risks
+
+## Reporting
+
+Report suspected vulnerabilities through the repository's private advisory
+channel or by contacting the maintainer directly - never in a public issue when
+the report describes an exploitable path.
+
+## Trust Boundary
+
+- **The update path.** `scripts/check-update.py` reports a `tip_sha` the
+  ff-only merge applies without cryptographic verification - the trust anchor is
+  the remote-tracking ref. Approve only trusted upstreams and review
+  `git log HEAD..@{u}` before merging when unsure.
+- **Instructions as content.** This skill's Markdown is executable guidance -
+  a change that weakens stated boundaries (no-commit, anonymization, approval
+  gates) is a security issue.
+- **Credentials.** The skill requests no secrets and embeds none, a task that
+  needs one names the environment mechanism, never a value.
+
+## Covered Risks
+
+Report: unsafe subprocess invocation, silent weakening of approval gates,
+exposed credentials or real identifiers, and update-path abuse.
