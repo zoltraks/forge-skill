@@ -5,17 +5,25 @@ from research on a topic, or from external sources such as PDF books, EPUB files
 Word documents, and HTML pages.
 
 It is a member of the [Astra Skills](https://github.com/Astra-Professional/astra-skills)
-collection, and the skills it produces follow the same conventions: a routed
+collection, and its default `astra` layout follows the same conventions: a routed
 `SKILL.md`, shared activation / JSON-exchange / session-review procedures, a
 once-per-session update check, governance documents, behavioral evals, and the
 dual-mode autonomy contract (interactive, autonomous, fully autonomous, verbose).
+
+Two further layouts are supported: the `spec` profile emits a minimal package
+conformant to the [Agent Skills specification](https://agentskills.io/specification),
+and the `plugin` profile wraps a spec skill in Claude Code plugin packaging.
+Existing skills migrate between layouts in both directions.
 
 ## What It Does
 
 | Operation              | What it covers                                                 |
 |------------------------|----------------------------------------------------------------|
 | Create a skill         | Research a topic and generate a complete skill document set    |
+| Create a spec skill    | Generate a minimal spec-conformant package for any host        |
+| Package a plugin       | Wrap a skill in Claude Code plugin or marketplace packaging    |
 | Create a collection    | Generate an index plus independently owned member skills       |
+| Migrate a layout       | Adopt a foreign skill into astra or export a member to spec    |
 | Analyze a source       | Convert and survey a PDF/book/document into an evidence report |
 | Generate from analysis | Render a skill from a recorded analysis or resumed run state   |
 | Update a skill         | Propose folding a new source into an existing skill            |
@@ -30,7 +38,8 @@ A creation request runs a five-phase pipeline:
 2. **Research foundation** - define the question, plan bounded gathering, extract
    and cite evidence, and note conflicts and gaps.
 3. **Architecture design** - map the distilled knowledge onto the skill router:
-   triggers, operations, resource files, and the compatibility matrix.
+   triggers, operations, resource files, and the resolved profile's
+   compatibility matrix.
 4. **Generation** - render the template set with the approved context into a
    scratch staging area, validate, then write the target.
 5. **Finalization** - run the validation suite and deliver the summary report.
@@ -74,6 +83,9 @@ Activate through your agent environment's skill mechanism, then name the task:
 ```text
 use forge
 forge a skill for municipal permit workflows from this handbook.pdf
+create a portable spec-layout skill for release notes
+package the release-notes skill as a Claude Code plugin
+adopt this external skill into astra
 create a skill collection for our support tooling, autonomously
 analyze this EPUB for a new skill, verbose
 generate the skill from the recorded analysis

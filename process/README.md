@@ -21,3 +21,4 @@ Load a procedure only when the task reaches it - progressive disclosure stays la
 | `research-synthesis.md` | Phase 1 output - distillation into the rule map            |
 | `source-conversion.md`  | A source needs binary/markup conversion                    |
 | `skill-template.md`     | Phase 2-3 - what a generated skill must contain            |
+| `layout-migration.md`   | Converting an existing skill between layout profiles       |

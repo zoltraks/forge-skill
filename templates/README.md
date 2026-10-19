@@ -11,10 +11,13 @@ logic - the renderer is a substitution engine.
 
 ## Sets
 
-| Set          | Target                                  |
-|--------------|-----------------------------------------|
-| `single`     | One complete member skill tree          |
-| `collection` | A collection index beside member skills |
+| Set           | Target                                             |
+|---------------|----------------------------------------------------|
+| `single`      | One complete member skill tree (`astra` profile)   |
+| `spec`        | One minimal spec-conformant skill (`spec` profile) |
+| `plugin`      | Claude Code plugin manifest packaging              |
+| `marketplace` | Claude Code marketplace catalog entry              |
+| `collection`  | A collection index beside member skills            |
 
 ## Single Set - Template To Output Map
 
@@ -37,24 +40,55 @@ logic - the renderer is a substitution engine.
 | `skill-maintenance.template`  | `docs/MAINTENANCE.md`          |
 | `skill-versioning.template`   | `docs/VERSIONING.md`           |
 | `skill-security.template`     | `docs/SECURITY.md`             |
-| `skill-evals.template`        | `evals/evals.json`             |
+| `skill-evaluation.template`   | `evals/evals.json`             |
 | `skill-updater.template`      | `scripts/check-update.py`      |
 | `skill-validator.template`    | `scripts/validate-skill.py`    |
 
 The agent-written files beside them - `process/README.md`, `scripts/README.md`,
 domain `process/` and `references/` files - come from the rule map, not templates.
 
+## Spec Set - Template To Output Map
+
+| Template                            | Output path        |
+|-------------------------------------|--------------------|
+| `specification-router.template`     | `SKILL.md`         |
+| `specification-readme.template`     | `README.md`        |
+| `skill-license.template`            | `LICENSE`          |
+| `specification-evaluation.template` | `evals/evals.json` |
+
+The `spec` set emits the minimal spec-conformant package - no member-contract
+files. Domain directories are written by the agent beside the rendered set.
+
+## Plugin Set - Template To Output Map
+
+| Template                   | Output path                  |
+|----------------------------|------------------------------|
+| `plugin-manifest.template` | `.claude-plugin/plugin.json` |
+
+The `plugin` set renders into a plugin root whose `skills/<name>/` payload is a
+separate `spec` render - the plugin packaging wraps the skill, it never
+rewrites it.
+
+## Marketplace Set - Template To Output Map
+
+| Template                      | Output path                       |
+|-------------------------------|-----------------------------------|
+| `plugin-marketplace.template` | `.claude-plugin/marketplace.json` |
+
+The `marketplace` set renders into a marketplace root - a separate directory
+that lists plugin sources by path.
+
 ## Collection Set - Template To Output Map
 
-| Template                         | Output path                  |
-|----------------------------------|------------------------------|
-| `collection-router.template`     | `SKILL.md`                   |
-| `collection-readme.template`     | `README.md`                  |
-| `collection-agents.template`     | `AGENTS.md`                  |
-| `collection-contract.template`   | `process/member-contract.md` |
-| `collection-review.template`     | `process/session-review.md`  |
-| `collection-sync.template`       | `process/synchronization.md` |
-| `collection-gitmodules.template` | `.gitmodules`                |
+| Template                              | Output path                  |
+|---------------------------------------|------------------------------|
+| `collection-router.template`          | `SKILL.md`                   |
+| `collection-readme.template`          | `README.md`                  |
+| `collection-agents.template`          | `AGENTS.md`                  |
+| `collection-contract.template`        | `process/member-contract.md` |
+| `collection-review.template`          | `process/session-review.md`  |
+| `collection-synchronization.template` | `process/synchronization.md` |
+| `collection-gitmodules.template`      | `.gitmodules`                |
 
 Each collection member additionally renders the full `single` set into its own
 `skills/<name>/` directory in the member's own repository - never as tracked files
@@ -81,6 +115,14 @@ inside the collection checkout.
 | `collection-purpose`     | Collection purpose line                      |
 | `member-table`           | Collection member roster rows                |
 | `gitmodules-entries`     | `.gitmodules` section blocks                 |
+| `workflow-steps`         | Spec router's ordered procedure list         |
+| `resource-listings`      | Spec router's on-demand resource bullets     |
+| `plugin-name`            | Claude Code plugin slug                      |
+| `plugin-version`         | Plugin version string                        |
+| `plugin-description`     | Plugin manifest description                  |
+| `plugin-author`          | Plugin author name                           |
+| `marketplace-name`       | Claude Code marketplace slug                 |
+| `plugin-source-path`     | Plugin path relative to the marketplace root |
 
 The machine-readable map is `templates/map.json`, keep both in sync per
 `docs/MAINTENANCE.md`.

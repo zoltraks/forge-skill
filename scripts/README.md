@@ -10,15 +10,21 @@ self-contained single files, standard library only.
 
 ## Tools
 
-| Tool                  | Class        | What it does                                             |
-|-----------------------|--------------|----------------------------------------------------------|
-| `check-update.py`     | read-only*   | Once-per-session upstream check, `STATUS` + key=value    |
-| `validate-skill.py`   | read-only    | Validates Forge or a generated tree, never runs targets  |
-| `render-templates.py` | staged-write | Renders templates to staging, writes target on `--write` |
-| `convert-source.py`   | converter    | Converts a local source via an approved MarkItDown       |
+| Tool                  | Class        | What it does                                                            |
+|-----------------------|--------------|-------------------------------------------------------------------------|
+| `check-update.py`     | read-only*   | Once-per-session upstream check, `STATUS` + key=value                   |
+| `validate-skill.py`   | read-only    | Validates Forge or a generated tree per `--profile`, never runs targets |
+| `render-templates.py` | staged-write | Renders templates to staging, writes target on `--write`                |
+| `convert-source.py`   | converter    | Converts a local source via an approved MarkItDown                      |
 
 The `check-update.py` footnote: it runs `git fetch`, which writes remote-tracking
 refs under `.git` but never touches the working tree.
+
+`validate-skill.py` takes `--profile astra|spec` - `astra` (the default)
+enforces the full member contract, `spec` enforces only the portable
+specification surface: `SKILL.md`, frontmatter rules, resolvable references,
+no unresolved placeholders, and the canonical evals schema when `evals.json`
+exists.
 
 ## Safety Classes
 

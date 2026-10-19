@@ -12,16 +12,19 @@ the two contract files, later phases load on demand.
 
 | File                      | Load when                                                 |
 |---------------------------|-----------------------------------------------------------|
-| `astra-conventions.md`    | Phase 0 and the phase 2 compatibility matrix              |
-| `skills-spec.md`          | Phase 0 and frontmatter writing or validation             |
+| `layout-profiles.md`      | Phase 0 - resolving the layout profile - and phase 2      |
+| `astra-conventions.md`    | Phase 0 and the phase 2 compatibility matrix (`astra`)    |
+| `skills-specification.md` | Phase 0 and frontmatter writing or validation (`spec`)    |
 | `skill-anatomy.md`        | Phase 2 - deciding what the generated skill contains      |
+| `instruction-patterns.md` | Phase 2 - designing procedures and instruction quality    |
 | `trigger-design.md`       | Phase 2 - writing descriptions, keywords, and near misses |
+| `evaluation-design.md`    | Phase 2 - designing the eval set - and phase 4 advice     |
 | `markitdown-reference.md` | Phase 1 - any binary or markup source conversion          |
 | `research-methods.md`     | Phase 1 - classifying the research and picking depth      |
 | `source-integrity.md`     | Phase 1 - every external source, also phase 3 fill review |
 
 ## Authority
 
-`astra-conventions.md` and `skills-spec.md` are contractual - generated output
-must satisfy them. The rest are methodological guidance the agent applies with
-judgment.
+`layout-profiles.md`, `astra-conventions.md`, and `skills-specification.md` are
+contractual - generated output must satisfy the profile they define. The rest
+are methodological guidance the agent applies with judgment.

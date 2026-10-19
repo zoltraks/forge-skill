@@ -33,16 +33,22 @@ A request whose target is this repository is maintenance - follow
 
 Classify the request into one primary operation:
 
-| Operation              | Trigger example                                          | Phases                |
-|------------------------|----------------------------------------------------------|-----------------------|
-| Create skill           | "create a skill for X", "forge a skill from book.pdf"    | 0-4                   |
-| Create collection      | "forge a collection for X", "a set of skills like astra" | 0-4 (collection mode) |
-| Analyze source         | "analyze this PDF for a new skill"                       | 0-1                   |
-| Generate from analysis | "generate the skill from the analysis"                   | 0, 2-4                |
-| Update skill           | "update <skill> with this new source"                    | 0-1 + proposal        |
+| Operation              | Trigger example                                          | Phases                        |
+|------------------------|----------------------------------------------------------|-------------------------------|
+| Create skill           | "create a skill for X", "forge a skill from book.pdf"    | 0-4                           |
+| Create collection      | "forge a collection for X", "a set of skills like astra" | 0-4 (collection mode)         |
+| Analyze source         | "analyze this PDF for a new skill"                       | 0-1                           |
+| Generate from analysis | "generate the skill from the analysis"                   | 0, 2-4                        |
+| Update skill           | "update <skill> with this new source"                    | 0-1 + proposal                |
+| Migrate layout         | "adopt this skill into astra", "export <skill> to spec"  | `process/layout-migration.md` |
 
 Select the interaction mode per `process/decision-modes.md` and record it in the run
 state before the first phase.
+
+Resolve the layout profile per `references/layout-profiles.md` and record it in the
+run state's `inputs`: `astra` is the default, `spec` serves portable or minimal
+requests and non-astra hosts, `plugin` wraps a spec skill in Claude Code packaging.
+A collection target implies the `astra` profile - member skills are astra-shaped.
 
 Identify the output target before generating anything: the directory the generated
 skill or collection lands in. A vague request - "make something from this" - is
@@ -56,7 +62,8 @@ repository's gitignored workspace, recording:
 - `schema` - the ledger schema version.
 - `run_id` - a unique run identifier.
 - `operation` and `mode` - the classified operation and interaction mode.
-- `inputs` - the explicit user inputs: topic, source paths, target directory.
+- `inputs` - the explicit user inputs: topic, source paths, target directory, and
+  the resolved layout profile.
 - `sources` - inventoried sources with fingerprints per `process/research-gathering.md`.
 - `phases` - per-phase status: `pending`, `in_progress`, `complete`, `skipped`,
   `blocked`.
@@ -75,8 +82,10 @@ unsafe reuse and report it.
 1. Record the operation, mode, inputs, and target in the run state.
 2. Open the dated run workspace `work/<YYYY-MM>/<YYYY-MM-DD>/forge-run-<id>/` -
    it holds converted text, evidence notes, the ledger, and staged output.
-3. Load `references/astra-conventions.md` and `references/skills-spec.md` - the
-   compatibility contract every generated file must satisfy.
+3. Load `references/layout-profiles.md` plus the resolved profile's contract -
+   `references/astra-conventions.md` for `astra`, `references/skills-specification.md`
+   for `spec` and `plugin`. These define the compatibility contract every generated
+   file must satisfy.
 4. Inventory supplied sources per `process/research-gathering.md`.
 
 ## Phase 1: Research Foundation
@@ -107,9 +116,12 @@ Map the synthesized knowledge onto the skill contract:
    `references/trigger-design.md`.
 3. Lay out the operation families and the resource directories the domain needs -
    `process/`, `references/`, `scripts/`, plus domain-specific directories only when
-   the evidence justifies them, per `references/skill-anatomy.md`.
-4. Fill the compatibility matrix against `references/astra-conventions.md` - every
-   row passes or carries a recorded reason.
+   the evidence justifies them, per `references/skill-anatomy.md`. The router's
+   instructions follow `references/instruction-patterns.md`, the trigger surface
+   follows `references/trigger-design.md`, and the eval set follows
+   `references/evaluation-design.md`.
+4. Fill the profile-scoped compatibility matrix from `process/skill-template.md` -
+   every row passes or carries a recorded reason.
 5. Write the template input JSON: every placeholder value the renderer needs, each
    derived from verified evidence or an explicit default - never filler.
 
@@ -119,18 +131,22 @@ Checkpoint: the design summary resolves per the interaction mode.
 
 ## Phase 3: Generation
 
-1. Render the template set into a fresh staging directory inside the run workspace
-   through `scripts/render-templates.py` with `template-input.json`.
-2. Run `scripts/validate-skill.py` on the staged output - a failed stage never
-   reaches the target.
+1. Render the profile's template set into a fresh staging directory inside the run
+   workspace through `scripts/render-templates.py` with `template-input.json` -
+   the `astra` profile renders the `single` set, `spec` renders the `spec` set,
+   and `plugin` renders the `spec` set into `skills/<skill-name>/` plus the
+   `plugin` set into the plugin root. A marketplace request adds the
+   `marketplace` set into the marketplace root.
+2. Run `scripts/validate-skill.py --profile <profile>` on each staged skill - a
+   failed stage never reaches the target.
 3. Write the staged tree to the approved target directory. An existing target needs
    its own approval, or is skipped in fully autonomous mode.
 
 ## Phase 4: Finalization
 
-1. Run the validation suite on the final tree: `scripts/validate-skill.py`, plus a
-   second pass confirming every registered resource exists and every referenced path
-   resolves.
+1. Run the validation suite on the final tree: `scripts/validate-skill.py
+   --profile <profile>` on each skill root, plus a second pass confirming every
+   registered resource exists and every referenced path resolves.
 2. Report the artifact inventory, the `Decisions:` recap, validation results, and
    the next steps - which include the user-side commit and publish actions Forge
    never performs.

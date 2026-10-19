@@ -1,0 +1,28 @@
+---
+name: {{skill-name}}
+description: >-
+  {{skill-description}}
+license: MIT
+compatibility: >-
+  Designed for agent coding environments with file system access. Requires the
+  ability to read and write text files.
+metadata:
+  version: "{{skill-version}}"
+  author: {{skill-author}}
+---
+
+# {{skill-title}}
+
+{{skill-purpose}}
+
+## When To Use
+
+{{trigger-keywords}}
+
+## Workflow
+
+{{workflow-steps}}
+
+## Resources
+
+{{resource-listings}}

@@ -8,7 +8,9 @@
 > conventions, registration contract
 
 This file condenses the astra-skills member contract for generation use. It is the
-authority for phase 2's compatibility matrix.
+authority for phase 2's compatibility matrix when the run's layout profile is
+`astra` - the profile set is defined in `references/layout-profiles.md`, and the
+minimal contract for the `spec` profile lives in `references/skills-specification.md`.
 
 ## Required Shared Surface
 

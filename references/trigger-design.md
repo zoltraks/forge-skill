@@ -21,6 +21,18 @@ A good description carries, in order:
 Stay under 1024 characters. Prefer specific verbs ("converts PDF books into skills")
 over capabilities adjectives ("powerful document processor").
 
+Phrase the description as an instruction to the agent - "Use this skill when..."
+reads as a routing rule, "This skill does..." reads as documentation.
+
+Describe what the user is trying to achieve, not the skill's internals - the
+agent matches against the user's request.
+
+Err on the pushy side: name the contexts where the skill applies, including
+requests that need it without naming the domain.
+
+In a crowded skill set, negative constraints earn their characters - an explicit
+"do NOT use for X" boundary keeps selection precise.
+
 ## Inclusion Criteria
 
 Trigger phrases should match how users actually ask:
@@ -57,3 +69,7 @@ thin, mark trigger coverage as a gap rather than padding with guesses.
 Design at least: one positive prompt per operation family, one near-miss prompt
 per exclusion boundary, and one prompt per interaction mode the skill supports.
 These land in the generated `evals/evals.json`.
+
+Description wording is tested like code - `references/evaluation-design.md` defines
+the trigger-eval loop: a split query set, repeated runs, and a trigger-rate
+threshold.

@@ -1,0 +1,23 @@
+{
+  "skill_name": "{{skill-name}}",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "<positive task prompt for the skill's primary operation>",
+      "expected_output": "<the routed behavior and its expected result>",
+      "files": [],
+      "assertions": [
+        "<verifiable statement about the output>"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "<near-miss prompt that resembles the skill's scope but belongs elsewhere>",
+      "expected_output": "The skill does not activate for the near miss, or the agent routes it correctly - the request is not treated as this skill's operation.",
+      "files": [],
+      "assertions": [
+        "The skill's stated boundary was respected."
+      ]
+    }
+  ]
+}

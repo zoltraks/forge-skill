@@ -2,16 +2,17 @@
 
 ## Purpose
 
-> **Scope:** What a generated skill contains - the file contract and fill rules
-> **Key items:** required files, optional directories, template map, fill rules,
-> compatibility matrix
+> **Scope:** What a generated skill contains - the file contract per layout
+> profile and the fill rules
+> **Key items:** astra, spec, and plugin contracts, template map, fill rules,
+> compatibility matrices
 
-This file defines the artifact Forge produces. The templates themselves live in
-`templates/`, the canonical template-to-path map is `templates/README.md`.
+This file defines the artifact Forge produces per layout profile - the profiles
+and selection rules live in `references/layout-profiles.md`. The templates
+themselves live in `templates/`, the canonical template-to-path map is
+`templates/README.md`.
 
-## The Generated File Contract
-
-A generated single skill carries:
+## Astra Profile - The Member Contract
 
 | File / directory               | Required     | Template                     |
 |--------------------------------|--------------|------------------------------|
@@ -31,19 +32,48 @@ A generated single skill carries:
 | `scripts/validate-skill.py`    | yes          | `skill-validator`            |
 | `scripts/README.md`            | yes          | written by the agent         |
 | `docs/` (governance set)       | yes          | `skill-docs-index` + 5 files |
-| `evals/evals.json`             | yes          | `skill-evals`                |
+| `evals/evals.json`             | yes          | `skill-evaluation`           |
 | domain directories             | as evidenced | written by the agent         |
 
-Domain-specific directories - `types/`, `languages/`, `conventions/`, additional
-`process/` or `references/` files - exist only when the evidence justifies them, per
-`references/skill-anatomy.md`. A generated skill does not ship empty directories.
+## Spec Profile - The Minimal Contract
+
+| File / directory   | Required                     | Template                   |
+|--------------------|------------------------------|----------------------------|
+| `SKILL.md`         | yes                          | `specification-router`     |
+| `README.md`        | recommended                  | `specification-readme`     |
+| `LICENSE`          | recommended                  | `skill-license`            |
+| `evals/evals.json` | when assertions are designed | `specification-evaluation` |
+| domain directories | as evidenced                 | written by the agent       |
+
+A spec skill carries no member-contract surface - no `AGENTS.md`, no
+`CHANGELOG.md`, no `docs/`, no shared `process/` procedures, no Forge scripts.
+Domain directories remain evidence-justified per
+`references/skill-anatomy.md`.
+
+## Plugin Profile - Claude Code Packaging
+
+| File / directory                  | Required        | Template             |
+|-----------------------------------|-----------------|----------------------|
+| `skills/<name>/` (spec skill)     | yes             | the `spec` set       |
+| `.claude-plugin/plugin.json`      | yes             | `plugin-manifest`    |
+| `README.md`                       | recommended     | written by the agent |
+| `.claude-plugin/marketplace.json` | when publishing | `plugin-marketplace` |
+
+The plugin root's manifest names the plugin and its metadata, and the payload is
+an unmodified spec render. Render the `plugin` set into the empty plugin root
+before the `spec` payload, since the renderer refuses a non-empty target. A
+marketplace request renders `plugin-marketplace` into a separate marketplace
+root.
 
 ## Collection Mode
 
 A generated collection carries the index set - `collection-router`,
 `collection-readme`, `collection-agents`, `collection-contract`,
-`collection-review`, `collection-sync` - plus one complete single-skill generation
-per member and a staged `collection-gitmodules` registration snippet.
+`collection-review`, `collection-synchronization` - plus one complete single-skill
+generation per member and a staged `collection-gitmodules` registration
+snippet.
+
+Collections imply the `astra` profile - member skills are astra-shaped.
 
 Members are independently owned repositories. The generated collection never
 contains member sources as plain files, the delivery report names the pin and
@@ -53,12 +83,14 @@ publish steps the user performs.
 
 - The renderer substitutes `{{placeholder}}` values from `template-input.json` -
   the agent writes that file from verified evidence.
-- Every generated skill ships both autonomy modes in its router and
+- Frontmatter follows `references/skills-specification.md`: `name` matches the directory
+  slug, `description` states purpose and triggers within limits,
+  `metadata.version` starts at `0.1.0` where the profile carries one.
+- Every `astra` skill ships both autonomy modes in its router and
   `process/decision-modes.md`, even when its own procedures ask nothing - the
   modes are documented no-ops with identical safety semantics.
-- Frontmatter follows `references/skills-spec.md`: `name` matches the directory
-  slug, `description` states purpose and triggers within limits,
-  `metadata.version` starts at `0.1.0`.
+- Router instructions follow `references/instruction-patterns.md`: procedures
+  over declarations, calibrated prescriptiveness, defaults over menus.
 - Author metadata comes from the target's convention or an explicit value - never
   guessed or hardcoded from Forge's own author.
 - Generated prose follows the shipped style contract: one sentence per paragraph,
@@ -66,9 +98,12 @@ publish steps the user performs.
 - Runtime scratch belongs to the generated skill's own gitignored `work/`, never
   to Forge's workspace and never to a collection's.
 
-## Compatibility Matrix
+## Compatibility Matrices
 
-Phase 2 fills this matrix before generation - every row must pass:
+Phase 2 fills the matrix for the resolved profile before generation - every
+row must pass.
+
+### Astra
 
 | Check             | Requirement                                              |
 |-------------------|----------------------------------------------------------|
@@ -82,11 +117,29 @@ Phase 2 fills this matrix before generation - every row must pass:
 | Governance        | full `docs/` set present                                 |
 | Independence      | self-contained - no sibling paths, no Forge paths        |
 
+### Spec
+
+| Check        | Requirement                                                       |
+|--------------|-------------------------------------------------------------------|
+| Frontmatter  | `name` and `description` per `references/skills-specification.md` |
+| Router       | `SKILL.md` under 500 lines, routes to on-demand resources         |
+| References   | every referenced path resolves inside the skill directory         |
+| Evals        | `evals/evals.json` (when present) carries the canonical schema    |
+| Independence | self-contained - no member-contract files, no Forge paths         |
+
+### Plugin
+
+| Check     | Requirement                                                    |
+|-----------|----------------------------------------------------------------|
+| Payload   | `skills/<name>/` passes the spec matrix                        |
+| Manifest  | `.claude-plugin/plugin.json` parses, names the plugin          |
+| Packaging | the payload is unmodified - manifests only wrap, never rewrite |
+
 A row that cannot pass carries a recorded reason and the run reports partial.
 
 ## Render Discipline
 
-Templates render to a staging directory first, `scripts/validate-skill.py` checks
-the stage, only a passing stage writes to the target. `scripts/render-templates.py`
-owns the mechanical rules - placeholder resolution, path safety, overwrite
-protection.
+Templates render to a staging directory first, `scripts/validate-skill.py
+--profile <profile>` checks the stage, only a passing stage writes to the
+target. `scripts/render-templates.py` owns the mechanical rules - placeholder
+resolution, path safety, overwrite protection.

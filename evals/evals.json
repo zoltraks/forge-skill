@@ -137,6 +137,50 @@
         "Only pending surfaces emit - no invented questions.",
         "A returned filled document is applied without re-asking."
       ]
+    },
+    {
+      "id": 13,
+      "prompt": "Create a portable spec-layout skill for release-note drafting - no astra machinery.",
+      "expected_output": "The five-phase pipeline with the `spec` profile: phase 0 resolves the profile per references/layout-profiles.md, phase 3 renders the spec template set, and validation runs validate-skill.py with --profile spec.",
+      "files": [],
+      "expectations": [
+        "The run state records the spec layout profile in its inputs.",
+        "The staged tree contains SKILL.md plus optional README, LICENSE, and evals - no AGENTS.md, docs/, or shared process/ contracts.",
+        "Validation runs with --profile spec and the rendered evals carry assertions."
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "Package the release-notes skill as a Claude Code plugin.",
+      "expected_output": "The plugin profile renders the spec set into skills/<name>/ under the plugin root plus the plugin set's .claude-plugin/plugin.json - packaging wraps the skill without rewriting it.",
+      "files": [],
+      "expectations": [
+        "The plugin root carries .claude-plugin/plugin.json with name, version, description, and author.",
+        "The skill payload renders via the spec set inside skills/<name>/.",
+        "A marketplace request additionally renders .claude-plugin/marketplace.json into a separate marketplace root."
+      ]
+    },
+    {
+      "id": 15,
+      "prompt": "Adopt this external skill repository into the astra layout.",
+      "expected_output": "The layout-migration procedure: inspect and classify the source layout, present a delta plan, generate the member-contract surface while preserving domain content, and validate with --profile astra.",
+      "files": [],
+      "expectations": [
+        "The source skill's domain files and trigger content are preserved.",
+        "The result carries the full member contract - shared procedures, docs/ set, scripts, astra-schema evals.",
+        "The delta plan is presented before any write, and nothing is committed."
+      ]
+    },
+    {
+      "id": 16,
+      "prompt": "Export panther-skill to a minimal spec package in ./out.",
+      "expected_output": "The layout-migration export direction: SKILL.md plus domain directories only, the router rewritten without astra machinery, expectations mapped to assertions, validated with --profile spec.",
+      "files": [],
+      "expectations": [
+        "Member-contract files are left behind in the source, not copied.",
+        "The report names what was dropped from the member contract.",
+        "No source files are modified without explicit approval."
+      ]
     }
   ]
 }

@@ -13,9 +13,9 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = REPO_ROOT / "scripts" / "validate-skill.py"
 
 
-def run_validator(target: Path) -> subprocess.CompletedProcess:
+def run_validator(target: Path, *extra: str) -> subprocess.CompletedProcess:
     return subprocess.run(
-        [sys.executable, str(SCRIPT), str(target)],
+        [sys.executable, str(SCRIPT), str(target), *extra],
         capture_output=True,
         encoding="utf-8",
         errors="replace",
@@ -133,6 +133,80 @@ class ValidateSkillTests(unittest.TestCase):
             result = run_validator(skill)
             self.assertEqual(result.returncode, 1)
             self.assertIn("fully autonomous", result.stdout)
+
+
+def make_spec_skill(root: Path, name: str = "spec-skill") -> Path:
+    skill = root / name
+    skill.mkdir(parents=True)
+    (skill / "SKILL.md").write_text(
+        f'---\nname: {name}\ndescription: >-\n  A minimal spec skill.\n'
+        'license: MIT\n---\n\n# Spec Sample\n',
+        encoding="utf-8",
+    )
+    return skill
+
+
+class SpecProfileTests(unittest.TestCase):
+    def test_minimal_spec_skill_passes_spec_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_spec_skill(Path(scratch))
+            result = run_validator(skill, "--profile", "spec")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("spec", result.stdout)
+
+    def test_minimal_spec_skill_fails_astra_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_spec_skill(Path(scratch))
+            result = run_validator(skill, "--profile", "astra")
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("required file missing", result.stdout)
+
+    def test_spec_profile_rejects_bad_name(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = Path(scratch) / "bad--name"
+            skill.mkdir()
+            (skill / "SKILL.md").write_text(
+                "---\nname: bad--name\ndescription: x\n---\n# t\n",
+                encoding="utf-8",
+            )
+            result = run_validator(skill, "--profile", "spec")
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("hyphens", result.stdout)
+
+    def test_spec_profile_missing_skill_file_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            root = Path(scratch) / "empty-skill"
+            root.mkdir()
+            result = run_validator(root, "--profile", "spec")
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("SKILL.md is missing", result.stdout)
+
+    def test_spec_evals_use_assertions_schema(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_spec_skill(Path(scratch))
+            (skill / "evals").mkdir()
+            evals = {"skill_name": "spec-skill", "evals": [
+                {"id": 1, "prompt": "p", "expected_output": "e",
+                 "files": [], "assertions": ["x"]},
+            ]}
+            (skill / "evals" / "evals.json").write_text(json.dumps(evals),
+                                                      encoding="utf-8")
+            result = run_validator(skill, "--profile", "spec")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_spec_evals_reject_expectations_schema(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_spec_skill(Path(scratch))
+            (skill / "evals").mkdir()
+            evals = {"skill_name": "spec-skill", "evals": [
+                {"id": 1, "prompt": "p", "expected_output": "e",
+                 "files": [], "expectations": ["x"]},
+            ]}
+            (skill / "evals" / "evals.json").write_text(json.dumps(evals),
+                                                      encoding="utf-8")
+            result = run_validator(skill, "--profile", "spec")
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("assertions", result.stdout)
 
 
 if __name__ == "__main__":

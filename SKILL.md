@@ -1,18 +1,17 @@
 ---
 name: forge-skill
 description: >-
-  Skill factory for creating new Agent Skills. Researches a topic, plans and
-  performs evidence gathering, synthesizes findings, and generates a complete
-  skill document set compatible with the astra-skills collection - router,
-  shared procedures, governance documents, evals, and mechanical scripts.
-  Converts external sources such as PDF books, EPUB, DOCX, and HTML into
-  structured skill knowledge through an approved local converter such as
-  MarkItDown. Creates single skills and, optionally, multi-member skill
-  collections modeled on astra-skills. Every generated skill carries the
-  shared activation, JSON exchange, session-review, update-check, and
-  dual-mode autonomy contracts. Use when asked to create, forge, or author a
-  new skill, to build a skill from a book or document set, to analyze a
-  source for skill creation, or to generate from an existing analysis.
+  Skill factory for creating Agent Skills. Researches a topic, synthesizes
+  evidence, and generates skill document sets in the astra-skills member
+  layout, the minimal spec-conformant layout of the Agent Skills
+  specification, or Claude Code plugin packaging - and migrates skills
+  between those layouts. Converts sources such as PDF books, EPUB, DOCX, and
+  HTML through an approved local converter such as MarkItDown. Optionally
+  creates multi-member collections modeled on astra-skills. Astra-layout
+  skills carry the shared activation, JSON exchange, session-review,
+  update-check, and autonomy contracts. Use to create or author a skill,
+  build one from a document set, analyze a source, generate from an
+  analysis, package a skill as a plugin, or migrate a skill between layouts.
   Maintains its own rule corpus on "work on forge-skill" requests.
 license: MIT
 compatibility: >-
@@ -22,7 +21,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   author: Filip Golewski
 ---
 
@@ -38,18 +37,18 @@ metadata:
 
 | Section            | Line | What it covers                                       |
 |--------------------|------|------------------------------------------------------|
-| Modes              | 63   | Enable, operation, and maintenance selection         |
-| Interaction Modes  | 74   | Interactive, autonomous, fully autonomous, verbose   |
-| Skill Update Check | 94   | Once-per-session upstream check                      |
-| Trigger Keywords   | 122  | Phrases that activate the skill                      |
-| Operations         | 142  | Request-to-resource routing                          |
-| `process/`         | 156  | Pipeline, conversion, research, and shared contracts |
-| `references/`      | 179  | Evidence and convention references                   |
-| `templates/`       | 197  | Generation skeletons and the output-path map         |
-| `scripts/`         | 214  | Mechanical tools                                     |
-| `evals/`           | 232  | Behavioral regression prompts                        |
-| Repository Files   | 240  | Governance files                                     |
-| Boundaries         | 250  | Authority, safety, and writing rules                 |
+| Modes              | 62   | Enable, operation, and maintenance selection         |
+| Interaction Modes  | 73   | Interactive, autonomous, fully autonomous, verbose   |
+| Skill Update Check | 93   | Once-per-session upstream check                      |
+| Trigger Keywords   | 121  | Phrases that activate the skill                      |
+| Operations         | 148  | Request-to-resource routing                          |
+| `process/`         | 165  | Pipeline, conversion, research, and shared contracts |
+| `references/`      | 190  | Evidence and convention references                   |
+| `templates/`       | 218  | Generation skeletons and the output-path map         |
+| `scripts/`         | 239  | Mechanical tools                                     |
+| `evals/`           | 257  | Behavioral regression prompts                        |
+| Repository Files   | 265  | Governance files                                     |
+| Boundaries         | 275  | Authority, safety, and writing rules                 |
 
 You are a Skill Factory Agent.
 
@@ -131,6 +130,13 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
   survey this book for skill creation.
 - **Generate from analysis**: generate the skill from the analysis, continue the forge
   run, resume forging.
+- **Spec layout**: create a portable skill, a minimal skill package, a
+  spec-conformant skill, a skill for a non-astra host.
+- **Plugin packaging**: package this skill as a Claude Code plugin, create a
+  plugin package, build a marketplace entry.
+- **Migrate a layout**: adopt this skill into astra, migrate this skill to the
+  spec layout, export this skill as a portable package, convert this skill's
+  layout.
 - **Update a skill**: update <skill> with this new source, fold this document into
   <skill>.
 - **Maintain the skill**: work on forge-skill, improve forge-skill, maintain this
@@ -141,17 +147,20 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
 
 ## Operations
 
-| Request                                                           | Route                                                             |
-|-------------------------------------------------------------------|-------------------------------------------------------------------|
-| create or forge a skill for a topic                               | `process/forge-workflow.md` - the full five-phase pipeline        |
-| create or forge a skill collection with members                   | `process/forge-workflow.md` - pipeline in collection mode         |
-| analyze a source (PDF, EPUB, DOCX, HTML, text) for a future skill | `process/research-gathering.md` + `process/source-conversion.md`  |
-| generate a skill from an existing analysis or run state           | `process/forge-workflow.md` phases 2-4 with the recorded evidence |
-| update an existing skill with a new source                        | `process/research-synthesis.md` - propose the fold-in, no writes  |
-| ask for intake parameters "as JSON" or name a diagnostic mode     | `process/json-exchange.md`                                        |
-| inspect or re-render generation templates                         | `templates/` + `process/skill-template.md`                        |
-| convert a local source file                                       | `process/source-conversion.md` + `scripts/convert-source.py`      |
-| change, extend, fix, or review this skill repository              | `process/skill-maintenance.md` - maintenance mode                 |
+| Request                                                                               | Route                                                             |
+|---------------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| create or forge a skill for a topic                                                   | `process/forge-workflow.md` - the full five-phase pipeline        |
+| create a portable, minimal, or spec-conformant skill                                  | `process/forge-workflow.md` - pipeline with the `spec` profile    |
+| package a skill as a Claude Code plugin or marketplace entry                          | `process/forge-workflow.md` - pipeline with the `plugin` profile  |
+| create or forge a skill collection with members                                       | `process/forge-workflow.md` - pipeline in collection mode         |
+| migrate a skill between layouts (adopt into astra, export to spec, package as plugin) | `process/layout-migration.md`                                     |
+| analyze a source (PDF, EPUB, DOCX, HTML, text) for a future skill                     | `process/research-gathering.md` + `process/source-conversion.md`  |
+| generate a skill from an existing analysis or run state                               | `process/forge-workflow.md` phases 2-4 with the recorded evidence |
+| update an existing skill with a new source                                            | `process/research-synthesis.md` - propose the fold-in, no writes  |
+| ask for intake parameters "as JSON" or name a diagnostic mode                         | `process/json-exchange.md`                                        |
+| inspect or re-render generation templates                                             | `templates/` + `process/skill-template.md`                        |
+| convert a local source file                                                           | `process/source-conversion.md` + `scripts/convert-source.py`      |
+| change, extend, fix, or review this skill repository                                  | `process/skill-maintenance.md` - maintenance mode                 |
 
 ## `process/` - Procedures
 
@@ -173,17 +182,29 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
   confidence, conflict handling, and the rule map.
 - **`process/source-conversion.md`** - Local source conversion through an approved
   converter, extraction-quality inspection, and scratch boundaries.
-- **`process/skill-template.md`** - What a generated skill contains: the file
-  contract, template map, and per-file fill rules.
+- **`process/skill-template.md`** - What a generated skill contains: the per-profile
+  file contracts, template map, and per-file fill rules.
+- **`process/layout-migration.md`** - Converting a skill between layout profiles:
+  adopt into astra, export to spec, package as plugin.
 
 ## `references/` - Evidence Library
 
-- **`references/astra-conventions.md`** - The compatibility contract generated
+- **`references/layout-profiles.md`** - The generation layouts: `astra`, `spec`,
+  and `plugin` profiles, selection rules, harness discovery paths, and the
+  portability rule.
+- **`references/astra-conventions.md`** - The `astra` profile contract generated
   skills must satisfy to sit beside the astra-skills members.
-- **`references/skills-spec.md`** - The Agent Skills specification summary:
-  frontmatter fields, limits, and directory layout.
+- **`references/skills-specification.md`** - The Agent Skills specification summary and
+  the `spec` profile contract: canonical source, frontmatter fields, limits,
+  directory layout, validation.
 - **`references/skill-anatomy.md`** - Required and optional components of a
-  generated skill with their purpose.
+  generated skill per profile, with their purpose.
+- **`references/instruction-patterns.md`** - Process-driven instruction design:
+  procedures over declarations, calibrated prescriptiveness, the pattern
+  catalog, granularity, and context economy.
+- **`references/evaluation-design.md`** - Evaluation datasets, run workspaces,
+  assertions and grading, trigger evals, security guardrails, and quality
+  gates for generated skills.
 - **`references/trigger-design.md`** - Trigger-description and keyword practice:
   inclusion, exclusion, and near-miss cases.
 - **`references/markitdown-reference.md`** - The MarkItDown converter: what it is,
@@ -199,14 +220,18 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
 Templates render through `scripts/render-templates.py` with a context document the
 agent writes from verified evidence - a template never invents domain knowledge.
 
-- Single-skill set: `skill-router`, `skill-agents`, `skill-activation`,
-  `review-procedure`, `exchange-procedure`, `decision-modes`, `skill-maintainer`,
-  `skill-readme`, `skill-changelog`, `skill-license`, `skill-gitignore`,
-  `skill-docs-index`, `skill-contributing`, `skill-style`, `skill-maintenance`,
-  `skill-versioning`, `skill-security`, `skill-evals`, `skill-updater`,
-  `skill-validator`.
+- Single-skill set (`astra` profile): `skill-router`, `skill-agents`,
+  `skill-activation`, `review-procedure`, `exchange-procedure`, `decision-modes`,
+  `skill-maintainer`, `skill-readme`, `skill-changelog`, `skill-license`,
+  `skill-gitignore`, `skill-docs-index`, `skill-contributing`, `skill-style`,
+  `skill-maintenance`, `skill-versioning`, `skill-security`, `skill-evaluation`,
+  `skill-updater`, `skill-validator`.
+- Spec set (`spec` profile): `specification-router`, `specification-readme`,
+  `specification-evaluation`, and the shared `skill-license`.
+- Plugin set (`plugin` profile): `plugin-manifest`, and the `marketplace` set
+  carries `plugin-marketplace` for marketplace publishing.
 - Collection set: `collection-router`, `collection-readme`, `collection-agents`,
-  `collection-contract`, `collection-review`, `collection-sync`,
+  `collection-contract`, `collection-review`, `collection-synchronization`,
   `collection-gitmodules`.
 - **`templates/README.md`** - The canonical template-to-output-path map and the
   placeholder vocabulary.
@@ -220,7 +245,7 @@ untrusted targets without the sandboxing rules of `scripts/README.md`.
   Skill Update Check gate.
 - **`scripts/validate-skill.py`** - Read-only validator for this skill and for
   generated skill trees - frontmatter, shared contracts, structure, evals,
-  references. It never executes target scripts.
+  references, per `--profile astra|spec`. It never executes target scripts.
 - **`scripts/render-templates.py`** - Deterministic `{{placeholder}}` renderer:
   explicit output-path map, scratch staging, overwrite protection, and
   leftover-placeholder rejection.

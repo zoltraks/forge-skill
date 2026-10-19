@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
-"""Validate Forge or a generated skill tree against the member contract.
+"""Validate Forge or a generated skill tree against a layout profile.
 
 Read-only inspection: frontmatter, shared procedures, decision modes,
 structure, evals, root references, naming, and leftover placeholders.
 Never executes target scripts, never fetches, never writes.
 
-Usage: python3 scripts/validate-skill.py <skill-directory>
+Usage: python3 scripts/validate-skill.py <skill-directory> [--profile astra|spec]
+
+The default `astra` profile enforces the full member contract. The `spec`
+profile enforces only the portable Agent Skills specification surface - the
+member-contract checks do not apply.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sys
@@ -111,7 +116,8 @@ def parse_frontmatter(text: str, issues: list[str]) -> tuple[dict[str, str], str
     return fields, text[match.end():]
 
 
-def validate_frontmatter(root: Path, fields: dict[str, str], issues: list[str]) -> None:
+def validate_frontmatter(root: Path, fields: dict[str, str], issues: list[str],
+                         profile: str) -> None:
     missing = {"name", "description"} - fields.keys()
     for key in sorted(missing):
         issue(f"frontmatter is missing required field: {key}", issues)
@@ -147,7 +153,7 @@ def validate_frontmatter(root: Path, fields: dict[str, str], issues: list[str]) 
     if compatibility and len(compatibility) > 500:
         issue(f"compatibility is {len(compatibility)} characters, maximum is 500", issues)
 
-    if "metadata.version" not in fields:
+    if profile == "astra" and "metadata.version" not in fields:
         issue("frontmatter metadata carries no version", issues)
 
 
@@ -161,10 +167,13 @@ def referenced_paths(body: str) -> set[str]:
     return references
 
 
-def validate_structure(root: Path, issues: list[str]) -> None:
-    for relative in REQUIRED_FILES:
+def validate_structure(root: Path, issues: list[str], profile: str) -> None:
+    required = REQUIRED_FILES if profile == "astra" else ["SKILL.md"]
+    for relative in required:
         if not (root / relative).is_file():
             issue(f"required file missing: {relative}", issues)
+    if profile != "astra":
+        return
     for relative in SHARED_PROCEDURES:
         path = root / relative
         if not path.is_file():
@@ -248,7 +257,8 @@ def relative_name(path: Path, root: Path) -> str:
     return str(path.relative_to(root))
 
 
-def validate_evals(root: Path, fields: dict[str, str], issues: list[str]) -> None:
+def validate_evals(root: Path, fields: dict[str, str], issues: list[str],
+                   profile: str) -> None:
     evals_file = root / "evals" / "evals.json"
     if not evals_file.is_file():
         return
@@ -262,6 +272,7 @@ def validate_evals(root: Path, fields: dict[str, str], issues: list[str]) -> Non
         return
     if data.get("skill_name") != fields.get("name"):
         issue("evals/evals.json skill_name does not match frontmatter name", issues)
+    assertion_key = "expectations" if profile == "astra" else "assertions"
     identifiers: set[int] = set()
     for position, item in enumerate(data["evals"], start=1):
         if not isinstance(item, dict):
@@ -274,8 +285,13 @@ def validate_evals(root: Path, fields: dict[str, str], issues: list[str]) -> Non
             identifiers.add(identifier)
         if not isinstance(item.get("prompt"), str) or not item["prompt"].strip():
             issue(f"eval {position} has no prompt", issues)
-        if not isinstance(item.get("expectations"), list) or not item["expectations"]:
-            issue(f"eval {position} has no expectations", issues)
+        if profile == "spec" and (
+            not isinstance(item.get("expected_output"), str)
+            or not item["expected_output"].strip()
+        ):
+            issue(f"eval {position} has no expected_output", issues)
+        if not isinstance(item.get(assertion_key), list) or not item[assertion_key]:
+            issue(f"eval {position} has no {assertion_key}", issues)
 
 
 def validate_json_files(root: Path, issues: list[str]) -> None:
@@ -290,11 +306,13 @@ def validate_json_files(root: Path, issues: list[str]) -> None:
 
 
 def main() -> int:
-    if len(sys.argv) != 2:
-        print("Usage: python3 scripts/validate-skill.py <skill-directory>")
-        return 1
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("skill_dir", help="skill directory to validate")
+    parser.add_argument("--profile", choices=["astra", "spec"], default="astra",
+                        help="layout profile to enforce (default: astra)")
+    args = parser.parse_args()
 
-    root = Path(sys.argv[1]).resolve()
+    root = Path(args.skill_dir).resolve()
     skill_file = root / "SKILL.md"
     issues: list[str] = []
     if not root.is_dir():
@@ -304,11 +322,11 @@ def main() -> int:
     else:
         text = skill_file.read_text(encoding="utf-8")
         fields, body = parse_frontmatter(text, issues)
-        validate_frontmatter(root, fields, issues)
+        validate_frontmatter(root, fields, issues, args.profile)
         validate_body(root, body, issues)
-        validate_structure(root, issues)
+        validate_structure(root, issues, args.profile)
         validate_naming(root, issues)
-        validate_evals(root, fields, issues)
+        validate_evals(root, fields, issues, args.profile)
         validate_json_files(root, issues)
 
     if issues:
@@ -317,7 +335,8 @@ def main() -> int:
         print(f"{len(issues)} issue(s) found")
         return 1
 
-    print("PASS skill contract, structure, references, and naming")
+    print(f"PASS {args.profile} profile: frontmatter, structure, references, "
+          "and naming")
     return 0
 
 

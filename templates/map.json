@@ -17,9 +17,21 @@
     "skill-maintenance.template": "docs/MAINTENANCE.md",
     "skill-versioning.template": "docs/VERSIONING.md",
     "skill-security.template": "docs/SECURITY.md",
-    "skill-evals.template": "evals/evals.json",
+    "skill-evaluation.template": "evals/evals.json",
     "skill-updater.template": "scripts/check-update.py",
     "skill-validator.template": "scripts/validate-skill.py"
+  },
+  "spec": {
+    "specification-router.template": "SKILL.md",
+    "specification-readme.template": "README.md",
+    "skill-license.template": "LICENSE",
+    "specification-evaluation.template": "evals/evals.json"
+  },
+  "plugin": {
+    "plugin-manifest.template": ".claude-plugin/plugin.json"
+  },
+  "marketplace": {
+    "plugin-marketplace.template": ".claude-plugin/marketplace.json"
   },
   "collection": {
     "collection-router.template": "SKILL.md",
@@ -27,7 +39,7 @@
     "collection-agents.template": "AGENTS.md",
     "collection-contract.template": "process/member-contract.md",
     "collection-review.template": "process/session-review.md",
-    "collection-sync.template": "process/synchronization.md",
+    "collection-synchronization.template": "process/synchronization.md",
     "collection-gitmodules.template": ".gitmodules"
   }
 }

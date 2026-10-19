@@ -1,0 +1,17 @@
+# {{skill-title}}
+
+{{skill-purpose}}
+
+## Install
+
+Copy this directory into your agent environment's skills location - for
+example `.claude/skills/{{skill-name}}/` for Claude Code project scope, or the
+discovery path your host documents.
+
+## Usage
+
+Activate through your agent environment's skill mechanism, then name the task.
+
+## License
+
+MIT - see `LICENSE`.
