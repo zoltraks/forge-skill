@@ -1,6 +1,17 @@
 # Changelog
 
-## [Unreleased]
+## [0.1.2] - 2026-10-19
+
+### Changed
+
+- `CHANGELOG.md` drops the `Unreleased` section: change-set entries record directly under
+  `## [<version>] - <date>` headings opened with the set's version bump, and
+  `docs/VERSIONING.md` and `SKILL.md` carry the new release-record rule. The `0.1.1`
+  release entries are re-anchored to their shipped version heading.
+- `references/skill-anatomy.md` records the collection test layout: script tests live in
+  `tests/` at the repository root, with subdirectory containers such as `fixtures/`.
+
+## [0.1.1] - 2026-10-19
 
 ### Added
 

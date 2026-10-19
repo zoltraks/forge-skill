@@ -31,7 +31,7 @@ Domain directories are evidence-justified in every profile:
 | `templates/`              | The skill produces documents from skeletons                                                            |
 | `assets/`                 | Static files the skill copies or serves                                                                |
 | `types/`, `languages/`…   | Domain taxonomies like panther's - real evidence only                                                  |
-| `tests/`                  | The skill ships its own scripts worth testing                                                          |
+| `tests/`                  | The skill ships its own scripts worth testing - root directory, subdirectory containers like `fixtures/` |
 | `evals/`                  | Always for `astra`, and for `spec` when assertions are designed, per `references/evaluation-design.md` |
 
 A generated skill ships no empty directory and no placeholder file "for later".

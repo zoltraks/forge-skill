@@ -21,7 +21,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
   author: Filip Golewski
 ---
 
@@ -266,7 +266,7 @@ untrusted targets without the sandboxing rules of `scripts/README.md`.
 
 - **`AGENTS.md`** - The agent-facing maintenance entry point.
 - **`README.md`** - The human-facing overview and directory tree.
-- **`CHANGELOG.md`** - Release history, record changes under `## [Unreleased]`.
+- **`CHANGELOG.md`** - Release history, version-numbered sections only.
 - **`LICENSE`** - MIT.
 - **`docs/`** - Governance: `STYLE.md`, `VERSIONING.md`, `MAINTENANCE.md`,
   `CONTRIBUTING.md`, `SECURITY.md`, and the `docs/README.md` index.

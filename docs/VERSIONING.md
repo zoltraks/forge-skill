@@ -22,6 +22,8 @@ Rollover: `0.1.9` bumps to `0.2.0`, `0.9.9` to `1.0.0` - patch rolls at 9.
 
 ## Release Anchoring
 
-`CHANGELOG.md` records each change set under `## [Unreleased]` as it lands. At
-release the section is renamed to the version and date. The changelog is
-release-facing history, it is not the version source of truth.
+`CHANGELOG.md` records each change set under `## [<version>] - <date>` as it lands, where
+`<version>` is the version the set bumps to and `<date>` is the delivery date. The heading
+opens together with the bump - `CHANGELOG.md` never carries an `Unreleased` section, so a
+committed change set can no longer ship under a placeholder. The changelog is release-facing
+history, it is not the version source of truth.
