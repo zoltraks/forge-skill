@@ -82,12 +82,13 @@ entries are the pattern.
 
 ## Install Methods
 
-| Method             | Mechanism                                                        |
-|--------------------|------------------------------------------------------------------|
-| Direct placement   | Copy the package into the host's discovery path                  |
-| Plugin marketplace | `.claude-plugin/marketplace.json` registry, install by name      |
-| Registry CLI       | skills.sh and similar one-command installers                     |
-| Git submodule      | Pinned external repository, the astra collection's own mechanism |
+| Method             | Mechanism                                                            |
+|--------------------|----------------------------------------------------------------------|
+| Direct placement   | Copy the package into the host's discovery path                      |
+| Plugin marketplace | `.claude-plugin/marketplace.json` registry, install by name          |
+| Registry CLI       | skills.sh and similar one-command installers                         |
+| Git submodule      | Pinned external repository - the astra-skills collection's mechanism |
+| Tracked directory  | Member lives inside the collection repository as a tracked path      |
 
 ## Portability Rule
 

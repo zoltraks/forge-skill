@@ -70,19 +70,30 @@ root.
 A generated collection carries the index set - `collection-router`,
 `collection-readme`, `collection-agents`, `collection-contract`,
 `collection-review`, `collection-synchronization` - plus one complete single-skill
-generation per member and a staged `collection-gitmodules` registration
-snippet.
+generation per member.
 
 Collections imply the `astra` profile - member skills are astra-shaped.
 
-Members are independently owned repositories. The generated collection never
-contains member sources as plain files, the delivery report names the pin and
-publish steps the user performs.
+The run resolves one of two membership models at intake and records it in the run
+state's `inputs`:
+
+- `submodule` - members are independently owned repositories pinned as git
+  submodules. Member trees render into each member's own repository checkout, the
+  `collection-gitmodules` template renders the registration snippet, and the
+  delivery report names the pin and publish steps the user performs.
+- `tracked` - members are tracked `skills/<name>/` directories inside the
+  collection repository. Member trees render straight into the collection staging
+  tree, no `.gitmodules` is emitted, and the generated membership placeholders
+  record the tracked model throughout the index documents.
 
 ## Fill Rules
 
 - The renderer substitutes `{{placeholder}}` values from `template-input.json` -
   the agent writes that file from verified evidence.
+- Every context file carries the renderer's required keys - `skill-name`,
+  `skill-title`, `skill-purpose`, `skill-description` - whichever set renders.
+  A collection context aliases them to the collection values, while the
+  `collection-*` keys carry the real text the index templates consume.
 - Frontmatter follows `references/skills-specification.md`: `name` matches the directory
   slug, `description` states purpose and triggers within limits,
   `metadata.version` starts at `0.1.0` where the profile carries one.

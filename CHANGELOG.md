@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.1.3] - 2026-10-19
+
+### Changed
+
+- Collection generation gains a membership model resolved at intake: `submodule`
+  keeps members as pinned external repositories, `tracked` renders members as
+  tracked `skills/<name>/` directories inside the collection repository and emits
+  no `.gitmodules`. `process/skill-template.md`, `process/forge-workflow.md`,
+  `references/astra-conventions.md`, and `references/layout-profiles.md` record the
+  contract.
+- The `collection` template set is membership-aware through new placeholders
+  (`membership-prose`, `membership-usage`, `membership-hint`, `membership-rule`,
+  `membership-install`, `membership-tree`, `membership-contract`,
+  `membership-update`, `membership-sync`) registered in `templates/README.md`.
+- Member directory naming follows two-word kebab-case - the `-skill` suffix is a
+  standalone-repository convention, not required inside a collection.
+- `evals/evals.json` adjusts the collection eval for both models and adds a
+  tracked-membership regression prompt.
+- `templates/collection-readme.template` and `templates/decision-modes.template`
+  drop the `text` fence tag - plain-text blocks ship untagged fences.
+- `process/skill-template.md` records the required context keys every render
+  input carries, and `process/forge-workflow.md` adds the staged-tree editorial
+  pass to phase 3.
+
 ## [0.1.2] - 2026-10-19
 
 ### Changed

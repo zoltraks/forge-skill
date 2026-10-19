@@ -84,7 +84,7 @@ fetching or asking, then uses the loaded router.
 
 Inline decisions read:
 
-```text
+```
 Decisions:
 - <surface> -> <value> (recommended; <reason>).
 - <surface> -> skipped (<reason>; dependent steps skipped).

@@ -2,12 +2,14 @@
 
 ## Purpose
 
-> **Scope:** Fetching and reconciling the collection and every member submodule
+> **Scope:** Fetching and reconciling the collection and its member packages
 > **Key items:** fetch first, report state, fast-forward, pin reconciliation,
 > push order
 
 Follow it when the request asks to synchronize, merge remotes, or update the
 collection and its members.
+
+{{membership-sync}}
 
 ## Procedure
 

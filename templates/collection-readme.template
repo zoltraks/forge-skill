@@ -16,27 +16,20 @@
 ├── AGENTS.md         # Agent entry point for maintaining the collection
 ├── README.md         # This file
 ├── process/          # member-contract, session-review, synchronization
-├── skills/           # Member skill packages (git submodules)
+├── skills/           # Member skill packages ({{membership-tree}})
 │   └── <member>/
 └── work/             # Gitignored local workspace
 ```
 
 ## Installation
 
-Clone the collection, then fetch the members:
-
-```bash
-git submodule update --init
-```
-
-Each member is an independent repository pinned as a submodule - members publish
-in their own repositories first, then the collection re-pins.
+{{membership-install}}
 
 ## Usage
 
 Activate the collection through your agent environment's skill mechanism:
 
-```text
+```
 use {{collection-name}}
 ```
 

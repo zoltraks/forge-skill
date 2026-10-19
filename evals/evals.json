@@ -28,14 +28,15 @@
     {
       "id": 3,
       "prompt": "Create a skill collection for our support tooling with two members, autonomously.",
-      "expected_output": "Collection mode of process/forge-workflow.md - the index templates render beside two complete single-skill member generations, with member-first publication steps reported at the end.",
+      "expected_output": "Collection mode of process/forge-workflow.md - the membership model resolves at intake, the index templates render beside two complete single-skill member generations, and publication steps are reported at the end.",
       "files": [],
       "expectations": [
         "Both member skills carry the full single-skill contract including decision-modes.md.",
         "The collection roster, README tree, and member directories match one to one.",
         "Routine decisions resolve inline with recorded reasons - no unnecessary questions.",
-        "Member sources are not authored as plain files inside the collection checkout.",
-        "The delivery report names the user-side pin and publish steps."
+        "The membership model is recorded in the run state inputs and the generated documents carry matching membership text.",
+        "Under the submodule model, member sources are not authored as plain files inside the collection checkout and the delivery report names the pin and publish steps.",
+        "Under the tracked model, member trees render into skills/<name>/ inside the collection and no .gitmodules is emitted."
       ]
     },
     {
@@ -180,6 +181,18 @@
         "Member-contract files are left behind in the source, not copied.",
         "The report names what was dropped from the member contract.",
         "No source files are modified without explicit approval."
+      ]
+    },
+    {
+      "id": 17,
+      "prompt": "Forge a single-repository skill collection with tracked members for our deployment tooling.",
+      "expected_output": "Collection mode with the tracked membership model: the index renders with tracked-membership text, each member renders into skills/<name>/ inside the collection, and no .gitmodules or pin plan is produced.",
+      "files": [],
+      "expectations": [
+        "The run state records the tracked membership model in inputs.",
+        "Generated collection documents describe tracked-directory membership, not submodule pins.",
+        "No .gitmodules file reaches the target tree.",
+        "Member directories carry two-word kebab-case names without a required -skill suffix."
       ]
     }
   ]

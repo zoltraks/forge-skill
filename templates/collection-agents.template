@@ -37,9 +37,7 @@ This file is the entry point for agents that modify the collection.
   `README.md` tree in the same change set.
 - Keep each skill self-contained: a member skill never reaches into a sibling skill's
   directory or into `work/`.
-- Member skills are always external repositories: each skill's contents live and change
-  only in its own repository, the collection records the pinned submodule commit, and a
-  skill's files are never authored or edited inside the collection.
+{{membership-rule}}
 
 ## Local Workspace
 

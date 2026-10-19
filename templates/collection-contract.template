@@ -6,9 +6,7 @@
 > **Key items:** bare activation, shared procedure filenames, update check, review modes,
 > repository conventions, member-owned variance.
 
-Each member skill is an external repository that owns its own files - this file records
-the conventions all members share, so collection maintenance can tell recorded variance
-from drift and a new member can conform without reverse-engineering its siblings.
+{{membership-contract}}
 
 A member's own `AGENTS.md` and `SKILL.md` stay authoritative for that member - when this
 file and a member disagree, the member's documents win and the disagreement is either a
@@ -39,6 +37,8 @@ remote-tracking ref the `tip_sha` was reported from.
 
 A member on a detached HEAD reports `NO-UPSTREAM`. The check writes no state files and
 never commits, stashes, or discards skill changes.
+
+{{membership-update}}
 
 ## Shared Procedures
 

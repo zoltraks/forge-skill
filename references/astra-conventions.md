@@ -71,7 +71,20 @@ skipping and partial reporting - as generated-skill standard.
 
 ## Collection Membership
 
-A member is an external repository pinned as a submodule. It assumes nothing about
-which siblings load beside it, never reaches into a sibling's directory, and a
-collection-level session review delegates member lessons to the member's own
-review procedure.
+A member package lives under `skills/<name>/` in one of two models, chosen per
+collection and recorded in the run state: an external repository pinned as a git
+submodule, or a tracked directory inside the collection repository.
+
+The `submodule` model keeps each member's history and release cadence in its own
+repository, and the collection records a pinned commit. The `tracked` model keeps the
+collection and its members in one repository - a member's update check resolves the
+collection's upstream, and synchronization is the repository's own fetch, merge, and
+push, with no pins to reconcile.
+
+Member directories use two-word kebab-case names. A `-skill` suffix belongs to the
+repository-slug convention of a standalone member - it is not required on a member
+directory inside a collection.
+
+Whatever the model, a member assumes nothing about which siblings load beside it,
+never reaches into a sibling's directory, and a collection-level session review
+delegates member lessons to the member's own review procedure.

@@ -91,38 +91,48 @@ that lists plugin sources by path.
 | `collection-gitmodules.template`      | `.gitmodules`                |
 
 Each collection member additionally renders the full `single` set into its own
-`skills/<name>/` directory in the member's own repository - never as tracked files
-inside the collection checkout.
+`skills/<name>/` directory - into the member's own repository checkout under the
+`submodule` membership model, or straight into the collection staging tree under the
+`tracked` model. The `collection-gitmodules` output is emitted only for `submodule`
+collections - a `tracked` run drops the staged `.gitmodules` and records the decision.
 
 ## Placeholder Vocabulary
 
-| Placeholder              | Source                                       |
-|--------------------------|----------------------------------------------|
-| `skill-name`             | Validated slug matching the target directory |
-| `skill-title`            | Title Case display name                      |
-| `skill-purpose`          | One-line purpose sentence                    |
-| `skill-description`      | Frontmatter description                      |
-| `skill-version`          | Initial version - `0.1.0`                    |
-| `skill-author`           | Target's author convention, never guessed    |
-| `year`                   | License year                                 |
-| `trigger-keywords`       | Grouped trigger phrase list                  |
-| `operations-table`       | Operations table rows                        |
-| `process-listings`       | Extra `process/` bullet rows                 |
-| `parameter-rows`         | Extra parameter-catalog rows                 |
-| `collection-name`        | Collection slug                              |
-| `collection-title`       | Collection display name                      |
-| `collection-description` | Collection frontmatter description           |
-| `collection-purpose`     | Collection purpose line                      |
-| `member-table`           | Collection member roster rows                |
-| `gitmodules-entries`     | `.gitmodules` section blocks                 |
-| `workflow-steps`         | Spec router's ordered procedure list         |
-| `resource-listings`      | Spec router's on-demand resource bullets     |
-| `plugin-name`            | Claude Code plugin slug                      |
-| `plugin-version`         | Plugin version string                        |
-| `plugin-description`     | Plugin manifest description                  |
-| `plugin-author`          | Plugin author name                           |
-| `marketplace-name`       | Claude Code marketplace slug                 |
-| `plugin-source-path`     | Plugin path relative to the marketplace root |
+| Placeholder              | Source                                                        |
+|--------------------------|---------------------------------------------------------------|
+| `skill-name`             | Validated slug matching the target directory                  |
+| `skill-title`            | Title Case display name                                       |
+| `skill-purpose`          | One-line purpose sentence                                     |
+| `skill-description`      | Frontmatter description                                       |
+| `skill-version`          | Initial version - `0.1.0`                                     |
+| `skill-author`           | Target's author convention, never guessed                     |
+| `year`                   | License year                                                  |
+| `trigger-keywords`       | Grouped trigger phrase list                                   |
+| `operations-table`       | Operations table rows                                         |
+| `process-listings`       | Extra `process/` bullet rows                                  |
+| `parameter-rows`         | Extra parameter-catalog rows                                  |
+| `collection-name`        | Collection slug                                               |
+| `collection-title`       | Collection display name                                       |
+| `collection-description` | Collection frontmatter description                            |
+| `collection-purpose`     | Collection purpose line                                       |
+| `member-table`           | Collection member roster rows                                 |
+| `gitmodules-entries`     | `.gitmodules` section blocks - `submodule` membership only    |
+| `membership-prose`       | Router paragraph describing the collection's membership model |
+| `membership-hint`        | Router enablement hint shown for an absent member             |
+| `membership-rule`        | AGENTS membership bullet under Adding a Skill                 |
+| `membership-install`     | README Installation section body                              |
+| `membership-tree`        | README directory-tree comment for `skills/`                   |
+| `membership-contract`    | member-contract opening block describing the model            |
+| `membership-update`      | member-contract tracked-member upstream resolution            |
+| `membership-sync`        | synchronization scope note per membership model               |
+| `workflow-steps`         | Spec router's ordered procedure list                          |
+| `resource-listings`      | Spec router's on-demand resource bullets                      |
+| `plugin-name`            | Claude Code plugin slug                                       |
+| `plugin-version`         | Plugin version string                                         |
+| `plugin-description`     | Plugin manifest description                                   |
+| `plugin-author`          | Plugin author name                                            |
+| `marketplace-name`       | Claude Code marketplace slug                                  |
+| `plugin-source-path`     | Plugin path relative to the marketplace root                  |
 
 The machine-readable map is `templates/map.json`, keep both in sync per
 `docs/MAINTENANCE.md`.

@@ -48,7 +48,9 @@ state before the first phase.
 Resolve the layout profile per `references/layout-profiles.md` and record it in the
 run state's `inputs`: `astra` is the default, `spec` serves portable or minimal
 requests and non-astra hosts, `plugin` wraps a spec skill in Claude Code packaging.
-A collection target implies the `astra` profile - member skills are astra-shaped.
+A collection target implies the `astra` profile - member skills are astra-shaped -
+and also resolves the membership model, `submodule` or `tracked`, per
+`process/skill-template.md`.
 
 Identify the output target before generating anything: the directory the generated
 skill or collection lands in. A vague request - "make something from this" - is
@@ -138,7 +140,11 @@ Checkpoint: the design summary resolves per the interaction mode.
    `plugin` set into the plugin root. A marketplace request adds the
    `marketplace` set into the marketplace root.
 2. Run `scripts/validate-skill.py --profile <profile>` on each staged skill - a
-   failed stage never reaches the target.
+   failed stage never reaches the target. When a panther checkout sits adjacent,
+   run its `check-document.py --width 100 --layout wrap` over every staged
+   Markdown file - long context values and prose wrapping around inserted
+   placeholders are recurring defects, and a `description: >-` frontmatter
+   scalar past 100 characters needs manual folding the renderer does not do.
 3. Write the staged tree to the approved target directory. An existing target needs
    its own approval, or is skipped in fully autonomous mode.
 
@@ -161,9 +167,10 @@ A collection target adds:
   generation with its own name, purpose, and resource set.
 - The member roster in the index README and SKILL table, matching the generated
   member directories one to one.
-- A submodule registration plan in the delivery report: members are independently
-  owned repositories, never nested file copies authored inside the collection
-  checkout.
+- The resolved membership model carried through generation: `submodule` renders the
+  `collection-gitmodules` registration snippet and a pin-and-publish plan in the
+  delivery report, `tracked` renders members as tracked directories inside the
+  collection and emits no `.gitmodules`.
 
 ## Checkpoints
 

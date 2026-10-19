@@ -33,8 +33,7 @@ metadata:
 |-------|------|---------|
 {{member-table}}
 
-Member skills are always external repositories, arriving as git submodules cloned from
-their own repositories - never as sources authored inside the collection.
+{{membership-prose}}
 
 New skills are added under `skills/<name>/` and registered here and in `README.md` in
 the same change set.
@@ -53,27 +52,29 @@ the same change set.
 
 ## Usage
 
-- Member submodules must be fetched before any use. Whenever a skill is going to be
-  used - a bare collection activation or a request naming a member - first run
-  `git submodule update --init` in the collection root. A skill whose files are not
+- Member packages must be on disk before any use. Whenever a skill is going to be
+  used - a bare collection activation or a request naming a member - first run the
+  fetch step for the collection's membership model: `git submodule update --init`
+  for submodule members, nothing for tracked members. A skill whose files are not
   on disk cannot be loaded, routed to, or reported on.
 - Read the member skill's own `SKILL.md` before acting - it is the runtime contract
   for that skill.
-- A request naming a member skill loads that skill directly, fetching its submodule
-  first if needed. This index only disambiguates requests that name no member.
+- A request naming a member skill loads that skill directly, fetching it first when
+  its membership model requires. This index only disambiguates requests that name no
+  member.
 - A task that names no member is matched against every member's description, not
   just the closest one - all members whose scope covers part of the task are
   fetched and loaded together, and each applies its own procedures to the part it
   covers. Picking a single recommended member and stopping there is wrong when
   several members are applicable.
 - A bare `use {{collection-name}}` request enables every member in roster order:
-  fetch any unfetched members first, load each fetched member's `SKILL.md` and run
-  its own bare-activation procedure, then answer once with the Enablement Response
-  below and wait for the named task - the index performs no operation itself.
+  ensure every member is on disk first - fetching any missing submodule member -
+  load each member's `SKILL.md` and run its own bare-activation procedure, then
+  answer once with the Enablement Response below and wait for the named task - the
+  index performs no operation itself.
 - A request to merge remote, synchronize, or update the collection and its members
-  runs `process/synchronization.md` - fetch every remote first, fast-forward the
-  collection then each member, reconcile pins, and push members before the
-  collection.
+  runs `process/synchronization.md` - it resolves fetch, fast-forward, and push per
+  the collection's membership model.
 - Maintenance work on the collection itself starts from `AGENTS.md`, not from this
   file.
 
@@ -93,8 +94,8 @@ the same change set.
 
 A bare activation answers the human with one message: a status line naming the
 collection and its `metadata.version`, a roster line per member with the member's
-own version and purpose (or a "not initialized - run `git submodule update --init`"
-hint for an unfetched member), and a prompt for the task.
+own version and purpose (or {{membership-hint}} for an absent member), and a prompt
+for the task.
 
 The member skills' own enablement responses are folded into the roster lines rather
 than printed one after another.
