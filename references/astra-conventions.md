@@ -88,3 +88,15 @@ directory inside a collection.
 Whatever the model, a member assumes nothing about which siblings load beside it,
 never reaches into a sibling's directory, and a collection-level session review
 delegates member lessons to the member's own review procedure.
+
+## Sister Collections
+
+A second collection modeled on the same member contract - shared procedures, update
+check, review modes, and repository conventions above - accepts the `astra` profile
+for conformance checks even though it is not the astra-skills collection itself.
+
+Validate such a member with `scripts/validate-skill.py --profile astra` and treat
+the collection's own member contract as authoritative for per-collection deltas -
+membership model, member naming, and collection-specific conventions.
+
+The target collection's contract always wins over this file on a conflict.

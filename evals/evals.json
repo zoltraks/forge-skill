@@ -194,6 +194,17 @@
         "No .gitmodules file reaches the target tree.",
         "Member directories carry two-word kebab-case names without a required -skill suffix."
       ]
+    },
+    {
+      "id": 18,
+      "prompt": "Add a member skill to a different skill collection and check whether the result satisfies the generation contract.",
+      "expected_output": "The skill routes to the conformance surface - scripts/validate-skill.py with the astra profile plus references/astra-conventions.md - producing a verdict, no writes to the target.",
+      "files": [],
+      "expectations": [
+        "The request is recognized as skill-package work even though the target collection is not astra-skills.",
+        "The conformance check reports a verdict and never edits the target member's files.",
+        "The sister-collection rule applies - the target collection's own contract overrides astra conventions on conflict."
+      ]
     }
   ]
 }

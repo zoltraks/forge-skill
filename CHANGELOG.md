@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.4] - 2026-10-21
+
+### Changed
+
+- `references/astra-conventions.md` gains a Sister Collections section - the astra
+  profile applies as a conformance check to collections modeled on the same member
+  contract, with the target collection's own contract winning on conflicts.
+- `SKILL.md` triggers cover member-addition and collection-adjustment requests
+  in any collection, and the operations table gains a conformance-check row
+  (validator plus conventions file, verdict only, no writes).
+- `evals/evals.json` adds a member-addition regression prompt.
+
 ## [0.1.3] - 2026-10-19
 
 ### Changed

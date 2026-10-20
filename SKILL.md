@@ -21,7 +21,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.1.3"
+  version: "0.1.4"
   author: Filip Golewski
 ---
 
@@ -124,6 +124,9 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
   for, make a skill from scratch, new agent skill, generate a skill package.
 - **Create a collection**: create a skill collection, forge a collection, build a set
   of skills like astra-skills, multi-skill collection.
+- **Add a member**: add a member skill, new member for a collection, extend the
+  collection with a skill, adjust a skill collection, add a skill to
+  deployment-skills or another collection.
 - **From sources**: create a skill from this book, forge a skill from this PDF, build
   a skill from these documents, turn this EPUB into a skill, skill from a website.
 - **Analyze a source**: analyze this PDF for a new skill, extract skill knowledge from,
@@ -157,6 +160,7 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
 | analyze a source (PDF, EPUB, DOCX, HTML, text) for a future skill                     | `process/research-gathering.md` + `process/source-conversion.md`  |
 | generate a skill from an existing analysis or run state                               | `process/forge-workflow.md` phases 2-4 with the recorded evidence |
 | update an existing skill with a new source                                            | `process/research-synthesis.md` - propose the fold-in, no writes  |
+| check an existing or hand-built skill against the generation contract                 | `scripts/validate-skill.py` + `references/astra-conventions.md` - conformance verdict, no writes |
 | ask for intake parameters "as JSON" or name a diagnostic mode                         | `process/json-exchange.md`                                        |
 | inspect or re-render generation templates                                             | `templates/` + `process/skill-template.md`                        |
 | convert a local source file                                                           | `process/source-conversion.md` + `scripts/convert-source.py`      |
