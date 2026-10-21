@@ -89,7 +89,7 @@ fetching or asking, then uses the loaded router.
 
 Inline decisions read:
 
-```text
+```
 Decisions:
 - research-depth -> focused (recommended; two supplied sources cover the requested scope).
 - pdf-conversion -> skipped (converter unavailable without approved network access; book-only synthesis blocked).

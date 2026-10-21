@@ -60,7 +60,7 @@ previous version) - in a clean context per run.
 
 Organize results by iteration:
 
-```text
+```
 <skill>-workspace/
 └── iteration-1/
     ├── eval-<case>/

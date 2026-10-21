@@ -80,7 +80,7 @@ forge-skill/
 
 Activate through your agent environment's skill mechanism, then name the task:
 
-```text
+```
 use forge
 forge a skill for municipal permit workflows from this handbook.pdf
 create a portable spec-layout skill for release notes

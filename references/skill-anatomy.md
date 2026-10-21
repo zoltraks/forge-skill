@@ -23,16 +23,16 @@ defines the profiles and the selection rules.
 
 Domain directories are evidence-justified in every profile:
 
-| Component                 | Exists when                                                                                            |
-|---------------------------|--------------------------------------------------------------------------------------------------------|
-| `process/<task>.md`       | The domain has distinct procedures the router dispatches                                               |
-| `references/`             | Procedures consult reusable domain knowledge                                                           |
-| `scripts/<verb>-<obj>.py` | Mechanical, repeatable work exists - never for reasoning                                               |
-| `templates/`              | The skill produces documents from skeletons                                                            |
-| `assets/`                 | Static files the skill copies or serves                                                                |
-| `types/`, `languages/`…   | Domain taxonomies like panther's - real evidence only                                                  |
+| Component                 | Exists when                                                                                              |
+|---------------------------|----------------------------------------------------------------------------------------------------------|
+| `process/<task>.md`       | The domain has distinct procedures the router dispatches                                                 |
+| `references/`             | Procedures consult reusable domain knowledge                                                             |
+| `scripts/<verb>-<obj>.py` | Mechanical, repeatable work exists - never for reasoning                                                 |
+| `templates/`              | The skill produces documents from skeletons                                                              |
+| `assets/`                 | Static files the skill copies or serves                                                                  |
+| `types/`, `languages/`... | Domain taxonomies like panther's - real evidence only                                                    |
 | `tests/`                  | The skill ships its own scripts worth testing - root directory, subdirectory containers like `fixtures/` |
-| `evals/`                  | Always for `astra`, and for `spec` when assertions are designed, per `references/evaluation-design.md` |
+| `evals/`                  | Always for `astra`, and for `spec` when assertions are designed, per `references/evaluation-design.md`   |
 
 A generated skill ships no empty directory and no placeholder file "for later".
 
