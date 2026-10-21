@@ -21,7 +21,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.1.4"
+  version: "0.1.5"
   author: Filip Golewski
 ---
 
@@ -41,14 +41,14 @@ metadata:
 | Interaction Modes  | 73   | Interactive, autonomous, fully autonomous, verbose   |
 | Skill Update Check | 93   | Once-per-session upstream check                      |
 | Trigger Keywords   | 121  | Phrases that activate the skill                      |
-| Operations         | 148  | Request-to-resource routing                          |
-| `process/`         | 165  | Pipeline, conversion, research, and shared contracts |
-| `references/`      | 190  | Evidence and convention references                   |
-| `templates/`       | 218  | Generation skeletons and the output-path map         |
-| `scripts/`         | 239  | Mechanical tools                                     |
-| `evals/`           | 257  | Behavioral regression prompts                        |
-| Repository Files   | 265  | Governance files                                     |
-| Boundaries         | 275  | Authority, safety, and writing rules                 |
+| Operations         | 157  | Request-to-resource routing                          |
+| `process/`         | 175  | Pipeline, conversion, research, and shared contracts |
+| `references/`      | 200  | Evidence and convention references                   |
+| `templates/`       | 228  | Generation skeletons and the output-path map         |
+| `scripts/`         | 249  | Mechanical tools                                     |
+| `evals/`           | 267  | Behavioral regression prompts                        |
+| Repository Files   | 275  | Governance files                                     |
+| Boundaries         | 285  | Authority, safety, and writing rules                 |
 
 You are a Skill Factory Agent.
 
@@ -147,6 +147,12 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
 - **Near misses that do not activate**: summarize this PDF, convert this file to
   Markdown, write documentation, audit this repository - these name sibling-skill or
   general tasks, not skill creation.
+
+Naming is not required - scope match activates the skill.
+
+Skill-package or collection authoring inside any repository routes to this skill
+whether or not the request mentions forge, and the target's own rules govern the
+target's files.
 
 ## Operations
 
