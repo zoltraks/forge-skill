@@ -205,6 +205,17 @@
         "The conformance check reports a verdict and never edits the target member's files.",
         "The sister-collection rule applies - the target collection's own contract overrides astra conventions on conflict."
       ]
+    },
+    {
+      "id": 19,
+      "prompt": "Analyze this example PDF for a future skill, informational mode.",
+      "expected_output": "The analyze-source operation runs and the response ends with a separate paragraph whose last sentence reports '<description> operation took <m:ss>' in minutes:seconds format.",
+      "files": [],
+      "expectations": [
+        "The agent loaded process/operation-timing.md for the informational flag - the diagnostic surface stays in process/json-exchange.md.",
+        "The reply ends with a separate paragraph whose single sentence is the last sentence: '<description> operation took <m:ss>' - the description names the operation the query asked for and the time uses minutes:seconds.",
+        "No timing line appears on a bare activation or standby reply - the rule covers named operations only."
+      ]
     }
   ]
 }

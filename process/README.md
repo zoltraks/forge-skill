@@ -14,6 +14,7 @@ Load a procedure only when the task reaches it - progressive disclosure stays la
 | `skill-activation.md`   | Bare activation - the request names the skill but no task  |
 | `skill-maintenance.md`  | The request targets this repository's own files            |
 | `json-exchange.md`      | JSON parameter requests, diagnostic mode, verbose surfaces |
+| `operation-timing.md`   | Operation timing under verbose, informational, diagnostic  |
 | `decision-modes.md`     | Any operation run - the interaction-mode matrix            |
 | `session-review.md`     | "Improve the skill from this session" requests             |
 | `forge-workflow.md`     | Any generation operation - the five-phase pipeline         |

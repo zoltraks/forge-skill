@@ -21,7 +21,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.1.5"
+  version: "0.1.6"
   author: Filip Golewski
 ---
 
@@ -168,6 +168,7 @@ target's files.
 | update an existing skill with a new source                                            | `process/research-synthesis.md` - propose the fold-in, no writes                                 |
 | check an existing or hand-built skill against the generation contract                 | `scripts/validate-skill.py` + `references/astra-conventions.md` - conformance verdict, no writes |
 | ask for intake parameters "as JSON" or name a diagnostic mode                         | `process/json-exchange.md`                                                                       |
+| name a verbose, informational, or diagnostic mode on an operation                     | `process/operation-timing.md`                                                                    |
 | inspect or re-render generation templates                                             | `templates/` + `process/skill-template.md`                                                       |
 | convert a local source file                                                           | `process/source-conversion.md` + `scripts/convert-source.py`                                     |
 | change, extend, fix, or review this skill repository                                  | `process/skill-maintenance.md` - maintenance mode                                                |
@@ -180,6 +181,8 @@ target's files.
   distinction, governing read set, and the validation gate.
 - **`process/json-exchange.md`** - JSON parameter documents for intake question
   surfaces - emission triggers, parameter catalog, returned-document authority.
+- **`process/operation-timing.md`** - Elapsed-time report for named operations
+  under a verbose, informational, or diagnostic mode.
 - **`process/decision-modes.md`** - The interaction-mode matrix: interactive,
   autonomous, fully autonomous, and verbose semantics with the decision log.
 - **`process/session-review.md`** - The session-review procedure: findings,

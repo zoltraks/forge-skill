@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.6] - 2026-10-22
+
+### Added
+
+- `process/operation-timing.md` records operation timing: under a verbose,
+  informational, or diagnostic flag a named operation's response ends with a
+  separate paragraph reporting `<description> operation took <m:ss>` as its
+  last sentence.
+- `evals/evals.json` gains a diagnostic-timing regression prompt.
+
 ## [0.1.4] - 2026-10-21
 
 ### Changed
