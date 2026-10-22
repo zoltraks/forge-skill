@@ -24,8 +24,12 @@ a fenced `json` block.
 
 ## Diagnostic Output
 
-When the request names a debugging mode, a diagnostic mode, or asks for detailed or
-verbose information, emit the parameter document for information purposes only.
+When the request names a debugging mode, a diagnostic mode, a timing mode, or asks
+for detailed or verbose information, emit the parameter document for information
+purposes only.
+
+The informational mode never triggers this emission - it arms only the
+elapsed-time report in `process/operation-timing.md`.
 
 The document covers only surfaces that are actually pending - diagnostics expose the
 intake state and never create a question.

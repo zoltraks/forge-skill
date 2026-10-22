@@ -21,7 +21,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.1.7"
+  version: "0.1.8"
   author: Filip Golewski
 ---
 
@@ -104,6 +104,10 @@ Use `python3` when `python` is not on PATH.
   then re-read `SKILL.md` and any loaded rule files. When the merge is blocked or
   declined, report briefly and continue with the current version, without asking again
   this session.
+- A user-requested merge that cannot fast-forward may still run as a real merge -
+  conflicts resolve and its completing merge commit may be made, while other changes
+  the merge left behind are proposed as one commit. Pushing runs only on a separately
+  named request.
 - Any other status - proceed silently and do not mention the check.
 - Under fully autonomous mode without network authorization, record a
   `network-check-skipped` decision and continue with the loaded router instead of

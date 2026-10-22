@@ -48,6 +48,8 @@ Keep each rule in its owning document and link to it instead of duplicating it.
   files in this repository change on an explicit, confirmed instruction.
 - Do not claim validation that did not run.
 - Never commit automatically - propose a one-sentence commit message without trailers.
+  The one exception is a commit completing a user-approved upstream merge, which may be
+  made - pushing always runs on a separate request.
 - A bare `work on forge-skill` request that names no operation is standby - read this
   file, `SKILL.md`, and `process/skill-activation.md`, confirm readiness, and wait for
   the named operation rather than resuming plans or editing on assumption.

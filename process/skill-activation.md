@@ -111,8 +111,10 @@ A read-only survey with proposed work belongs in the reply only when the request
 that operation itself - "take a look around" asks for the survey, a purpose qualifier
 does not.
 
-A diagnostic flag folds into the opening sentence - "enabled in diagnostic mode" - and
-adds no intake-state preamble, since a bare activation has no pending surface to report.
+A diagnostic, timing, or informational flag folds into the opening sentence -
+"enabled in diagnostic mode", "enabled in timing mode", or "enabled in
+informational mode" - and adds no intake-state preamble, since a bare activation
+has no pending surface to report.
 
 Write the response in the language of the request.
 
@@ -124,11 +126,14 @@ Write the response in the language of the request.
   to guess the task.
 - No rule files load beyond the router and this file - progressive disclosure stays
   lazy, the next request selects its own rule set.
-- A diagnostic or verbose flag adds `process/json-exchange.md` to the loaded set and
-  nothing else - no scan of the target runs and no operation-mode files load, and no
-  parameter document emits while no question surface is pending.
+- A diagnostic, timing, or verbose flag adds `process/json-exchange.md` to the
+  loaded set and nothing else - no scan of the target runs and no operation-mode
+  files load, and no parameter document emits while no question surface is
+  pending.
+- An informational flag adds `process/operation-timing.md` to the loaded set and
+  nothing else - the standby reply itself emits no timing line.
 - A target-scoped activation leaves the `operation-selection` surface pending, so a
-  diagnostic flag emits its parameter document for it.
+  diagnostic or timing flag emits its parameter document for it.
 - No file is written. A proposed change waits for a request that names the operation
   and confirms it.
 

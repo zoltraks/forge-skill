@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.8] - 2026-10-22
+
+### Changed
+
+- `process/operation-timing.md` and `process/json-exchange.md` split the shared
+  request modes on the diagnostic surface: `verbose`, `diagnostic`, and `timing`
+  emit the parameter document, while `informational` arms the elapsed-time
+  report alone - no parameter document, no expanded option lists.
+- `process/skill-activation.md` acknowledges the informational flag in the
+  enablement opening and loads `process/operation-timing.md` for it.
+- `templates/exchange-procedure.template` and
+  `templates/skill-activation.template` carry the same split for generated
+  skills.
+- `evals/evals.json` strengthens the informational-mode prompt with an explicit
+  no-parameter-document expectation.
+- `SKILL.md` and `AGENTS.md` record the merge-commit-and-push contract for
+  upstream merges: a real merge may end in a commit, pushing stays a separate
+  request.
+
 ## [0.1.7] - 2026-10-22
 
 ### Changed
