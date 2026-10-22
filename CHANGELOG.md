@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.7] - 2026-10-22
+
+### Changed
+
+- The `timing` request mode joins the verbose, informational, and diagnostic
+  names that arm `process/operation-timing.md` - `SKILL.md`, `process/README.md`,
+  and `evals/evals.json` follow the same contract.
+
 ## [0.1.6] - 2026-10-22
 
 ### Added

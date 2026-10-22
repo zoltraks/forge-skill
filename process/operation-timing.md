@@ -3,17 +3,17 @@
 ## Purpose
 
 > **Scope:** Elapsed-time reporting for named operations under a verbose,
-> informational, or diagnostic request mode.
+> informational, diagnostic, or timing request mode.
 > **Key items:** mode trigger, clock capture, closing report, coverage
 
 This file defines how Forge reports the time a named operation took.
 
 ## Trigger
 
-Timing arms when the request names a verbose, informational, or diagnostic
-mode.
+Timing arms when the request names a verbose, informational, diagnostic, or
+timing mode.
 
-The three mode names share the diagnostic surface defined in
+The four mode names share the diagnostic surface defined in
 `process/json-exchange.md` - that file owns the parameter-document emission,
 this file owns only the timing report.
 
