@@ -99,6 +99,12 @@ when the pairing is recorded in the document and the check is constrained by
 tests, so it classifies `FALSE_POSITIVE`. The signal fires only on unguarded
 hand synchronization between authoritative copies.
 
+A pairing the owning contract itself mandates classifies `FALSE_POSITIVE` the
+same way - a registration rule that requires an index and a tree to update in
+one change set produces "keep in sync" instructions that state the contract,
+and the same words carried into a scope file that teaches the convention to
+other repositories are that convention applied, not a defect.
+
 ### Workspace References
 
 A `work/` path inside a shipped file divides by direction. An instruction that
@@ -133,6 +139,13 @@ Deduplication is three distinct passes with different risk levels:
    or `merge-candidate` from trigger, scope, and instruction-similarity
    evidence. The agent proposes, the human confirms - semantic merges never
    auto-apply.
+
+Artifacts also coexist legitimately when the corpus records why. A documented
+deprecation marker - `superseded by`, `deprecated`, kept for compatibility -
+makes a file a sanctioned compatibility twin, never a dedup candidate. Two
+tools whose documented scopes differ - a single-check validator beside a
+one-command battery - are recorded distinct roles, not overlap. Both classify
+`FALSE_POSITIVE`.
 
 Batch generation deduplicates during generation, merging similar content
 before separate skills form, per `process/research-synthesis.md`.

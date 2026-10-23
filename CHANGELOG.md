@@ -12,6 +12,13 @@
   instruction directing artifacts into the gitignored `work/` tree states the
   convention itself, only a shipped file that depends on workspace content is a
   defect.
+- `references/skill-hygiene.md` exempts contract-mandated pairings from the
+  multi-maintenance signal: "keep in sync" instructions a registration rule
+  requires, and their echoes in scope files that teach the convention, classify
+  `FALSE_POSITIVE`.
+- `references/skill-hygiene.md` records two dedup exemptions: a documented
+  deprecation marker makes a file a sanctioned compatibility twin, and tools
+  with documented distinct scopes are not overlap.
 
 ## [0.2.2] - 2026-10-23
 
