@@ -29,6 +29,10 @@ A compatible member carries:
   order (`id`, `question`, `answer`, `description`, `type`, `menu`, `default`),
   `choice` / `selection` / `text` types, `Cancel` always last and never default,
   presentation-only authority.
+- `process/operation-timing.md` - elapsed-time report armed when the request
+  names a verbose, informational, diagnostic, or timing mode: the response
+  closes with `<description> operation took <m:ss>`, standby and enablement
+  carry no line.
 - `process/session-review.md` - gather, findings, approval gate, apply, validate.
   The `autonomous` flag resolves gates to recommended options with inline
   reporting, `verbose` adds options and rationale. Never commits.

@@ -47,6 +47,7 @@ The member contract on top of the universal set:
 | `.gitignore`                   | Excludes the runtime `work/` tree and Python artifacts         |
 | `process/skill-activation.md`  | Bare-activation standby contract                               |
 | `process/json-exchange.md`     | Parameter exchange contract                                    |
+| `process/operation-timing.md`  | Elapsed-time report contract                                   |
 | `process/session-review.md`    | Improvement-routine contract                                   |
 | `process/decision-modes.md`    | Interaction-mode matrix                                        |
 | `process/skill-maintenance.md` | Self-maintenance intake                                        |

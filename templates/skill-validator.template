@@ -25,6 +25,7 @@ PLACEHOLDER_PATTERN = re.compile(r"\{\{[A-Za-z0-9_-]+\}\}")
 SHARED_PROCEDURES = [
     "process/skill-activation.md",
     "process/json-exchange.md",
+    "process/operation-timing.md",
     "process/session-review.md",
     "process/decision-modes.md",
 ]

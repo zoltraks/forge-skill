@@ -62,6 +62,17 @@
         "Skipped steps carry reasons and dependent steps are skipped too.",
         "A separately gated action - network, install, overwrite, commit - is skipped, never performed silently."
       ]
+    },
+    {
+      "id": 7,
+      "prompt": "<primary operation>, timing mode.",
+      "expected_output": "The operation runs and the response ends with a separate paragraph whose last sentence reports '<description> operation took <m:ss>' in minutes:seconds format.",
+      "files": [],
+      "expectations": [
+        "The agent loaded process/operation-timing.md for the timing flag - the diagnostic surface stays in process/json-exchange.md.",
+        "The reply ends with a separate paragraph whose single sentence is the last sentence: '<description> operation took <m:ss>'.",
+        "No timing line appears on a bare activation or standby reply - the rule covers named operations only."
+      ]
     }
   ]
 }

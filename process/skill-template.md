@@ -24,6 +24,7 @@ themselves live in `templates/`, the canonical template-to-path map is
 | `.gitignore`                   | yes          | `skill-gitignore`            |
 | `process/skill-activation.md`  | yes          | `skill-activation`           |
 | `process/json-exchange.md`     | yes          | `exchange-procedure`         |
+| `process/operation-timing.md`  | yes          | `operation-timing`           |
 | `process/session-review.md`    | yes          | `review-procedure`           |
 | `process/decision-modes.md`    | yes          | `decision-modes`             |
 | `process/skill-maintenance.md` | yes          | `skill-maintainer`           |
@@ -116,17 +117,17 @@ row must pass.
 
 ### Astra
 
-| Check             | Requirement                                              |
-|-------------------|----------------------------------------------------------|
-| Router            | `SKILL.md` routes, frontmatter complete, under 500 lines |
-| Shared procedures | activation, JSON exchange, session review present        |
-| Decision modes    | both autonomy modes plus verbose documented              |
-| Update check      | `check-update.py` present with shared verdict semantics  |
-| Registration      | every resource registered in router and README           |
-| Evals             | `evals/evals.json` valid, `skill_name` matches           |
-| Naming            | two-word kebab-case rule files, `verb-object.py` tools   |
-| Governance        | full `docs/` set present                                 |
-| Independence      | self-contained - no sibling paths, no Forge paths        |
+| Check             | Requirement                                                         |
+|-------------------|---------------------------------------------------------------------|
+| Router            | `SKILL.md` routes, frontmatter complete, under 500 lines            |
+| Shared procedures | activation, JSON exchange, session review, operation timing present |
+| Decision modes    | both autonomy modes plus verbose documented                         |
+| Update check      | `check-update.py` present with shared verdict semantics             |
+| Registration      | every resource registered in router and README                      |
+| Evals             | `evals/evals.json` valid, `skill_name` matches                      |
+| Naming            | two-word kebab-case rule files, `verb-object.py` tools              |
+| Governance        | full `docs/` set present                                            |
+| Independence      | self-contained - no sibling paths, no Forge paths                   |
 
 ### Spec
 

@@ -21,7 +21,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.1.8"
+  version: "0.1.9"
   author: Filip Golewski
 ---
 
@@ -239,10 +239,10 @@ agent writes from verified evidence - a template never invents domain knowledge.
 
 - Single-skill set (`astra` profile): `skill-router`, `skill-agents`,
   `skill-activation`, `review-procedure`, `exchange-procedure`, `decision-modes`,
-  `skill-maintainer`, `skill-readme`, `skill-changelog`, `skill-license`,
-  `skill-gitignore`, `skill-docs-index`, `skill-contributing`, `skill-style`,
-  `skill-maintenance`, `skill-versioning`, `skill-security`, `skill-evaluation`,
-  `skill-updater`, `skill-validator`.
+  `operation-timing`, `skill-maintainer`, `skill-readme`, `skill-changelog`,
+  `skill-license`, `skill-gitignore`, `skill-docs-index`, `skill-contributing`,
+  `skill-style`, `skill-maintenance`, `skill-versioning`, `skill-security`,
+  `skill-evaluation`, `skill-updater`, `skill-validator`.
 - Spec set (`spec` profile): `specification-router`, `specification-readme`,
   `specification-evaluation`, and the shared `skill-license`.
 - Plugin set (`plugin` profile): `plugin-manifest`, and the `marketplace` set

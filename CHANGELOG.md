@@ -1,5 +1,20 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- `templates/operation-timing.template` rendering `process/operation-timing.md`
+  for generated `astra`-profile skills - the elapsed-time routine armed by the
+  verbose, informational, diagnostic, and timing request modes.
+- Registration of the new template across the generation surface:
+  `templates/map.json`, `templates/README.md`, `process/skill-template.md`,
+  `references/astra-conventions.md`, `references/skill-anatomy.md`, the
+  `skill-router` and `collection-contract` templates, and the shared-procedure
+  lists of `scripts/validate-skill.py` and `skill-validator.template`.
+- A timing-mode eval row in `templates/skill-evaluation.template` and a forge
+  eval covering the routine's presence in generated member trees.
+
 ## [0.1.8] - 2026-10-22
 
 ### Changed

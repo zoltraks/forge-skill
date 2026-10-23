@@ -8,6 +8,7 @@
     "skill-gitignore.template": ".gitignore",
     "skill-activation.template": "process/skill-activation.md",
     "exchange-procedure.template": "process/json-exchange.md",
+    "operation-timing.template": "process/operation-timing.md",
     "review-procedure.template": "process/session-review.md",
     "decision-modes.template": "process/decision-modes.md",
     "skill-maintainer.template": "process/skill-maintenance.md",

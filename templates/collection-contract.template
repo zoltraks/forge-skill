@@ -42,12 +42,13 @@ never commits, stashes, or discards skill changes.
 
 ## Shared Procedures
 
-Three procedure filenames are shared across every member's `process/` directory:
+Four procedure filenames are shared across every member's `process/` directory:
 
 | File                          | Role                                              |
 |-------------------------------|---------------------------------------------------|
 | `process/skill-activation.md` | Bare-activation standby procedure                 |
 | `process/json-exchange.md`    | JSON parameter exchange format                    |
+| `process/operation-timing.md` | Elapsed-time report for named request modes       |
 | `process/session-review.md`   | Member session review the collection delegates to |
 
 A member may carry additional procedures beside them - the shared filenames exist so the

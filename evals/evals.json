@@ -168,7 +168,7 @@
       "files": [],
       "expectations": [
         "The source skill's domain files and trigger content are preserved.",
-        "The result carries the full member contract - shared procedures, docs/ set, scripts, astra-schema evals.",
+        "The result carries the full member contract - shared procedures including process/operation-timing.md, docs/ set, scripts, astra-schema evals.",
         "The delta plan is presented before any write, and nothing is committed."
       ]
     },
@@ -227,6 +227,17 @@
         "The agent loaded process/operation-timing.md for the timing flag - the diagnostic surface stays in process/json-exchange.md.",
         "The reply ends with a separate paragraph whose single sentence is the last sentence: '<description> operation took <m:ss>' - the description names the operation the query asked for and the time uses minutes:seconds.",
         "No timing line appears on a bare activation or standby reply - the rule covers named operations only."
+      ]
+    },
+    {
+      "id": 21,
+      "prompt": "Forge a skill for our release-notes domain, astra profile.",
+      "expected_output": "The five-phase pipeline produces a member tree that carries the full shared surface including process/operation-timing.md, registered in the generated router's operations table and process listings.",
+      "files": [],
+      "expectations": [
+        "The staged member tree contains process/operation-timing.md rendered from templates/operation-timing.template.",
+        "The generated SKILL.md routes the verbose, informational, diagnostic, and timing modes to process/operation-timing.md.",
+        "scripts/validate-skill.py --profile astra passes on the staged tree with the shared-procedures check covering operation-timing."
       ]
     }
   ]
