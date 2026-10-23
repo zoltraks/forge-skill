@@ -22,7 +22,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.2.0"
+  version: "0.2.1"
   author: Filip Golewski
 ---
 
@@ -38,20 +38,20 @@ metadata:
 
 ## Contents
 
-| Section            | Line | What it covers                                     |
-|--------------------|------|----------------------------------------------------|
-| Modes              | 68   | Enable, operation, and maintenance selection       |
-| Interaction Modes  | 79   | Interactive, autonomous, fully autonomous, verbose |
-| Skill Update Check | 99   | Once-per-session upstream check                    |
-| Trigger Keywords   | 131  | Phrases that activate the skill                    |
-| Operations         | 173  | Request-to-resource routing                        |
-| `process/`         | 195  | Pipeline, lifecycle, conversion, shared contracts  |
-| `references/`      | 227  | Evidence and convention references                 |
-| `templates/`       | 260  | Generation skeletons and the output-path map       |
-| `scripts/`         | 281  | Mechanical tools                                   |
-| `evals/`           | 304  | Behavioral regression prompts                      |
-| Repository Files   | 312  | Governance files                                   |
-| Boundaries         | 322  | Authority, safety, and writing rules               |
+| Section            | Line | What it covers                                            |
+|--------------------|------|-----------------------------------------------------------|
+| Modes              | 66   | Enable, operation, and maintenance selection              |
+| Interaction Modes  | 77   | Interactive, autonomous, fully autonomous, verbose        |
+| Skill Update Check | 97   | Once-per-session upstream check                           |
+| Trigger Keywords   | 129  | Phrases that activate the skill                           |
+| Operations         | 171  | Request-to-resource routing                               |
+| `process/`         | 193  | Pipeline, lifecycle, conversion, research, contract files |
+| `references/`      | 225  | Evidence and convention references                        |
+| `templates/`       | 254  | Generation skeletons and the output-path map              |
+| `scripts/`         | 275  | Mechanical tools                                          |
+| `evals/`           | 294  | Behavioral regression prompts                             |
+| Repository Files   | 301  | Governance files                                          |
+| Boundaries         | 312  | Authority, safety, and writing rules                      |
 
 You are a Skill Factory Agent.
 
@@ -62,8 +62,6 @@ You housekeep and repair existing skills under governed rules - dry-run first,
 archive before mutation, evidence before promotion.
 
 You keep mechanical work in scripts and judgment in the rule corpus.
-
-You never commit, publish, fetch, or install without the required approval.
 
 ## Modes
 
@@ -161,8 +159,8 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
   skill, fix this skill.
 - **Near misses that do not activate**: summarize this PDF, convert this file to
   Markdown, write documentation, audit this repository - these name sibling-skill or
-  general tasks, not skill creation or lifecycle work. "Improve forge-skill" and
-  "fix this skill" name this repository and stay in maintenance mode.
+  general tasks, and "improve forge-skill" or "fix this skill" stays in maintenance
+  mode.
 
 Naming is not required - scope match activates the skill.
 
@@ -172,34 +170,34 @@ target's files.
 
 ## Operations
 
-| Request                                                                               | Route                                                                                            |
-|---------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| create or forge a skill for a topic                                                   | `process/forge-workflow.md` - the full five-phase pipeline                                       |
-| create a portable, minimal, or spec-conformant skill                                  | `process/forge-workflow.md` - pipeline with the `spec` profile                                   |
-| package a skill as a Claude Code plugin or marketplace entry                          | `process/forge-workflow.md` - pipeline with the `plugin` profile                                 |
-| create or forge a skill collection with members                                       | `process/forge-workflow.md` - pipeline in collection mode                                        |
-| migrate a skill between layouts (adopt into astra, export to spec, package as plugin) | `process/layout-migration.md`                                                                    |
-| analyze a source (PDF, EPUB, DOCX, HTML, text) for a future skill                     | `process/research-gathering.md` + `process/source-conversion.md`                                 |
-| generate a skill from an existing analysis or run state                               | `process/forge-workflow.md` phases 2-4 with the recorded evidence                                |
-| update an existing skill with a new source                                            | `process/research-synthesis.md` - propose the fold-in, no writes                                 |
-| housekeep, clean, reorganize, optimize, or audit a skill or collection                | `process/skill-housekeeping.md` - the governed housekeeping loop                                 |
-| inventory skills across platform roots or check for drift and duplicates              | `process/skill-housekeeping.md` + `scripts/audit-skill.py --discover`                            |
-| repair, heal, fix, or improve a named external skill                                  | `process/skill-healing.md` - the evidence-gated healing loop                                     |
-| check an existing or hand-built skill against the generation contract                 | `scripts/validate-skill.py` + `references/astra-conventions.md` - conformance verdict, no writes |
-| ask for intake parameters "as JSON" or name a diagnostic mode                         | `process/json-exchange.md`                                                                       |
-| name a verbose, informational, diagnostic, or timing mode on an operation             | `process/operation-timing.md`                                                                    |
-| inspect or re-render generation templates                                             | `templates/` + `process/skill-template.md`                                                       |
-| convert a local source file                                                           | `process/source-conversion.md` + `scripts/convert-source.py`                                     |
-| change, extend, fix, or review this skill repository                                  | `process/skill-maintenance.md` - maintenance mode                                                |
+| Request                                                         | Route                                                            |
+|-----------------------------------------------------------------|------------------------------------------------------------------|
+| create or forge a skill for a topic                             | `process/forge-workflow.md`                                      |
+| create a portable, minimal, or spec-conformant skill            | `process/forge-workflow.md` - `spec` profile                     |
+| package a skill as a Claude Code plugin or marketplace entry    | `process/forge-workflow.md` - `plugin` profile                   |
+| create or forge a skill collection with members                 | `process/forge-workflow.md` - collection mode                    |
+| migrate a skill between layouts                                 | `process/layout-migration.md`                                    |
+| analyze a source for a future skill                             | `process/research-gathering.md` + `process/source-conversion.md` |
+| generate a skill from an existing analysis or run state         | `process/forge-workflow.md` phases 2-4                           |
+| update an existing skill with a new source                      | `process/research-synthesis.md` - proposal only                  |
+| housekeep, clean, reorganize, or optimize a skill or collection | `process/skill-housekeeping.md`                                  |
+| inventory skills across platform roots or check for drift       | `process/skill-housekeeping.md` + `audit-skill.py --discover`    |
+| repair, heal, fix, or improve a named external skill            | `process/skill-healing.md`                                       |
+| check a skill against the generation contract                   | `scripts/validate-skill.py` + `references/astra-conventions.md`  |
+| ask for intake parameters "as JSON" or name a diagnostic mode   | `process/json-exchange.md`                                       |
+| name a verbose, informational, diagnostic, or timing mode       | `process/operation-timing.md`                                    |
+| inspect or re-render generation templates                       | `templates/` + `process/skill-template.md`                       |
+| convert a local source file                                     | `process/source-conversion.md` + `scripts/convert-source.py`     |
+| change, extend, fix, or review this skill repository            | `process/skill-maintenance.md`                                   |
 
 ## `process/` - Procedures
 
 - **`process/skill-activation.md`** - The enable-mode procedure: bare-activation
-  intake, referent resolution, the enablement response, and standby.
+  intake and standby.
 - **`process/skill-maintenance.md`** - The maintenance-mode procedure: mode
   distinction, governing read set, and the validation gate.
 - **`process/json-exchange.md`** - JSON parameter documents for intake question
-  surfaces - emission triggers, parameter catalog, returned-document authority.
+  surfaces.
 - **`process/operation-timing.md`** - Elapsed-time report for named operations
   under a verbose, informational, diagnostic, or timing mode.
 - **`process/decision-modes.md`** - The interaction-mode matrix: interactive,
@@ -218,11 +216,11 @@ target's files.
   file contracts, template map, and per-file fill rules.
 - **`process/layout-migration.md`** - Converting a skill between layout profiles:
   adopt into astra, export to spec, package as plugin.
-- **`process/skill-housekeeping.md`** - The governed housekeeping loop for an
-  existing skill or collection: inventory, audit, gated apply, archive-first
-  mutation, and the audit log.
+- **`process/skill-housekeeping.md`** - The governed housekeeping loop for a
+  skill or collection - inventory, audit, gated apply, archive-first mutation.
 - **`process/skill-healing.md`** - The evidence-gated repair loop for a named
   external skill: evaluate, patch, replay against an external verifier, promote.
+- **`process/README.md`** - The procedure index and loading rules.
 
 ## `references/` - Evidence Library
 
@@ -231,28 +229,24 @@ target's files.
   portability rule.
 - **`references/astra-conventions.md`** - The `astra` profile contract generated
   skills must satisfy to sit beside the astra-skills members.
-- **`references/skills-specification.md`** - The Agent Skills specification summary and
-  the `spec` profile contract: canonical source, frontmatter fields, limits,
-  directory layout, validation.
+- **`references/skills-specification.md`** - The Agent Skills specification and
+  the `spec` profile contract.
 - **`references/skill-anatomy.md`** - Required and optional components of a
   generated skill per profile, with their purpose.
-- **`references/instruction-patterns.md`** - Process-driven instruction design:
-  procedures over declarations, calibrated prescriptiveness, the pattern
-  catalog, granularity, and context economy.
-- **`references/evaluation-design.md`** - Evaluation datasets, run workspaces,
-  assertions and grading, trigger evals, security guardrails, and quality
-  gates for generated skills.
+- **`references/instruction-patterns.md`** - Process-driven instruction design
+  and the pattern catalog.
+- **`references/evaluation-design.md`** - Evaluation design, grading, trigger
+  evals, and quality gates for generated skills.
 - **`references/trigger-design.md`** - Trigger-description and keyword practice:
   inclusion, exclusion, and near-miss cases.
-- **`references/markitdown-reference.md`** - The MarkItDown converter: what it is,
-  the upstream URL, version and dependency constraints, and usage.
+- **`references/markitdown-reference.md`** - The MarkItDown converter - version,
+  constraints, and usage.
 - **`references/research-methods.md`** - Research type classification, gathering
   depth, and methodology selection.
 - **`references/source-integrity.md`** - Provenance, copyright, untrusted-content,
   and injection boundaries for external sources.
-- **`references/skill-hygiene.md`** - The housekeeping audit taxonomy: lifecycle
-  states, drift and contradiction classes, deduplication passes, the confidence
-  matrix, token budgets, and safety rules.
+- **`references/skill-hygiene.md`** - The housekeeping audit taxonomy,
+  confidence matrix, and apply gates.
 - **`references/platform-paths.md`** - Platform skill and rule roots for
   multi-root inventory, discovery semantics, and precedence.
 - **`references/README.md`** - The reference index and loading rules.
@@ -285,27 +279,22 @@ untrusted targets without the sandboxing rules of `scripts/README.md`.
 
 - **`scripts/check-update.py`** - Once-per-session upstream check used by the
   Skill Update Check gate.
-- **`scripts/validate-skill.py`** - Read-only validator for this skill and for
-  generated skill trees - frontmatter, shared contracts, structure, evals,
-  references, per `--profile astra|spec`. It never executes target scripts.
-- **`scripts/render-templates.py`** - Deterministic `{{placeholder}}` renderer:
-  explicit output-path map, scratch staging, overwrite protection, and
-  leftover-placeholder rejection.
-- **`scripts/convert-source.py`** - Optional local-source converter: preflights
-  the file, locates an installed or approved MarkItDown, and reports extraction
-  quality. Never installs or fetches on its own.
-- **`scripts/audit-skill.py`** - Read-only skill and collection inventory:
-  layout, lifecycle state, package hash, broken references, orphans, token
-  estimates, and `--discover` multi-root duplicate and collision detection.
+- **`scripts/validate-skill.py`** - Read-only validator for this skill and
+  generated trees, per `--profile astra|spec`.
+- **`scripts/render-templates.py`** - Deterministic `{{placeholder}}` renderer
+  with staged writes.
+- **`scripts/convert-source.py`** - Optional local-source converter through an
+  approved MarkItDown.
+- **`scripts/audit-skill.py`** - Read-only skill and collection inventory,
+  `--discover` multi-root scan.
 - **`scripts/archive-skill.py`** - Staged-write archiver: snapshot, list, and
   conflict-preserving restore, dry-run until `--apply`. Never deletes.
 - **`scripts/README.md`** - Tool contracts, safety rules, and exit statuses.
 
 ## `evals/` - Regression Prompts
 
-- **`evals/evals.json`** - Behavioral regression prompts covering routing, each
-  interaction mode, near misses, blocked permission, and resume - exercised after
-  behavior changes.
+- **`evals/evals.json`** - Behavioral regression prompts covering routing,
+  interaction modes, near misses, blocked permission, and resume.
 - **`evals/README.md`** - The eval schema and the honest-reporting rule for
   skipped runs.
 
@@ -317,7 +306,8 @@ untrusted targets without the sandboxing rules of `scripts/README.md`.
 - **`LICENSE`** - MIT.
 - **`docs/`** - Governance: `STYLE.md`, `VERSIONING.md`, `MAINTENANCE.md`,
   `CONTRIBUTING.md`, `SECURITY.md`, and the `docs/README.md` index.
-- **`tests/`** - Deterministic unit tests and synthetic fixtures for the scripts.
+- **`tests/`** - Deterministic unit tests and synthetic fixtures for the scripts,
+  indexed by `tests/README.md`.
 
 ## Boundaries
 

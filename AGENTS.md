@@ -6,7 +6,9 @@
 > **Key items:** governing documents, boundaries, local workspace, validation, improvement.
 
 This repository is the Forge skill, an Agent Skills package that creates new Agent
-Skills from research or external sources and, optionally, generates skill collections.
+Skills from research or external sources, optionally generates skill collections,
+and governs existing skill projects and collections through housekeeping and
+evidence-gated repair.
 
 `SKILL.md` is the runtime router read by agents that use the skill.
 

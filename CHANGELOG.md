@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.2.1] - 2026-10-23
+
+### Fixed
+
+- `tests/` gains its `README.md` index - every distinct directory now carries
+  one, per the member contract's directory rule.
+- `SKILL.md` registers the `process/README.md` and `tests/README.md` indexes -
+  `process/` was the only indexed directory whose index lacked a bullet.
+- `AGENTS.md` refreshes the stale purpose sentence - it now names lifecycle
+  management alongside creation and collection generation.
+- `SKILL.md` aligns its `process/` Contents cell with the owning role text in
+  `docs/MAINTENANCE.md`, and the Operations table and persona prose are
+  tightened - shorter route cells, trimmed restatements - pulling the body
+  back toward the ~5,000-token budget.
+
 ## [0.2.0] - 2026-10-23
 
 ### Added
