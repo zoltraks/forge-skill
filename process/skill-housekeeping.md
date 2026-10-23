@@ -28,9 +28,12 @@ drift".
 
 ## When This Applies
 
-The target is a named directory that is not this repository - a request whose
-target is forge-skill itself stays in maintenance mode per
-`process/skill-maintenance.md`.
+The target is a named directory.
+
+A request whose target is this repository stays in maintenance mode per
+`process/skill-maintenance.md`, with one exception - a request that names the
+housekeeping operation explicitly runs it on this repository's files, still
+under the repository's own governing documents.
 
 Classify the target before anything else:
 

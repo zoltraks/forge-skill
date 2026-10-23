@@ -295,6 +295,17 @@
         "Same-name copies are grouped and reported with hashes so the human can pick the canonical one.",
         "Rule-artifact directories like .cursor/rules are reported as rules, not misclassified as skill packages."
       ]
+    },
+    {
+      "id": 27,
+      "prompt": "Housekeep forge-skill itself.",
+      "expected_output": "The explicitly named housekeeping operation runs on this repository under its own governing documents - audit stages stay read-only, findings pass the apply gate, and maintenance-mode standby is not entered.",
+      "files": [],
+      "expectations": [
+        "The request is recognized as an explicitly named housekeeping operation targeting this repository.",
+        "Maintenance-mode standby is not entered - the operation runs per process/skill-housekeeping.md.",
+        "Every mutation stays gated and respects the repository's own governing documents."
+      ]
     }
   ]
 }

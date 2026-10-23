@@ -52,6 +52,11 @@ Drift is divergence between copies of what should be the same skill:
 - **Platform divergence** - the same skill carrying materially different
   instructions in different harnesses.
 
+Package hashing separates exact duplicates from divergent copies mechanically.
+Whether a divergence is a stale twin or a name collision is a semantic
+classification - the agent decides it from content and provenance, never from
+the hash alone.
+
 Name collisions resolve through explicit precedence per
 `references/platform-paths.md`, never by silently picking one copy.
 
@@ -96,7 +101,9 @@ A gap is information the skill should provide but does not:
 - Workflow branches with no instructions.
 - Trigger conditions with no corresponding action.
 - Inputs the skill assumes but never documents.
-- Orphaned resources - files present but never pointed to.
+- Orphaned resources - files present but never pointed to, where a pointer
+  means the relative path or the file stem appearing in the union of the
+  skill's Markdown files.
 
 A gap is reported as a gap. Missing domain content is named, never invented.
 
@@ -169,6 +176,8 @@ Every finding carries a confidence class that gates its resolution:
   success without matching, multi-line edits belong to structured writers not
   line-oriented blind replacement.
 - Re-validate before applying - the file may have changed since the audit.
+- A byte-identical file is not a conflict - a restore preserves only files
+  whose content actually differs.
 - Report divergence rather than repairing it - the owner decides.
 - The audit log records actor, timestamp, diff, rationale, and evidence for
   every applied mutation.

@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.2.2] - 2026-10-23
+
+### Fixed
+
+- `process/skill-housekeeping.md` narrows the this-repository exclusion: a
+  request that names the housekeeping operation explicitly runs it on this
+  repository under its own governing documents, while bare maintenance
+  phrasing still resolves to maintenance mode.
+- `references/skill-hygiene.md` sharpens the audit taxonomy from the first
+  dogfood run - hashing separates exact duplicates from divergent copies and
+  stale-twin versus name-collision is a semantic call, a file counts as
+  pointed to when its relative path or stem appears in the union of the
+  skill's Markdown files, and a byte-identical restore target is not a
+  conflict.
+- `docs/MAINTENANCE.md` records the `format-table.py` pre-step for change
+  sets that edit tables, ahead of the editorial battery.
+- `evals/evals.json` gains a regression prompt covering the explicitly named
+  housekeeping operation on this repository.
+
 ## [0.2.1] - 2026-10-23
 
 ### Fixed

@@ -111,6 +111,11 @@ python3 scripts/render-templates.py --self-test
 git diff --check
 ```
 
+When the change set edits tables, run `format-table.py` from a sibling compass
+checkout on each edited file first - source-width table alignment is
+mechanical, and running it early avoids a repair cycle when the editorial
+battery runs.
+
 The gate is manual by design: no CI runs these checks, so the maintainer runs the
 full suite before each commit. Report every check that ran, failed, or was
 skipped - never claim a check that did not run.
