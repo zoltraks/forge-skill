@@ -93,6 +93,20 @@ synchronized by hand.
 Any instruction containing "keep in sync", "update both copies", or "the same
 file also needs changing" is a multi-maintenance defect signal.
 
+A deliberately mirrored pair is not that signal - a prose contract stating a
+bound and a checking script enforcing the same bound is a sanctioned parity
+when the pairing is recorded in the document and the check is constrained by
+tests, so it classifies `FALSE_POSITIVE`. The signal fires only on unguarded
+hand synchronization between authoritative copies.
+
+### Workspace References
+
+A `work/` path inside a shipped file divides by direction. An instruction that
+directs generated artifacts, run state, or scratch into the gitignored
+workspace states the workspace convention itself, it is not a violation. A
+shipped file that reads from, links to, or otherwise depends on workspace
+content is a defect - the workspace never ships.
+
 ## Gap Classes
 
 A gap is information the skill should provide but does not:

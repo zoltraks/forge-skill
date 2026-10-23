@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.3] - 2026-10-23
+
+### Fixed
+
+- `references/skill-hygiene.md` refines the multi-maintenance defect signal: a
+  prose bound deliberately mirrored by a checking script that is constrained by
+  tests is a sanctioned parity classified `FALSE_POSITIVE`, and the signal fires
+  only on unguarded hand synchronization.
+- `references/skill-hygiene.md` adds the workspace-reference classification: an
+  instruction directing artifacts into the gitignored `work/` tree states the
+  convention itself, only a shipped file that depends on workspace content is a
+  defect.
+
 ## [0.2.2] - 2026-10-23
 
 ### Fixed
