@@ -1,6 +1,46 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.0] - 2026-10-23
+
+### Added
+
+- `process/skill-housekeeping.md` - the governed housekeeping loop for an
+  existing skill project or collection: intake, multi-root inventory through
+  `scripts/audit-skill.py --discover`, mechanical and semantic audit passes,
+  a dry-run plan, confidence-gated apply with archive-first mutation, and a
+  closing audit log. Collection targets gain index-level checks, and
+  submodule member findings are delegated as proposals to the member
+  repositories rather than patched inside the collection checkout.
+- `process/skill-healing.md` - the evidence-gated repair loop for a named
+  external skill: evaluate, minimal candidate patches, replay against an
+  external verifier, and promote with the target's own version and changelog
+  rules - reflection alone never promotes, and autonomous skill
+  auto-creation stays rejected by default.
+- `references/skill-hygiene.md` - the audit taxonomy both procedures cite:
+  behavioral preservation, lifecycle states, drift and contradiction
+  classes, the single-owner map, three deduplication passes, the confidence
+  matrix and apply gates, token budgets, and safety rules.
+- `references/platform-paths.md` - the multi-root inventory contract:
+  platform skill and rule roots, per-platform discovery semantics,
+  precedence order, and portability rules.
+- `scripts/audit-skill.py` - read-only inventory of skills and collections:
+  layout detection, lifecycle state, package hashing, broken references,
+  orphan detection, token estimates, and cross-root duplicate and collision
+  reporting.
+- `scripts/archive-skill.py` - staged-write archiver: snapshot, list, and
+  conflict-preserving restore, dry-run until `--apply`, never deletes.
+- `tests/test_audit_skill.py` and `tests/test_archive_skill.py` covering
+  both tools, including dry-run writes-nothing and restore conflict
+  preservation.
+- `evals/evals.json` gains housekeeping, collection housekeeping, healing,
+  mode-resolution, and multi-root regression prompts.
+
+### Fixed
+
+- `CHANGELOG.md` re-anchors the `0.1.9` entries: the change set shipped under
+  `0.1.9` while its entries still sat under `## [Unreleased]`.
+
+## [0.1.9] - 2026-10-23
 
 ### Added
 

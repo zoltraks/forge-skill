@@ -22,6 +22,8 @@ the two contract files, later phases load on demand.
 | `markitdown-reference.md` | Phase 1 - any binary or markup source conversion          |
 | `research-methods.md`     | Phase 1 - classifying the research and picking depth      |
 | `source-integrity.md`     | Phase 1 - every external source, also phase 3 fill review |
+| `skill-hygiene.md`        | Housekeeping and healing runs - audit taxonomy and gates  |
+| `platform-paths.md`       | Multi-root inventory, precedence, and portability rules   |
 
 ## Authority
 

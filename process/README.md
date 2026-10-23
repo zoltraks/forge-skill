@@ -23,3 +23,5 @@ Load a procedure only when the task reaches it - progressive disclosure stays la
 | `source-conversion.md`  | A source needs binary/markup conversion                    |
 | `skill-template.md`     | Phase 2-3 - what a generated skill must contain            |
 | `layout-migration.md`   | Converting an existing skill between layout profiles       |
+| `skill-housekeeping.md` | Housekeep, clean, reorganize, or optimize a named target   |
+| `skill-healing.md`      | Repair or improve a named external skill, evidence-gated   |

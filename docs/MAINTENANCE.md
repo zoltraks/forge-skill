@@ -15,7 +15,7 @@ procedure is `process/skill-maintenance.md`.
 
 | Directory     | Role                                                      |
 |---------------|-----------------------------------------------------------|
-| `process/`    | Pipeline, conversion, research, and shared contract files |
+| `process/`    | Pipeline, lifecycle, conversion, research, contract files |
 | `references/` | Specifications, conventions, and methodology evidence     |
 | `templates/`  | Generation skeletons and the output-path map              |
 | `scripts/`    | Mechanical tools: validation, rendering, conversion       |

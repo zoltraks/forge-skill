@@ -239,6 +239,62 @@
         "The generated SKILL.md routes the verbose, informational, diagnostic, and timing modes to process/operation-timing.md.",
         "scripts/validate-skill.py --profile astra passes on the staged tree with the shared-procedures check covering operation-timing."
       ]
+    },
+    {
+      "id": 22,
+      "prompt": "Housekeep the billing-skill project.",
+      "expected_output": "The housekeeping procedure runs read-only first - intake records the target and layout, the audit inventory and findings report is presented as a dry-run plan before any mutation is proposed.",
+      "files": [],
+      "expectations": [
+        "The agent loaded process/skill-housekeeping.md and classified the target layout.",
+        "No file in the target is written, moved, or removed during the audit stages.",
+        "Findings carry confidence classes and the plan names the gate tier each fix requires."
+      ]
+    },
+    {
+      "id": 23,
+      "prompt": "Clean up our skill collection, autonomously.",
+      "expected_output": "Collection housekeeping resolves routine decisions inline but keeps mutations gated - removals archive first with a recorded restore path, and submodule member findings are proposals for the member repositories, never in-place patches.",
+      "files": [],
+      "expectations": [
+        "Autonomous mode resolves evidenced recommendations inline with a recorded Decisions list.",
+        "No hard deletion occurs in any mode - every removal goes through an archive snapshot first.",
+        "Member-level findings in a submodule collection are reported as member-repository proposals, not applied inside the collection checkout."
+      ]
+    },
+    {
+      "id": 24,
+      "prompt": "Repair the parser-skill, its trigger misfires on incident prompts.",
+      "expected_output": "The healing loop runs - the failure is tagged, two or three minimal candidate patches are generated, each is replayed against an external verifier, and only an improving patch promotes with a version bump and a restore path.",
+      "files": [],
+      "expectations": [
+        "The agent loaded process/skill-healing.md and tagged the failure structurally.",
+        "Candidate patches are minimal and targeted, never a wholesale rewrite.",
+        "No patch promotes on self-assessment alone - an external verifier ran before application.",
+        "The target is archived before mutation and nothing is committed."
+      ]
+    },
+    {
+      "id": 25,
+      "prompt": "Fix forge-skill.",
+      "expected_output": "Near-miss mode resolution - the request targets this repository, so it stays in maintenance mode under process/skill-maintenance.md rather than routing to the healing procedure.",
+      "files": [],
+      "expectations": [
+        "The target resolves to this repository and maintenance mode applies.",
+        "The healing procedure is not loaded for a forge-skill target.",
+        "A bare directionless maintenance request confirms readiness and waits for the named operation."
+      ]
+    },
+    {
+      "id": 26,
+      "prompt": "Check my skills across all platform roots for duplicates.",
+      "expected_output": "Multi-root inventory - the housekeeping procedure loads references/platform-paths.md, runs scripts/audit-skill.py --discover, and reports duplicates, divergent copies, and collisions with precedence evidence, all read-only.",
+      "files": [],
+      "expectations": [
+        "The scan stays read-only across every platform root.",
+        "Same-name copies are grouped and reported with hashes so the human can pick the canonical one.",
+        "Rule-artifact directories like .cursor/rules are reported as rules, not misclassified as skill packages."
+      ]
     }
   ]
 }

@@ -1,18 +1,19 @@
 ---
 name: forge-skill
 description: >-
-  Skill factory for creating Agent Skills. Researches a topic, synthesizes
-  evidence, and generates skill document sets in the astra-skills member
-  layout, the minimal spec-conformant layout of the Agent Skills
-  specification, or Claude Code plugin packaging - and migrates skills
-  between those layouts. Converts sources such as PDF books, EPUB, DOCX, and
-  HTML through an approved local converter such as MarkItDown. Optionally
-  creates multi-member collections modeled on astra-skills. Astra-layout
-  skills carry the shared activation, JSON exchange, session-review,
-  update-check, and autonomy contracts. Use to create or author a skill,
-  build one from a document set, analyze a source, generate from an
-  analysis, package a skill as a plugin, or migrate a skill between layouts.
-  Maintains its own rule corpus on "work on forge-skill" requests.
+  Skill factory for creating Agent Skills and governed lifecycle manager for
+  existing ones. Researches a topic, synthesizes evidence, and generates
+  skill document sets in the astra-skills member layout, the spec-conformant
+  layout of the Agent Skills specification, or Claude Code plugin packaging
+  - and migrates skills between those layouts. Converts sources such as PDF,
+  EPUB, DOCX, and HTML through an approved local converter such as
+  MarkItDown. Optionally creates multi-member collections modeled on
+  astra-skills. Housekeeps, reorganizes, optimizes, and repairs existing
+  skill projects and collections under dry-run, archive-first, evidence-
+  gated rules. Use to create a skill, build one from a document set, analyze
+  a source, package a plugin, migrate layouts, audit or clean a skill or
+  collection, or heal a failing skill. Maintains its own rule corpus on
+  "work on forge-skill" requests.
 license: MIT
 compatibility: >-
   Designed for agent coding environments with file system access (Claude Code,
@@ -21,39 +22,44 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.1.9"
+  version: "0.2.0"
   author: Filip Golewski
 ---
 
 # Forge Skill
 
 > **Type:** Root router
-> **Purpose:** Route skill-creation, source-analysis, and collection-generation requests
-> to the pipeline procedure, the conversion path, or the maintenance path.
-> **Scope:** Creates new Agent Skills from research or external sources - it does not
-> edit documents, audit code, or prepare repositories, those belong to sibling skills.
+> **Purpose:** Route skill-creation, source-analysis, collection-generation, and
+> skill-lifecycle requests to the pipeline procedure, the housekeeping or healing
+> procedures, the conversion path, or the maintenance path.
+> **Scope:** Creates new Agent Skills from research or external sources and
+> governs existing skill projects and collections - it does not edit prose
+> documents, audit code, or prepare repositories, those belong to sibling skills.
 
 ## Contents
 
-| Section            | Line | What it covers                                       |
-|--------------------|------|------------------------------------------------------|
-| Modes              | 62   | Enable, operation, and maintenance selection         |
-| Interaction Modes  | 73   | Interactive, autonomous, fully autonomous, verbose   |
-| Skill Update Check | 93   | Once-per-session upstream check                      |
-| Trigger Keywords   | 121  | Phrases that activate the skill                      |
-| Operations         | 157  | Request-to-resource routing                          |
-| `process/`         | 175  | Pipeline, conversion, research, and shared contracts |
-| `references/`      | 200  | Evidence and convention references                   |
-| `templates/`       | 228  | Generation skeletons and the output-path map         |
-| `scripts/`         | 249  | Mechanical tools                                     |
-| `evals/`           | 267  | Behavioral regression prompts                        |
-| Repository Files   | 275  | Governance files                                     |
-| Boundaries         | 285  | Authority, safety, and writing rules                 |
+| Section            | Line | What it covers                                     |
+|--------------------|------|----------------------------------------------------|
+| Modes              | 68   | Enable, operation, and maintenance selection       |
+| Interaction Modes  | 79   | Interactive, autonomous, fully autonomous, verbose |
+| Skill Update Check | 99   | Once-per-session upstream check                    |
+| Trigger Keywords   | 131  | Phrases that activate the skill                    |
+| Operations         | 173  | Request-to-resource routing                        |
+| `process/`         | 195  | Pipeline, lifecycle, conversion, shared contracts  |
+| `references/`      | 227  | Evidence and convention references                 |
+| `templates/`       | 260  | Generation skeletons and the output-path map       |
+| `scripts/`         | 281  | Mechanical tools                                   |
+| `evals/`           | 304  | Behavioral regression prompts                      |
+| Repository Files   | 312  | Governance files                                   |
+| Boundaries         | 322  | Authority, safety, and writing rules               |
 
 You are a Skill Factory Agent.
 
 You create new Agent Skills from evidence - researched knowledge, local documents,
 converted books - never from invention.
+
+You housekeep and repair existing skills under governed rules - dry-run first,
+archive before mutation, evidence before promotion.
 
 You keep mechanical work in scripts and judgment in the rule corpus.
 
@@ -146,11 +152,17 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
   layout.
 - **Update a skill**: update <skill> with this new source, fold this document into
   <skill>.
+- **Housekeep a skill**: housekeep this skill, clean up <skill>, reorganize
+  <skill>, optimize <skill>, audit <skill> for drift, tidy the skill collection,
+  check my skills for duplicates.
+- **Repair a skill**: repair <skill>, heal <skill>, fix the triggering on
+  <skill>, improve <named-skill>, the skill misfires on this prompt.
 - **Maintain the skill**: work on forge-skill, improve forge-skill, maintain this
   skill, fix this skill.
 - **Near misses that do not activate**: summarize this PDF, convert this file to
   Markdown, write documentation, audit this repository - these name sibling-skill or
-  general tasks, not skill creation.
+  general tasks, not skill creation or lifecycle work. "Improve forge-skill" and
+  "fix this skill" name this repository and stay in maintenance mode.
 
 Naming is not required - scope match activates the skill.
 
@@ -170,6 +182,9 @@ target's files.
 | analyze a source (PDF, EPUB, DOCX, HTML, text) for a future skill                     | `process/research-gathering.md` + `process/source-conversion.md`                                 |
 | generate a skill from an existing analysis or run state                               | `process/forge-workflow.md` phases 2-4 with the recorded evidence                                |
 | update an existing skill with a new source                                            | `process/research-synthesis.md` - propose the fold-in, no writes                                 |
+| housekeep, clean, reorganize, optimize, or audit a skill or collection                | `process/skill-housekeeping.md` - the governed housekeeping loop                                 |
+| inventory skills across platform roots or check for drift and duplicates              | `process/skill-housekeeping.md` + `scripts/audit-skill.py --discover`                            |
+| repair, heal, fix, or improve a named external skill                                  | `process/skill-healing.md` - the evidence-gated healing loop                                     |
 | check an existing or hand-built skill against the generation contract                 | `scripts/validate-skill.py` + `references/astra-conventions.md` - conformance verdict, no writes |
 | ask for intake parameters "as JSON" or name a diagnostic mode                         | `process/json-exchange.md`                                                                       |
 | name a verbose, informational, diagnostic, or timing mode on an operation             | `process/operation-timing.md`                                                                    |
@@ -203,6 +218,11 @@ target's files.
   file contracts, template map, and per-file fill rules.
 - **`process/layout-migration.md`** - Converting a skill between layout profiles:
   adopt into astra, export to spec, package as plugin.
+- **`process/skill-housekeeping.md`** - The governed housekeeping loop for an
+  existing skill or collection: inventory, audit, gated apply, archive-first
+  mutation, and the audit log.
+- **`process/skill-healing.md`** - The evidence-gated repair loop for a named
+  external skill: evaluate, patch, replay against an external verifier, promote.
 
 ## `references/` - Evidence Library
 
@@ -230,6 +250,11 @@ target's files.
   depth, and methodology selection.
 - **`references/source-integrity.md`** - Provenance, copyright, untrusted-content,
   and injection boundaries for external sources.
+- **`references/skill-hygiene.md`** - The housekeeping audit taxonomy: lifecycle
+  states, drift and contradiction classes, deduplication passes, the confidence
+  matrix, token budgets, and safety rules.
+- **`references/platform-paths.md`** - Platform skill and rule roots for
+  multi-root inventory, discovery semantics, and precedence.
 - **`references/README.md`** - The reference index and loading rules.
 
 ## `templates/` - Generation Skeletons
@@ -269,6 +294,11 @@ untrusted targets without the sandboxing rules of `scripts/README.md`.
 - **`scripts/convert-source.py`** - Optional local-source converter: preflights
   the file, locates an installed or approved MarkItDown, and reports extraction
   quality. Never installs or fetches on its own.
+- **`scripts/audit-skill.py`** - Read-only skill and collection inventory:
+  layout, lifecycle state, package hash, broken references, orphans, token
+  estimates, and `--discover` multi-root duplicate and collision detection.
+- **`scripts/archive-skill.py`** - Staged-write archiver: snapshot, list, and
+  conflict-preserving restore, dry-run until `--apply`. Never deletes.
 - **`scripts/README.md`** - Tool contracts, safety rules, and exit statuses.
 
 ## `evals/` - Regression Prompts
@@ -303,6 +333,13 @@ untrusted targets without the sandboxing rules of `scripts/README.md`.
   never produces an ungrounded "complete" skill.
 - No automatic commits, pushes, remote creation, network access, or package
   installation - each needs its own approval, in every interaction mode.
+- Housekeeping and healing never hard-delete - every removal archives first
+  with a recorded restore path, and every mutation passes its apply gate.
+- A healing patch promotes only on external-verifier evidence - reflection
+  alone never promotes a change.
+- A housekeeping run on a collection never patches member checkouts on
+  collection authority - member changes are proposed inside each member's
+  own repository.
 - Bump `metadata.version` by one patch with every change set, per
   `docs/VERSIONING.md`.
 - Do not claim validation that did not run.

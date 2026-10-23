@@ -2,7 +2,8 @@
 
 Forge is an Agent Skills package that creates **new** Agent Skills - from scratch,
 from research on a topic, or from external sources such as PDF books, EPUB files,
-Word documents, and HTML pages.
+Word documents, and HTML pages - and that **governs existing** ones through
+housekeeping, optimization, and evidence-gated repair.
 
 It is a member of the [Astra Skills](https://github.com/Astra-Professional/astra-skills)
 collection, and its default `astra` layout follows the same conventions: a routed
@@ -17,17 +18,19 @@ Existing skills migrate between layouts in both directions.
 
 ## What It Does
 
-| Operation              | What it covers                                                 |
-|------------------------|----------------------------------------------------------------|
-| Create a skill         | Research a topic and generate a complete skill document set    |
-| Create a spec skill    | Generate a minimal spec-conformant package for any host        |
-| Package a plugin       | Wrap a skill in Claude Code plugin or marketplace packaging    |
-| Create a collection    | Generate an index plus independently owned member skills       |
-| Migrate a layout       | Adopt a foreign skill into astra or export a member to spec    |
-| Analyze a source       | Convert and survey a PDF/book/document into an evidence report |
-| Generate from analysis | Render a skill from a recorded analysis or resumed run state   |
-| Update a skill         | Propose folding a new source into an existing skill            |
-| Maintain Forge         | Changes and session reviews of this repository                 |
+| Operation              | What it covers                                                   |
+|------------------------|------------------------------------------------------------------|
+| Create a skill         | Research a topic and generate a complete skill document set      |
+| Create a spec skill    | Generate a minimal spec-conformant package for any host          |
+| Package a plugin       | Wrap a skill in Claude Code plugin or marketplace packaging      |
+| Create a collection    | Generate an index plus independently owned member skills         |
+| Migrate a layout       | Adopt a foreign skill into astra or export a member to spec      |
+| Analyze a source       | Convert and survey a PDF/book/document into an evidence report   |
+| Generate from analysis | Render a skill from a recorded analysis or resumed run state     |
+| Update a skill         | Propose folding a new source into an existing skill              |
+| Housekeep a skill      | Inventory, drift, dedup, cleanup, optimize a skill or collection |
+| Repair a skill         | Evidence-gated patch, replay, and promote for a failing skill    |
+| Maintain Forge         | Changes and session reviews of this repository                   |
 
 ## How It Works
 
@@ -89,6 +92,9 @@ adopt this external skill into astra
 create a skill collection for our support tooling, autonomously
 analyze this EPUB for a new skill, verbose
 generate the skill from the recorded analysis
+housekeep the permit-skill project
+check my skills across platform roots for drift
+repair the release-notes skill, its trigger misfires
 ```
 
 Every operation accepts `autonomous`, `fully autonomous`, and `verbose` flags -
@@ -102,7 +108,10 @@ see `process/decision-modes.md` for the authoritative matrix.
   Update operation reports a proposed fold only.
 - Conversion quality is best effort: scanned PDFs need a separate OCR path, and
   extraction loss is reported, never hidden.
-- Self-healing routing and live model benchmarking are deferred enhancements.
+- Housekeeping mutates a target only through its apply gates - dry-run first,
+  archive before any removal, never hard-delete.
+- Live model benchmarking and fully unsupervised self-improvement remain
+  deferred - healing promotes only on external-verifier evidence.
 
 ## License
 
