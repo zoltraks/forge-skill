@@ -60,6 +60,42 @@ class AuditSkillTests(unittest.TestCase):
             self.assertIn("orphan=references/unused.md", result.stdout)
             self.assertNotIn("orphan=process/notes.md", result.stdout)
 
+    def test_workspace_and_external_refs_become_notes(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch))
+            skill.joinpath("SKILL.md").write_text(
+                "---\nname: sample-skill\ndescription: >-\n  A sample skill.\n"
+                'license: MIT\nmetadata:\n  version: "0.1.0"\n---\n\n'
+                "# Sample\n\nSee process/notes.md, emit work/out.md, and read "
+                "settings/lucy/tools.json from the memory repository.\n",
+                encoding="utf-8",
+            )
+            result = run_audit(str(skill))
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("broken_refs=0", result.stdout)
+            self.assertIn("note_ref=work/out.md (workspace)", result.stdout)
+            self.assertIn("note_ref=settings/lucy/tools.json (no known root)",
+                          result.stdout)
+
+    def test_convention_addressed_record_is_not_orphan(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch))
+            (skill / "docs").mkdir()
+            (skill / "docs" / "changes").mkdir()
+            (skill / "docs" / "changes" / "change-007-widget-fix.md").write_text(
+                "# Change\n", encoding="utf-8",
+            )
+            skill.joinpath("SKILL.md").write_text(
+                "---\nname: sample-skill\ndescription: >-\n  A sample skill.\n"
+                'license: MIT\nmetadata:\n  version: "0.1.0"\n---\n\n'
+                "# Sample\n\nSee process/notes.md. Shipped as change-007.\n",
+                encoding="utf-8",
+            )
+            result = run_audit(str(skill))
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertNotIn("orphan=docs/changes/change-007-widget-fix.md",
+                             result.stdout)
+
     def test_collection_audits_root_and_members(self) -> None:
         with tempfile.TemporaryDirectory() as scratch:
             root = Path(scratch) / "my-collection"

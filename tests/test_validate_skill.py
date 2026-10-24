@@ -134,6 +134,47 @@ class ValidateSkillTests(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             self.assertIn("fully autonomous", result.stdout)
 
+    def test_workspace_reference_is_advisory_not_fail(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch))
+            (skill / "SKILL.md").write_text(
+                "---\nname: sample-skill\ndescription: >-\n  A sample skill.\n"
+                'license: MIT\nmetadata:\n  version: "0.1.0"\n---\n\n'
+                "# Sample\n\nWrite the report to work/report.md.\n",
+                encoding="utf-8",
+            )
+            result = run_validator(skill)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("ADVISORY root reference targets the workspace",
+                          result.stdout)
+
+    def test_external_root_reference_is_advisory_not_fail(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch))
+            (skill / "SKILL.md").write_text(
+                "---\nname: sample-skill\ndescription: >-\n  A sample skill.\n"
+                'license: MIT\nmetadata:\n  version: "0.1.0"\n---\n\n'
+                "# Sample\n\nThe memory repository reads settings/lucy/tools.json.\n",
+                encoding="utf-8",
+            )
+            result = run_validator(skill)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("ADVISORY root reference resolves in no known root",
+                          result.stdout)
+
+    def test_broken_reference_into_existing_tree_still_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch))
+            (skill / "SKILL.md").write_text(
+                "---\nname: sample-skill\ndescription: >-\n  A sample skill.\n"
+                'license: MIT\nmetadata:\n  version: "0.1.0"\n---\n\n'
+                "# Sample\n\nSee references/missing-doc.md for details.\n",
+                encoding="utf-8",
+            )
+            result = run_validator(skill)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("root reference does not resolve", result.stdout)
+
 
 def make_spec_skill(root: Path, name: str = "spec-skill") -> Path:
     skill = root / name

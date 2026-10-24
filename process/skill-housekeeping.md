@@ -93,7 +93,10 @@ Load `references/skill-hygiene.md` - it defines every class below.
 - Run `scripts/validate-skill.py --profile <detected>` on each skill, plus the
   target's own validator when it ships one.
 - Mechanical findings come from the audit script: broken references, orphans,
-  drift verdicts, token overruns.
+  drift verdicts, token overruns. Known false-positive classes -
+  workspace-direction references, external-root references, and
+  convention-addressed records - surface as notes or advisories, not findings,
+  per `references/skill-hygiene.md`.
 - Semantic findings are agent work: contradiction tiers, gap classes,
   ownership violations, semantic dedup candidates, description and
   progressive-disclosure weaknesses.

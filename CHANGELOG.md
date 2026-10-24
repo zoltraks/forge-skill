@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.2.4] - 2026-10-24
+
+### Fixed
+
+- `scripts/validate-skill.py` and `scripts/audit-skill.py` classify the three
+  recurring false-positive reference shapes instead of reporting them as
+  findings: `work/…` root references surface as workspace advisories, root
+  references whose first segment exists nowhere in the tree surface as
+  external-root advisories or notes, and only references into an existing tree
+  stay failures.
+- `scripts/audit-skill.py` counts a file as referenced when its leading
+  `<word>-<number>` identifier appears in the corpus, so convention-addressed
+  archive records like `docs/changes/change-042-slug.md` no longer surface as
+  orphans.
+- `references/skill-hygiene.md` documents the mechanical false-positive classes
+  and `process/skill-housekeeping.md` records that they surface as notes or
+  advisories rather than findings.
+
 ## [0.2.3] - 2026-10-23
 
 ### Fixed

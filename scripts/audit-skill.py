@@ -161,6 +161,7 @@ def audit_skill(root: Path) -> dict:
         "tokens_estimate": 0,
         "package_hash": "",
         "broken_refs": [],
+        "note_refs": [],
         "orphans": [],
     }
     skill_file = root / "SKILL.md"
@@ -186,7 +187,13 @@ def audit_skill(root: Path) -> dict:
             record["broken_refs"].append(f"{relative} (escapes root)")
             continue
         if not (root / candidate).is_file():
-            record["broken_refs"].append(relative)
+            first = candidate.parts[0] if candidate.parts else ""
+            if first == "work":
+                record["note_refs"].append(f"{relative} (workspace)")
+            elif first and first not in RESOURCE_DIRS:
+                record["note_refs"].append(f"{relative} (no known root)")
+            else:
+                record["broken_refs"].append(relative)
 
     corpus = text
     for path in files:
@@ -200,6 +207,11 @@ def audit_skill(root: Path) -> dict:
         if relative.parts[0] not in RESOURCE_DIRS or relative.name == "README.md":
             continue
         if relative.as_posix() not in corpus and path.stem not in corpus:
+            convention = re.match(r"([a-z]+-\d+)\b", path.stem)
+            if convention and re.search(
+                rf"\b{re.escape(convention.group(1))}\b", corpus
+            ):
+                continue
             record["orphans"].append(relative.as_posix())
 
     body_chars = len(text)
@@ -301,6 +313,8 @@ def print_record(record: dict) -> None:
           f"broken_refs={len(record['broken_refs'])} orphans={len(record['orphans'])}")
     for ref in record["broken_refs"]:
         print(f"  broken_ref={ref}")
+    for ref in record["note_refs"]:
+        print(f"  note_ref={ref}")
     for orphan in record["orphans"]:
         print(f"  orphan={orphan}")
 

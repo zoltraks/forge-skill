@@ -53,6 +53,9 @@ GOVERNANCE_DOCS = [
     "docs/README.md",
 ]
 
+KNOWN_DIRS = {"process", "references", "scripts", "templates", "docs",
+              "evals", "assets", "resources", "examples"}
+
 # Conventional names exempt from the two-word advisory.
 NAMING_EXEMPTIONS = {
     "SKILL.md", "AGENTS.md", "README.md", "CHANGELOG.md", "LICENSE",
@@ -197,13 +200,29 @@ def validate_body(root: Path, body: str, issues: list[str]) -> None:
     if total_lines > 500:
         issue(f"SKILL.md is {total_lines} lines, maximum is 500", issues)
 
+    advisory: list[str] = []
     for relative in sorted(referenced_paths(body)):
         candidate = Path(relative.replace("\\", "/"))
         if candidate.is_absolute() or ".." in candidate.parts:
             issue(f"root reference escapes the skill directory: {relative}", issues)
             continue
-        if not (root / candidate).is_file():
+        if (root / candidate).is_file():
+            continue
+        first = candidate.parts[0] if candidate.parts else ""
+        if first == "work":
+            advisory.append(
+                f"root reference targets the workspace: {relative} "
+                "(convention statement or workspace dependency)"
+            )
+        elif first and first not in KNOWN_DIRS:
+            advisory.append(
+                f"root reference resolves in no known root: {relative} "
+                "(possibly an external-root path)"
+            )
+        else:
             issue(f"root reference does not resolve: {relative}", issues)
+    for message in advisory:
+        print(f"ADVISORY {message}")
 
     for path in sorted(root.rglob("*")):
         if not path.is_file():

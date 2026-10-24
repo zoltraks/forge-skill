@@ -113,6 +113,27 @@ workspace states the workspace convention itself, it is not a violation. A
 shipped file that reads from, links to, or otherwise depends on workspace
 content is a defect - the workspace never ships.
 
+### Mechanical False-Positive Classes
+
+The mechanical checks surface three recurring reference and pointer shapes that
+usually classify `FALSE_POSITIVE` - the scripts now carry them as notes or
+advisories instead of findings, and the human classification stays the same:
+
+- **Workspace-direction references** - a `work/…` root reference never resolves
+  in a fresh checkout, because the workspace is gitignored by contract. Directing
+  output there is the convention statement above. Only a reference that depends
+  on workspace content is a defect, and that judgment is semantic.
+- **External-root references** - a root reference whose first path segment
+  exists nowhere in the skill tree often names a path inside another repository
+  the skill documents - a memory repository, a platform directory, a settings
+  root. The prose should name its root. When it does, classify `FALSE_POSITIVE`,
+  when it does not, the reference is a clarity defect, not a broken link.
+- **Convention-addressed records** - a numbered archive record
+  (`change-042-slug.md`, `plan-007-slug.md`, and the like) is pointed at by its
+  identifier `change-042`, not by path or stem. The audit counts a file as
+  referenced when its leading `<word>-<number>` identifier appears in the corpus,
+  so such records no longer surface as orphans.
+
 ## Gap Classes
 
 A gap is information the skill should provide but does not:
