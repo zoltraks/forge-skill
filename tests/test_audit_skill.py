@@ -126,5 +126,21 @@ class AuditSkillTests(unittest.TestCase):
             self.assertIn("collision=dup-skill verdict=exact-duplicate", result.stdout)
 
 
+
+    def test_astra_missing_catalog_flagged(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            skill = Path(tmp) / "skill"
+            (skill / "process").mkdir(parents=True)
+            (skill / "scripts").mkdir()
+            fm = "---" + chr(10) + "name: fixture" + chr(10) + "description: x" + chr(10) + "---" + chr(10)
+            (skill / "SKILL.md").write_text(fm, encoding="utf-8")
+            (skill / "AGENTS.md").write_text("# A" + chr(10), encoding="utf-8")
+            (skill / "scripts" / "check-update.py").write_text("", encoding="utf-8")
+            result = run_audit(str(skill))
+            self.assertIn("operations_surface=missing-catalog", result.stdout)
+            (skill / "process" / "operations-catalog.md").write_text("# C" + chr(10), encoding="utf-8")
+            result = run_audit(str(skill))
+            self.assertNotIn("operations_surface=", result.stdout)
+
 if __name__ == "__main__":
     unittest.main()

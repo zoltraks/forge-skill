@@ -306,6 +306,39 @@
         "Maintenance-mode standby is not entered - the operation runs per process/skill-housekeeping.md.",
         "Every mutation stays gated and respects the repository's own governing documents."
       ]
+    },
+    {
+      "id": 28,
+      "prompt": "List all operations.",
+      "expected_output": "The operations catalog: the full operations table from process/operations-catalog.md delivered inline, expanded past the family names into the concrete operations, with no file written.",
+      "files": [],
+      "expectations": [
+        "The agent loaded process/operations-catalog.md and answered with its canonical operations table inline.",
+        "The table covers every family expanded into concrete operations and ends with a line inviting a task request.",
+        "No pipeline phase, housekeeping stage, or file write runs."
+      ]
+    },
+    {
+      "id": 29,
+      "prompt": "Audit the example-skill repository.",
+      "expected_output": "The housekeeping audit reports the operations-surface gap: the astra-layout target lacks process/operations-catalog.md, classified per references/skill-hygiene.md.",
+      "files": [],
+      "expectations": [
+        "scripts/audit-skill.py reports operations_surface=missing-catalog for the target.",
+        "The finding classifies per the missing-operations-surface gap class in references/skill-hygiene.md.",
+        "A catalog proposal requires human approval - it never auto-applies."
+      ]
+    },
+    {
+      "id": 31,
+      "prompt": "Housekeep the example-member skill.",
+      "expected_output": "The housekeeping audit reports the member's recorded variance - bare-list evals, own prose profile - as FALSE_POSITIVE, never as drift, while unrecorded divergence surfaces as a finding.",
+      "files": [],
+      "expectations": [
+        "Recorded variance classifies FALSE_POSITIVE per references/skill-hygiene.md.",
+        "Unrecorded divergence is reported as a finding.",
+        "A legitimate unrecorded variance produces a proposal naming the owning document, never a patch on collection authority."
+      ]
     }
   ]
 }

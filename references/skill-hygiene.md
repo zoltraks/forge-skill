@@ -145,8 +145,37 @@ A gap is information the skill should provide but does not:
 - Orphaned resources - files present but never pointed to, where a pointer
   means the relative path or the file stem appearing in the union of the
   skill's Markdown files.
+- Missing operations surface - the skill does not clearly state its supported
+  operations: an `astra`-layout member lacking `process/operations-catalog.md`,
+  or a `SKILL.md` carrying no operations enumeration on any other layout.
 
 A gap is reported as a gap. Missing domain content is named, never invented.
+
+### Recorded Variance
+
+A difference between a member and the shared contract is sanctioned when it is
+recorded.
+
+Resolution order: the member's own documents first - `AGENTS.md`, `docs/`,
+`README.md` - then, when the target provably sits inside a skill collection,
+that collection's member contract.
+
+Absent a collection, the member's own docs alone decide.
+
+Recorded variance classifies `FALSE_POSITIVE`, and the same difference unrecorded
+is a finding.
+
+Sanctioned shapes include: `CHANGELOG.md` presence or absence, test-layout
+depth or missing `tests/`, `docs/MAINTENANCE.md` beside or instead of
+`process/skill-maintenance.md`, vendored canonical `references/` corpora,
+`process/` subdirectories, extra interaction modes, prose-profile variance,
+sanctioned non-ASCII, evals schema variants, `docs/decisions/` and
+`docs/standard/` subtrees, missing `parameter-configuration.md`, and
+multilingual `languages/`/`translations/` corpora.
+
+A discovery of legitimate but unrecorded variance produces a proposal naming
+the owning document - the member's own docs always, the collection contract
+only when a collection resolves - never a patch on collection authority.
 
 ## Deduplication Passes
 
@@ -213,6 +242,7 @@ Every finding carries a confidence class that gates its resolution:
 | Ownership pointer replacement           | Yes, after snapshot          | No                           |
 | Contradiction resolution                | Never                        | Always                       |
 | Semantic merge                          | Never                        | Always                       |
+| Missing operations catalog              | Never                        | Always                       |
 | Behavioral change, even framed as a fix | Never                        | Always, plus replay evidence |
 
 ## Safety Rules

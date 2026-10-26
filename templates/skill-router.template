@@ -101,6 +101,7 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
 {{operations-table}}
 | ask for parameters "as JSON" or name a diagnostic mode                    | `process/json-exchange.md`                        |
 | name a verbose, informational, diagnostic, or timing mode on an operation | `process/operation-timing.md`                     |
+| list all operations or show all capabilities                              | `process/operations-catalog.md`                   |
 | change, extend, fix, or review this skill repository                      | `process/skill-maintenance.md` - maintenance mode |
 
 ## `process/` - Procedures
@@ -110,6 +111,7 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
 - **`process/skill-maintenance.md`** - Maintenance-mode intake and validation gate.
 - **`process/json-exchange.md`** - JSON parameter documents for question surfaces.
 - **`process/operation-timing.md`** - Elapsed-time report for named operations
+- **`process/operations-catalog.md`** - The catalog procedure for "list all operations" requests.
   under a verbose, informational, diagnostic, or timing mode.
 - **`process/decision-modes.md`** - The interaction-mode matrix and decision log.
 - **`process/session-review.md`** - Session review with the shared review modes.

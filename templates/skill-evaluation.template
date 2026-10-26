@@ -73,6 +73,17 @@
         "The reply ends with a separate paragraph whose single sentence is the last sentence: '<description> operation took <m:ss>'.",
         "No timing line appears on a bare activation or standby reply - the rule covers named operations only."
       ]
+    },
+    {
+      "id": 8,
+      "prompt": "List all operations.",
+      "expected_output": "The operations catalog: the full operations table from process/operations-catalog.md delivered inline, expanded past the family names into the concrete operations, with no file written.",
+      "files": [],
+      "expectations": [
+        "The agent loaded process/operations-catalog.md and answered with its canonical operations table inline.",
+        "The table covers every family expanded into concrete operations and ends with a line inviting a task request.",
+        "No task machinery, parameter resolution, target survey, or file write runs."
+      ]
     }
   ]
 }

@@ -33,6 +33,10 @@ A compatible member carries:
   names a verbose, informational, diagnostic, or timing mode: the response
   closes with `<description> operation took <m:ss>`, standby and enablement
   carry no line.
+- `process/operations-catalog.md` - the canonical operations table for
+  "list all operations" requests: `Family | Operation | What it covers`,
+  concrete operations over family names, Enable family rows included,
+  delivered inline with a closing invitation line.
 - `process/session-review.md` - gather, findings, approval gate, apply, validate.
   The `autonomous` flag resolves gates to recommended options with inline
   reporting, `verbose` adds options and rationale. Never commits.

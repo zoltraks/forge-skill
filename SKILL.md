@@ -22,7 +22,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.2.4"
+  version: "0.2.6"
   author: Filip Golewski
 ---
 
@@ -44,14 +44,14 @@ metadata:
 | Interaction Modes  | 77   | Interactive, autonomous, fully autonomous, verbose        |
 | Skill Update Check | 97   | Once-per-session upstream check                           |
 | Trigger Keywords   | 129  | Phrases that activate the skill                           |
-| Operations         | 171  | Request-to-resource routing                               |
-| `process/`         | 193  | Pipeline, lifecycle, conversion, research, contract files |
-| `references/`      | 225  | Evidence and convention references                        |
-| `templates/`       | 254  | Generation skeletons and the output-path map              |
-| `scripts/`         | 275  | Mechanical tools                                          |
-| `evals/`           | 294  | Behavioral regression prompts                             |
-| Repository Files   | 301  | Governance files                                          |
-| Boundaries         | 312  | Authority, safety, and writing rules                      |
+| Operations         | 173  | Request-to-resource routing                               |
+| `process/`         | 196  | Pipeline, lifecycle, conversion, research, contract files |
+| `references/`      | 230  | Evidence and convention references                        |
+| `templates/`       | 259  | Generation skeletons and the output-path map              |
+| `scripts/`         | 280  | Mechanical tools                                          |
+| `evals/`           | 299  | Behavioral regression prompts                             |
+| Repository Files   | 306  | Governance files                                          |
+| Boundaries         | 317  | Authority, safety, and writing rules                      |
 
 You are a Skill Factory Agent.
 
@@ -155,6 +155,8 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
   check my skills for duplicates.
 - **Repair a skill**: repair <skill>, heal <skill>, fix the triggering on
   <skill>, improve <named-skill>, the skill misfires on this prompt.
+- **Operations catalog**: list all operations, show all capabilities, what
+  operations can this skill perform, list everything this skill can do.
 - **Maintain the skill**: work on forge-skill, improve forge-skill, maintain this
   skill, fix this skill.
 - **Near misses that do not activate**: summarize this PDF, convert this file to
@@ -185,6 +187,7 @@ target's files.
 | repair, heal, fix, or improve a named external skill            | `process/skill-healing.md`                                       |
 | check a skill against the generation contract                   | `scripts/validate-skill.py` + `references/astra-conventions.md`  |
 | ask for intake parameters "as JSON" or name a diagnostic mode   | `process/json-exchange.md`                                       |
+| list all operations or show all capabilities                    | `process/operations-catalog.md`                                  |
 | name a verbose, informational, diagnostic, or timing mode       | `process/operation-timing.md`                                    |
 | inspect or re-render generation templates                       | `templates/` + `process/skill-template.md`                       |
 | convert a local source file                                     | `process/source-conversion.md` + `scripts/convert-source.py`     |
@@ -200,6 +203,8 @@ target's files.
   surfaces.
 - **`process/operation-timing.md`** - Elapsed-time report for named operations
   under a verbose, informational, diagnostic, or timing mode.
+- **`process/operations-catalog.md`** - The catalog procedure for "list all
+  operations" requests.
 - **`process/decision-modes.md`** - The interaction-mode matrix: interactive,
   autonomous, fully autonomous, and verbose semantics with the decision log.
 - **`process/session-review.md`** - The session-review procedure: findings,
@@ -258,7 +263,7 @@ agent writes from verified evidence - a template never invents domain knowledge.
 
 - Single-skill set (`astra` profile): `skill-router`, `skill-agents`,
   `skill-activation`, `review-procedure`, `exchange-procedure`, `decision-modes`,
-  `operation-timing`, `skill-maintainer`, `skill-readme`, `skill-changelog`,
+  `operation-timing`, `operations-catalog`, `skill-maintainer`, `skill-readme`, `skill-changelog`,
   `skill-license`, `skill-gitignore`, `skill-docs-index`, `skill-contributing`,
   `skill-style`, `skill-maintenance`, `skill-versioning`, `skill-security`,
   `skill-evaluation`, `skill-updater`, `skill-validator`.

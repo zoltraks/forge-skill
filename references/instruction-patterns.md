@@ -50,16 +50,17 @@ never present a menu that hides a known preference.
 
 Apply the patterns the domain's procedures need - not all of them:
 
-| Pattern               | Use when                                                                                                          |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------|
-| Gotchas section       | Environment facts defy reasonable assumptions - keep them in `SKILL.md` where they are read before the mistake    |
-| Output template       | The skill produces a fixed-format artifact - a literal template beats prose description                           |
-| Checklist             | Multi-step workflows with dependencies or gates - progress is tracked explicitly                                  |
-| Validation loop       | A script or checklist can verify the work - do, validate, fix, repeat until clean                                 |
-| Plan-validate-execute | Batch or destructive operations - intermediate plan artifact validated against a source of truth before execution |
-| Conditional branch    | The process forks on an evaluated condition - triage, classification                                              |
-| Loop                  | A step repeats until a condition holds - research-until-confident                                                 |
-| Parallel              | Independent sub-tasks whose outputs combine - speed with a merge step                                             |
+| Pattern               | Use when                                                                                                             |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------|
+| Gotchas section       | Environment facts defy reasonable assumptions - keep them in `SKILL.md` where they are read before the mistake       |
+| Output template       | The skill produces a fixed-format artifact - a literal template beats prose description                              |
+| Checklist             | Multi-step workflows with dependencies or gates - progress is tracked explicitly                                     |
+| Validation loop       | A script or checklist can verify the work - do, validate, fix, repeat until clean                                    |
+| Plan-validate-execute | Batch or destructive operations - intermediate plan artifact validated against a source of truth before execution    |
+| Operations catalog    | Broad operation surfaces - a dedicated file answers list-all-operations requests with the canonical operations table |
+| Conditional branch    | The process forks on an evaluated condition - triage, classification                                                 |
+| Loop                  | A step repeats until a condition holds - research-until-confident                                                    |
+| Parallel              | Independent sub-tasks whose outputs combine - speed with a merge step                                                |
 
 ## Skill Granularity
 

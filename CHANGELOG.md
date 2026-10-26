@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.2.6] - 2026-10-26
+
+### Added
+
+- `references/skill-hygiene.md` records the recorded-variance class: member
+  divergence from the shared contract classifies `FALSE_POSITIVE` when recorded
+  in the member's own docs or a resolved collection contract, with the
+  sanctioned-shape enumeration and member-docs-first resolution order.
+
+## [0.2.5] - 2026-10-26
+
+### Added
+
+- `process/operations-catalog.md` - the shared operations-catalog procedure:
+  the canonical `Family | Operation | What it covers` table for "list all
+  operations" requests, registered in `SKILL.md`, `process/README.md`, and
+  `evals/evals.json`.
+- `templates/operations-catalog.template` - generated skills ship the catalog
+  file, wired through `templates/README.md`, `process/skill-template.md`, the
+  skill-router, collection-contract, skill-validator, and skill-evaluation
+  templates.
+- `references/skill-anatomy.md`, `references/astra-conventions.md`,
+  `references/instruction-patterns.md`, `references/trigger-design.md`, and
+  `process/forge-workflow.md` record the operations surface as a required
+  recommendation for generated skills.
+- `references/skill-hygiene.md` adds the missing-operations-surface gap class
+  and `scripts/audit-skill.py` reports `operations_surface` mechanically, so a
+  housekeeping audit flags a skill that does not clearly state its supported
+  operations.
+
 ## [0.2.4] - 2026-10-24
 
 ### Fixed

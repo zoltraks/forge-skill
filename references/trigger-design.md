@@ -45,6 +45,11 @@ Trigger phrases should match how users actually ask:
 Group keywords by intent in the router's Trigger Keywords section - grouped lists
 beat flat dumps for both readability and coverage review.
 
+The shared query-surface triggers are fixed vocabulary - a generated skill
+carries "list all operations", "show all capabilities", "what operations can
+this skill perform", and "list everything this skill can do" verbatim when it
+ships `process/operations-catalog.md`.
+
 ## Exclusion Criteria
 
 Every generated router names its near misses - requests that look similar but

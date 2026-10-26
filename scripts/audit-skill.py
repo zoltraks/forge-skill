@@ -163,6 +163,7 @@ def audit_skill(root: Path) -> dict:
         "broken_refs": [],
         "note_refs": [],
         "orphans": [],
+        "operations_surface": "unknown",
     }
     skill_file = root / "SKILL.md"
     if not root.is_dir() or not skill_file.is_file():
@@ -176,6 +177,16 @@ def audit_skill(root: Path) -> dict:
     if fields.get("name"):
         record["name"] = fields["name"]
     record["layout"] = detect_layout(root)
+    if record["layout"] == "astra":
+        record["operations_surface"] = (
+            "ok" if (root / "process" / "operations-catalog.md").is_file()
+            else "missing-catalog"
+        )
+    else:
+        has_enum = re.search(
+            r"(?im)^\s*(#+\s*.*operations|\|\s*operation)", text
+        )
+        record["operations_surface"] = "ok" if has_enum else "unstated"
 
     files = list_files(root)
     record["files"] = len(files)
@@ -317,6 +328,8 @@ def print_record(record: dict) -> None:
         print(f"  note_ref={ref}")
     for orphan in record["orphans"]:
         print(f"  orphan={orphan}")
+    if record["operations_surface"] not in ("ok", "unknown"):
+        print(f"  operations_surface={record['operations_surface']}")
 
 
 def main() -> int:

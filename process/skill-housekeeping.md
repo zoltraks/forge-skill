@@ -41,6 +41,9 @@ Classify the target before anything else:
 |----------------|--------------------------------------------------------------|
 | Collection     | Root `SKILL.md` plus `skills/<name>/` member directories     |
 | Astra member   | `AGENTS.md`, the shared `process/` contracts, `scripts/` set |
+
+Astra members are judged against the shared contract plus recorded variance
+per `references/skill-hygiene.md`.
 | Spec skill     | `SKILL.md` plus optional resources, no member contract       |
 | Plugin package | `.claude-plugin/plugin.json`                                 |
 | Foreign        | None of the above - audit only, no mutation proposals        |
@@ -93,13 +96,16 @@ Load `references/skill-hygiene.md` - it defines every class below.
 - Run `scripts/validate-skill.py --profile <detected>` on each skill, plus the
   target's own validator when it ships one.
 - Mechanical findings come from the audit script: broken references, orphans,
-  drift verdicts, token overruns. Known false-positive classes -
+  drift verdicts, token overruns, operations-surface absence. Known false-positive classes -
   workspace-direction references, external-root references, and
   convention-addressed records - surface as notes or advisories, not findings,
   per `references/skill-hygiene.md`.
 - Semantic findings are agent work: contradiction tiers, gap classes,
   ownership violations, semantic dedup candidates, description and
-  progressive-disclosure weaknesses.
+  progressive-disclosure weaknesses. Recorded variance resolves per
+  `references/skill-hygiene.md` - recorded in the member's own docs or a
+  resolved collection contract classifies `FALSE_POSITIVE`, unrecorded
+  divergence is a finding.
 - Classify every finding `HIGH`, `MEDIUM`, or `FALSE_POSITIVE` per the
   confidence matrix.
 

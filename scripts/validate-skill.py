@@ -32,6 +32,7 @@ SHARED_PROCEDURES = [
     "process/json-exchange.md",
     "process/operation-timing.md",
     "process/session-review.md",
+    "process/operations-catalog.md",
     "process/decision-modes.md",
 ]
 

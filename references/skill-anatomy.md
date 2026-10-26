@@ -40,23 +40,24 @@ A generated skill ships no empty directory and no placeholder file "for later".
 
 The member contract on top of the universal set:
 
-| Component                      | Role                                                           |
-|--------------------------------|----------------------------------------------------------------|
-| `AGENTS.md`                    | Maintenance entry point                                        |
-| `CHANGELOG.md`                 | Release history                                                |
-| `.gitignore`                   | Excludes the runtime `work/` tree and Python artifacts         |
-| `process/skill-activation.md`  | Bare-activation standby contract                               |
-| `process/json-exchange.md`     | Parameter exchange contract                                    |
-| `process/operation-timing.md`  | Elapsed-time report contract                                   |
-| `process/session-review.md`    | Improvement-routine contract                                   |
-| `process/decision-modes.md`    | Interaction-mode matrix                                        |
-| `process/skill-maintenance.md` | Self-maintenance intake                                        |
-| `process/README.md`            | Procedure index                                                |
-| `scripts/check-update.py`      | Once-per-session upstream check                                |
-| `scripts/validate-skill.py`    | Read-only validator                                            |
-| `scripts/README.md`            | Tool index                                                     |
-| `docs/` governance set         | STYLE, VERSIONING, MAINTENANCE, CONTRIBUTING, SECURITY, README |
-| `evals/evals.json`             | Behavioral regression prompts                                  |
+| Component                       | Role                                                           |
+|---------------------------------|----------------------------------------------------------------|
+| `AGENTS.md`                     | Maintenance entry point                                        |
+| `CHANGELOG.md`                  | Release history                                                |
+| `.gitignore`                    | Excludes the runtime `work/` tree and Python artifacts         |
+| `process/skill-activation.md`   | Bare-activation standby contract                               |
+| `process/json-exchange.md`      | Parameter exchange contract                                    |
+| `process/operation-timing.md`   | Elapsed-time report contract                                   |
+| `process/operations-catalog.md` | Operations surface contract - the canonical operations table   |
+| `process/session-review.md`     | Improvement-routine contract                                   |
+| `process/decision-modes.md`     | Interaction-mode matrix                                        |
+| `process/skill-maintenance.md`  | Self-maintenance intake                                        |
+| `process/README.md`             | Procedure index                                                |
+| `scripts/check-update.py`       | Once-per-session upstream check                                |
+| `scripts/validate-skill.py`     | Read-only validator                                            |
+| `scripts/README.md`             | Tool index                                                     |
+| `docs/` governance set          | STYLE, VERSIONING, MAINTENANCE, CONTRIBUTING, SECURITY, README |
+| `evals/evals.json`              | Behavioral regression prompts                                  |
 
 ## Plugin Profile
 
@@ -73,6 +74,10 @@ compatibility.
 
 A minimal `spec` skill is `SKILL.md` alone - everything else waits for
 evidence.
+
+Every profile states its supported operations - `astra` members carry the
+catalog file, `spec` and `plugin` skills enumerate them in the router's
+operations table.
 
 ## Separation Of Concerns
 

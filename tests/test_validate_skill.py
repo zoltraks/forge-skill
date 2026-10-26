@@ -37,7 +37,7 @@ def make_skill(root: Path, name: str = "sample-skill", **overrides: str) -> Path
     for directory in ("process", "scripts", "docs", "evals"):
         (skill / directory).mkdir()
     for proc in ("skill-activation", "json-exchange", "operation-timing",
-                 "session-review", "decision-modes"):
+                 "operations-catalog", "session-review", "decision-modes"):
         content = "# Procedure\n\nautonomous fully autonomous verbose\n"
         (skill / "process" / f"{proc}.md").write_text(content, encoding="utf-8")
     for doc in ("STYLE", "VERSIONING", "MAINTENANCE", "CONTRIBUTING", "SECURITY",

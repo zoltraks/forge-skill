@@ -21,29 +21,30 @@ logic - the renderer is a substitution engine.
 
 ## Single Set - Template To Output Map
 
-| Template                      | Output path                    |
-|-------------------------------|--------------------------------|
-| `skill-router.template`       | `SKILL.md`                     |
-| `skill-agents.template`       | `AGENTS.md`                    |
-| `skill-readme.template`       | `README.md`                    |
-| `skill-changelog.template`    | `CHANGELOG.md`                 |
-| `skill-license.template`      | `LICENSE`                      |
-| `skill-gitignore.template`    | `.gitignore`                   |
-| `skill-activation.template`   | `process/skill-activation.md`  |
-| `exchange-procedure.template` | `process/json-exchange.md`     |
-| `operation-timing.template`   | `process/operation-timing.md`  |
-| `review-procedure.template`   | `process/session-review.md`    |
-| `decision-modes.template`     | `process/decision-modes.md`    |
-| `skill-maintainer.template`   | `process/skill-maintenance.md` |
-| `skill-docs-index.template`   | `docs/README.md`               |
-| `skill-contributing.template` | `docs/CONTRIBUTING.md`         |
-| `skill-style.template`        | `docs/STYLE.md`                |
-| `skill-maintenance.template`  | `docs/MAINTENANCE.md`          |
-| `skill-versioning.template`   | `docs/VERSIONING.md`           |
-| `skill-security.template`     | `docs/SECURITY.md`             |
-| `skill-evaluation.template`   | `evals/evals.json`             |
-| `skill-updater.template`      | `scripts/check-update.py`      |
-| `skill-validator.template`    | `scripts/validate-skill.py`    |
+| Template                      | Output path                     |
+|-------------------------------|---------------------------------|
+| `skill-router.template`       | `SKILL.md`                      |
+| `skill-agents.template`       | `AGENTS.md`                     |
+| `skill-readme.template`       | `README.md`                     |
+| `skill-changelog.template`    | `CHANGELOG.md`                  |
+| `skill-license.template`      | `LICENSE`                       |
+| `skill-gitignore.template`    | `.gitignore`                    |
+| `skill-activation.template`   | `process/skill-activation.md`   |
+| `exchange-procedure.template` | `process/json-exchange.md`      |
+| `operation-timing.template`   | `process/operation-timing.md`   |
+| `operations-catalog.template` | `process/operations-catalog.md` |
+| `review-procedure.template`   | `process/session-review.md`     |
+| `decision-modes.template`     | `process/decision-modes.md`     |
+| `skill-maintainer.template`   | `process/skill-maintenance.md`  |
+| `skill-docs-index.template`   | `docs/README.md`                |
+| `skill-contributing.template` | `docs/CONTRIBUTING.md`          |
+| `skill-style.template`        | `docs/STYLE.md`                 |
+| `skill-maintenance.template`  | `docs/MAINTENANCE.md`           |
+| `skill-versioning.template`   | `docs/VERSIONING.md`            |
+| `skill-security.template`     | `docs/SECURITY.md`              |
+| `skill-evaluation.template`   | `evals/evals.json`              |
+| `skill-updater.template`      | `scripts/check-update.py`       |
+| `skill-validator.template`    | `scripts/validate-skill.py`     |
 
 The agent-written files beside them - `process/README.md`, `scripts/README.md`,
 domain `process/` and `references/` files - come from the rule map, not templates.

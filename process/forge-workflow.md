@@ -118,7 +118,9 @@ Map the synthesized knowledge onto the skill contract:
    `references/trigger-design.md`.
 3. Lay out the operation families and the resource directories the domain needs -
    `process/`, `references/`, `scripts/`, plus domain-specific directories only when
-   the evidence justifies them, per `references/skill-anatomy.md`. The router's
+   the evidence justifies them, per `references/skill-anatomy.md`. The operations
+  surface is recorded the same way - the router's operations table plus the
+  catalog procedure per `process/operations-catalog.md`. The router's
    instructions follow `references/instruction-patterns.md`, the trigger surface
    follows `references/trigger-design.md`, and the eval set follows
    `references/evaluation-design.md`.

@@ -14,27 +14,28 @@ themselves live in `templates/`, the canonical template-to-path map is
 
 ## Astra Profile - The Member Contract
 
-| File / directory               | Required     | Template                     |
-|--------------------------------|--------------|------------------------------|
-| `SKILL.md`                     | yes          | `skill-router`               |
-| `AGENTS.md`                    | yes          | `skill-agents`               |
-| `README.md`                    | yes          | `skill-readme`               |
-| `CHANGELOG.md`                 | yes          | `skill-changelog`            |
-| `LICENSE`                      | yes          | `skill-license`              |
-| `.gitignore`                   | yes          | `skill-gitignore`            |
-| `process/skill-activation.md`  | yes          | `skill-activation`           |
-| `process/json-exchange.md`     | yes          | `exchange-procedure`         |
-| `process/operation-timing.md`  | yes          | `operation-timing`           |
-| `process/session-review.md`    | yes          | `review-procedure`           |
-| `process/decision-modes.md`    | yes          | `decision-modes`             |
-| `process/skill-maintenance.md` | yes          | `skill-maintainer`           |
-| `process/README.md`            | yes          | written by the agent         |
-| `scripts/check-update.py`      | yes          | `skill-updater`              |
-| `scripts/validate-skill.py`    | yes          | `skill-validator`            |
-| `scripts/README.md`            | yes          | written by the agent         |
-| `docs/` (governance set)       | yes          | `skill-docs-index` + 5 files |
-| `evals/evals.json`             | yes          | `skill-evaluation`           |
-| domain directories             | as evidenced | written by the agent         |
+| File / directory                | Required     | Template                     |
+|---------------------------------|--------------|------------------------------|
+| `SKILL.md`                      | yes          | `skill-router`               |
+| `AGENTS.md`                     | yes          | `skill-agents`               |
+| `README.md`                     | yes          | `skill-readme`               |
+| `CHANGELOG.md`                  | yes          | `skill-changelog`            |
+| `LICENSE`                       | yes          | `skill-license`              |
+| `.gitignore`                    | yes          | `skill-gitignore`            |
+| `process/skill-activation.md`   | yes          | `skill-activation`           |
+| `process/json-exchange.md`      | yes          | `exchange-procedure`         |
+| `process/operation-timing.md`   | yes          | `operation-timing`           |
+| `process/operations-catalog.md` | yes          | `operations-catalog`         |
+| `process/session-review.md`     | yes          | `review-procedure`           |
+| `process/decision-modes.md`     | yes          | `decision-modes`             |
+| `process/skill-maintenance.md`  | yes          | `skill-maintainer`           |
+| `process/README.md`             | yes          | written by the agent         |
+| `scripts/check-update.py`       | yes          | `skill-updater`              |
+| `scripts/validate-skill.py`     | yes          | `skill-validator`            |
+| `scripts/README.md`             | yes          | written by the agent         |
+| `docs/` (governance set)        | yes          | `skill-docs-index` + 5 files |
+| `evals/evals.json`              | yes          | `skill-evaluation`           |
+| domain directories              | as evidenced | written by the agent         |
 
 ## Spec Profile - The Minimal Contract
 
