@@ -22,7 +22,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.2.6"
+  version: "0.2.7"
   author: Filip Golewski
 ---
 
@@ -157,8 +157,8 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
   <skill>, improve <named-skill>, the skill misfires on this prompt.
 - **Operations catalog**: list all operations, show all capabilities, what
   operations can this skill perform, list everything this skill can do.
-- **Maintain the skill**: work on forge-skill, improve forge-skill, maintain this
-  skill, fix this skill.
+- **Maintain the skill**: work on forge-skill, improve forge-skill, update forge-skill,
+  maintain this skill, fix this skill.
 - **Near misses that do not activate**: summarize this PDF, convert this file to
   Markdown, write documentation, audit this repository - these name sibling-skill or
   general tasks, and "improve forge-skill" or "fix this skill" stays in maintenance
