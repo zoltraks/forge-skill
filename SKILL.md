@@ -22,7 +22,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.2.7"
+  version: "0.2.8"
   author: Filip Golewski
 ---
 

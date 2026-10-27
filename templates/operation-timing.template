@@ -35,6 +35,42 @@ sentence of the response: `<description> operation took <m:ss>`, where
 `<description>` is a short phrase naming the operation the last user query
 asked for and `<m:ss>` is the elapsed time in minutes:seconds.
 
+## Performance Analysis
+
+An operation that runs longer than three minutes closes with a breakdown table
+placed immediately before the timing sentence.
+
+| Stage    | Elapsed  | Share  | Note                            |
+|----------|----------|--------|---------------------------------|
+| `<name>` | `<m:ss>` | `<n>%` | what consumed or saved the time |
+
+The rule binds every long operation the session runs, not only the skill's own
+procedures. Stage times come from command-reported elapsed values, recorded
+clock captures, or output timestamps - when none exists, the note says so
+instead of guessing.
+
+## Progress Heartbeat
+
+While a backgrounded command runs past about a minute, the agent reports
+progress roughly every 60 seconds - the output printed since the last note
+aggregated into one short line carrying the current stage, items done of the
+total, and warnings seen. A poll that finds no new output still earns a brief
+"still in <stage>" line.
+
+## Agent Identity
+
+A verbose, diagnostic, or timing report names the driving agent and model
+ahead of the stage table. Detection follows a ladder - an explicit value named
+in the request, then the tool's own namespace variables, then known
+environment markers (`AI_AGENT` carrying `devin` proves Devin, `CLAUDECODE`
+and `CLAUDE_CODE_*` prove Claude Code, `CODEX_*` proves Codex,
+`CURSOR_TRACE_ID` proves Cursor, `ANTIGRAVITY_*` proves AntiGravity,
+`GEMINI_CLI` proves Gemini, `QWEN_CODE` proves Qwen, a `windsurf`
+`ACP_BACKEND` proves a Windsurf-family host), then configured settings keys,
+then agent self-declaration for what stays unresolved. The markers identify
+the host product best-effort - an unresolved value reports `unset`, an honest
+answer rather than a failure.
+
 ## Coverage
 
 The timing covers task requests - the activation standby and the enablement

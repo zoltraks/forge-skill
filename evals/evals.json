@@ -339,6 +339,18 @@
         "Unrecorded divergence is reported as a finding.",
         "A legitimate unrecorded variance produces a proposal naming the owning document, never a patch on collection authority."
       ]
+    },
+    {
+      "id": 32,
+      "prompt": "Housekeep the example-member skill in verbose mode; one step takes four minutes.",
+      "expected_output": "The verbose timing contract from process/operation-timing.md applies: the response closes with '<description> operation took <m:ss>', the over-three-minute step carries a stage breakdown table immediately before the timing sentence, progress heartbeats aggregate output roughly every 60 seconds while it runs, and the report names the driving agent and model with detection evidence.",
+      "files": [],
+      "expectations": [
+        "The breakdown table sits before the operation-timing sentence and covers stages with elapsed and share.",
+        "Heartbeat lines aggregate new output into one short line, never raw relay.",
+        "The identity block reports agent product and model or an honest 'unset' with its source.",
+        "Standby and enablement responses carry no timing line."
+      ]
     }
   ]
 }

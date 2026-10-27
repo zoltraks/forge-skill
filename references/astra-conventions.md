@@ -32,7 +32,9 @@ A compatible member carries:
 - `process/operation-timing.md` - elapsed-time report armed when the request
   names a verbose, informational, diagnostic, or timing mode: the response
   closes with `<description> operation took <m:ss>`, standby and enablement
-  carry no line.
+  carry no line. Operations past three minutes add a stage breakdown table,
+  backgrounded commands get a ~60-second output heartbeat, and verbose reports
+  carry an agent/model identity block resolved through the marker ladder.
 - `process/operations-catalog.md` - the canonical operations table for
   "list all operations" requests: `Family | Operation | What it covers`,
   concrete operations over family names, Enable family rows included,
