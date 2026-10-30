@@ -41,6 +41,10 @@ logic - the renderer is a substitution engine.
 | `skill-style.template`        | `docs/STYLE.md`                 |
 | `skill-maintenance.template`  | `docs/MAINTENANCE.md`           |
 | `skill-versioning.template`   | `docs/VERSIONING.md`            |
+| `parallel-execution.template`  | `process/parallel-execution.md`  |
+| `housekeeping.template`        | `process/housekeeping.md`        |
+| `self-healing.template`        | `process/self-healing.md`        |
+| `development.template`         | `process/development.md`         |
 | `skill-security.template`     | `docs/SECURITY.md`              |
 | `skill-evaluation.template`   | `evals/evals.json`              |
 | `skill-updater.template`      | `scripts/check-update.py`       |

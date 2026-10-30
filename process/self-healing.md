@@ -1,0 +1,86 @@
+# Self Healing
+
+## Purpose
+
+> **Scope:** The evidence-gated self-repair loop for this skill - diagnose a
+> named defect in atlas's own behavior, patch minimally, replay against
+> external evidence, promote only what improves.
+> **Key items:** safety taxonomy, the healing loop, external verifiers,
+> rollback
+
+This file defines how Forge repairs itself: a named misfire, regression, or
+drift in this skill's own routing, procedures, or documents. Follow it for
+requests like "heal forge-skill", "fix atlas's triggering", or "the review gate
+misfired".
+
+A request to improve the skill from session lessons routes to
+`process/session-review.md` instead - healing repairs a named defect, review
+harvests lessons. Repair of an *external* named skill stays in
+`process/skill-healing.md` - this file owns self-repair only.
+
+## Safety Taxonomy
+
+| Pattern                         | Verdict     | Constraint                                   |
+|---------------------------------|-------------|----------------------------------------------|
+| Retry plus error classification | Endorsed    | Universal baseline, no verification burden   |
+| Reflection / self-correction    | Conditional | Only with an external verifier               |
+| Autonomous self-rewrite         | Rejected    | Requires explicit human-in-the-loop approval |
+| Learned-state promotion         | HITL        | Human approval before promotion              |
+
+A patch is never promoted on reflection alone - an internal judgment that a
+patch "looks right" is not evidence.
+
+## The Healing Loop
+
+### 1. Evaluate
+
+Score the skill against its own contract: `SKILL.md` routing, the procedure
+files under `process/`, and `evals/evals.json` where the defect has a prompt.
+
+Classify the failure with a structured tag - "missed-trigger",
+"contradiction", "stale-reference", "gate-misfire" - not prose impressions.
+
+### 2. Patch
+
+Produce two or three minimal candidate patches - a routing line, a constraint,
+an example, an option set. Never rewrite the skill wholesale.
+
+Each candidate records what it changes and the failure tag it addresses.
+
+### 3. Replay
+
+Verify every candidate against an external verifier before it touches the rule
+corpus: re-run `scripts/validate-skill.py .` and the tests under
+`tests/`, replay the failing eval prompt, or replay the recorded failing path.
+
+A patch that improves the target behavior without regressing others passes. A
+patch with no measurable improvement is reported inconclusive, never promoted.
+
+### 4. Promote
+
+Apply the winning patch. Record the rollback path first - a copy of the file
+being changed kept in `work/` is the restore point.
+
+Record the change per `docs/VERSIONING.md`: bump `metadata.version` once and
+report the rationale (which failure tag triggered it) and the evidence (replay
+results).
+
+Never commit - propose the commit message and report the restore path.
+
+## External Verifiers
+
+Acceptable signals, in order of strength:
+
+1. The member's own validation suite re-run before and after.
+2. A replayed eval prompt showing the defect resolved.
+3. A replayed execution trace showing the defect resolved.
+4. Explicit human confirmation that the observed behavior is the fix.
+
+## What Does Not Apply
+
+- Nothing heals other skills - an external target is out of scope for this
+  procedure.
+- No promotion without an external signal - reflection alone is not healing.
+- No commits or pushes - the heal lands uncommitted with a proposed message.
+- No wholesale rewrites - a patch that cannot stay minimal is a change request,
+  not a heal.

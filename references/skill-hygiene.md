@@ -151,6 +151,16 @@ A gap is information the skill should provide but does not:
 
 A gap is reported as a gap. Missing domain content is named, never invented.
 
+Shared-surface drift is a gap class of its own: a missing shared procedure
+file, or a shared file missing a required skeleton section per the collection's
+member contract, classifies `MEDIUM` and proposes the skeleton, while recorded
+variance resolves `FALSE_POSITIVE`.
+
+A sibling-reference violation is a consistency finding: a member file that names
+a sibling skill or carries a `../<sibling>` path in an actionable instruction
+classifies `HIGH` - members are standalone packages and cross-member composition
+belongs to collection documents only.
+
 ### Recorded Variance
 
 A difference between a member and the shared contract is sanctioned when it is

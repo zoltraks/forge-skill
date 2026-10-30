@@ -21,7 +21,8 @@ A partial question - "can {{skill-name}} do X" - is not a catalog request.
 
 Answer it directly instead of reproducing the table.
 
-The catalog is a query surface, not a task - no operation machinery runs.
+The catalog is a query surface, not a task - no document-type resolution,
+parameter resolution, or methodology loading runs.
 
 When the catalog request is the session's first action, the once-per-session
 Skill Update Check from `SKILL.md` runs first.
@@ -40,14 +41,14 @@ source width when the request's language changes the cell text.
 Deliver the catalog inline.
 
 Write the response in the language of the request - family and operation names
-render in that language while the `Family` column keeps its canonical
-grouping.
+render in that language while the `Family` column keeps its canonical grouping.
 
 Close with one line inviting a task request.
 
 ## What Does Not Apply
 
-- No task machinery runs - the request named a query.
+- No document-type resolution, parameter resolution, or methodology loading
+  runs - the request named a query.
 - No rule files beyond the router and this file load. The catalog table is
   canonical and is not rebuilt by rescanning the repository.
 - No file is written and no target is surveyed.

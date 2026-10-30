@@ -57,8 +57,8 @@ The document carries a `description`, context fields (`target`, `task`, `date`,
 `task` emits as an empty string when no task is classified yet - enable mode has none.
 
 Each parameter object keeps a fixed key order: `id`, `question`, `answer`,
-`description`, `type`, `menu`, `default` - the `default` key is always the last key of
-the object.
+`description`, optional `when`, `type`, `menu`, `open`, `default` - the `default`
+key is always the last key of the object.
 
 - `id` - a stable kebab-case identifier for the parameter.
 - `question` - the literal question wording presented to the answering side.
@@ -66,13 +66,20 @@ the object.
   filled by the answering side.
 - `description` - what the parameter controls and the detection evidence behind its
   default.
+- `when` - an optional condition under which the parameter is asked, written as
+  clauses such as `research-depth is A` joined by `and` or `or` and grouped with
+  parentheses. A parameter whose `when` is unsatisfied is skipped - it is not
+  asked, applies no `default`, and ignores any returned answer. `when` may
+  reference only parameters listed earlier in `intake`.
 - `type` - `choice` for a single-option answer taken from `menu`, `selection` when
   multiple options may be chosen, or `text` for free input.
 - `menu` - required for `choice` and `selection` types and omitted for `text`,
   letter-keyed (`A`, `B`, `C`, ...), and the recommended option label carries
   "(recommended)". A menu lists at most three candidate options plus a trailing
   `Cancel - abort the operation` entry, and `Cancel` is never the `default`.
-- `default` - the option letter or suggested text applied when the answer stays empty.
+- `open` - whether the answer is open to free text beyond the listed options.
+- `default` - the option letter or suggested text applied when the answer stays
+  empty - for `selection`, the array of letters that are pre-checked.
 
 ```json
 {
@@ -124,15 +131,34 @@ the questions.
 
 ## Returned Document
 
-The answering side may return the document with `answer` fields filled.
+A returned JSON document answers the pending surfaces by `id`, in either of two
+forms.
 
-Answers arriving as prompt selections or natural-language responses are equivalent.
+The first form is the emitted document itself with `answer` fields filled.
 
-A returned document that resolves every pending surface is applied without re-asking.
+The second form carries a `response` key - either an array of entry objects or a
+condensed object keyed by parameter `id`. Each array entry requires only `id` and
+`answer` - an option letter for `choice`, an array of letters for `selection`, or
+free text for `text`; other keys may be echoed or omitted.
+
+An empty or missing `answer` - including an `id` absent from the condensed
+object - applies the parameter's `default`. Entries or keys with an unknown `id`
+are ignored, as is an answer for a parameter whose `when` is unsatisfied.
+Answering "use defaults" applies every `default` value.
+
+A returned document is accepted whenever it appears - on any question surface, on
+its own or embedded inside a natural-language reply. Natural language surrounding
+the document is treated as supplementary context, not as part of the answers.
+
+Answers arriving as prompt selections or natural-language responses are
+equivalent.
+
+A returned document that resolves every pending surface is applied without
+re-asking.
 
 Validation failures - an `answer` letter outside `menu`, a `selection` carrying no
-entry, a `choice` answer that ignores `Cancel` - re-emit the document in diagnostic
-mode with the failure named, then continue the question flow.
+entry, a `choice` answer that ignores `Cancel` - re-emit the document in
+diagnostic mode with the failure named, then continue the question flow.
 
 ## Autonomous Surfaces
 
@@ -157,3 +183,9 @@ The emitted document describes pending decisions. It never performs the operatio
 A filled document returned with answers is user input of the same rank as an
 interactive answer - the permission boundaries of `process/decision-modes.md` still
 govern what may run without asking.
+
+## What Does Not Apply
+
+- No parameter document emits while no question surface is pending.
+- The catalog is not a parameter surface - `process/operations-catalog.md` answers
+  inline and never emits JSON.

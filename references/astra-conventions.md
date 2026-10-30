@@ -25,14 +25,16 @@ A compatible member carries:
 - `process/skill-activation.md` - bare-activation standby: Purpose, When This
   Applies, Procedure, Enablement Response, What Does Not Apply, Relation To The
   Modes. Standby never scans the target to infer a task.
-- `process/json-exchange.md` - parameter documents: emission triggers, fixed key
-  order (`id`, `question`, `answer`, `description`, `type`, `menu`, `default`),
+- `process/json-exchange.md` - parameter documents: emission triggers, context
+  fields `target`, `task`, `date`, `time`, fixed key order (`id`, `question`,
+  `answer`, `description`, optional `when`, `type`, `menu`, `open`, `default`),
   `choice` / `selection` / `text` types, `Cancel` always last and never default,
+  both return forms accepted (answer-filled document and `response` wrapper),
   presentation-only authority.
-- `process/operation-timing.md` - elapsed-time report armed when the request
-  names a verbose, informational, diagnostic, or timing mode: the response
-  closes with `<description> operation took <m:ss>`, standby and enablement
-  carry no line. Operations past three minutes add a stage breakdown table,
+- `process/operation-timing.md` - elapsed-time report armed by default on every
+  operation with a `no timing` per-request opt-out: the response closes with
+  `<description> operation took <m:ss>` and a bare activation times its update
+  check. Operations past three minutes add a stage breakdown table,
   backgrounded commands get a ~60-second output heartbeat, and verbose reports
   carry an agent/model identity block resolved through the marker ladder.
 - `process/operations-catalog.md` - the canonical operations table for
@@ -42,9 +44,21 @@ A compatible member carries:
 - `process/session-review.md` - gather, findings, approval gate, apply, validate.
   The `autonomous` flag resolves gates to recommended options with inline
   reporting, `verbose` adds options and rationale. Never commits.
-- `process/decision-modes.md` - the interaction-mode matrix. Astra members record
-  autonomy semantics here or in an equivalent documented file, Forge generates it
-  explicitly so every member carries both `autonomous` and `fully autonomous`.
+- `process/decision-modes.md` - the interaction-mode matrix. The canonical
+  autonomous tier is named `autonomous` with `automatic`, `unattended`,
+  `non-interactive`, and `automated` as accepted aliases; Forge additionally
+  documents `fully autonomous` as a real second tier.
+- `process/parallel-execution.md` - the delegated scout model for large work
+  surfaces: applicability gate, scout contract (read-only or scratch-only,
+  text findings, scoped brief), single-writer merge discipline, provenance,
+  sequential fallback.
+- `process/housekeeping.md` - self-repository upkeep: upstream report,
+  registration reconciliation, evals coverage, version check, workspace
+  hygiene, the member's own validation suite, proposal-only report.
+- `process/self-healing.md` - the member self-repair loop: evaluate, patch,
+  replay, promote, with the safety taxonomy and external-verifier rule.
+- `process/development.md` - standby-for-specification mode: the named trigger
+  runs the update check, reports readiness, and waits for a described change.
 - `scripts/check-update.py` - the shared verdict contract: `STATUS <verdict>` plus
   `key=value` lines, `tip_sha`/`tip_date` after upstream resolution, always exit 0,
   merge path via `git merge --ff-only <tip_sha>` gated on `ahead=0` and `dirty=no`.
@@ -98,6 +112,10 @@ directory inside a collection.
 Whatever the model, a member assumes nothing about which siblings load beside it,
 never reaches into a sibling's directory, and a collection-level session review
 delegates member lessons to the member's own review procedure.
+
+A member is a standalone package: a shipped member file never names a sibling
+member, never carries a `../<sibling>` path, and never assumes collection files
+exist - cross-member composition is orchestrated only by collection documents.
 
 ## Sister Collections
 

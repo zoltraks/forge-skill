@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.2.9] - 2026-10-30
+
+### Changed
+
+- Harmonized shared procedure surfaces with the collection member contract:
+  default-armed operation timing with opt-out, JSON exchange superset envelope
+  with `when`/`open` keys and `response`-wrapper returns, and the interaction
+  modes documentation.
+- Added `process/parallel-execution.md`, `process/housekeeping.md`,
+  `process/self-healing.md`, and `process/development.md` shared surfaces.
+- Removed sibling-skill references per member independence - validation now
+  describes the editorial battery capability generically.
+- `references/astra-conventions.md` updated to the ten-file shared contract,
+  the superset JSON envelope, default-armed timing, and member independence.
+- `references/skill-hygiene.md` adds shared-surface drift and sibling-reference
+  finding classes. Templates regenerated to the unified texts plus four new
+  shared-surface templates.
+
 ## [0.2.6] - 2026-10-26
 
 ### Added

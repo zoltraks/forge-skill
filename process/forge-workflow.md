@@ -142,11 +142,11 @@ Checkpoint: the design summary resolves per the interaction mode.
    `plugin` set into the plugin root. A marketplace request adds the
    `marketplace` set into the marketplace root.
 2. Run `scripts/validate-skill.py --profile <profile>` on each staged skill - a
-   failed stage never reaches the target. When a panther checkout sits adjacent,
-   run its `check-document.py --width 100 --layout wrap` over every staged
-   Markdown file - long context values and prose wrapping around inserted
-   placeholders are recurring defects, and a `description: >-` frontmatter
-   scalar past 100 characters needs manual folding the renderer does not do.
+   failed stage never reaches the target. An editorial Markdown battery applies
+   over every staged Markdown file where the host provides one - long context
+   values and prose wrapping around inserted placeholders are recurring
+   defects, and a `description: >-` frontmatter scalar past 100 characters
+   needs manual folding the renderer does not do.
 3. Write the staged tree to the approved target directory. An existing target needs
    its own approval, or is skipped in fully autonomous mode.
 

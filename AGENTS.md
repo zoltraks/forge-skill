@@ -78,9 +78,8 @@ git diff --check
 Run `python3 scripts/render-templates.py --self-test` to verify the renderer and the
 template set still agree.
 
-When panther-skill is checked out adjacent, its editorial battery applies to every
-edited owned document: `python3 ../panther-skill/scripts/check-document.py <file>
---width 100 --layout wrap`. Report it skipped when the checkout is absent.
+An editorial Markdown battery applies to every edited owned document where the
+host provides one - report it skipped otherwise.
 
 Changes that alter skill behavior also exercise the regression prompts in
 `evals/evals.json`.

@@ -20,19 +20,36 @@
     "skill-security.template": "docs/SECURITY.md",
     "skill-evaluation.template": "evals/evals.json",
     "skill-updater.template": "scripts/check-update.py",
-    "skill-validator.template": "scripts/validate-skill.py"
+    "skill-validator.template": "scripts/validate-skill.py",
+    "templates/parallel-execution.template": "process/parallel-execution.md",
+    "parallel-execution.template": "process/parallel-execution.md",
+    "housekeeping.template": "process/housekeeping.md",
+    "self-healing.template": "process/self-healing.md",
+    "development.template": "process/development.md"
   },
   "spec": {
     "specification-router.template": "SKILL.md",
     "specification-readme.template": "README.md",
     "skill-license.template": "LICENSE",
-    "specification-evaluation.template": "evals/evals.json"
+    "specification-evaluation.template": "evals/evals.json",
+    "parallel-execution.template": "process/parallel-execution.md",
+    "housekeeping.template": "process/housekeeping.md",
+    "self-healing.template": "process/self-healing.md",
+    "development.template": "process/development.md"
   },
   "plugin": {
-    "plugin-manifest.template": ".claude-plugin/plugin.json"
+    "plugin-manifest.template": ".claude-plugin/plugin.json",
+    "parallel-execution.template": "process/parallel-execution.md",
+    "housekeeping.template": "process/housekeeping.md",
+    "self-healing.template": "process/self-healing.md",
+    "development.template": "process/development.md"
   },
   "marketplace": {
-    "plugin-marketplace.template": ".claude-plugin/marketplace.json"
+    "plugin-marketplace.template": ".claude-plugin/marketplace.json",
+    "parallel-execution.template": "process/parallel-execution.md",
+    "housekeeping.template": "process/housekeeping.md",
+    "self-healing.template": "process/self-healing.md",
+    "development.template": "process/development.md"
   },
   "collection": {
     "collection-router.template": "SKILL.md",
@@ -41,6 +58,10 @@
     "collection-contract.template": "process/member-contract.md",
     "collection-review.template": "process/session-review.md",
     "collection-synchronization.template": "process/synchronization.md",
-    "collection-gitmodules.template": ".gitmodules"
+    "collection-gitmodules.template": ".gitmodules",
+    "parallel-execution.template": "process/parallel-execution.md",
+    "housekeeping.template": "process/housekeeping.md",
+    "self-healing.template": "process/self-healing.md",
+    "development.template": "process/development.md"
   }
 }

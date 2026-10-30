@@ -22,7 +22,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.2.8"
+  version: "0.2.9"
   author: Filip Golewski
 ---
 
@@ -73,6 +73,9 @@ You keep mechanical work in scripts and judgment in the rule corpus.
   operation.
 
 The update check below runs once per session in every mode.
+
+Timing is armed by default on every operation - `no timing` opts out for that
+request, per `process/operation-timing.md`.
 
 ## Interaction Modes
 
@@ -192,6 +195,10 @@ target's files.
 | inspect or re-render generation templates                       | `templates/` + `process/skill-template.md`                       |
 | convert a local source file                                     | `process/source-conversion.md` + `scripts/convert-source.py`     |
 | change, extend, fix, or review this skill repository            | `process/skill-maintenance.md`                                   |
+| housekeep this skill                                            | `process/housekeeping.md`                                        |
+| heal this skill or fix a named defect in it                     | `process/self-healing.md`                                        |
+| work on forge-skill development                                 | `process/development.md`                                         |
+| split a large work surface across parallel scouts               | `process/parallel-execution.md`                                  |
 
 ## `process/` - Procedures
 
@@ -209,6 +216,14 @@ target's files.
   autonomous, fully autonomous, and verbose semantics with the decision log.
 - **`process/session-review.md`** - The session-review procedure: findings,
   approval gate, apply, validate - with the shared review modes.
+- **`process/parallel-execution.md`** - The delegated scout model for large
+  work surfaces: applicability, contract, merge, fallback.
+- **`process/housekeeping.md`** - Self-repository upkeep: registration,
+  coverage, workspace, validation.
+- **`process/self-healing.md`** - The evidence-gated self-repair loop for this
+  skill.
+- **`process/development.md`** - Standby-for-specification mode for developing
+  this skill.
 - **`process/forge-workflow.md`** - The five-phase pipeline: initialization,
   research foundation, architecture design, generation, finalization.
 - **`process/research-gathering.md`** - Evidence intake: source inventory,
