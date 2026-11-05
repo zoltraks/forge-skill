@@ -232,7 +232,7 @@
     {
       "id": 21,
       "prompt": "Forge a skill for our release-notes domain, astra profile.",
-      "expected_output": "The five-phase pipeline produces a member tree that carries the full shared surface including process/operation-timing.md, registered in the generated router's operations table and process listings.",
+      "expected_output": "The five-phase pipeline produces a member tree that carries the full shared surface including process/operation-timing.md, registered in the generated router's operations table and the process directory index.",
       "files": [],
       "expectations": [
         "The staged member tree contains process/operation-timing.md rendered from templates/operation-timing.template.",
@@ -395,6 +395,16 @@
       "files": [],
       "expectations": [
         "emits the parameter document and accepts both return forms"
+      ]
+    },
+    {
+      "id": 355,
+      "prompt": "Use forge.",
+      "expected_output": "Bare activation loads only the router and process/skill-activation.md - no process, references, templates, or scripts file is read before the task names its route.",
+      "files": [],
+      "expectations": [
+        "no rule file beyond SKILL.md and process/skill-activation.md is loaded at activation",
+        "directory README indexes are consulted on demand, never bulk-read"
       ]
     }
   ]

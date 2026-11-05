@@ -8,6 +8,9 @@
 Load a reference only when the pipeline phase that needs it runs - phase 0 loads
 the two contract files, later phases load on demand.
 
+A large reference loads by section, not whole - `skill-hygiene.md` is read per
+finding class: grep the class heading and read that section only.
+
 ## Index
 
 | File                      | Load when                                                 |

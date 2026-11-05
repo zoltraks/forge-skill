@@ -124,7 +124,7 @@ row must pass.
 | Shared procedures | activation, JSON exchange, session review, operation timing present |
 | Decision modes    | both autonomy modes plus verbose documented                         |
 | Update check      | `check-update.py` present with shared verdict semantics             |
-| Registration      | every resource registered in router and README                      |
+| Registration      | indexed in its directory `README.md`, routed ones in the router     |
 | Evals             | `evals/evals.json` valid, `skill_name` matches                      |
 | Naming            | two-word kebab-case rule files, `verb-object.py` tools              |
 | Governance        | full `docs/` set present                                            |

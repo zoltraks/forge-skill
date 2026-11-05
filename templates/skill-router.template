@@ -17,19 +17,6 @@ metadata:
 > **Type:** Root router
 > **Purpose:** {{skill-purpose}}
 
-## Contents
-
-| Section            | What it covers                                     |
-|--------------------|----------------------------------------------------|
-| Modes              | Enable, operation, and maintenance selection       |
-| Interaction Modes  | Interactive, autonomous, fully autonomous, verbose |
-| Skill Update Check | Once-per-session upstream check                    |
-| Trigger Keywords   | Phrases that activate the skill                    |
-| Operations         | Request-to-resource routing                        |
-| `process/`         | Procedures and shared contracts                    |
-| Repository Files   | Governance files                                   |
-| Boundaries         | Authority, safety, and writing rules               |
-
 ## Modes
 
 - **Enable mode** - a bare activation phrase ("use {{skill-name}}", "work with
@@ -42,21 +29,22 @@ metadata:
 
 The update check below runs once per session in every mode.
 
+Load only the file a route names plus the files that file names in turn - the
+Resource Map's directory indexes resolve names on demand and are never bulk-read.
+
 ## Interaction Modes
 
 Every operation accepts orthogonal interaction flags named in the request. The
 authoritative matrix is `process/decision-modes.md`.
 
 - **Interactive** (default) - recommendations are shown and material checkpoints ask.
-- **Autonomous** - `autonomous`, `automatic`, `unattended`, or `non-interactive`.
-  Each evidenced recommendation is selected without asking and reported inline, a
-  question remains only for an essential input with no safe default and for
-  separately gated actions.
-- **Fully autonomous** - `fully autonomous`, `no questions`, or `without asking`.
-  No question surfaces at all: blocked or unauthorized steps and their dependents
-  are skipped, independent safe work continues, and the result is reported partial.
-- **Verbose** - `verbose`. Adds options, evidence, trade-offs, and rejected
-  alternatives to every decision report. It never changes a selection or a gate.
+- **Autonomous** - `autonomous`, `automatic`, `unattended`, or `non-interactive` -
+  evidenced recommendations apply without asking, essential inputs and gated
+  actions still surface.
+- **Fully autonomous** - `fully autonomous`, `no questions`, or `without asking` -
+  no question surfaces, blocked steps skip, and the result reports partial.
+- **Verbose** - `verbose` adds options, evidence, trade-offs, and rejected
+  alternatives to every decision report without changing selections or gates.
 
 No interaction mode grants permission for network access, installation, overwrite,
 deletion, commit, or publication. A separately gated action still requires its own
@@ -104,34 +92,30 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
 | list all operations or show all capabilities                              | `process/operations-catalog.md`                   |
 | change, extend, fix, or review this skill repository                      | `process/skill-maintenance.md` - maintenance mode |
 
-## `process/` - Procedures
+## Resource Map
 
-- **`process/skill-activation.md`** - Bare-activation intake, the enablement
-  response, and standby.
-- **`process/skill-maintenance.md`** - Maintenance-mode intake and validation gate.
-- **`process/json-exchange.md`** - JSON parameter documents for question surfaces.
-- **`process/operation-timing.md`** - Elapsed-time report for named operations
-- **`process/operations-catalog.md`** - The catalog procedure for "list all operations" requests.
-  under a verbose, informational, diagnostic, or timing mode.
-- **`process/decision-modes.md`** - The interaction-mode matrix and decision log.
-- **`process/session-review.md`** - Session review with the shared review modes.
-{{process-listings}}
+Each resource directory carries a `README.md` index naming every file with its
+load trigger - consult the index when a route or procedure needs a name, never
+bulk-read a directory.
 
-## Repository Files
+| Path       | Index               | Contents                                      |
+|------------|---------------------|-----------------------------------------------|
+| `process/` | `process/README.md` | Procedures and shared contracts               |
+| `scripts/` | `scripts/README.md` | Mechanical tools - run them, do not read them |
+| `docs/`    | `docs/README.md`    | Repository governance                         |
+| `evals/`   | -                   | Behavioral regression prompts                 |
+| `work/`    | -                   | Gitignored run state, never shipped           |
+{{resource-rows}}
 
-- **`AGENTS.md`** - The agent-facing maintenance entry point.
-- **`README.md`** - The human-facing overview and directory tree.
-- **`CHANGELOG.md`** - Release history.
-- **`LICENSE`** - MIT.
-- **`docs/`** - Governance: `STYLE.md`, `VERSIONING.md`, `MAINTENANCE.md`,
-  `CONTRIBUTING.md`, `SECURITY.md`, and the `docs/README.md` index.
-- **`evals/`** - Behavioral regression prompts.
+Repository files: `AGENTS.md` (maintenance entry point), `README.md` (human
+overview and directory tree), `CHANGELOG.md` (release history), `LICENSE` (MIT).
 
 ## Boundaries
 
 - Keep `SKILL.md` lean: it routes and stays below 500 lines.
-- Register every new or renamed resource in `SKILL.md` and mirror it in the
-  `README.md` tree, per `docs/MAINTENANCE.md`.
+- Register every new or renamed resource in its directory's `README.md` index -
+  routed procedures also gain an Operations table row - and mirror layout changes
+  in the `README.md` tree, per `docs/MAINTENANCE.md`.
 - A gitignored `work/` holds local artifacts, shipped files never reference it.
 - Examples and findings stay anonymized.
 - Bump `metadata.version` by one patch with every change set, per

@@ -18,9 +18,11 @@ own files only.
 ## Procedure
 
 1. Run `scripts/check-update.py` once and report upstream state.
-2. Reconcile `SKILL.md` against `process/`, `references/`, `templates/`, `scripts/`,
-   `tests/`, `docs/`, and `evals/` - every shipped resource must be registered in `SKILL.md` and
-   mirrored in `README.md`.
+2. Reconcile the resource map against `process/`, `references/`, `templates/`,
+   `scripts/`, `tests/`, `docs/`, and `evals/` - every shipped resource must be
+   registered in its directory's `README.md` index, every routed procedure must
+   carry an Operations table row in `SKILL.md`, and layout changes must mirror in
+   `README.md`.
 3. Check `evals/evals.json` covers every operation in `operations-catalog.md`.
 4. Verify `metadata.version` moved for shipped changes since the last commit.
 5. Clean `work/` entries older than the session, and confirm no shipped file

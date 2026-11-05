@@ -23,7 +23,7 @@ BASE_CONTEXT = {
     "year": "2026",
     "trigger-keywords": "- \"do the sample thing\"",
     "operations-table": "| do a sample thing | `process/sample-thing.md` |",
-    "process-listings": "- **`process/sample-thing.md`** - The sample procedure.",
+    "resource-rows": "| `assets/` | - | Sample domain assets |",
     "parameter-rows": "",
     "collection-name": "sample-collection",
     "collection-title": "Sample Collection",

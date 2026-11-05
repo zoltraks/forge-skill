@@ -56,7 +56,7 @@ attributed knowledge lands in the generated skill.
 
 ```
 forge-skill/
-├── SKILL.md          # Runtime router - modes, update check, operations, boundaries
+├── SKILL.md          # Runtime router - modes, update check, routes, resource map, boundaries
 ├── AGENTS.md         # Agent entry point for maintaining this repository
 ├── README.md         # This file
 ├── CHANGELOG.md      # Release history

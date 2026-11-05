@@ -35,8 +35,9 @@ Keep each rule in its owning document and link to it instead of duplicating it.
   the generation machinery in `process/forge-workflow.md` does not apply to the
   skill's own files.
 - Keep `SKILL.md` lean: it routes and stays below 500 lines.
-- Register every new or renamed resource in `SKILL.md` and mirror it in the `README.md`
-  tree, per `docs/MAINTENANCE.md`.
+- Register every new or renamed resource in its directory's `README.md` index - routed
+  procedures also gain an Operations table row in `SKILL.md` - and mirror layout changes
+  in the `README.md` tree, per `docs/MAINTENANCE.md`.
 - Follow `docs/STYLE.md` for every shipped file: H1 plus Purpose, one sentence per
   paragraph, prose wrapped at 100 characters, tables aligned by source width.
 - Never embed example files, paths, or project names supplied with a request - create

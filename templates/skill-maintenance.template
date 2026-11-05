@@ -42,10 +42,11 @@ files over 300 lines add a `## Contents` table.
 
 ## Registration Contract
 
-- Register every new or renamed resource in `SKILL.md` under its directory's
-  section, with a line saying what it covers and when to load it.
+- Register every new or renamed resource in its directory's `README.md` index,
+  with a line saying what it covers and when to load it. A procedure the router
+  dispatches also gains a row in the `SKILL.md` Operations table.
 - Mirror every layout change in the `README.md` directory tree.
-- Renumber every `## Contents` table affected by line shifts.
+- `## Contents` tables carry section names only, no line numbers.
 - Keep `evals/evals.json` in sync when behavior changes.
 
 ## External Examples
@@ -56,9 +57,9 @@ Create anonymized skill-owned examples instead.
 ## Adding A Procedure
 
 1. Create `process/<two-words>.md` in the house structure.
-2. Register it in `SKILL.md` under `process/` and in `process/README.md`.
-3. Route to it from the Operations table when it serves a request class.
-4. Update the `README.md` tree and renumber affected Contents tables.
+2. Register it in `process/README.md` with its load trigger.
+3. Route to it from the `SKILL.md` Operations table when it serves a request class.
+4. Update the `README.md` tree when the layout changes.
 
 ## Adding A Tool
 
@@ -68,7 +69,7 @@ Create anonymized skill-owned examples instead.
    `errors="backslashreplace"`, pass explicit `encoding=`/`errors=` to every
    subprocess text call.
 4. Document it in `scripts/README.md` with its exit statuses and safety class.
-5. Reference it from `SKILL.md` and the workflow step where it runs.
+5. Route to it from `SKILL.md` or the workflow step where it runs.
 
 ## Validation After Changes
 

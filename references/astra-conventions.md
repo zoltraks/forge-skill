@@ -17,9 +17,10 @@ minimal contract for the `spec` profile lives in `references/skills-specificatio
 A compatible member carries:
 
 - `SKILL.md` - the runtime router with YAML frontmatter (`name`, `description`,
-  `license`, `compatibility`, `metadata.version`), a Contents table, modes, a
-  once-per-session update check, trigger keywords, an operations table, progressive
-  resource listings, and boundaries. Under 500 lines.
+  `license`, `compatibility`, `metadata.version`), modes, a once-per-session
+  update check, trigger keywords, an operations table, a resource map pointing at
+  each directory's `README.md` index, and boundaries. Under 500 lines - keep it
+  lean, per-file catalogs live in the indexes, not the router.
 - `AGENTS.md` - the maintenance entry point: governing documents, boundaries,
   local workspace, validation, improvement.
 - `process/skill-activation.md` - bare-activation standby: Purpose, When This
@@ -46,7 +47,7 @@ A compatible member carries:
   reporting, `verbose` adds options and rationale. Never commits.
 - `process/decision-modes.md` - the interaction-mode matrix. The canonical
   autonomous tier is named `autonomous` with `automatic`, `unattended`,
-  `non-interactive`, and `automated` as accepted aliases; Forge additionally
+  `non-interactive`, and `automated` as accepted aliases - Forge additionally
   documents `fully autonomous` as a real second tier.
 - `process/parallel-execution.md` - the delegated scout model for large work
   surfaces: applicability gate, scout contract (read-only or scratch-only,

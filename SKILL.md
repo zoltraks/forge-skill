@@ -2,18 +2,15 @@
 name: forge-skill
 description: >-
   Skill factory for creating Agent Skills and governed lifecycle manager for
-  existing ones. Researches a topic, synthesizes evidence, and generates
-  skill document sets in the astra-skills member layout, the spec-conformant
-  layout of the Agent Skills specification, or Claude Code plugin packaging
-  - and migrates skills between those layouts. Converts sources such as PDF,
-  EPUB, DOCX, and HTML through an approved local converter such as
-  MarkItDown. Optionally creates multi-member collections modeled on
-  astra-skills. Housekeeps, reorganizes, optimizes, and repairs existing
-  skill projects and collections under dry-run, archive-first, evidence-
-  gated rules. Use to create a skill, build one from a document set, analyze
-  a source, package a plugin, migrate layouts, audit or clean a skill or
-  collection, or heal a failing skill. Maintains its own rule corpus on
-  "work on forge-skill" requests.
+  existing ones. Researches a topic and generates skill document sets in the
+  astra-skills member layout, the spec-conformant Agent Skills layout, or
+  Claude Code plugin packaging, and migrates skills between layouts. Converts
+  sources such as PDF, EPUB, DOCX, and HTML through an approved local
+  converter. Generates multi-member collections, and housekeeps, audits, and
+  repairs existing skills and collections under evidence-gated rules. Use to
+  create a skill, build one from documents, analyze a source, package a
+  plugin, migrate layouts, audit or heal a skill or collection, or maintain
+  this skill on "work on forge-skill".
 license: MIT
 compatibility: >-
   Designed for agent coding environments with file system access (Claude Code,
@@ -22,7 +19,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.2.9"
+  version: "0.3.0"
   author: Filip Golewski
 ---
 
@@ -35,23 +32,6 @@ metadata:
 > **Scope:** Creates new Agent Skills from research or external sources and
 > governs existing skill projects and collections - it does not edit prose
 > documents, audit code, or prepare repositories, those belong to sibling skills.
-
-## Contents
-
-| Section            | Line | What it covers                                            |
-|--------------------|------|-----------------------------------------------------------|
-| Modes              | 66   | Enable, operation, and maintenance selection              |
-| Interaction Modes  | 77   | Interactive, autonomous, fully autonomous, verbose        |
-| Skill Update Check | 97   | Once-per-session upstream check                           |
-| Trigger Keywords   | 129  | Phrases that activate the skill                           |
-| Operations         | 173  | Request-to-resource routing                               |
-| `process/`         | 196  | Pipeline, lifecycle, conversion, research, contract files |
-| `references/`      | 230  | Evidence and convention references                        |
-| `templates/`       | 259  | Generation skeletons and the output-path map              |
-| `scripts/`         | 280  | Mechanical tools                                          |
-| `evals/`           | 299  | Behavioral regression prompts                             |
-| Repository Files   | 306  | Governance files                                          |
-| Boundaries         | 317  | Authority, safety, and writing rules                      |
 
 You are a Skill Factory Agent.
 
@@ -74,6 +54,9 @@ You keep mechanical work in scripts and judgment in the rule corpus.
 
 The update check below runs once per session in every mode.
 
+Load only the file a route names plus the files that file names in turn - the
+Resource Map's directory indexes resolve names on demand and are never bulk-read.
+
 Timing is armed by default on every operation - `no timing` opts out for that
 request, per `process/operation-timing.md`.
 
@@ -83,15 +66,13 @@ Every operation accepts orthogonal interaction flags named in the request. The
 authoritative matrix is `process/decision-modes.md`.
 
 - **Interactive** (default) - recommendations are shown and material checkpoints ask.
-- **Autonomous** - `autonomous`, `automatic`, `unattended`, or `non-interactive`.
-  Each evidenced recommendation is selected without asking and reported inline, a
-  question remains only for an essential input with no safe default and for
-  separately gated actions.
-- **Fully autonomous** - `fully autonomous`, `no questions`, or `without asking`.
-  No question surfaces at all: blocked or unauthorized steps and their dependents
-  are skipped, independent safe work continues, and the result is reported partial.
-- **Verbose** - `verbose`. Adds options, evidence, trade-offs, and rejected
-  alternatives to every decision report. It never changes a selection or a gate.
+- **Autonomous** - `autonomous`, `automatic`, `unattended`, or `non-interactive` -
+  evidenced recommendations apply without asking, essential inputs and gated
+  actions still surface.
+- **Fully autonomous** - `fully autonomous`, `no questions`, or `without asking` -
+  no question surfaces, blocked steps skip, and the result reports partial.
+- **Verbose** - `verbose` adds options, evidence, trade-offs, and rejected
+  alternatives to every decision report without changing selections or gates.
 
 No interaction mode grants permission for network access, installation, overwrite,
 deletion, commit, or publication. A separately gated action still requires its own
@@ -131,41 +112,24 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
 
 ## Trigger Keywords
 
-- **Create a skill**: create a skill, forge a skill, author a new skill, build a skill
-  for, make a skill from scratch, new agent skill, generate a skill package.
-- **Create a collection**: create a skill collection, forge a collection, build a set
-  of skills like astra-skills, multi-skill collection.
-- **Add a member**: add a member skill, new member for a collection, extend the
-  collection with a skill, adjust a skill collection, add a skill to
-  deployment-skills or another collection.
-- **From sources**: create a skill from this book, forge a skill from this PDF, build
-  a skill from these documents, turn this EPUB into a skill, skill from a website.
-- **Analyze a source**: analyze this PDF for a new skill, extract skill knowledge from,
-  survey this book for skill creation.
-- **Generate from analysis**: generate the skill from the analysis, continue the forge
-  run, resume forging.
-- **Spec layout**: create a portable skill, a minimal skill package, a
-  spec-conformant skill, a skill for a non-astra host.
-- **Plugin packaging**: package this skill as a Claude Code plugin, create a
-  plugin package, build a marketplace entry.
-- **Migrate a layout**: adopt this skill into astra, migrate this skill to the
-  spec layout, export this skill as a portable package, convert this skill's
-  layout.
-- **Update a skill**: update <skill> with this new source, fold this document into
-  <skill>.
-- **Housekeep a skill**: housekeep this skill, clean up <skill>, reorganize
-  <skill>, optimize <skill>, audit <skill> for drift, tidy the skill collection,
-  check my skills for duplicates.
-- **Repair a skill**: repair <skill>, heal <skill>, fix the triggering on
-  <skill>, improve <named-skill>, the skill misfires on this prompt.
-- **Operations catalog**: list all operations, show all capabilities, what
-  operations can this skill perform, list everything this skill can do.
-- **Maintain the skill**: work on forge-skill, improve forge-skill, update forge-skill,
-  maintain this skill, fix this skill.
+- **Create**: create, forge, author, build, or generate a skill or collection -
+  "new agent skill", "make a skill from scratch", "create a skill collection",
+  "add a member skill to a collection".
+- **From sources**: "skill from this book/PDF/EPUB/website", "analyze this source
+  for a future skill", "generate the skill from the recorded analysis".
+- **Package and migrate**: "package as a Claude Code plugin", "marketplace
+  entry", "adopt this skill into astra", "export to the spec layout", "migrate
+  this skill's layout".
+- **Lifecycle**: "update <skill> with this source", "housekeep, clean, or
+  reorganize <skill>", "repair, heal, or fix <named-skill>", "check my skills
+  for duplicates or drift".
+- **Catalog**: "list all operations", "show all capabilities".
+- **Maintenance**: "work on forge-skill", "improve forge-skill", "fix this
+  skill".
 - **Near misses that do not activate**: summarize this PDF, convert this file to
-  Markdown, write documentation, audit this repository - these name sibling-skill or
-  general tasks, and "improve forge-skill" or "fix this skill" stays in maintenance
-  mode.
+  Markdown, write documentation, audit this repository - these name sibling-skill
+  or general tasks, and "improve forge-skill" or "fix this skill" stays in
+  maintenance mode.
 
 Naming is not required - scope match activates the skill.
 
@@ -200,140 +164,32 @@ target's files.
 | work on forge-skill development                                 | `process/development.md`                                         |
 | split a large work surface across parallel scouts               | `process/parallel-execution.md`                                  |
 
-## `process/` - Procedures
+## Resource Map
 
-- **`process/skill-activation.md`** - The enable-mode procedure: bare-activation
-  intake and standby.
-- **`process/skill-maintenance.md`** - The maintenance-mode procedure: mode
-  distinction, governing read set, and the validation gate.
-- **`process/json-exchange.md`** - JSON parameter documents for intake question
-  surfaces.
-- **`process/operation-timing.md`** - Elapsed-time report for named operations
-  under a verbose, informational, diagnostic, or timing mode.
-- **`process/operations-catalog.md`** - The catalog procedure for "list all
-  operations" requests.
-- **`process/decision-modes.md`** - The interaction-mode matrix: interactive,
-  autonomous, fully autonomous, and verbose semantics with the decision log.
-- **`process/session-review.md`** - The session-review procedure: findings,
-  approval gate, apply, validate - with the shared review modes.
-- **`process/parallel-execution.md`** - The delegated scout model for large
-  work surfaces: applicability, contract, merge, fallback.
-- **`process/housekeeping.md`** - Self-repository upkeep: registration,
-  coverage, workspace, validation.
-- **`process/self-healing.md`** - The evidence-gated self-repair loop for this
-  skill.
-- **`process/development.md`** - Standby-for-specification mode for developing
-  this skill.
-- **`process/forge-workflow.md`** - The five-phase pipeline: initialization,
-  research foundation, architecture design, generation, finalization.
-- **`process/research-gathering.md`** - Evidence intake: source inventory,
-  bounded gathering plan, extraction, and citation identity.
-- **`process/research-synthesis.md`** - Knowledge distillation: candidates,
-  confidence, conflict handling, and the rule map.
-- **`process/source-conversion.md`** - Local source conversion through an approved
-  converter, extraction-quality inspection, and scratch boundaries.
-- **`process/skill-template.md`** - What a generated skill contains: the per-profile
-  file contracts, template map, and per-file fill rules.
-- **`process/layout-migration.md`** - Converting a skill between layout profiles:
-  adopt into astra, export to spec, package as plugin.
-- **`process/skill-housekeeping.md`** - The governed housekeeping loop for a
-  skill or collection - inventory, audit, gated apply, archive-first mutation.
-- **`process/skill-healing.md`** - The evidence-gated repair loop for a named
-  external skill: evaluate, patch, replay against an external verifier, promote.
-- **`process/README.md`** - The procedure index and loading rules.
+Each resource directory carries a `README.md` index naming every file with its
+load trigger - consult the index when a route or procedure needs a name, never
+bulk-read a directory.
 
-## `references/` - Evidence Library
+| Path          | Index                  | Contents                                      |
+|---------------|------------------------|-----------------------------------------------|
+| `process/`    | `process/README.md`    | Pipeline, lifecycle, conversion, contracts    |
+| `references/` | `references/README.md` | Specifications, conventions, methodology      |
+| `templates/`  | `templates/README.md`  | Generation skeletons and the output-path map  |
+| `scripts/`    | `scripts/README.md`    | Mechanical tools - run them, do not read them |
+| `evals/`      | `evals/README.md`      | Regression prompts and the eval schema        |
+| `docs/`       | `docs/README.md`       | Repository governance                         |
+| `tests/`      | `tests/README.md`      | Unit tests and fixtures for the scripts       |
+| `work/`       | -                      | Gitignored run state, never shipped           |
 
-- **`references/layout-profiles.md`** - The generation layouts: `astra`, `spec`,
-  and `plugin` profiles, selection rules, harness discovery paths, and the
-  portability rule.
-- **`references/astra-conventions.md`** - The `astra` profile contract generated
-  skills must satisfy to sit beside the astra-skills members.
-- **`references/skills-specification.md`** - The Agent Skills specification and
-  the `spec` profile contract.
-- **`references/skill-anatomy.md`** - Required and optional components of a
-  generated skill per profile, with their purpose.
-- **`references/instruction-patterns.md`** - Process-driven instruction design
-  and the pattern catalog.
-- **`references/evaluation-design.md`** - Evaluation design, grading, trigger
-  evals, and quality gates for generated skills.
-- **`references/trigger-design.md`** - Trigger-description and keyword practice:
-  inclusion, exclusion, and near-miss cases.
-- **`references/markitdown-reference.md`** - The MarkItDown converter - version,
-  constraints, and usage.
-- **`references/research-methods.md`** - Research type classification, gathering
-  depth, and methodology selection.
-- **`references/source-integrity.md`** - Provenance, copyright, untrusted-content,
-  and injection boundaries for external sources.
-- **`references/skill-hygiene.md`** - The housekeeping audit taxonomy,
-  confidence matrix, and apply gates.
-- **`references/platform-paths.md`** - Platform skill and rule roots for
-  multi-root inventory, discovery semantics, and precedence.
-- **`references/README.md`** - The reference index and loading rules.
-
-## `templates/` - Generation Skeletons
-
-Templates render through `scripts/render-templates.py` with a context document the
-agent writes from verified evidence - a template never invents domain knowledge.
-
-- Single-skill set (`astra` profile): `skill-router`, `skill-agents`,
-  `skill-activation`, `review-procedure`, `exchange-procedure`, `decision-modes`,
-  `operation-timing`, `operations-catalog`, `skill-maintainer`, `skill-readme`, `skill-changelog`,
-  `skill-license`, `skill-gitignore`, `skill-docs-index`, `skill-contributing`,
-  `skill-style`, `skill-maintenance`, `skill-versioning`, `skill-security`,
-  `skill-evaluation`, `skill-updater`, `skill-validator`.
-- Spec set (`spec` profile): `specification-router`, `specification-readme`,
-  `specification-evaluation`, and the shared `skill-license`.
-- Plugin set (`plugin` profile): `plugin-manifest`, and the `marketplace` set
-  carries `plugin-marketplace` for marketplace publishing.
-- Collection set: `collection-router`, `collection-readme`, `collection-agents`,
-  `collection-contract`, `collection-review`, `collection-synchronization`,
-  `collection-gitmodules`.
-- **`templates/README.md`** - The canonical template-to-output-path map and the
-  placeholder vocabulary.
-
-## `scripts/` - Mechanical Tools
-
-Run tools in place - `python3 <skill-root>/scripts/<tool>.py` - and never against
-untrusted targets without the sandboxing rules of `scripts/README.md`.
-
-- **`scripts/check-update.py`** - Once-per-session upstream check used by the
-  Skill Update Check gate.
-- **`scripts/validate-skill.py`** - Read-only validator for this skill and
-  generated trees, per `--profile astra|spec`.
-- **`scripts/render-templates.py`** - Deterministic `{{placeholder}}` renderer
-  with staged writes.
-- **`scripts/convert-source.py`** - Optional local-source converter through an
-  approved MarkItDown.
-- **`scripts/audit-skill.py`** - Read-only skill and collection inventory,
-  `--discover` multi-root scan.
-- **`scripts/archive-skill.py`** - Staged-write archiver: snapshot, list, and
-  conflict-preserving restore, dry-run until `--apply`. Never deletes.
-- **`scripts/README.md`** - Tool contracts, safety rules, and exit statuses.
-
-## `evals/` - Regression Prompts
-
-- **`evals/evals.json`** - Behavioral regression prompts covering routing,
-  interaction modes, near misses, blocked permission, and resume.
-- **`evals/README.md`** - The eval schema and the honest-reporting rule for
-  skipped runs.
-
-## Repository Files
-
-- **`AGENTS.md`** - The agent-facing maintenance entry point.
-- **`README.md`** - The human-facing overview and directory tree.
-- **`CHANGELOG.md`** - Release history, version-numbered sections only.
-- **`LICENSE`** - MIT.
-- **`docs/`** - Governance: `STYLE.md`, `VERSIONING.md`, `MAINTENANCE.md`,
-  `CONTRIBUTING.md`, `SECURITY.md`, and the `docs/README.md` index.
-- **`tests/`** - Deterministic unit tests and synthetic fixtures for the scripts,
-  indexed by `tests/README.md`.
+Repository files: `AGENTS.md` (maintenance entry point), `README.md` (human
+overview and directory tree), `CHANGELOG.md` (release history), `LICENSE` (MIT).
 
 ## Boundaries
 
 - Keep `SKILL.md` lean: it routes and stays below 500 lines.
-- Register every new or renamed resource in `SKILL.md` and mirror it in the
-  `README.md` tree, per `docs/MAINTENANCE.md`.
+- Register every new or renamed resource in its directory's `README.md` index -
+  routed procedures also gain an Operations table row - and mirror layout changes
+  in the `README.md` tree, per `docs/MAINTENANCE.md`.
 - A generated skill writes only into its approved target directory, Forge's own
   run state and converted source text live in the gitignored `work/` tree and are
   never shipped.

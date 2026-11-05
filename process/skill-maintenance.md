@@ -64,9 +64,10 @@ Read the smallest useful set before editing:
 
 1. Read the governing set above.
 2. Make the change per `docs/STYLE.md` and `docs/MAINTENANCE.md`.
-3. Register every new or renamed resource in `SKILL.md` and mirror it in `README.md`,
-   per the registration contract.
-4. Renumber every `## Contents` table affected by line shifts.
+3. Register every new or renamed resource in its directory's `README.md` index -
+   routed procedures also gain an Operations table row in `SKILL.md` - and mirror
+   layout changes in the `README.md` tree, per the registration contract.
+4. Re-anchor every `## Contents` table affected by renamed or removed sections.
 5. Keep `evals/evals.json` in sync when the change alters skill behavior.
 6. When a template changes, check whether Forge's own corresponding file stays the
    reference instance of the same contract, and keep `templates/README.md` and the

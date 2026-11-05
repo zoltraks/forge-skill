@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.3.0] - 2026-11-05
+
+### Changed
+
+- Slimmed `SKILL.md` for progressive disclosure: the per-file resource catalogs
+  moved out of the router into a Resource Map pointing at each directory's
+  `README.md` index, the line-numbered Contents table dropped, Trigger Keywords
+  compressed to families, and the frontmatter description tightened.
+- The registration contract now registers resources in the owning directory's
+  `README.md` index - the Operations table keeps routed procedures - applied
+  across `AGENTS.md`, `docs/MAINTENANCE.md`, `process/skill-maintenance.md`,
+  `process/housekeeping.md`, `process/skill-template.md`,
+  `references/astra-conventions.md`, and the generation templates.
+- `templates/skill-router.template` emits the slim router shape - every
+  generated skill inherits the lazy-load contract. The `process-listings`
+  placeholder became `resource-rows` for the Resource Map's domain rows.
+- `references/README.md` records section-level loading for large references.
+
+### Fixed
+
+- `templates/map.json` carried a stray `templates/parallel-execution.template`
+  key that resolved to no file and duplicated the `parallel-execution` output
+  path - every render and the self-test failed on it.
+
 ## [0.2.9] - 2026-10-30
 
 ### Changed
