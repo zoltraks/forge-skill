@@ -542,7 +542,8 @@ def main(path, mode, width, payload_markdown, check_only, convert=False,
         else:
             pieces = wrap_unit(body, width)
             flagged = pieces != body and \
-                (not loose or any(len(l) > width for l in body))
+                (not loose or (len(body) > 1
+                               and any(len(l) > width for l in body)))
             if flagged:
                 wrapped += 1
                 rewrapped.append((unit[0][0], unit[-1][0]))
@@ -799,7 +800,7 @@ if __name__ == "__main__":
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--loose", action="store_true",
                         help="loose wrap convention: only reflow blocks "
-                        "that contain an over-width line (with --wrap)")
+                        "inside a multi-line block that contains an over-width line")
     parser.add_argument("--exclude", action="append", default=[],
                         metavar="NAME", help="skip files whose path contains a component with this name (repeatable, directory mode)")
     parsed = parser.parse_args()
