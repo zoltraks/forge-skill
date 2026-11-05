@@ -13,20 +13,21 @@ finding class: grep the class heading and read that section only.
 
 ## Index
 
-| File                      | Load when                                                 |
-|---------------------------|-----------------------------------------------------------|
-| `layout-profiles.md`      | Phase 0 - resolving the layout profile - and phase 2      |
-| `astra-conventions.md`    | Phase 0 and the phase 2 compatibility matrix (`astra`)    |
-| `skills-specification.md` | Phase 0 and frontmatter writing or validation (`spec`)    |
-| `skill-anatomy.md`        | Phase 2 - deciding what the generated skill contains      |
-| `instruction-patterns.md` | Phase 2 - designing procedures and instruction quality    |
-| `trigger-design.md`       | Phase 2 - writing descriptions, keywords, and near misses |
-| `evaluation-design.md`    | Phase 2 - designing the eval set - and phase 4 advice     |
-| `markitdown-reference.md` | Phase 1 - any binary or markup source conversion          |
-| `research-methods.md`     | Phase 1 - classifying the research and picking depth      |
-| `source-integrity.md`     | Phase 1 - every external source, also phase 3 fill review |
-| `skill-hygiene.md`        | Housekeeping and healing runs - audit taxonomy and gates  |
-| `platform-paths.md`       | Multi-root inventory, precedence, and portability rules   |
+| File                       | Load when                                                 |
+|----------------------------|-----------------------------------------------------------|
+| `layout-profiles.md`       | Phase 0 - resolving the layout profile - and phase 2      |
+| `astra-conventions.md`     | Phase 0 and the phase 2 compatibility matrix (`astra`)    |
+| `skills-specification.md`  | Phase 0 and frontmatter writing or validation (`spec`)    |
+| `skill-anatomy.md`         | Phase 2 - deciding what the generated skill contains      |
+| `instruction-patterns.md`  | Phase 2 - designing procedures and instruction quality    |
+| `trigger-design.md`        | Phase 2 - writing descriptions, keywords, and near misses |
+| `evaluation-design.md`     | Phase 2 - designing the eval set - and phase 4 advice     |
+| `markitdown-reference.md`  | Phase 1 - any binary or markup source conversion          |
+| `research-methods.md`      | Phase 1 - classifying the research and picking depth      |
+| `source-integrity.md`      | Phase 1 - every external source, also phase 3 fill review |
+| `skill-hygiene.md`         | Housekeeping and healing runs - audit taxonomy and gates  |
+| `optimization-patterns.md` | Optimization runs - load surfaces, findings, patterns     |
+| `platform-paths.md`        | Multi-root inventory, precedence, and portability rules   |
 
 ## Authority
 

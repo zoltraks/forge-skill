@@ -10,14 +10,14 @@ self-contained single files, standard library only.
 
 ## Tools
 
-| Tool                  | Class        | What it does                                                            |
-|-----------------------|--------------|-------------------------------------------------------------------------|
-| `check-update.py`     | read-only*   | Once-per-session upstream check, `STATUS` + key=value                   |
-| `validate-skill.py`   | read-only    | Validates Forge or a generated tree per `--profile`, never runs targets |
-| `render-templates.py` | staged-write | Renders templates to staging, writes target on `--write`                |
-| `convert-source.py`   | converter    | Converts a local source via an approved MarkItDown                      |
-| `audit-skill.py`      | read-only    | Inventories skills and collections, `--discover` scans platform roots   |
-| `archive-skill.py`    | staged-write | Snapshots, lists, and restores archives, dry-run until `--apply`        |
+| Tool                  | Class        | What it does                                                                                                             |
+|-----------------------|--------------|--------------------------------------------------------------------------------------------------------------------------|
+| `check-update.py`     | read-only*   | Once-per-session upstream check, `STATUS` + key=value                                                                    |
+| `validate-skill.py`   | read-only    | Validates Forge or a generated tree per `--profile`, never runs targets                                                  |
+| `render-templates.py` | staged-write | Renders templates to staging, writes target on `--write`                                                                 |
+| `convert-source.py`   | converter    | Converts a local source via an approved MarkItDown                                                                       |
+| `audit-skill.py`      | read-only    | Inventories skills and collections, `--discover` scans platform roots, `--load-profile` reports per-surface load metrics |
+| `archive-skill.py`    | staged-write | Snapshots, lists, and restores archives, dry-run until `--apply`                                                         |
 
 The `check-update.py` footnote: it runs `git fetch`, which writes remote-tracking
 refs under `.git` but never touches the working tree.
@@ -55,6 +55,10 @@ exists.
 - `validate-skill.py` reads target scripts but never executes them.
 - `audit-skill.py` is read-only end to end - `--discover` scans the platform
   roots table in `references/platform-paths.md` and writes nothing.
+  `--load-profile` adds per-surface metrics for explicit targets:
+  `description_chars`, `skill_md_bytes`/`skill_md_lines`, a `section` line per
+  `## ` heading, `dir_bytes` totals, and `indexes` naming directories with a
+  `README.md` index.
 - `archive-skill.py` never deletes - restores preserve conflicting files as
   `<name>.conflict-<timestamp>` instead of overwriting them.
 - `convert-source.py` treats document content as untrusted data - the only

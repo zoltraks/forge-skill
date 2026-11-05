@@ -3,8 +3,7 @@
 ## Purpose
 
 > **Scope:** The governed housekeeping procedure for an existing skill project
-> or skill collection - inventory, drift, consistency, deduplication, cleanup,
-> and optimization
+> or skill collection - inventory, drift, consistency, deduplication, cleanup
 > **Key items:** target resolution, dry-run default, confidence gates,
 > archive-before-mutate, collection member boundaries, audit log
 
@@ -12,8 +11,11 @@ This file defines the lifecycle-management path of operation mode: the agent
 audits and, on approval, reorganizes, optimizes, and cleans a named target.
 
 Follow it for requests like "housekeep this skill", "clean up the skill
-collection", "reorganize <skill>", "optimize <skill>", or "check my skills for
-drift".
+collection", "reorganize <skill>", or "check my skills for drift".
+
+A request to optimize a named skill's context cost - "optimize <skill>",
+"slim <skill>", "reduce <skill>'s token cost" - routes to
+`process/skill-optimization.md` instead.
 
 ## Contents
 
@@ -41,12 +43,12 @@ Classify the target before anything else:
 |----------------|--------------------------------------------------------------|
 | Collection     | Root `SKILL.md` plus `skills/<name>/` member directories     |
 | Astra member   | `AGENTS.md`, the shared `process/` contracts, `scripts/` set |
-
-Astra members are judged against the shared contract plus recorded variance
-per `references/skill-hygiene.md`.
 | Spec skill     | `SKILL.md` plus optional resources, no member contract       |
 | Plugin package | `.claude-plugin/plugin.json`                                 |
 | Foreign        | None of the above - audit only, no mutation proposals        |
+
+Astra members are judged against the shared contract plus recorded variance
+per `references/skill-hygiene.md`.
 
 A target that carries no `SKILL.md` is not a housekeeping target. Report it as
 out of scope rather than treating it as a source for a creation run.

@@ -212,6 +212,10 @@ before separate skills form, per `process/research-synthesis.md`.
 
 ## Token Budgets
 
+A request whose whole object is bringing a target inside these budgets runs the
+focused diet procedure in `process/skill-optimization.md`, backed by
+`references/optimization-patterns.md` - this table stays the budget authority.
+
 | Layer                            | Target                         | Action when exceeded                 |
 |----------------------------------|--------------------------------|--------------------------------------|
 | Metadata - `name`, `description` | ~100 tokens per skill          | Shorten, add negative constraints    |

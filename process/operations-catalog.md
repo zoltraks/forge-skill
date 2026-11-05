@@ -45,7 +45,8 @@ source width when the request's language changes the cell text.
 | Source   | generate from run  | render a skill from recorded analysis or resumed run state  |
 | Source   | update with source | propose folding a new source into an existing skill         |
 | Layout   | migrate layouts    | adopt into astra, export to spec, package as plugin         |
-| Govern   | housekeep          | clean, reorganize, or optimize a skill or collection        |
+| Govern   | housekeep          | clean or reorganize a skill or collection                   |
+| Govern   | optimize           | context-diet restructure of a named skill                   |
 | Govern   | inventory          | multi-root skill discovery and drift check                  |
 | Govern   | heal               | evidence-gated repair of a named external skill             |
 | Govern   | validate           | check a skill against the generation contract               |

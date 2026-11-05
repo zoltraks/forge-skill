@@ -2,6 +2,18 @@
 
 ## [0.3.0] - 2026-11-05
 
+### Added
+
+- `process/skill-optimization.md` - the context-diet operation for a named
+  external skill: intake, mechanical measurement, diagnosis, dry-run plan,
+  archive-first apply, verify, byte-delta report.
+- `references/optimization-patterns.md` - the evidence layer: load-surface
+  model, eight finding classes, restructure patterns, per-layout variants,
+  verification contract.
+- `scripts/audit-skill.py --load-profile` - per-surface load metrics:
+  `description_chars`, `skill_md_bytes`/`skill_md_lines`, a section line per
+  `## ` heading, `dir_bytes` totals, and directory index presence.
+
 ### Changed
 
 - Slimmed `SKILL.md` for progressive disclosure: the per-file resource catalogs

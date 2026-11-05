@@ -121,8 +121,8 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
   entry", "adopt this skill into astra", "export to the spec layout", "migrate
   this skill's layout".
 - **Lifecycle**: "update <skill> with this source", "housekeep, clean, or
-  reorganize <skill>", "repair, heal, or fix <named-skill>", "check my skills
-  for duplicates or drift".
+  reorganize <skill>", "optimize or slim <skill>", "repair, heal, or fix
+  <named-skill>", "check my skills for duplicates or drift".
 - **Catalog**: "list all operations", "show all capabilities".
 - **Maintenance**: "work on forge-skill", "improve forge-skill", "fix this
   skill".
@@ -139,30 +139,31 @@ target's files.
 
 ## Operations
 
-| Request                                                         | Route                                                            |
-|-----------------------------------------------------------------|------------------------------------------------------------------|
-| create or forge a skill for a topic                             | `process/forge-workflow.md`                                      |
-| create a portable, minimal, or spec-conformant skill            | `process/forge-workflow.md` - `spec` profile                     |
-| package a skill as a Claude Code plugin or marketplace entry    | `process/forge-workflow.md` - `plugin` profile                   |
-| create or forge a skill collection with members                 | `process/forge-workflow.md` - collection mode                    |
-| migrate a skill between layouts                                 | `process/layout-migration.md`                                    |
-| analyze a source for a future skill                             | `process/research-gathering.md` + `process/source-conversion.md` |
-| generate a skill from an existing analysis or run state         | `process/forge-workflow.md` phases 2-4                           |
-| update an existing skill with a new source                      | `process/research-synthesis.md` - proposal only                  |
-| housekeep, clean, reorganize, or optimize a skill or collection | `process/skill-housekeeping.md`                                  |
-| inventory skills across platform roots or check for drift       | `process/skill-housekeeping.md` + `audit-skill.py --discover`    |
-| repair, heal, fix, or improve a named external skill            | `process/skill-healing.md`                                       |
-| check a skill against the generation contract                   | `scripts/validate-skill.py` + `references/astra-conventions.md`  |
-| ask for intake parameters "as JSON" or name a diagnostic mode   | `process/json-exchange.md`                                       |
-| list all operations or show all capabilities                    | `process/operations-catalog.md`                                  |
-| name a verbose, informational, diagnostic, or timing mode       | `process/operation-timing.md`                                    |
-| inspect or re-render generation templates                       | `templates/` + `process/skill-template.md`                       |
-| convert a local source file                                     | `process/source-conversion.md` + `scripts/convert-source.py`     |
-| change, extend, fix, or review this skill repository            | `process/skill-maintenance.md`                                   |
-| housekeep this skill                                            | `process/housekeeping.md`                                        |
-| heal this skill or fix a named defect in it                     | `process/self-healing.md`                                        |
-| work on forge-skill development                                 | `process/development.md`                                         |
-| split a large work surface across parallel scouts               | `process/parallel-execution.md`                                  |
+| Request                                                       | Route                                                            |
+|---------------------------------------------------------------|------------------------------------------------------------------|
+| create or forge a skill for a topic                           | `process/forge-workflow.md`                                      |
+| create a portable, minimal, or spec-conformant skill          | `process/forge-workflow.md` - `spec` profile                     |
+| package a skill as a Claude Code plugin or marketplace entry  | `process/forge-workflow.md` - `plugin` profile                   |
+| create or forge a skill collection with members               | `process/forge-workflow.md` - collection mode                    |
+| migrate a skill between layouts                               | `process/layout-migration.md`                                    |
+| analyze a source for a future skill                           | `process/research-gathering.md` + `process/source-conversion.md` |
+| generate a skill from an existing analysis or run state       | `process/forge-workflow.md` phases 2-4                           |
+| update an existing skill with a new source                    | `process/research-synthesis.md` - proposal only                  |
+| housekeep, clean, or reorganize a skill or collection         | `process/skill-housekeeping.md`                                  |
+| optimize, slim, or reduce a named skill's context cost        | `process/skill-optimization.md`                                  |
+| inventory skills across platform roots or check for drift     | `process/skill-housekeeping.md` + `audit-skill.py --discover`    |
+| repair, heal, fix, or improve a named external skill          | `process/skill-healing.md`                                       |
+| check a skill against the generation contract                 | `scripts/validate-skill.py` + `references/astra-conventions.md`  |
+| ask for intake parameters "as JSON" or name a diagnostic mode | `process/json-exchange.md`                                       |
+| list all operations or show all capabilities                  | `process/operations-catalog.md`                                  |
+| name a verbose, informational, diagnostic, or timing mode     | `process/operation-timing.md`                                    |
+| inspect or re-render generation templates                     | `templates/` + `process/skill-template.md`                       |
+| convert a local source file                                   | `process/source-conversion.md` + `scripts/convert-source.py`     |
+| change, extend, fix, or review this skill repository          | `process/skill-maintenance.md`                                   |
+| housekeep this skill                                          | `process/housekeeping.md`                                        |
+| heal this skill or fix a named defect in it                   | `process/self-healing.md`                                        |
+| work on forge-skill development                               | `process/development.md`                                         |
+| split a large work surface across parallel scouts             | `process/parallel-execution.md`                                  |
 
 ## Resource Map
 

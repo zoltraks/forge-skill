@@ -9,7 +9,7 @@ reports cross-root duplicates, stale twins, and name collisions.
 Never writes, never executes target scripts, never fetches.
 
 Usage:
-  python3 scripts/audit-skill.py <dir> [<dir> ...]
+  python3 scripts/audit-skill.py <dir> [<dir> ...] [--load-profile] [--json]
   python3 scripts/audit-skill.py --discover [--json]
   python3 scripts/audit-skill.py <dir> ... --discover
 
@@ -150,7 +150,36 @@ def referenced_paths(body: str) -> set[str]:
     return references
 
 
-def audit_skill(root: Path) -> dict:
+def load_profile(root: Path, text: str, files: list[Path]) -> dict:
+    """Per-surface context-load metrics for one skill - read-only."""
+    profile: dict = {"skill_md_bytes": len(text.encode("utf-8")),
+                     "sections": [], "dir_bytes": {}, "indexes": []}
+    current = "(prelude)"
+    sizes: dict[str, int] = {}
+    for line in text.splitlines(keepends=True):
+        if line.startswith("## "):
+            current = line[3:].strip()
+        sizes[current] = sizes.get(current, 0) + len(line.encode("utf-8"))
+    profile["sections"] = [{"section": key, "bytes": value}
+                           for key, value in sizes.items()]
+    for path in files:
+        if path.suffix not in {".md", ".py", ".json", ".txt", ".template"}:
+            continue
+        relative = path.relative_to(root)
+        bucket = relative.parts[0] if len(relative.parts) > 1 else "(root)"
+        try:
+            size = len(path.read_bytes())
+        except OSError:
+            continue
+        profile["dir_bytes"][bucket] = profile["dir_bytes"].get(bucket, 0) + size
+    profile["indexes"] = sorted(
+        directory for directory in RESOURCE_DIRS
+        if (root / directory).is_dir() and (root / directory / "README.md").is_file()
+    )
+    return profile
+
+
+def audit_skill(root: Path, with_profile: bool = False) -> dict:
     record: dict = {
         "path": str(root),
         "name": root.name,
@@ -241,6 +270,8 @@ def audit_skill(root: Path) -> dict:
     record["state"] = "active" if fields.get("name") and fields.get("description") else "invalid"
     if fields:
         record["description_chars"] = len(fields.get("description", ""))
+    if with_profile:
+        record["load_profile"] = load_profile(root, text, files)
     return record
 
 
@@ -295,7 +326,7 @@ def collision_verdicts(entries: list[dict]) -> list[dict]:
     return verdicts
 
 
-def audit_target(raw: str) -> list[dict]:
+def audit_target(raw: str, with_profile: bool = False) -> list[dict]:
     root = Path(raw).resolve()
     if not root.is_dir():
         return [{"path": str(root), "name": root.name, "state": "invalid",
@@ -303,12 +334,12 @@ def audit_target(raw: str) -> list[dict]:
     if (root / "skills").is_dir() and any(
             (child / "SKILL.md").is_file()
             for child in (root / "skills").iterdir() if child.is_dir()):
-        records = [audit_skill(root)]
+        records = [audit_skill(root, with_profile)]
         for child in sorted((root / "skills").iterdir()):
             if child.is_dir() and (child / "SKILL.md").is_file():
-                records.append(audit_skill(child))
+                records.append(audit_skill(child, with_profile))
         return records
-    return [audit_skill(root)]
+    return [audit_skill(root, with_profile)]
 
 
 def print_record(record: dict) -> None:
@@ -330,6 +361,17 @@ def print_record(record: dict) -> None:
         print(f"  orphan={orphan}")
     if record["operations_surface"] not in ("ok", "unknown"):
         print(f"  operations_surface={record['operations_surface']}")
+    profile = record.get("load_profile")
+    if profile:
+        print(f"  load_profile description_chars={record.get('description_chars', 0)} "
+              f"skill_md_bytes={profile['skill_md_bytes']} "
+              f"skill_md_lines={record['lines']}")
+        for section in profile["sections"]:
+            print(f"  section \"{section['section']}\" {section['bytes']}b")
+        totals = " ".join(f"{name}={size}b" for name, size
+                          in sorted(profile["dir_bytes"].items()))
+        print(f"  dir_bytes {totals}")
+        print(f"  indexes {','.join(profile['indexes']) or 'none'}")
 
 
 def main() -> int:
@@ -337,6 +379,10 @@ def main() -> int:
     parser.add_argument("targets", nargs="*", help="skill or collection directories")
     parser.add_argument("--discover", action="store_true",
                         help="scan the platform roots table for skills and rule artifacts")
+    parser.add_argument("--load-profile", action="store_true",
+                        help="emit per-surface load metrics for explicit targets: "
+                             "description size, SKILL.md section bytes, directory "
+                             "totals, and index presence")
     parser.add_argument("--json", action="store_true", help="emit JSON instead of key=value lines")
     args = parser.parse_args()
 
@@ -349,7 +395,7 @@ def main() -> int:
                     "targets": [], "discovery": [], "collisions": []}
 
     for raw in args.targets:
-        records = audit_target(raw)
+        records = audit_target(raw, args.load_profile)
         report["targets"].extend(records)
         if not args.json:
             for record in records:

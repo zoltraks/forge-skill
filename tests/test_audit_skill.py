@@ -142,5 +142,39 @@ class AuditSkillTests(unittest.TestCase):
             result = run_audit(str(skill))
             self.assertNotIn("operations_surface=", result.stdout)
 
+    def test_load_profile_reports_surfaces(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch))
+            (skill / "process" / "README.md").write_text("# Index\n",
+                                                        encoding="utf-8")
+            (skill / "references").mkdir()
+            (skill / "references" / "evidence.md").write_text("# Evidence\n",
+                                                            encoding="utf-8")
+            skill.joinpath("SKILL.md").write_text(
+                "---\nname: sample-skill\ndescription: >-\n  A sample skill.\n"
+                'license: MIT\nmetadata:\n  version: "0.1.0"\n---\n\n'
+                "# Sample\n\n## Operations\n\nDo the thing.\n",
+                encoding="utf-8",
+            )
+            result = run_audit(str(skill), "--load-profile")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("load_profile description_chars=", result.stdout)
+            self.assertIn("skill_md_bytes=", result.stdout)
+            self.assertIn('section "Operations"', result.stdout)
+            self.assertIn("dir_bytes", result.stdout)
+            self.assertIn("process=", result.stdout)
+            self.assertIn("indexes process", result.stdout)
+
+    def test_load_profile_absent_without_flag(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch))
+            result = run_audit(str(skill))
+            self.assertNotIn("load_profile", result.stdout)
+
+    def test_load_profile_invalid_target(self) -> None:
+        result = run_audit("/nonexistent-skill-dir", "--load-profile")
+        self.assertEqual(result.returncode, 1)
+        self.assertNotIn("load_profile", result.stdout)
+
 if __name__ == "__main__":
     unittest.main()

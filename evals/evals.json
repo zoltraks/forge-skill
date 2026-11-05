@@ -406,6 +406,27 @@
         "no rule file beyond SKILL.md and process/skill-activation.md is loaded at activation",
         "directory README indexes are consulted on demand, never bulk-read"
       ]
+    },
+    {
+      "id": 356,
+      "prompt": "Optimize the billing-skill for context cost.",
+      "expected_output": "Runs process/skill-optimization.md - intake ledger, audit-skill.py --load-profile baseline, diagnosis per references/optimization-patterns.md, dry-run plan before any mutation.",
+      "files": [],
+      "expectations": [
+        "the load profile baseline is measured before findings are proposed",
+        "no file mutates before the dry-run plan is approved",
+        "the report ends with a before/after byte delta per touched surface"
+      ]
+    },
+    {
+      "id": 357,
+      "prompt": "Optimize the unknown-skill directory - it is not a known layout.",
+      "expected_output": "A foreign or unclassifiable target receives a proposal report only - patterns are reported, nothing is applied.",
+      "files": [],
+      "expectations": [
+        "no mutation runs on a foreign target",
+        "an approved mutation on a governed layout archives the file before rewriting it"
+      ]
     }
   ]
 }
