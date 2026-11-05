@@ -2,16 +2,14 @@
 
 ## Purpose
 
-> **Scope:** Required and optional components of a generated skill, per layout
-> profile
-> **Key items:** universal vs astra components, file roles, when a directory
-> exists, minimum viable set, separation of concerns
+> **Scope:** Required and optional components of a generated skill, per layout profile
+> **Key items:** universal vs astra components, file roles, when a directory exists,
+> minimum viable set, separation of concerns
 
-This file is the checklist phase 2 designs against and `process/skill-template.md`
-enforces.
+This file is the checklist phase 2 designs against and `process/skill-template.md` enforces.
 
-The layout profile decides which table applies - `references/layout-profiles.md`
-defines the profiles and the selection rules.
+The layout profile decides which table applies - `references/layout-profiles.md` defines the
+profiles and the selection rules.
 
 ## Universal - Every Profile
 
@@ -61,35 +59,30 @@ The member contract on top of the universal set:
 
 ## Plugin Profile
 
-A `plugin` package is a `spec` skill nested under `skills/<name>/` inside a
-Claude Code plugin root carrying `.claude-plugin/plugin.json`, plus an optional
-`.claude-plugin/marketplace.json` in a marketplace root - per
-`references/layout-profiles.md`.
+A `plugin` package is a `spec` skill nested under `skills/<name>/` inside a Claude Code plugin root
+carrying `.claude-plugin/plugin.json`, plus an optional `.claude-plugin/marketplace.json` in a
+marketplace root - per `references/layout-profiles.md`.
 
 ## Minimum Viable Set
 
-A minimal `astra` skill still carries every member-contract row - the shared
-contract is what makes it a collection member, and shrinking it breaks
-compatibility.
+A minimal `astra` skill still carries every member-contract row - the shared contract is what makes
+it a collection member, and shrinking it breaks compatibility.
 
-A minimal `spec` skill is `SKILL.md` alone - everything else waits for
-evidence.
+A minimal `spec` skill is `SKILL.md` alone - everything else waits for evidence.
 
-Every profile states its supported operations - `astra` members carry the
-catalog file, `spec` and `plugin` skills enumerate them in the router's
-operations table.
+Every profile states its supported operations - `astra` members carry the catalog file,
+`spec` and `plugin` skills enumerate them in the router's operations table.
 
 ## Separation Of Concerns
 
-Scripts do mechanical work: rendering, validation, conversion, fetching,
-state checks. Rule files do reasoning: procedures, criteria, and judgment the
-agent applies. Never write a script that "decides" or a procedure that
-re-implements what a script can verify deterministically.
+Scripts do mechanical work: rendering, validation, conversion, fetching, state checks.
+Rule files do reasoning: procedures, criteria, and judgment the agent applies.
+Never write a script that "decides" or a procedure that re-implements what a script can
+verify deterministically.
 
-The boundary is measured, not just principled - moving mechanical steps from
-inference into scripts has cut skill cost by roughly a quarter in published
-experiments while improving accuracy.
+The boundary is measured, not just principled - moving mechanical steps from inference into scripts
+has cut skill cost by roughly a quarter in published experiments while improving accuracy.
 
-Bundled scripts are non-interactive, accept input via flags or stdin, document
-themselves through `--help`, and pin their dependencies, per the upstream
-guidance `references/skills-specification.md` condenses.
+Bundled scripts are non-interactive, accept input via flags or stdin,
+document themselves through `--help`, and pin their dependencies,
+per the upstream guidance `references/skills-specification.md` condenses.

@@ -7,21 +7,20 @@
 
 ## Issues
 
-Report bugs and proposals through the repository's issue tracker. Include what you
-asked, what happened, what you expected, and whether a generated skill or Forge's
-own files misbehaved - those follow different fix paths.
+Report bugs and proposals through the repository's issue tracker. Include what you asked,
+what happened, what you expected, and whether a generated skill or Forge's own files misbehaved -
+those follow different fix paths.
 
 ## Setup
 
-No build step and no dependencies beyond Python 3.10+. Edit documents per
-`docs/STYLE.md`, run the suite in `docs/MAINTENANCE.md`, and propose a
-one-sentence commit message.
+No build step and no dependencies beyond Python 3.10+. Edit documents per `docs/STYLE.md`,
+run the suite in `docs/MAINTENANCE.md`, and propose a one-sentence commit message.
 
 ## Pull Requests
 
 - One coherent change set per pull request.
-- Follow the registration contract in `docs/MAINTENANCE.md` - router, README
-  tree, Contents tables, and evals move together.
+- Follow the registration contract in `docs/MAINTENANCE.md` - router, README tree, Contents tables,
+  and evals move together.
 - The full validation suite must pass or name what was skipped and why.
 - Version bumps follow `docs/VERSIONING.md` - one patch per change set.
 

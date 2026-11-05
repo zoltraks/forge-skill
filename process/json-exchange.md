@@ -2,84 +2,80 @@
 
 ## Purpose
 
-> **Scope:** Emit and consume machine-readable parameter documents in place of, or
-> alongside, the question surfaces of the generation and maintenance workflows.
-> **Key items:** emission trigger, diagnostic output, emitted document, parameter
-> catalog, returned document, authority
+> **Scope:** Emit and consume machine-readable parameter documents in place of, or alongside,
+> the question surfaces of the generation and maintenance workflows.
+> **Key items:** emission trigger, diagnostic output, emitted document, parameter catalog,
+> returned document, authority
 
-This file defines how Forge exposes its intake questions as JSON and how it consumes
-JSON answers.
+This file defines how Forge exposes its intake questions as JSON and how it consumes JSON answers.
 
 ## When To Emit
 
 When the request asks for the questions, settings, or parameters "in JSON", "as JSON",
-or another machine-readable format, emit a parameter document instead of the question
-prompts.
+or another machine-readable format, emit a parameter document instead of the question prompts.
 
-Detection and default resolution still run first: the document contains only the
-questions that are actually pending in this session.
+Detection and default resolution still run first:
+the document contains only the questions that are actually pending in this session.
 
-Emit the document where the request directs - inline in the response by default, inside
-a fenced `json` block.
+Emit the document where the request directs - inline in the response by default,
+inside a fenced `json` block.
 
 ## Diagnostic Output
 
-When the request names a debugging mode, a diagnostic mode, a timing mode, or asks
-for detailed or verbose information, emit the parameter document for information
-purposes only.
+When the request names a debugging mode, a diagnostic mode, a timing mode,
+or asks for detailed or verbose information,
+emit the parameter document for information purposes only.
 
-The informational mode never triggers this emission - it arms only the
-elapsed-time report in `process/operation-timing.md`.
+The informational mode never triggers this emission - it arms only the elapsed-time report in
+`process/operation-timing.md`.
 
-The document covers only surfaces that are actually pending - diagnostics expose the
-intake state and never create a question.
+The document covers only surfaces that are actually pending - diagnostics expose the intake state
+and never create a question.
 
-When no surface is pending, nothing emits - no parameter document, no
-pending-decisions note, and no question prompts.
+When no surface is pending, nothing emits - no parameter document, no pending-decisions note,
+and no question prompts.
 
-The emission order is fixed: the JSON document first, then a text description of the
-pending decisions, then the question prompts.
+The emission order is fixed: the JSON document first,
+then a text description of the pending decisions, then the question prompts.
 
-The question prompts still run. The emitted document does not replace the question
-flow.
+The question prompts still run. The emitted document does not replace the question flow.
 
 ## Emitted Document
 
-The document carries a `description`, context fields (`target`, `task`, `date`,
-`time`), and an `intake` array.
+The document carries a `description`, context fields (`target`, `task`, `date`, `time`),
+and an `intake` array.
 
 - `target` - the skill directory, collection directory, or source the task centers on.
-- `task` - the classified task: `create-skill`, `create-collection`,
-  `analyze-source`, `generate-from-analysis`, `update-skill`, or `maintain`.
+- `task` - the classified task: `create-skill`, `create-collection`, `analyze-source`,
+  `generate-from-analysis`, `update-skill`, or `maintain`.
 - `date` - the current day in `YYYY-MM-DD` format.
 - `time` - the local time in `hh:mm:ss` followed by the timezone offset.
 
 `task` emits as an empty string when no task is classified yet - enable mode has none.
 
-Each parameter object keeps a fixed key order: `id`, `question`, `answer`,
-`description`, optional `when`, `type`, `menu`, `open`, `default` - the `default`
-key is always the last key of the object.
+Each parameter object keeps a fixed key order: `id`, `question`, `answer`, `description`,
+optional `when`, `type`, `menu`, `open`,
+`default` - the `default` key is always the last key of the object.
 
 - `id` - a stable kebab-case identifier for the parameter.
 - `question` - the literal question wording presented to the answering side.
-- `answer` - emitted as an empty string, or an empty array for `selection`, to be
-  filled by the answering side.
-- `description` - what the parameter controls and the detection evidence behind its
-  default.
-- `when` - an optional condition under which the parameter is asked, written as
-  clauses such as `research-depth is A` joined by `and` or `or` and grouped with
-  parentheses. A parameter whose `when` is unsatisfied is skipped - it is not
-  asked, applies no `default`, and ignores any returned answer. `when` may
-  reference only parameters listed earlier in `intake`.
-- `type` - `choice` for a single-option answer taken from `menu`, `selection` when
-  multiple options may be chosen, or `text` for free input.
-- `menu` - required for `choice` and `selection` types and omitted for `text`,
-  letter-keyed (`A`, `B`, `C`, ...), and the recommended option label carries
-  "(recommended)". A menu lists at most three candidate options plus a trailing
-  `Cancel - abort the operation` entry, and `Cancel` is never the `default`.
+- `answer` - emitted as an empty string, or an empty array for `selection`,
+  to be filled by the answering side.
+- `description` - what the parameter controls and the detection evidence behind its default.
+- `when` - an optional condition under which the parameter is asked,
+  written as clauses such as `research-depth is A` joined by `and` or `or` and grouped with
+  parentheses. A parameter whose `when` is unsatisfied is skipped - it is not asked,
+  applies no `default`, and ignores any returned answer.
+  `when` may reference only parameters listed earlier in `intake`.
+- `type` - `choice` for a single-option answer taken from `menu`,
+  `selection` when multiple options may be chosen, or `text` for free input.
+- `menu` - required for `choice` and `selection` types and omitted for `text`, letter-keyed (`A`,
+  `B`, `C`, ...), and the recommended option label carries "(recommended)".
+  A menu lists at most three candidate options plus a trailing `Cancel - abort the operation` entry,
+  and `Cancel` is never the `default`.
 - `open` - whether the answer is open to free text beyond the listed options.
-- `default` - the option letter or suggested text applied when the answer stays
-  empty - for `selection`, the array of letters that are pre-checked.
+- `default` - the option letter or suggested text applied when the answer stays empty - for
+  `selection`, the array of letters that are pre-checked.
 
 ```json
 {
@@ -125,40 +121,37 @@ Every pending question surface emits with a stable kebab-case `id`:
 | `permission-request`      | `choice`    | A separately gated action: network, install, overwrite, publish      |
 | `session-review-approval` | `choice`    | Approve the session-review findings report before applying changes   |
 
-Parameters that mirror `process/forge-workflow.md` decision points follow that
-document's question wording and option order. This file describes the envelope, not
-the questions.
+Parameters that mirror `process/forge-workflow.md` decision points follow that document's question
+wording and option order. This file describes the envelope, not the questions.
 
 ## Returned Document
 
-A returned JSON document answers the pending surfaces by `id`, in either of two
-forms.
+A returned JSON document answers the pending surfaces by `id`, in either of two forms.
 
 The first form is the emitted document itself with `answer` fields filled.
 
-The second form carries a `response` key - either an array of entry objects or a
-condensed object keyed by parameter `id`. Each array entry requires only `id` and
-`answer` - an option letter for `choice`, an array of letters for `selection`, or
-free text for `text`; other keys may be echoed or omitted.
+The second form carries a `response` key - either an array of entry objects or a condensed object
+keyed by parameter `id`. Each array entry requires only `id` and `answer` - an option letter for
+`choice`, an array of letters for `selection`, or free text for `text`;
+other keys may be echoed or omitted.
 
-An empty or missing `answer` - including an `id` absent from the condensed
-object - applies the parameter's `default`. Entries or keys with an unknown `id`
-are ignored, as is an answer for a parameter whose `when` is unsatisfied.
+An empty or missing `answer` - including an `id` absent from the condensed object - applies the
+parameter's `default`. Entries or keys with an unknown `id` are ignored,
+as is an answer for a parameter whose `when` is unsatisfied.
 Answering "use defaults" applies every `default` value.
 
-A returned document is accepted whenever it appears - on any question surface, on
-its own or embedded inside a natural-language reply. Natural language surrounding
-the document is treated as supplementary context, not as part of the answers.
+A returned document is accepted whenever it appears - on any question surface,
+on its own or embedded inside a natural-language reply.
+Natural language surrounding the document is treated as supplementary context,
+not as part of the answers.
 
-Answers arriving as prompt selections or natural-language responses are
-equivalent.
+Answers arriving as prompt selections or natural-language responses are equivalent.
 
-A returned document that resolves every pending surface is applied without
-re-asking.
+A returned document that resolves every pending surface is applied without re-asking.
 
-Validation failures - an `answer` letter outside `menu`, a `selection` carrying no
-entry, a `choice` answer that ignores `Cancel` - re-emit the document in
-diagnostic mode with the failure named, then continue the question flow.
+Validation failures - an `answer` letter outside `menu`, a `selection` carrying no entry,
+a `choice` answer that ignores `Cancel` - re-emit the document in diagnostic mode with the failure
+named, then continue the question flow.
 
 ## Autonomous Surfaces
 
@@ -167,25 +160,23 @@ A procedure that defines an autonomous mode - the session review's flag in
 `process/decision-modes.md` - resolves each of its pending surfaces to the recommended
 option without waiting.
 
-The document emits with the resolved value in `answer` instead of the empty string, and
-the resolution is reported in the reply like an answered question.
+The document emits with the resolved value in `answer` instead of the empty string,
+and the resolution is reported in the reply like an answered question.
 
-A verbose flag additionally reports the full `menu` and the rationale behind each
-resolved default.
+A verbose flag additionally reports the full `menu` and the rationale behind each resolved default.
 
-Under `fully autonomous` no question surface emits at all - surfaces that cannot be
-resolved safely are recorded as skipped decisions, never as empty prompts.
+Under `fully autonomous` no question surface emits at all - surfaces that cannot be resolved safely
+are recorded as skipped decisions, never as empty prompts.
 
 ## Authority
 
 The emitted document describes pending decisions. It never performs the operation.
 
-A filled document returned with answers is user input of the same rank as an
-interactive answer - the permission boundaries of `process/decision-modes.md` still
-govern what may run without asking.
+A filled document returned with answers is user input of the same rank as an interactive answer -
+the permission boundaries of `process/decision-modes.md` still govern what may run without asking.
 
 ## What Does Not Apply
 
 - No parameter document emits while no question surface is pending.
-- The catalog is not a parameter surface - `process/operations-catalog.md` answers
-  inline and never emits JSON.
+- The catalog is not a parameter surface - `process/operations-catalog.md` answers inline
+  and never emits JSON.

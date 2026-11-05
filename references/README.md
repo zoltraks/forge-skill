@@ -5,11 +5,11 @@
 > **Scope:** Index of the evidence and convention references under `references/`
 > **Key items:** load triggers, authority levels
 
-Load a reference only when the pipeline phase that needs it runs - phase 0 loads
-the two contract files, later phases load on demand.
+Load a reference only when the pipeline phase that needs it runs - phase 0 loads the two contract
+files, later phases load on demand.
 
-A large reference loads by section, not whole - `skill-hygiene.md` is read per
-finding class: grep the class heading and read that section only.
+A large reference loads by section, not whole - `skill-hygiene.md` is read per finding class:
+grep the class heading and read that section only.
 
 ## Index
 
@@ -31,6 +31,6 @@ finding class: grep the class heading and read that section only.
 
 ## Authority
 
-`layout-profiles.md`, `astra-conventions.md`, and `skills-specification.md` are
-contractual - generated output must satisfy the profile they define. The rest
-are methodological guidance the agent applies with judgment.
+`layout-profiles.md`, `astra-conventions.md`,
+and `skills-specification.md` are contractual - generated output must satisfy the profile they
+define. The rest are methodological guidance the agent applies with judgment.

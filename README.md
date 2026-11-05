@@ -1,19 +1,19 @@
 # Forge Skill
 
 Forge is an Agent Skills package that creates **new** Agent Skills - from scratch,
-from research on a topic, or from external sources such as PDF books, EPUB files,
-Word documents, and HTML pages - and that **governs existing** ones through
-housekeeping, optimization, and evidence-gated repair.
+from research on a topic, or from external sources such as PDF books, EPUB files, Word documents,
+and HTML pages - and that **governs existing** ones through housekeeping, optimization,
+and evidence-gated repair.
 
-It is a member of the [Astra Skills](https://github.com/Astra-Professional/astra-skills)
-collection, and its default `astra` layout follows the same conventions: a routed
-`SKILL.md`, shared activation / JSON-exchange / session-review procedures, a
-once-per-session update check, governance documents, behavioral evals, and the
-dual-mode autonomy contract (interactive, autonomous, fully autonomous, verbose).
+It is a member of the [Astra Skills](https://github.com/Astra-Professional/astra-skills) collection,
+and its default `astra` layout follows the same conventions: a routed `SKILL.md`,
+shared activation / JSON-exchange / session-review procedures, a once-per-session update check,
+governance documents, behavioral evals, and the dual-mode autonomy contract (interactive,
+autonomous, fully autonomous, verbose).
 
-Two further layouts are supported: the `spec` profile emits a minimal package
-conformant to the [Agent Skills specification](https://agentskills.io/specification),
-and the `plugin` profile wraps a spec skill in Claude Code plugin packaging.
+Two further layouts are supported: the `spec` profile emits a minimal package conformant to the
+[Agent Skills specification](https://agentskills.io/specification), and the `plugin` profile wraps a
+spec skill in Claude Code plugin packaging.
 Existing skills migrate between layouts in both directions.
 
 ## What It Does
@@ -36,21 +36,19 @@ Existing skills migrate between layouts in both directions.
 
 A creation request runs a five-phase pipeline:
 
-1. **Initialization** - classify the operation and interaction mode, open a dated
-   gitignored run workspace, and start the run-state ledger.
-2. **Research foundation** - define the question, plan bounded gathering, extract
-   and cite evidence, and note conflicts and gaps.
+1. **Initialization** - classify the operation and interaction mode,
+   open a dated gitignored run workspace, and start the run-state ledger.
+2. **Research foundation** - define the question, plan bounded gathering, extract and cite evidence,
+   and note conflicts and gaps.
 3. **Architecture design** - map the distilled knowledge onto the skill router:
-   triggers, operations, resource files, and the resolved profile's
-   compatibility matrix.
-4. **Generation** - render the template set with the approved context into a
-   scratch staging area, validate, then write the target.
+   triggers, operations, resource files, and the resolved profile's compatibility matrix.
+4. **Generation** - render the template set with the approved context into a scratch staging area,
+   validate, then write the target.
 5. **Finalization** - run the validation suite and deliver the summary report.
 
-External documents convert through an approved local converter - MarkItDown when
-installed or previously approved - with provenance, injection screening, and
-extraction-quality reporting. Raw source text stays in scratch, only derived,
-attributed knowledge lands in the generated skill.
+External documents convert through an approved local converter - MarkItDown when installed or
+previously approved - with provenance, injection screening, and extraction-quality reporting.
+Raw source text stays in scratch, only derived, attributed knowledge lands in the generated skill.
 
 ## Directory Tree
 
@@ -73,11 +71,11 @@ forge-skill/
 ## Requirements
 
 - An agent environment with file access and Python 3.10+.
-- No network access for local sources. Remote fetching, cloning, and package
-  installation always require explicit approval - including in fully autonomous
-  mode, which skips them instead.
-- MarkItDown is optional: needed only to convert binary documents such as PDF or
-  DOCX. Plain text and Markdown sources work without it.
+- No network access for local sources. Remote fetching, cloning,
+  and package installation always require explicit approval - including in fully autonomous mode,
+  which skips them instead.
+- MarkItDown is optional: needed only to convert binary documents such as PDF or DOCX.
+  Plain text and Markdown sources work without it.
 
 ## Usage
 
@@ -97,21 +95,21 @@ check my skills across platform roots for drift
 repair the release-notes skill, its trigger misfires
 ```
 
-Every operation accepts `autonomous`, `fully autonomous`, and `verbose` flags -
-see `process/decision-modes.md` for the authoritative matrix.
+Every operation accepts `autonomous`, `fully autonomous`,
+and `verbose` flags - see `process/decision-modes.md` for the authoritative matrix.
 
 ## Limitations
 
-- Forge generates document sets, it does not invent domain expertise. A blocked
-  essential phase produces a partial run, not an ungrounded skill.
-- Automatic fold-in of new sources into an existing skill is deferred - the
-  Update operation reports a proposed fold only.
-- Conversion quality is best effort: scanned PDFs need a separate OCR path, and
-  extraction loss is reported, never hidden.
+- Forge generates document sets, it does not invent domain expertise.
+  A blocked essential phase produces a partial run, not an ungrounded skill.
+- Automatic fold-in of new sources into an existing skill is deferred - the Update operation reports
+  a proposed fold only.
+- Conversion quality is best effort: scanned PDFs need a separate OCR path,
+  and extraction loss is reported, never hidden.
 - Housekeeping mutates a target only through its apply gates - dry-run first,
   archive before any removal, never hard-delete.
-- Live model benchmarking and fully unsupervised self-improvement remain
-  deferred - healing promotes only on external-verifier evidence.
+- Live model benchmarking and fully unsupervised self-improvement remain deferred - healing promotes
+  only on external-verifier evidence.
 
 ## License
 

@@ -19,19 +19,19 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.3.1"
+  version: "0.3.2"
   author: Filip Golewski
 ---
 
 # Forge Skill
 
 > **Type:** Root router
-> **Purpose:** Route skill-creation, source-analysis, collection-generation, and
-> skill-lifecycle requests to the pipeline procedure, the housekeeping or healing
-> procedures, the conversion path, or the maintenance path.
-> **Scope:** Creates new Agent Skills from research or external sources and
-> governs existing skill projects and collections - it does not edit prose
-> documents, audit code, or prepare repositories, those belong to sibling skills.
+> **Purpose:** Route skill-creation, source-analysis, collection-generation,
+> and skill-lifecycle requests to the pipeline procedure, the housekeeping or healing procedures,
+> the conversion path, or the maintenance path.
+> **Scope:** Creates new Agent Skills from research or external sources and governs existing skill
+> projects and collections - it does not edit prose documents, audit code, or prepare repositories,
+> those belong to sibling skills.
 
 You are a Skill Factory Agent.
 
@@ -45,38 +45,37 @@ You keep mechanical work in scripts and judgment in the rule corpus.
 
 ## Modes
 
-- **Enable mode** - a bare activation phrase ("use forge", "work with forge") runs
-  `process/skill-activation.md`, answers with the enablement response, and waits.
+- **Enable mode** - a bare activation phrase ("use forge", "work with forge")
+  runs `process/skill-activation.md`, answers with the enablement response, and waits.
 - **Operation mode** - the request names an operation from the table below.
-- **Maintenance mode** - "work on forge-skill" targets this package's own files -
-  follow `process/skill-maintenance.md`, confirm readiness, and wait for the named
-  operation.
+- **Maintenance mode** - "work on forge-skill" targets this package's own files - follow
+  `process/skill-maintenance.md`, confirm readiness, and wait for the named operation.
 
 The update check below runs once per session in every mode.
 
-Load only the file a route names plus the files that file names in turn - the
-Resource Map's directory indexes resolve names on demand and are never bulk-read.
+Load only the file a route names plus the files that file names in turn - the Resource Map's
+directory indexes resolve names on demand and are never bulk-read.
 
-Timing is armed by default on every operation - `no timing` opts out for that
-request, per `process/operation-timing.md`.
+Timing is armed by default on every operation - `no timing` opts out for that request,
+per `process/operation-timing.md`.
 
 ## Interaction Modes
 
-Every operation accepts orthogonal interaction flags named in the request. The
-authoritative matrix is `process/decision-modes.md`.
+Every operation accepts orthogonal interaction flags named in the request.
+The authoritative matrix is `process/decision-modes.md`.
 
 - **Interactive** (default) - recommendations are shown and material checkpoints ask.
-- **Autonomous** - `autonomous`, `automatic`, `unattended`, or `non-interactive` -
-  evidenced recommendations apply without asking, essential inputs and gated
-  actions still surface.
-- **Fully autonomous** - `fully autonomous`, `no questions`, or `without asking` -
-  no question surfaces, blocked steps skip, and the result reports partial.
-- **Verbose** - `verbose` adds options, evidence, trade-offs, and rejected
-  alternatives to every decision report without changing selections or gates.
+- **Autonomous** - `autonomous`, `automatic`, `unattended`,
+  or `non-interactive` - evidenced recommendations apply without asking,
+  essential inputs and gated actions still surface.
+- **Fully autonomous** - `fully autonomous`, `no questions`,
+  or `without asking` - no question surfaces, blocked steps skip, and the result reports partial.
+- **Verbose** - `verbose` adds options, evidence, trade-offs,
+  and rejected alternatives to every decision report without changing selections or gates.
 
-No interaction mode grants permission for network access, installation, overwrite,
-deletion, commit, or publication. A separately gated action still requires its own
-approval or is skipped per the mode rules.
+No interaction mode grants permission for network access, installation, overwrite, deletion, commit,
+or publication. A separately gated action still requires its own approval or is
+skipped per the mode rules.
 
 ## Skill Update Check
 
@@ -85,57 +84,50 @@ where `<skill-root>` is the directory holding this `SKILL.md` - never the edited
 
 Use `python3` when `python` is not on PATH.
 
-- `UPDATE-AVAILABLE` - show the user the reported `tip_sha`, `tip_date`, `incoming_*`
-  commits, and `changed_*` flags, then ask whether to update the skill now or skip for
-  this session, and wait for the answer. On approval, run `git -C <skill-root> merge
-  --ff-only <tip_sha>` only when the reported state allows it (`ahead=0`, `dirty=no`),
-  then re-read `SKILL.md` and any loaded rule files. When the merge is blocked or
-  declined, report briefly and continue with the current version, without asking again
-  this session.
-- A user-requested merge that cannot fast-forward may still run as a real merge -
-  conflicts resolve and its completing merge commit may be made, while other changes
-  the merge left behind are proposed as one commit. Pushing runs only on a separately
-  named request.
+- `UPDATE-AVAILABLE` - show the user the reported `tip_sha`, `tip_date`, `incoming_*` commits,
+  and `changed_*` flags, then ask whether to update the skill now or skip for this session,
+  and wait for the answer. On approval, run `git -C <skill-root> merge --ff-only <tip_sha>` only
+  when the reported state allows it (`ahead=0`, `dirty=no`),
+  then re-read `SKILL.md` and any loaded rule files. When the merge is blocked or declined,
+  report briefly and continue with the current version, without asking again this session.
+- A user-requested merge that cannot fast-forward may still run as a real merge - conflicts resolve
+  and its completing merge commit may be made,
+  while other changes the merge left behind are proposed as one commit.
+  Pushing runs only on a separately named request.
 - Any other status - proceed silently and do not mention the check.
-- Under fully autonomous mode without network authorization, record a
-  `network-check-skipped` decision and continue with the loaded router instead of
-  fetching or asking.
+- Under fully autonomous mode without network authorization,
+  record a `network-check-skipped` decision and continue with the loaded router instead
+  of fetching or asking.
 
 The check writes no state files and never commits, stashes, or discards skill changes.
-Its `git fetch` updates remote-tracking refs under `.git` but writes no files in the
-working tree.
+Its `git fetch` updates remote-tracking refs under `.git` but writes no files in the working tree.
 
 The merge applies upstream content without cryptographic verification.
 
-Approve only trusted upstreams, and review `git log HEAD..@{u}` diffs before approving
-when unsure. The merge fast-forwards to the reported `tip_sha`, never a later tip.
+Approve only trusted upstreams, and review `git log HEAD..@{u}` diffs before approving when unsure.
+The merge fast-forwards to the reported `tip_sha`, never a later tip.
 
 ## Trigger Keywords
 
-- **Create**: create, forge, author, build, or generate a skill or collection -
-  "new agent skill", "make a skill from scratch", "create a skill collection",
-  "add a member skill to a collection".
-- **From sources**: "skill from this book/PDF/EPUB/website", "analyze this source
-  for a future skill", "generate the skill from the recorded analysis".
-- **Package and migrate**: "package as a Claude Code plugin", "marketplace
-  entry", "adopt this skill into astra", "export to the spec layout", "migrate
-  this skill's layout".
-- **Lifecycle**: "update <skill> with this source", "housekeep, clean, or
-  reorganize <skill>", "optimize or slim <skill>", "repair, heal, or fix
+- **Create**: create, forge, author, build, or generate a skill or collection - "new agent skill",
+  "make a skill from scratch", "create a skill collection", "add a member skill to a collection".
+- **From sources**: "skill from this book/PDF/EPUB/website",
+  "analyze this source for a future skill", "generate the skill from the recorded analysis".
+- **Package and migrate**: "package as a Claude Code plugin", "marketplace entry",
+  "adopt this skill into astra", "export to the spec layout", "migrate this skill's layout".
+- **Lifecycle**: "update <skill> with this source", "housekeep, clean, or reorganize <skill>",
+  "optimize or slim <skill>", "repair, heal, or fix
   <named-skill>", "check my skills for duplicates or drift".
 - **Catalog**: "list all operations", "show all capabilities".
-- **Maintenance**: "work on forge-skill", "improve forge-skill", "fix this
-  skill".
-- **Near misses that do not activate**: summarize this PDF, convert this file to
-  Markdown, write documentation, audit this repository - these name sibling-skill
-  or general tasks, and "improve forge-skill" or "fix this skill" stays in
-  maintenance mode.
+- **Maintenance**: "work on forge-skill", "improve forge-skill", "fix this skill".
+- **Near misses that do not activate**: summarize this PDF, convert this file to Markdown,
+  write documentation, audit this repository - these name sibling-skill or general tasks,
+  and "improve forge-skill" or "fix this skill" stays in maintenance mode.
 
 Naming is not required - scope match activates the skill.
 
-Skill-package or collection authoring inside any repository routes to this skill
-whether or not the request mentions forge, and the target's own rules govern the
-target's files.
+Skill-package or collection authoring inside any repository routes to this skill whether or not the
+request mentions forge, and the target's own rules govern the target's files.
 
 ## Operations
 
@@ -167,9 +159,8 @@ target's files.
 
 ## Resource Map
 
-Each resource directory carries a `README.md` index naming every file with its
-load trigger - consult the index when a route or procedure needs a name, never
-bulk-read a directory.
+Each resource directory carries a `README.md` index naming every file with its load trigger -
+consult the index when a route or procedure needs a name, never bulk-read a directory.
 
 | Path          | Index                  | Contents                                      |
 |---------------|------------------------|-----------------------------------------------|
@@ -182,31 +173,29 @@ bulk-read a directory.
 | `tests/`      | `tests/README.md`      | Unit tests and fixtures for the scripts       |
 | `work/`       | -                      | Gitignored run state, never shipped           |
 
-Repository files: `AGENTS.md` (maintenance entry point), `README.md` (human
-overview and directory tree), `CHANGELOG.md` (release history), `LICENSE` (MIT).
+Repository files: `AGENTS.md` (maintenance entry point),
+`README.md` (human overview and directory tree), `CHANGELOG.md` (release history), `LICENSE` (MIT).
 
 ## Boundaries
 
 - Keep `SKILL.md` lean: it routes and stays below 500 lines.
-- Register every new or renamed resource in its directory's `README.md` index -
-  routed procedures also gain an Operations table row - and mirror layout changes
-  in the `README.md` tree, per `docs/MAINTENANCE.md`.
-- A generated skill writes only into its approved target directory, Forge's own
-  run state and converted source text live in the gitignored `work/` tree and are
-  never shipped.
-- Never embed real project names, paths, or identifiers supplied with a request -
-  examples stay anonymized, per `docs/MAINTENANCE.md`.
-- Never invent domain facts. A blocked essential phase marks the run partial, it
-  never produces an ungrounded "complete" skill.
-- No automatic commits, pushes, remote creation, network access, or package
-  installation - each needs its own approval, in every interaction mode.
-- Housekeeping and healing never hard-delete - every removal archives first
-  with a recorded restore path, and every mutation passes its apply gate.
-- A healing patch promotes only on external-verifier evidence - reflection
-  alone never promotes a change.
-- A housekeeping run on a collection never patches member checkouts on
-  collection authority - member changes are proposed inside each member's
-  own repository.
-- Bump `metadata.version` by one patch with every change set, per
-  `docs/VERSIONING.md`.
+- Register every new or renamed resource in its directory's `README.md` index - routed procedures
+  also gain an Operations table row - and mirror layout changes in the `README.md` tree,
+  per `docs/MAINTENANCE.md`.
+- A generated skill writes only into its approved target directory,
+  Forge's own run state and converted source text live in the gitignored `work/` tree
+  and are never shipped.
+- Never embed real project names, paths, or identifiers supplied with a request - examples stay
+  anonymized, per `docs/MAINTENANCE.md`.
+- Never invent domain facts. A blocked essential phase marks the run partial,
+  it never produces an ungrounded "complete" skill.
+- No automatic commits, pushes, remote creation, network access,
+  or package installation - each needs its own approval, in every interaction mode.
+- Housekeeping and healing never hard-delete - every removal archives first with a recorded restore
+  path, and every mutation passes its apply gate.
+- A healing patch promotes only on external-verifier evidence - reflection alone
+  never promotes a change.
+- A housekeeping run on a collection never patches member checkouts on collection authority - member
+  changes are proposed inside each member's own repository.
+- Bump `metadata.version` by one patch with every change set, per `docs/VERSIONING.md`.
 - Do not claim validation that did not run.

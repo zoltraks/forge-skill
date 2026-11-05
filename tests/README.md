@@ -5,9 +5,8 @@
 > **Scope:** Index of the deterministic unit tests under `tests/`
 > **Key items:** suite table, invocation
 
-Every tool under `scripts/` carries a test file here, covering at least one
-failing fixture. Synthetic skill trees are built in temporary directories - no
-shipped fixtures are required.
+Every tool under `scripts/` carries a test file here, covering at least one failing fixture.
+Synthetic skill trees are built in temporary directories - no shipped fixtures are required.
 
 ## Suite
 

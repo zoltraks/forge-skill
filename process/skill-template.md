@@ -4,13 +4,11 @@
 
 > **Scope:** What a generated skill contains - the file contract per layout
 > profile and the fill rules
-> **Key items:** astra, spec, and plugin contracts, template map, fill rules,
-> compatibility matrices
+> **Key items:** astra, spec, and plugin contracts, template map, fill rules, compatibility matrices
 
-This file defines the artifact Forge produces per layout profile - the profiles
-and selection rules live in `references/layout-profiles.md`. The templates
-themselves live in `templates/`, the canonical template-to-path map is
-`templates/README.md`.
+This file defines the artifact Forge produces per layout profile - the profiles and selection rules
+live in `references/layout-profiles.md`. The templates themselves live in `templates/`,
+the canonical template-to-path map is `templates/README.md`.
 
 ## Astra Profile - The Member Contract
 
@@ -47,10 +45,9 @@ themselves live in `templates/`, the canonical template-to-path map is
 | `evals/evals.json` | when assertions are designed | `specification-evaluation` |
 | domain directories | as evidenced                 | written by the agent       |
 
-A spec skill carries no member-contract surface - no `AGENTS.md`, no
-`CHANGELOG.md`, no `docs/`, no shared `process/` procedures, no Forge scripts.
-Domain directories remain evidence-justified per
-`references/skill-anatomy.md`.
+A spec skill carries no member-contract surface - no `AGENTS.md`, no `CHANGELOG.md`, no `docs/`,
+no shared `process/` procedures, no Forge scripts.
+Domain directories remain evidence-justified per `references/skill-anatomy.md`.
 
 ## Plugin Profile - Claude Code Packaging
 
@@ -61,60 +58,56 @@ Domain directories remain evidence-justified per
 | `README.md`                       | recommended     | written by the agent |
 | `.claude-plugin/marketplace.json` | when publishing | `plugin-marketplace` |
 
-The plugin root's manifest names the plugin and its metadata, and the payload is
-an unmodified spec render. Render the `plugin` set into the empty plugin root
-before the `spec` payload, since the renderer refuses a non-empty target. A
-marketplace request renders `plugin-marketplace` into a separate marketplace
-root.
+The plugin root's manifest names the plugin and its metadata,
+and the payload is an unmodified spec render.
+Render the `plugin` set into the empty plugin root before the `spec` payload,
+since the renderer refuses a non-empty target.
+A marketplace request renders `plugin-marketplace` into a separate marketplace root.
 
 ## Collection Mode
 
-A generated collection carries the index set - `collection-router`,
-`collection-readme`, `collection-agents`, `collection-contract`,
-`collection-review`, `collection-synchronization` - plus one complete single-skill
-generation per member.
+A generated collection carries the index set - `collection-router`, `collection-readme`,
+`collection-agents`, `collection-contract`, `collection-review`,
+`collection-synchronization` - plus one complete single-skill generation per member.
 
 Collections imply the `astra` profile - member skills are astra-shaped.
 
-The run resolves one of two membership models at intake and records it in the run
-state's `inputs`:
+The run resolves one of two membership models at intake and records it in the run state's `inputs`:
 
-- `submodule` - members are independently owned repositories pinned as git
-  submodules. Member trees render into each member's own repository checkout, the
-  `collection-gitmodules` template renders the registration snippet, and the
-  delivery report names the pin and publish steps the user performs.
-- `tracked` - members are tracked `skills/<name>/` directories inside the
-  collection repository. Member trees render straight into the collection staging
-  tree, no `.gitmodules` is emitted, and the generated membership placeholders
-  record the tracked model throughout the index documents.
+- `submodule` - members are independently owned repositories pinned as git submodules.
+  Member trees render into each member's own repository checkout,
+  the `collection-gitmodules` template renders the registration snippet,
+  and the delivery report names the pin and publish steps the user performs.
+- `tracked` - members are tracked `skills/<name>/` directories inside the collection repository.
+  Member trees render straight into the collection staging tree, no `.gitmodules` is emitted,
+  and the generated membership placeholders record the tracked model throughout the index documents.
 
 ## Fill Rules
 
-- The renderer substitutes `{{placeholder}}` values from `template-input.json` -
-  the agent writes that file from verified evidence.
-- Every context file carries the renderer's required keys - `skill-name`,
-  `skill-title`, `skill-purpose`, `skill-description` - whichever set renders.
-  A collection context aliases them to the collection values, while the
-  `collection-*` keys carry the real text the index templates consume.
-- Frontmatter follows `references/skills-specification.md`: `name` matches the directory
-  slug, `description` states purpose and triggers within limits,
+- The renderer substitutes `{{placeholder}}` values from `template-input.json` - the agent writes
+  that file from verified evidence.
+- Every context file carries the renderer's required keys - `skill-name`, `skill-title`,
+  `skill-purpose`, `skill-description` - whichever set renders.
+  A collection context aliases them to the collection values,
+  while the `collection-*` keys carry the real text the index templates consume.
+- Frontmatter follows `references/skills-specification.md`: `name` matches the directory slug,
+  `description` states purpose and triggers within limits,
   `metadata.version` starts at `0.1.0` where the profile carries one.
-- Every `astra` skill ships both autonomy modes in its router and
-  `process/decision-modes.md`, even when its own procedures ask nothing - the
-  modes are documented no-ops with identical safety semantics.
-- Router instructions follow `references/instruction-patterns.md`: procedures
-  over declarations, calibrated prescriptiveness, defaults over menus.
-- Author metadata comes from the target's convention or an explicit value - never
-  guessed or hardcoded from Forge's own author.
+- Every `astra` skill ships both autonomy modes in its router and `process/decision-modes.md`,
+  even when its own procedures ask nothing - the modes are documented no-ops with
+  identical safety semantics.
+- Router instructions follow `references/instruction-patterns.md`: procedures over declarations,
+  calibrated prescriptiveness, defaults over menus.
+- Author metadata comes from the target's convention or an explicit value - never guessed or
+  hardcoded from Forge's own author.
 - Generated prose follows the shipped style contract: one sentence per paragraph,
   wrapped at 100 characters, tables aligned by source width.
-- Runtime scratch belongs to the generated skill's own gitignored `work/`, never
-  to Forge's workspace and never to a collection's.
+- Runtime scratch belongs to the generated skill's own gitignored `work/`,
+  never to Forge's workspace and never to a collection's.
 
 ## Compatibility Matrices
 
-Phase 2 fills the matrix for the resolved profile before generation - every
-row must pass.
+Phase 2 fills the matrix for the resolved profile before generation - every row must pass.
 
 ### Astra
 
@@ -152,7 +145,8 @@ A row that cannot pass carries a recorded reason and the run reports partial.
 
 ## Render Discipline
 
-Templates render to a staging directory first, `scripts/validate-skill.py
---profile <profile>` checks the stage, only a passing stage writes to the
-target. `scripts/render-templates.py` owns the mechanical rules - placeholder
-resolution, path safety, overwrite protection.
+Templates render to a staging directory first,
+`scripts/validate-skill.py --profile <profile>` checks the stage,
+only a passing stage writes to the target.
+`scripts/render-templates.py` owns the mechanical rules - placeholder resolution, path safety,
+overwrite protection.
