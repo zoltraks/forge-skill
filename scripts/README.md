@@ -60,3 +60,10 @@ and the canonical evals schema when `evals.json` exists.
   `<name>.conflict-<timestamp>` instead of overwriting them.
 - `convert-source.py` treats document content as untrusted data - the only subprocess argument is
   the resolved file path.
+
+## Document-Formatting Tools
+
+The document-formatting battery lives in this directory and loads only for document-formatting
+tasks: `detect-encoding.py`, `census-document.py`, `normalize-chars.py`, `split-sentences.py`,
+`reflow-prose.py`, `wrap-prose.py`, `format-table.py`, `align-comments.py`, `validate-document.py`,
+`check-document.py`, `diff-content.py`.

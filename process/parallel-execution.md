@@ -29,11 +29,11 @@ Parallelism never changes what is produced - it changes only who reads or drafts
 Choose roles from the pool per request shape, merging roles when the surface is small.
 State which roles ran and why in the delivery.
 
-| Role            | Focus                                                              |
-|-----------------|--------------------------------------------------------------------|
-| `source-reader` | Read one authorized source range and return extracted evidence     |
-| `inventory`     | Read-only target map: files, layouts, registered resources         |
-| `draft`         | Draft one named template region or evidence section to scratch     |
+| Role            | Focus                                                          |
+|-----------------|----------------------------------------------------------------|
+| `source-reader` | Read one authorized source range and return extracted evidence |
+| `inventory`     | Read-only target map: files, layouts, registered resources     |
+| `draft`         | Draft one named template region or evidence section to scratch |
 
 ## Scout Contract
 

@@ -174,7 +174,7 @@
     },
     {
       "id": 16,
-      "prompt": "Export panther-skill to a minimal spec package in ./out.",
+      "prompt": "Export the sample skill to a minimal spec package in ./out.",
       "expected_output": "The layout-migration export direction: SKILL.md plus domain directories only, the router rewritten without astra machinery, expectations mapped to assertions, validated with --profile spec.",
       "files": [],
       "expectations": [
