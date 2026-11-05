@@ -30,7 +30,7 @@ Domain directories are evidence-justified in every profile:
 | `scripts/<verb>-<obj>.py` | Mechanical, repeatable work exists - never for reasoning                                                 |
 | `templates/`              | The skill produces documents from skeletons                                                              |
 | `assets/`                 | Static files the skill copies or serves                                                                  |
-| `types/`, `languages/`... | Domain taxonomies like panther's - real evidence only                                                    |
+| `types/`, `languages/`... | Domain taxonomies - real evidence only                                                                   |
 | `tests/`                  | The skill ships its own scripts worth testing - root directory, subdirectory containers like `fixtures/` |
 | `evals/`                  | Always for `astra`, and for `spec` when assertions are designed, per `references/evaluation-design.md`   |
 

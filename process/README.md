@@ -27,3 +27,6 @@ Load a procedure only when the task reaches it - progressive disclosure stays la
 | `skill-housekeeping.md` | Housekeep, clean, or reorganize a named target             |
 | `skill-optimization.md` | Optimize a named external skill's context cost             |
 | `skill-healing.md`      | Repair or improve a named external skill, evidence-gated   |
+| `self-healing.md`       | Evidence-gated repair of a named defect in this skill      |
+| `parallel-execution.md` | Large work surfaces split across read-only scouts          |
+| `development.md`        | "Work on forge-skill development" standby mode             |

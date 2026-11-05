@@ -78,6 +78,9 @@ contract, not bloat.
   operations-table rows.
 - **Index per directory** - every resource directory gains a `README.md` index
   naming each file with its load trigger when the target's conventions allow.
+  A target whose own contract registers resources in the router plus a
+  directory tree needs no per-directory index - its absence classifies
+  `FALSE_POSITIVE`, never `missing-index`.
 - **Conditional pointers** - references resolve through the index or through
   "read `<file>` when `<condition>`" wording, never blanket directory
   references.

@@ -165,6 +165,31 @@ class AuditSkillTests(unittest.TestCase):
             self.assertIn("process=", result.stdout)
             self.assertIn("indexes process", result.stdout)
 
+    def test_load_profile_counts_taxonomy_dir_index(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch))
+            (skill / "types").mkdir()
+            (skill / "types" / "README.md").write_text("# Index\n",
+                                                     encoding="utf-8")
+            (skill / "types" / "sample-type.md").write_text("# Type\n",
+                                                            encoding="utf-8")
+            result = run_audit(str(skill), "--load-profile")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("indexes types", result.stdout)
+
+    def test_taxonomy_dir_reference_counts_as_broken_ref(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch))
+            skill.joinpath("SKILL.md").write_text(
+                "---\nname: sample-skill\ndescription: >-\n  A sample skill.\n"
+                'license: MIT\nmetadata:\n  version: "0.1.0"\n---\n\n'
+                "# Sample\n\nSee process/notes.md and types/missing.md.\n",
+                encoding="utf-8",
+            )
+            result = run_audit(str(skill))
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("broken_ref=types/missing.md", result.stdout)
+
     def test_load_profile_absent_without_flag(self) -> None:
         with tempfile.TemporaryDirectory() as scratch:
             skill = make_skill(Path(scratch))

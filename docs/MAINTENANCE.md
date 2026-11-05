@@ -113,8 +113,8 @@ python3 scripts/render-templates.py --self-test
 git diff --check
 ```
 
-When the change set edits tables, run `format-table.py` from a sibling compass
-checkout on each edited file first - source-width table alignment is
+When the change set edits tables, run an editorial table formatter on each
+edited file first where the host provides one - source-width table alignment is
 mechanical, and running it early avoids a repair cycle when the editorial
 battery runs.
 

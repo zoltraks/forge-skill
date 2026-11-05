@@ -35,7 +35,10 @@ LINK_PATTERN = re.compile(r"\]\(([^)]+)\)")
 
 IGNORED_NAMES = {".git", "work", "__pycache__", ".DS_Store"}
 RESOURCE_DIRS = {"process", "references", "scripts", "templates", "docs",
-                 "evals", "assets", "resources", "examples"}
+                 "evals", "assets", "resources", "examples",
+                 "types", "languages", "translations", "scopes", "conventions",
+                 "principles", "sections", "orchestrations", "practices",
+                 "assessment", "synthesis", "agents"}
 RULE_DIRS = {".cursor/rules", ".kilocode/rules"}
 
 PLATFORM_ROOTS = [

@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.3.1] - 2026-11-05
+
+### Changed
+
+- `scripts/audit-skill.py` - `RESOURCE_DIRS` now covers member taxonomy
+  directories (`types/`, `languages/`, `translations/`, `scopes/`,
+  `conventions/`, `principles/`, `sections/`, `orchestrations/`, `practices/`,
+  `assessment/`, `synthesis`, `agents/`), so `--load-profile` index detection
+  and reference classification no longer miss them. New tests cover a taxonomy
+  index and a taxonomy broken reference.
+- `references/optimization-patterns.md` - the Index-per-directory pattern now
+  records that a target registering in its router plus a directory tree needs
+  no per-directory index.
+
+### Fixed
+
+- Removed sibling-name residue from `process/self-healing.md`,
+  `docs/MAINTENANCE.md`, and `references/skill-anatomy.md` - member files name
+  capabilities generically, never a sibling member.
+- Registered `process/self-healing.md`, `process/parallel-execution.md`, and
+  `process/development.md` in the `process/` index - all three were routed in
+  `SKILL.md` but missing from the directory index.
+
 ## [0.3.0] - 2026-11-05
 
 ### Added
