@@ -55,8 +55,8 @@ the difference is a recorded convention, not drift.
 
 ## Running Evals
 
-Run each case twice - once with the skill, once without (or against the previous version)
-- in a clean context per run.
+Run each case twice - once with the skill, once without (or against the previous version) -
+in a clean context per run.
 
 Organize results by iteration:
 

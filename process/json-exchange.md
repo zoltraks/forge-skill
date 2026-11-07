@@ -132,7 +132,7 @@ The first form is the emitted document itself with `answer` fields filled.
 
 The second form carries a `response` key - either an array of entry objects or a condensed object
 keyed by parameter `id`. Each array entry requires only `id` and `answer` - an option letter for
-`choice`, an array of letters for `selection`, or free text for `text`;
+`choice`, an array of letters for `selection`, or free text for `text`.
 other keys may be echoed or omitted.
 
 An empty or missing `answer` - including an `id` absent from the condensed object - applies the

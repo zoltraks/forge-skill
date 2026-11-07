@@ -5,9 +5,9 @@
 > **Scope:** Index of the generation skeletons and the canonical output-path map
 > **Key items:** template sets, placeholder vocabulary, render contract
 
-Templates render through `scripts/render-templates.py` with a context document the
-agent writes from verified evidence. A `{{placeholder}}` is a named value, never
-logic - the renderer is a substitution engine.
+Templates render through `scripts/render-templates.py` with a context document the agent writes from
+verified evidence. A `{{placeholder}}` is a named value,
+never logic - the renderer is a substitution engine.
 
 ## Sets
 
@@ -62,8 +62,8 @@ domain `process/` and `references/` files - come from the rule map, not template
 | `skill-license.template`            | `LICENSE`          |
 | `specification-evaluation.template` | `evals/evals.json` |
 
-The `spec` set emits the minimal spec-conformant package - no member-contract
-files. Domain directories are written by the agent beside the rendered set.
+The `spec` set emits the minimal spec-conformant package - no member-contract files.
+Domain directories are written by the agent beside the rendered set.
 
 ## Plugin Set - Template To Output Map
 
@@ -71,9 +71,8 @@ files. Domain directories are written by the agent beside the rendered set.
 |----------------------------|------------------------------|
 | `plugin-manifest.template` | `.claude-plugin/plugin.json` |
 
-The `plugin` set renders into a plugin root whose `skills/<name>/` payload is a
-separate `spec` render - the plugin packaging wraps the skill, it never
-rewrites it.
+The `plugin` set renders into a plugin root whose `skills/<name>/` payload is a separate `spec`
+render - the plugin packaging wraps the skill, it never rewrites it.
 
 ## Marketplace Set - Template To Output Map
 
@@ -81,8 +80,8 @@ rewrites it.
 |-------------------------------|-----------------------------------|
 | `plugin-marketplace.template` | `.claude-plugin/marketplace.json` |
 
-The `marketplace` set renders into a marketplace root - a separate directory
-that lists plugin sources by path.
+The `marketplace` set renders into a marketplace root - a separate directory that lists
+plugin sources by path.
 
 ## Collection Set - Template To Output Map
 
@@ -96,11 +95,11 @@ that lists plugin sources by path.
 | `collection-synchronization.template` | `process/synchronization.md` |
 | `collection-gitmodules.template`      | `.gitmodules`                |
 
-Each collection member additionally renders the full `single` set into its own
-`skills/<name>/` directory - into the member's own repository checkout under the
-`submodule` membership model, or straight into the collection staging tree under the
-`tracked` model. The `collection-gitmodules` output is emitted only for `submodule`
-collections - a `tracked` run drops the staged `.gitmodules` and records the decision.
+Each collection member additionally renders the full `single` set into its own `skills/<name>/`
+directory - into the member's own repository checkout under the `submodule` membership model,
+or straight into the collection staging tree under the `tracked` model.
+The `collection-gitmodules` output is emitted only for `submodule` collections - a `tracked` run
+drops the staged `.gitmodules` and records the decision.
 
 ## Placeholder Vocabulary
 
@@ -140,5 +139,4 @@ collections - a `tracked` run drops the staged `.gitmodules` and records the dec
 | `marketplace-name`       | Claude Code marketplace slug                                  |
 | `plugin-source-path`     | Plugin path relative to the marketplace root                  |
 
-The machine-readable map is `templates/map.json`, keep both in sync per
-`docs/MAINTENANCE.md`.
+The machine-readable map is `templates/map.json`, keep both in sync per `docs/MAINTENANCE.md`.

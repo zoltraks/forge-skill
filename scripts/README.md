@@ -70,8 +70,8 @@ tasks: `detect-encoding.py`, `census-document.py`, `normalize-chars.py`, `split-
 
 Layout handling: `reflow-prose.py` refuses `--wrap` or `--justify` on a document that reads as
 unwrapped - over-width lines that open their own prose units rather than continuing wrapped text.
-Pass `--convert` for an intentional layout conversion. `--loose` reflows only multi-line blocks
-that contain an over-width line and leaves unwrapped sentences alone. `reflow-prose.py` and
-`format-table.py` accept a directory as well as a file and skip `work/`, `.git/`, and every
-`--exclude NAME` component - produced documents under `assets/`, `examples/`, and `templates/`
-keep their own conventions and stay excluded from format sweeps.
+Pass `--convert` for an intentional layout conversion.
+`--loose` reflows only multi-line blocks that contain an over-width line and leaves unwrapped
+sentences alone. `reflow-prose.py` and `format-table.py` accept a directory as well as a file and
+skip `work/`, `.git/`, and every `--exclude NAME` component - produced documents under `assets/`,
+`examples/`, and `templates/` keep their own conventions and stay excluded from format sweeps.

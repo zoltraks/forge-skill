@@ -34,6 +34,7 @@ no collection to generate, and no maintenance request.
 
 An `"update forge-skill"` or context-resolved `"update the skill"` request is not a bare activation
 - it routes to `process/session-review.md`, the self-improvement routine,
+
 on every request without a separate "improve" keyword.
 
 An activation may also name a working target - a repository, directory,
