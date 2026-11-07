@@ -55,7 +55,8 @@ files over 300 lines add a `## Contents` table.
   table is the router's share of registration, per-file catalogs stay in the indexes.
 - Mirror every layout change in the `README.md` directory tree.
 - `## Contents` tables carry section names only, no line numbers.
-- Keep `evals/evals.json` in sync when behavior changes.
+- Keep `evals/evals.json` in sync when behavior changes - ids stay unique and sequential,
+  and scripted rewrites keep literal non-ASCII and the trailing newline.
 - A template change keeps `templates/README.md` and the renderer's map in sync.
 
 ## External Examples
