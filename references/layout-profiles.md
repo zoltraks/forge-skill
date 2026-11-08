@@ -85,6 +85,19 @@ entries are the pattern.
 | Git submodule      | Pinned external repository - the astra-skills collection's mechanism |
 | Tracked directory  | Member lives inside the collection repository as a tracked path      |
 
+## Special Files
+
+Optional agent-facing files in a generated tree follow the uppercase entry-point family
+alongside `README.md`, `AGENTS.md`, and `SKILL.md`:
+
+| File          | Role                                                                                                                                                          |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `REGISTRY.md` | A registry directory's selection file - the table resolving a selectable option to its entry, carrying the selection model itself rather than a content index |
+| `INDEX.md`    | An optional per-directory index listing contents - adopted where a project records that navigation convention                                                 |
+
+Both are optional - a directory carries them only when its role needs them, `README.md` remains
+the default directory index, and `REGISTRY.md` never replaces it.
+
 ## Portability Rule
 
 Keep domain logic in scripts and rule files, keep harness glue thin and generated.
