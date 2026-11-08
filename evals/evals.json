@@ -427,6 +427,17 @@
         "no mutation runs on a foreign target",
         "an approved mutation on a governed layout archives the file before rewriting it"
       ]
+    },
+    {
+      "id": 358,
+      "prompt": "Summarize the run in verbose mode.",
+      "expected_output": "The report closes with an operations table - one row per operation carrying `Operation`, `Time`, and `Context` columns - and the timing sentence stays last.",
+      "files": [],
+      "expectations": [
+        "a verbose report closes with an operations table carrying `Operation`, `Time`, and `Context` columns",
+        "the driving agent and model are named in a separate paragraph once per session or on request",
+        "the `<description> operation took <m:ss>` sentence stays the last sentence"
+      ]
     }
   ]
 }

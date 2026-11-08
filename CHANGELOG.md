@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.7] - 2026-11-08
+
+### Changed
+
+- `process/operation-timing.md` - verbose, diagnostic, and timing reports now close with an
+  operations table carrying `Operation`, `Time`, and `Context` columns, and the driving agent
+  and model are named once per session or on request in a separate paragraph.
+
 ## [0.3.1] - 2026-11-05
 
 ### Changed

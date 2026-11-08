@@ -37,6 +37,17 @@ response: `<description> operation took <m:ss>`,
 where `<description>` is a short phrase naming the operation the last user query asked for and
 `<m:ss>` is the elapsed time in minutes:seconds.
 
+A verbose, diagnostic, or timing report also closes with an operations table above the timing
+paragraph - one row per operation the session has run:
+
+| Operation | Time     | Context |
+|-----------|----------|---------|
+| `<name>`  | `<m:ss>` | `<n>%`  |
+
+The `Time` column is the operation's measured elapsed time and `Context` is the change in
+context-window fulfillment the operation caused - the best measure available, an estimate when
+the environment reports none.
+
 ## Performance Analysis
 
 An operation that runs longer than three minutes closes with a breakdown table placed immediately
@@ -59,7 +70,9 @@ and warnings seen. A poll that finds no new output still earns a brief "still in
 
 ## Agent Identity
 
-A verbose, diagnostic, or timing report names the driving agent and model ahead of the stage table.
+The driving agent and model are named once per session - on the first verbose, diagnostic, or
+timing report - and again whenever a request asks for them, as a separate paragraph outside
+the report block.
 Detection follows a ladder - an explicit value named in the request,
 then the tool's own namespace variables,
 then known environment markers (`AI_AGENT` carrying `devin` proves Devin,
