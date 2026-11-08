@@ -38,16 +38,46 @@ from __future__ import annotations
 import os
 import subprocess
 import sys
+from functools import lru_cache
 from pathlib import Path
 
 FETCH_TIMEOUT = 20
 GIT_TIMEOUT = 15
 
 
+@lru_cache(maxsize=None)
+def ssh_command(root: Path):
+    """Resolve the SSH command for fetches.
+
+    GIT_SSH_COMMAND preempts core.sshCommand, so a blanket default would
+    discard a repository's configured key. A configured OpenSSH command is
+    kept with BatchMode appended so it still fails fast instead of prompting.
+    Returns None when GIT_SSH is in use - it carries a program path and is
+    honored verbatim.
+    """
+    if os.environ.get("GIT_SSH"):
+        return None
+    cfg = subprocess.run(
+        ["git", "-C", str(root), "config", "--get", "core.sshCommand"],
+        capture_output=True, encoding="utf-8", errors="replace",
+        timeout=GIT_TIMEOUT,
+    )
+    base = cfg.stdout.strip() if cfg.returncode == 0 else ""
+    if not base:
+        return "ssh -o BatchMode=yes"
+    program = Path(base.split()[0].strip('"')).name.lower()
+    if program.startswith("ssh"):
+        return f"{base} -o BatchMode=yes"
+    return base
+
+
 def git(root: Path, *args: str, timeout: int = GIT_TIMEOUT) -> subprocess.CompletedProcess | None:
     env = dict(os.environ)
     env.setdefault("GIT_TERMINAL_PROMPT", "0")
-    env.setdefault("GIT_SSH_COMMAND", "ssh -o BatchMode=yes")
+    if "GIT_SSH_COMMAND" not in env:
+        command = ssh_command(root)
+        if command:
+            env["GIT_SSH_COMMAND"] = command
     try:
         return subprocess.run(
             ["git", "-C", str(root), *args],

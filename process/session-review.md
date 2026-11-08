@@ -89,6 +89,9 @@ failed, or was skipped.
 
 ## What Does Not Apply
 
+- A request naming `improvement` as a mode does not route here - the mode applies improvements
+  during the work itself, this procedure runs only when the `improve` operation is named,
+  and a mode request reviews no history that precedes it.
 - No generation machinery runs - pipeline phases, template rendering,
   and conversion do not apply to the skill's own files.
 - No separate findings log is kept - findings land directly in the rule files they correct.

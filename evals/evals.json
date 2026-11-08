@@ -438,6 +438,17 @@
         "the driving agent and model are named in a separate paragraph once per session or on request",
         "the `<description> operation took <m:ss>` sentence stays the last sentence"
       ]
+    },
+    {
+      "id": 359,
+      "prompt": "work on forge-skill in improvement mode",
+      "expected_output": "Improvement mode is a working mode - improvements the work surfaces are applied to this repository's files through the member's own maintenance path, during the work itself. The session-history gather does not run: it belongs to the named `improve` operation alone.",
+      "files": [],
+      "expectations": [
+        "does not route to process/session-review.md on the improvement-mode flag alone",
+        "applies improvements during the work through the member's own maintenance path",
+        "reviews no session history that precedes the mode request"
+      ]
     }
   ]
 }

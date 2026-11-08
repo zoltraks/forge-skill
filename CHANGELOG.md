@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.9] - 2026-11-08
+
+### Fixed
+
+- `scripts/check-update.py` - the fetch no longer overrides the repository's configured
+  `core.sshCommand` with a blanket `GIT_SSH_COMMAND` default, which discarded the pinned
+  credential and produced intermittent `FETCH-FAILED` verdicts under the wrong identity.
+  The script now resolves `core.sshCommand` and appends `BatchMode` to OpenSSH commands.
+
+### Changed
+
+- `process/development.md`, `process/session-review.md` - naming `improvement` as a mode on a
+  work request arms continuous improvement during the work itself, never the session-history
+  gather, which still runs only on the named `improve` operation.
+
 ## [0.3.7] - 2026-11-08
 
 ### Changed

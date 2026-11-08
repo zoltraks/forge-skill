@@ -34,10 +34,17 @@ a type file, a registration.
 The target is this repository's own files,
 edited under `docs/MAINTENANCE.md` and `docs/STYLE.md` through `process/skill-maintenance.md`.
 
+A development request may also name `improvement` - "work on forge-skill development and
+improvement". The flag arms improvement mode for the described work:
+improvements the work surfaces are applied to this repository's files through the member's own
+maintenance path, and the flag alone never routes to the session-history gather.
+
 ## What Does Not Apply
 
 - The mode never edits on assumption - standby ends at a described change, not before.
 - Session review stays a separate operation - development mode delivers a described change,
   while "improve forge-skill" gathers lessons.
+- An `improvement` flag on the request arms the working mode above - it never triggers the
+  session-review gather on its own.
 - Timing follows `process/operation-timing.md` - the start-up check is the operation the readiness
   report's closing line times.

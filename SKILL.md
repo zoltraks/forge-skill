@@ -19,7 +19,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.3.8"
+  version: "0.3.9"
   author: Filip Golewski
 ---
 
