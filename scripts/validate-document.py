@@ -301,7 +301,7 @@ def main(path, width, payload_markdown):
             if any(q in prose for q in TYPO_QUOTES):
                 issues.append(f"line {n}: typographic quote or apostrophe")
 
-            if ";" in prose and not line.startswith("|"):
+            if re.search(r"(?<!\w);|;(?!\w)", prose) and not line.startswith("|"):
                 issues.append(f"line {n}: semicolon in prose")
 
             if not line.lstrip().startswith("|") \
