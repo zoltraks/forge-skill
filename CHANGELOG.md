@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.4.2] - 2026-11-10
+
+### Changed
+
+- `process/operation-timing.md` - the context-usage surface is pinned to the compact operations
+  table with no report headings; a fuller context-usage report emits only when context usage is
+  specifically requested, and a counter the environment does not expose is omitted entirely,
+  never reported as `unknown` or another placeholder.
+
 ## [0.3.9] - 2026-11-08
 
 ### Fixed

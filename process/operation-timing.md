@@ -45,11 +45,19 @@ paragraph - one row per operation the session has run:
 | `<name>`  | `<m:ss>` | `<n>%`  |
 
 The `Time` column is the operation's measured elapsed time and `Context` is the change in
-context-window fulfillment the operation caused - the best measure available, an estimate when
-the environment reports none.
+context-window fulfillment the operation caused - the best measure available,
+an estimate when the environment reports none.
 
-The operations table is the only context-usage surface in a standard report - a descriptive
-context-usage form answers only a direct context question.
+The operations table is the standard report's context-usage surface - a single small table with no
+report headings, a few rows covering the context share and elapsed time of the session's operations.
+
+A fuller context-usage report emits only when context usage is specifically requested - it never
+rides along on an unrelated response.
+
+A descriptive context-usage form answers only a direct context question.
+
+A counter the environment does not expose is omitted entirely - no `unknown` or placeholder
+value is ever reported.
 
 ## Performance Analysis
 
@@ -73,9 +81,9 @@ and warnings seen. A poll that finds no new output still earns a brief "still in
 
 ## Agent Identity
 
-The driving agent and model are named once per session - on the first verbose, diagnostic, or
-timing report - and again whenever a request asks for them, as a separate paragraph outside
-the report block.
+The driving agent and model are named once per session - on the first verbose, diagnostic,
+or timing report - and again whenever a request asks for them,
+as a separate paragraph outside the report block.
 Detection follows a ladder - an explicit value named in the request,
 then the tool's own namespace variables,
 then known environment markers (`AI_AGENT` carrying `devin` proves Devin,
