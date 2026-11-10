@@ -48,6 +48,9 @@ The `Time` column is the operation's measured elapsed time and `Context` is the 
 context-window fulfillment the operation caused - the best measure available, an estimate when
 the environment reports none.
 
+The operations table is the only context-usage surface in a standard report - a descriptive
+context-usage form answers only a direct context question.
+
 ## Performance Analysis
 
 An operation that runs longer than three minutes closes with a breakdown table placed immediately
