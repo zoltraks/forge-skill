@@ -28,6 +28,11 @@
   across the corpus.
 - `SKILL.md`, `scripts/README.md`, `process/README.md`, `evals/README.md` - registration
   and coverage lines for the new capability.
+- `AGENTS.md`, `docs/CONTRIBUTING.md` - the commit-message convention now records the full
+  shape rules: repository-convention matching from `git log`, no type prefixes, no
+  trailing period on a single-line subject, no AI attribution or trailers, and no
+  trailing newline, with a blank line reserved for separating a subject from a real body
+  paragraph.
 
 ## [0.4.4] - 2026-11-11
 

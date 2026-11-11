@@ -49,8 +49,11 @@ Keep each rule in its owning document and link to it instead of duplicating it.
 - A request that names no concrete operation authorizes analysis and proposals only - files in this
   repository change on an explicit, confirmed instruction.
 - Do not claim validation that did not run.
-- Never commit automatically - propose a one-sentence commit message without trailers.
-  The one exception is a commit completing a user-approved upstream merge,
+- Never commit automatically - propose a commit message matching the repository convention
+  (`git log -10 --format=%s`): a one-line subject with no type prefixes, no trailing period
+  on a single-line subject, no AI attribution or trailers, and no trailing newline - a
+  blank line belongs only between a subject and a real body paragraph. The one exception
+  is a commit completing a user-approved upstream merge,
   which may be made - pushing always runs on a separate request.
 - A bare `work on forge-skill` request that names no operation is standby - read this file,
   `SKILL.md`, and `process/skill-activation.md`, confirm readiness,

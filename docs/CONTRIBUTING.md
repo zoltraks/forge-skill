@@ -15,7 +15,9 @@ those follow different fix paths.
 ## Setup
 
 No build step and no dependencies beyond Python 3.10+. Edit documents per `docs/STYLE.md`,
-run the suite in `docs/MAINTENANCE.md`, and propose a one-sentence commit message.
+run the suite in `docs/MAINTENANCE.md`, and propose a commit message per `AGENTS.md` -
+one-line subject, no type prefixes, no trailing period, no AI attribution or trailers,
+no trailing newline.
 
 ## Pull Requests
 
