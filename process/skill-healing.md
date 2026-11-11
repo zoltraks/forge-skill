@@ -61,7 +61,7 @@ Score the skill against its own constraints: its `SKILL.md` contract, its evals 
 and the named defect or regression.
 
 Use structured failure tags - "missed-trigger", "contradiction",
-"stale- reference" - not regex heuristics over prose.
+"stale- reference", "prose-question" - not regex heuristics over prose.
 
 ### 2. Patch
 

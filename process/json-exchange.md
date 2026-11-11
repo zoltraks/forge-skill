@@ -38,7 +38,10 @@ and no question prompts.
 The emission order is fixed: the JSON document first,
 then a text description of the pending decisions, then the question prompts.
 
-The question prompts still run. The emitted document does not replace the question flow.
+The question prompts still run - every pending surface is presented through the host's own
+question mechanism, or appended to the reply with its recommendation per
+`process/decision-modes.md` where prose delivery applies.
+The emitted document does not replace the question flow.
 
 ## Emitted Document
 

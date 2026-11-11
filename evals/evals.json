@@ -91,7 +91,8 @@
       "expectations": [
         "The run resumes from the first phase not proven complete.",
         "Mismatched inputs trigger a fresh run or a mode-appropriate resolution, never silent reuse.",
-        "No phase is skipped on file existence alone."
+        "No phase is skipped on file existence alone.",
+        "an appended question names its recommendation, and a verbose-mode append also states what it decides and each answer's consequences"
       ]
     },
     {
@@ -473,6 +474,30 @@
         "the final page carries the cancel entry and asks only after `Next` was selected",
         "a cancel-class answer pauses for the next prompt and `repeat` re-asks the last question",
         "a `selection` answer mixing a no-answer entry with content entries warns and re-asks"
+      ]
+    },
+    {
+      "id": 362,
+      "prompt": "audit the example-skill - its transcripts show options named in reply prose even though its corpus records menu-shape rules",
+      "expected_output": "A partial interaction-contract finding - the delivery-channel rule is unrecorded - repaired through the per-layout insert shape and gated on approval.",
+      "files": [],
+      "expectations": [
+        "classifies the gap Partial and names the missing delivery-channel rule",
+        "observed transcripts outweigh a recorded-complete contract",
+        "the repair inserts the smallest compatible contract in the target's own shape",
+        "no contract edit lands without approval - the repair is behavior-touching"
+      ]
+    },
+    {
+      "id": 363,
+      "prompt": "the forge run's intake summary ends by naming the profile options - proceed with astra?",
+      "expected_output": "The pending choice is asked through the host's question mechanism - a menu ending with a cancel-class entry - never answered by options named in reply prose.",
+      "files": [],
+      "expectations": [
+        "asks the pending surface through the host's question mechanism",
+        "a reply ending by waiting on a choice is treated as a pending surface",
+        "naming options in reply prose is not asking them",
+        "the question ends with a cancel-class entry"
       ]
     }
   ]

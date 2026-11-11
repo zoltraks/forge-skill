@@ -140,9 +140,9 @@ A gap is information the skill should provide but does not:
   an `astra` -layout member lacking `process/operations-catalog.md`,
   or a `SKILL.md` carrying no operations enumeration on any other layout.
 - Missing interaction contract - a skill that asks its user confirmations or selections carries no
-  recorded rules for how those questions are shaped and answered: menu shape, cancel class,
-  multi-answer exclusivity, resume. Detection signals, the canonical vocabulary,
-  and the per-layout repair shapes live in `references/interaction-contract.md`.
+  recorded rules for how those questions are delivered, shaped, and answered: delivery channel,
+  menu shape, cancel class, multi-answer exclusivity, resume. Detection signals, the canonical
+  vocabulary, and the per-layout repair shapes live in `references/interaction-contract.md`.
 
 A gap is reported as a gap.
 Missing domain content is named, never invented.

@@ -4,8 +4,8 @@
 
 > **Scope:** The question-surface contract a skill teaches its agent - detection signals for audits
 > and per-layout repair shapes for healing
-> **Key items:** menu shape, paging, cancel class, multi-answer exclusivity, proceed
-> variant, resume, JSON parity
+> **Key items:** delivery channel, menu shape, paging, cancel class, multi-answer exclusivity,
+> proceed variant, resume, JSON parity
 
 This file is the canonical definition of how a skill instructs its agent to ask the user for
 confirmation or selection.
@@ -20,6 +20,22 @@ but absent such a name the agent asks.
 
 Every material confirmation or selection emits as an option question,
 never as a prose-only proceed request and never as a silent apply.
+
+**Delivery channel**
+
+A question is delivered through the host's own question mechanism - a dedicated ask or question
+tool - whenever the host provides one.
+
+A reply that ends by waiting on a choice carries a pending surface, and naming options in reply
+prose is not asking them.
+
+A question appends to the tail of the reply in prose where the host offers no question mechanism,
+and may append under the skill's verbose or expanded-reporting mode where the added explanation
+belongs with the question.
+
+Every appended question names its recommendation.
+A question appended under the verbose mode also states what the question decides and the
+consequences each answer carries.
 
 **Menu shape**
 
@@ -68,12 +84,15 @@ and a returned document is accepted on any surface per the skill's own exchange 
 
 Classify the target's corpus for question-surface coverage.
 
-- **Present** - a recorded contract names the menu shape, the cancel class,
+- **Present** - a recorded contract names the delivery channel, the menu shape, the cancel class,
   multi-answer exclusivity, and resume - astra-layout members normally carry it inside their
   interaction-mode and JSON-exchange surfaces.
 - **Partial** - questions are asked but one or more rules are unrecorded - the gap names each
   missing rule, never the whole contract.
 - **Absent** - no question-surface instruction exists anywhere in the corpus.
+
+Observed transcripts outweigh recorded text: a session trace showing options named in reply prose
+classifies the delivery rule as unrecorded, whatever the corpus claims.
 
 A skill that never asks questions - a purely mechanical generator,
 a validator wrapper - has no surface to cover and reports `FALSE_POSITIVE`.

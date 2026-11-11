@@ -54,6 +54,8 @@ Keep each rule in its owning document and link to it instead of duplicating it.
 - A bare `work on forge-skill` request that names no operation is standby - read this file,
   `SKILL.md`, and `process/skill-activation.md`, confirm readiness,
   and wait for the named operation rather than resuming plans or editing on assumption.
+- Pending questions and option surfaces are asked through the host's question mechanism, never
+  appended to a reply in prose.
 
 ## Local Workspace
 
