@@ -4,6 +4,7 @@
 
 > **Scope:** The audit taxonomy and rule tables for housekeeping and healing an existing skill
 > project or skill collection
+>
 > **Key items:** behavioral preservation, lifecycle states, drift classes,
 > consistency and gap classes, deduplication passes, confidence matrix, token budgets, safety rules
 
@@ -248,6 +249,7 @@ Every finding carries a confidence class that gates its resolution:
 | Semantic merge                          | Never                        | Always                       |
 | Missing operations catalog              | Never                        | Always                       |
 | Interaction-contract repair             | Never                        | Always                       |
+| Evals suite compaction                  | Never                        | Always                       |
 | Behavioral change, even framed as a fix | Never                        | Always, plus replay evidence |
 
 ## Safety Rules

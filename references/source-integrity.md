@@ -4,6 +4,7 @@
 
 > **Scope:** Trust boundaries for external source material - provenance, copyright,
 > injection, and sanitization
+>
 > **Key items:** provenance chain, copyright boundary, untrusted content, Unicode hygiene,
 > no raw text in shipped files
 

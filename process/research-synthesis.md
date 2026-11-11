@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Distilling extracted evidence into an actionable skill design
+>
 > **Key items:** candidates, provenance, confidence, conflicts, gaps, the rule map
 
 This file defines how gathered evidence becomes the architecture input of phase 2 in

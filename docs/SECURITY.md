@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** What counts as a security issue in forge-skill and how to report one
+>
 > **Key items:** reporting path, trust boundaries, covered risks
 
 ## Reporting

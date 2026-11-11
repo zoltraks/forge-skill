@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Converting local external sources into readable text for gathering
+>
 > **Key items:** converter location, preflight, authorization, extraction quality, scratch boundary
 
 This file defines how binary and markup sources become text the gathering pass can read.

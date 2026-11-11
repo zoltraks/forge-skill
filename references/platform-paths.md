@@ -4,6 +4,7 @@
 
 > **Scope:** The skill and rule locations an inventory scans across agent platforms,
 > and the per-platform semantics a cleanup must respect
+>
 > **Key items:** platform roots table, discovery rules, precedence, portability
 
 This file is the evidence `scripts/audit-skill.py --discover` encodes and the contract housekeeping

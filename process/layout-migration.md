@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Converting an existing skill between layout profiles
+>
 > **Key items:** layout detection, adopt and export directions, delta plan, content
 > preservation, validation
 

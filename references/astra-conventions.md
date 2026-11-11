@@ -4,6 +4,7 @@
 
 > **Scope:** The compatibility contract a generated skill must satisfy to sit beside the
 > astra-skills collection members
+>
 > **Key items:** shared procedures, update check, review modes, repository conventions,
 > registration contract
 

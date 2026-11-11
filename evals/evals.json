@@ -4,12 +4,13 @@
     {
       "id": 1,
       "prompt": "Use forge.",
-      "expected_output": "Enable-mode response per process/skill-activation.md - a one-line enablement confirmation naming the skill and its version, a compact operations table, and standby for the next request.",
+      "expected_output": "Enable-mode response per process/skill-activation.md - a one-line enablement confirmation naming the skill and its version, a compact operations table, and standby for the next request. Nothing beyond the router and the activation file is read.",
       "files": [],
       "expectations": [
         "The reply names the skill version from metadata.version.",
         "The reply includes the operations table and invites a task request.",
-        "No repository scan, file read beyond the router, or edit is performed."
+        "No rule file beyond SKILL.md and process/skill-activation.md is loaded, no repository scan or edit runs.",
+        "Directory README indexes are consulted on demand, never bulk-read."
       ]
     },
     {
@@ -92,7 +93,7 @@
         "The run resumes from the first phase not proven complete.",
         "Mismatched inputs trigger a fresh run or a mode-appropriate resolution, never silent reuse.",
         "No phase is skipped on file existence alone.",
-        "an appended question names its recommendation, and a verbose-mode append also states what it decides and each answer's consequences"
+        "An appended question during resume names its recommendation, and a verbose-mode append also states what it decides and each answer's consequences."
       ]
     },
     {
@@ -209,24 +210,13 @@
     },
     {
       "id": 19,
-      "prompt": "Analyze this example PDF for a future skill, informational mode.",
-      "expected_output": "The analyze-source operation runs and the response ends with a separate paragraph whose last sentence reports '<description> operation took <m:ss>' in minutes:seconds format.",
+      "prompt": "Analyze this example PDF for a future skill - first in timing mode, then in informational mode.",
+      "expected_output": "Both runs of the analyze-source operation close per the operation-timing contract: each reply ends with the '<description> operation took <m:ss>' sentence, and the informational run emits no parameter document.",
       "files": [],
       "expectations": [
-        "The agent loaded process/operation-timing.md for the informational flag - the diagnostic surface stays in process/json-exchange.md.",
+        "The agent loaded process/operation-timing.md for both flags - the diagnostic surface stays in process/json-exchange.md.",
+        "Each reply ends with a separate paragraph whose single sentence is the last sentence: '<description> operation took <m:ss>' in minutes:seconds format.",
         "No parameter document emits under the informational flag - it arms the timing report alone.",
-        "The reply ends with a separate paragraph whose single sentence is the last sentence: '<description> operation took <m:ss>' - the description names the operation the query asked for and the time uses minutes:seconds.",
-        "No timing line appears on a bare activation or standby reply - the rule covers named operations only."
-      ]
-    },
-    {
-      "id": 20,
-      "prompt": "Analyze this example PDF for a future skill, timing mode.",
-      "expected_output": "The analyze-source operation runs and the response ends with a separate paragraph whose last sentence reports '<description> operation took <m:ss>' in minutes:seconds format.",
-      "files": [],
-      "expectations": [
-        "The agent loaded process/operation-timing.md for the timing flag - the diagnostic surface stays in process/json-exchange.md.",
-        "The reply ends with a separate paragraph whose single sentence is the last sentence: '<description> operation took <m:ss>' - the description names the operation the query asked for and the time uses minutes:seconds.",
         "No timing line appears on a bare activation or standby reply - the rule covers named operations only."
       ]
     },
@@ -304,8 +294,8 @@
       "files": [],
       "expectations": [
         "The request is recognized as an explicitly named housekeeping operation targeting this repository.",
-        "Maintenance-mode standby is not entered - the operation runs per process/skill-housekeeping.md.",
-        "Every mutation stays gated and respects the repository's own governing documents."
+        "Maintenance-mode standby is not entered - the operation runs per process/housekeeping.md.",
+        "Findings report as a proposal, and every mutation stays gated under the repository's own governing documents."
       ]
     },
     {
@@ -354,15 +344,6 @@
       ]
     },
     {
-      "id": 350,
-      "prompt": "housekeep forge-skill",
-      "expected_output": "Runs process/housekeeping.md - registration reconciliation, coverage checks, workspace hygiene, validation, proposal report.",
-      "files": [],
-      "expectations": [
-        "runs process/housekeeping.md and reports findings as a proposal"
-      ]
-    },
-    {
       "id": 351,
       "prompt": "work on forge-skill development",
       "expected_output": "Runs process/development.md - update check, readiness report, standby for a described change.",
@@ -396,16 +377,6 @@
       "files": [],
       "expectations": [
         "emits the parameter document and accepts both return forms"
-      ]
-    },
-    {
-      "id": 355,
-      "prompt": "Use forge.",
-      "expected_output": "Bare activation loads only the router and process/skill-activation.md - no process, references, templates, or scripts file is read before the task names its route.",
-      "files": [],
-      "expectations": [
-        "no rule file beyond SKILL.md and process/skill-activation.md is loaded at activation",
-        "directory README indexes are consulted on demand, never bulk-read"
       ]
     },
     {
@@ -498,6 +469,31 @@
         "a reply ending by waiting on a choice is treated as a pending surface",
         "naming options in reply prose is not asking them",
         "the question ends with a cancel-class entry"
+      ]
+    },
+    {
+      "id": 364,
+      "prompt": "Compact the example-skill evals - it carries duplicate prompts and repeated checks.",
+      "expected_output": "An evals-scoped optimization run per process/skill-optimization.md - scripts/compact-evals.py reports the candidates, findings classify per references/optimization-patterns.md, and a dry-run merge plan precedes any rewrite.",
+      "files": [],
+      "expectations": [
+        "scripts/compact-evals.py ran and its candidate findings were recorded as the baseline.",
+        "The scope stayed inside evals/evals.json - no other surface was measured or touched.",
+        "The merge plan preserves every behavioral surface the suite covered before compaction.",
+        "No rewrite lands before the plan is approved - evals compaction never auto-applies.",
+        "The dry-run plan closed with the apply-scope surface asked through the host's question mechanism, never by naming options in reply prose alone."
+      ]
+    },
+    {
+      "id": 365,
+      "prompt": "Apply the approved evals compaction to example-skill.",
+      "expected_output": "The rewrite preserves the schema and the coverage set - skill_name matches, ids stay unique and sequential, the files array survives, and the original archives first.",
+      "files": [],
+      "expectations": [
+        "Ids stay unique and sequential after the merge.",
+        "Literal non-ASCII content and the trailing newline survive the rewrite.",
+        "The compacted suite still covers every routed operation, gate, and boundary it covered before.",
+        "A snapshot archives the original file before the rewrite."
       ]
     }
   ]

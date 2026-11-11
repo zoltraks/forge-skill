@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Classifying the research task and picking the gathering methodology
+>
 > **Key items:** research types, depth levels, source categories, method selection
 
 ## Research Types

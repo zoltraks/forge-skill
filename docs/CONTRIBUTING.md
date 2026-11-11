@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** How to report issues and propose changes to forge-skill
+>
 > **Key items:** issue reporting, development setup, pull-request rules, AI policy
 
 ## Issues

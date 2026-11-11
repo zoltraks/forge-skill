@@ -4,6 +4,7 @@
 
 > **Scope:** The governed housekeeping procedure for an existing skill project or skill collection -
 > inventory, drift, consistency, deduplication, cleanup
+>
 > **Key items:** target resolution, dry-run default, confidence gates, archive-before-mutate,
 > collection member boundaries, audit log
 

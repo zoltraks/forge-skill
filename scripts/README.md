@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Contracts and safety classes of the tools under `scripts/`
+>
 > **Key items:** tool table, safety classes, exit statuses, invocation convention
 
 Run every tool in place - `python3 <skill-root>/scripts/<tool>.py`.
@@ -18,6 +19,7 @@ The tools are self-contained single files, standard library only.
 | `convert-source.py`   | converter    | Converts a local source via an approved MarkItDown                                                                       |
 | `audit-skill.py`      | read-only    | Inventories skills and collections, `--discover` scans platform roots, `--load-profile` reports per-surface load metrics |
 | `archive-skill.py`    | staged-write | Snapshots, lists, and restores archives, dry-run until `--apply`                                                         |
+| `compact-evals.py`    | read-only    | Reports evals.json compaction candidates - duplicate prompts, repeated checks, savings estimates                         |
 
 The `check-update.py` footnote: it runs `git fetch`,
 which writes remote-tracking refs under `.git` but never touches the working tree.
@@ -46,6 +48,7 @@ and the canonical evals schema when `evals.json` exists.
 | `convert-source.py`   | converted      | preflight/invoke fail | converter unavailable |
 | `audit-skill.py`      | inspected      | nothing inspectable   | usage error           |
 | `archive-skill.py`    | done/dry-run   | failure               | usage error           |
+| `compact-evals.py`    | inspected      | nothing inspectable   | usage error           |
 
 ## Boundaries
 
@@ -58,6 +61,8 @@ and the canonical evals schema when `evals.json` exists.
   `dir_bytes` totals, and `indexes` naming directories with a `README.md` index.
 - `archive-skill.py` never deletes - restores preserve conflicting files as
   `<name>.conflict-<timestamp>` instead of overwriting them.
+- `compact-evals.py` is read-only end to end - it parses `evals/evals.json` under a skill
+  directory or a direct JSON path and reports findings, it never rewrites the suite.
 - `convert-source.py` treats document content as untrusted data - the only subprocess argument is
   the resolved file path.
 
@@ -72,6 +77,8 @@ Layout handling: `reflow-prose.py` refuses `--wrap` or `--justify` on a document
 unwrapped - over-width lines that open their own prose units rather than continuing wrapped text.
 Pass `--convert` for an intentional layout conversion.
 `--loose` reflows only multi-line blocks that contain an over-width line and leaves unwrapped
-sentences alone. `reflow-prose.py` and `format-table.py` accept a directory as well as a file and
+sentences alone.
+
+`reflow-prose.py` and `format-table.py` accept a directory as well as a file and
 skip `work/`, `.git/`, and every `--exclude NAME` component - produced documents under `assets/`,
 `examples/`, and `templates/` keep their own conventions and stay excluded from format sweeps.

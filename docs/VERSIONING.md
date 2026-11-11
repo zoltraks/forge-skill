@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Version format, bump rules, and release anchoring for forge-skill
+>
 > **Key items:** three-part format, single location, change-set rule
 
 ## Format

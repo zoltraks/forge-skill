@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Index of the generation skeletons and the canonical output-path map
+>
 > **Key items:** template sets, placeholder vocabulary, render contract
 
 Templates render through `scripts/render-templates.py` with a context document the agent writes from

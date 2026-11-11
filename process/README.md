@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Index of the procedures under `process/`
+>
 > **Key items:** load order, shared contracts, pipeline files
 
 Load a procedure only when the task reaches it - progressive disclosure stays lazy.
@@ -25,7 +26,7 @@ Load a procedure only when the task reaches it - progressive disclosure stays la
 | `skill-template.md`     | Phase 2-3 - what a generated skill must contain            |
 | `layout-migration.md`   | Converting an existing skill between layout profiles       |
 | `skill-housekeeping.md` | Housekeep, clean, or reorganize a named target             |
-| `skill-optimization.md` | Optimize a named external skill's context cost             |
+| `skill-optimization.md` | Optimize a named external skill's context cost or evals    |
 | `skill-healing.md`      | Repair or improve a named external skill, evidence-gated   |
 | `self-healing.md`       | Evidence-gated repair of a named defect in this skill      |
 | `parallel-execution.md` | Large work surfaces split across read-only scouts          |

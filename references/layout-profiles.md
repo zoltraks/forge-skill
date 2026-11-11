@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** The generation layouts Forge can emit and the hosts that consume each
+>
 > **Key items:** astra, spec, and plugin profiles, selection rules, harness discovery, portability
 
 A layout profile is the combination of a template set, a file contract, and a validation profile.

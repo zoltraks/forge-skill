@@ -4,6 +4,7 @@
 
 > **Scope:** The evidence-gated repair and improvement procedure for an existing skill that
 > is not this repository
+>
 > **Key items:** safety taxonomy, healing directives, the evaluate-patch- replay-promote loop,
 > external verifiers, continuous improvement, rollback
 

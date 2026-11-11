@@ -4,6 +4,7 @@
 
 > **Scope:** Delegation model for splitting large document work across parallel scout agents when
 > the host environment supports subagents
+>
 > **Key items:** applicability, scout roles, scout contract, merge discipline,
 > provenance, sequential fallback
 

@@ -4,6 +4,7 @@
 
 > **Scope:** Elapsed-time reporting for operations,
 > armed by default on every operation the skill answers.
+>
 > **Key items:** default arming, opt-out, clock capture, closing report, coverage
 
 This file defines how Forge reports the time an operation took.

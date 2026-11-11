@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Index of the deterministic unit tests under `tests/`
+>
 > **Key items:** suite table, invocation
 
 Every tool under `scripts/` carries a test file here, covering at least one failing fixture.

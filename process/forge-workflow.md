@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** The end-to-end pipeline for creating a new skill or skill collection
+>
 > **Key items:** five phases, run state, resume, checkpoints, single and
 > collection modes, validation
 

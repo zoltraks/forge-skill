@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Prose, tables, headings, and encoding for this repository's documents
+>
 > **Key items:** document structure, sentence layout, wrapping, tables, characters, file encoding
 
 These rules apply to every shipped file in this repository,
@@ -12,7 +13,9 @@ and they are the contract `templates/` encodes for generated skills.
 
 - One H1 title (`#`) at the top of the file, concise and descriptive.
 - A `## Purpose` section immediately after,
-  using the blockquote `Scope:` / `Key items:` shape where the file is a rule file.
+  using the blockquote `Scope:` / `Key items:` shape where the file is a rule file -
+  a `>` blank line divides the two rows, because consecutive `>` lines render as one
+  merged line.
 - Main sections at H2 (`##`), subsections at H3 (`###`). No H4 or deeper.
 - Headings use Title Case, carry no trailing punctuation, and no parenthesized qualifiers.
 - Files over 300 lines carry a `## Contents` table right after the title block,

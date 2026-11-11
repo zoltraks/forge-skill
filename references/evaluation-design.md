@@ -4,6 +4,7 @@
 
 > **Scope:** The testing and validation surface a generated skill carries - eval datasets, grading,
 > trigger testing, security guardrails
+>
 > **Key items:** test-case anatomy, run workspace, assertions and grading, trigger evals,
 > quality gates, guardrails
 

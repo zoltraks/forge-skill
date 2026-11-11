@@ -1,5 +1,45 @@
 # Changelog
 
+## [0.4.5] - 2026-11-11
+
+### Added
+
+- `scripts/compact-evals.py` - read-only reporter of evals.json compaction candidates:
+  duplicate and similar prompts, repeated and shared checks, and a savings estimate.
+- `references/optimization-patterns.md` - evals.json as a measured load surface,
+  five evals finding classes, the evals-compaction restructure pattern,
+  and the coverage-set verification rule.
+- `process/skill-optimization.md` - single-surface scope directives, an evals-scoped run
+  measured by `compact-evals.py` instead of the load profile.
+- `references/skill-hygiene.md` - an evals-suite-compaction apply gate (human approval always).
+- `tests/test_compact_evals.py` - unit coverage including failing fixtures.
+- `evals/evals.json` - evals 364 and 365 lock the scoped run and the schema-preserving rewrite.
+
+### Changed
+
+- `evals/evals.json` - compacted per the new pattern: prompt-duplicate entries merged
+  (355 into 1, 20 into 19, 350 into 27), one style-drifting expectation normalized,
+  every behavioral surface retained.
+- `references/optimization-patterns.md`, `evals/evals.json` - session-review refinements:
+  merge unions cover expected-output facets, the rewrite preserves the file's own JSON
+  indent convention, `est_savings_bytes` is documented as an upper bound,
+  and eval 364 locks the plan-stage ask surface.
+- Rule-file Purpose blocks - blank `>` lines normalized between blockquote rows
+  across the corpus.
+- `SKILL.md`, `scripts/README.md`, `process/README.md`, `evals/README.md` - registration
+  and coverage lines for the new capability.
+
+## [0.4.4] - 2026-11-11
+
+### Added
+
+- `process/decision-modes.md` - question delivery through the host's own mechanism,
+  with recommendation and verbose-mode guidance for prose-appended questions.
+- `references/interaction-contract.md` - delivery-channel detection and repair guidance.
+- `process/json-exchange.md` - question prompts stay live beside the emitted document.
+- `process/skill-healing.md`, `references/skill-hygiene.md`, `AGENTS.md`,
+  `evals/evals.json` - healing tags, JSON parity, and regression evals.
+
 ## [0.4.3] - 2026-11-11
 
 ### Added

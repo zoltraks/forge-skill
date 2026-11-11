@@ -4,6 +4,7 @@
 
 > **Scope:** The question-surface contract a skill teaches its agent - detection signals for audits
 > and per-layout repair shapes for healing
+>
 > **Key items:** delivery channel, menu shape, paging, cancel class, multi-answer exclusivity,
 > proceed variant, resume, JSON parity
 

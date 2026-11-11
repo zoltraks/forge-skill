@@ -4,6 +4,7 @@
 
 > **Scope:** The interaction-mode contract for every Forge operation - how routine decisions,
 > checkpoints, missing inputs, and gated actions resolve in each mode
+>
 > **Key items:** mode matrix, recommendation precedence, decision log, verbose
 > reporting, permission boundary
 

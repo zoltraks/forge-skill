@@ -19,16 +19,18 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.4.4"
+  version: "0.4.5"
   author: Filip Golewski
 ---
 
 # Forge Skill
 
 > **Type:** Root router
+>
 > **Purpose:** Route skill-creation, source-analysis, collection-generation,
 > and skill-lifecycle requests to the pipeline procedure, the housekeeping or healing procedures,
 > the conversion path, or the maintenance path.
+>
 > **Scope:** Creates new Agent Skills from research or external sources and governs existing skill
 > projects and collections - it does not edit prose documents, audit code, or prepare repositories,
 > those belong to sibling skills.
@@ -116,7 +118,7 @@ The merge fast-forwards to the reported `tip_sha`, never a later tip.
 - **Package and migrate**: "package as a Claude Code plugin", "marketplace entry",
   "adopt this skill into astra", "export to the spec layout", "migrate this skill's layout".
 - **Lifecycle**: "update <skill> with this source", "housekeep, clean, or reorganize <skill>",
-  "optimize or slim <skill>", "repair, heal, or fix
+  "optimize or slim <skill>", "compact or deduplicate <skill>'s evals", "repair, heal, or fix
   <named-skill>", "check my skills for duplicates or drift",
   "check a skill's question or confirmation instructions".
 - **Catalog**: "list all operations", "show all capabilities".
@@ -144,6 +146,7 @@ request mentions forge, and the target's own rules govern the target's files.
 | update an existing skill with a new source                    | `process/research-synthesis.md` - proposal only                                                      |
 | housekeep, clean, or reorganize a skill or collection         | `process/skill-housekeeping.md`                                                                      |
 | optimize, slim, or reduce a named skill's context cost        | `process/skill-optimization.md`                                                                      |
+| compact or deduplicate a named skill's evals                  | `process/skill-optimization.md` + `scripts/compact-evals.py`                                         |
 | inventory skills across platform roots or check for drift     | `process/skill-housekeeping.md` + `audit-skill.py --discover`                                        |
 | repair, heal, fix, or improve a named external skill          | `process/skill-healing.md`                                                                           |
 | check a skill against the generation contract                 | `scripts/validate-skill.py` + `references/astra-conventions.md`                                      |

@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Required and optional components of a generated skill, per layout profile
+>
 > **Key items:** universal vs astra components, file roles, when a directory exists,
 > minimum viable set, separation of concerns
 

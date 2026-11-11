@@ -4,6 +4,7 @@
 
 > **Scope:** The context-diet procedure for a named external skill - measure its load surfaces,
 > classify findings, restructure for lazy loading, and verify the delta
+>
 > **Key items:** target resolution, mechanical measurement, dry-run plan,
 > archive-before-mutate, byte-delta report
 
@@ -11,7 +12,8 @@ This file defines the optimization path of operation mode:
 the agent reduces a named skill's context consumption while preserving its behavior.
 
 Follow it for requests like "optimize <skill>", "slim <skill>", "reduce
-<skill>'s context cost", or "make <skill> lazy-load".
+<skill>'s context cost", "make <skill> lazy-load",
+or a scoped request like "compact <skill>'s evals" or "optimize <skill>'s evals.json".
 
 ## When This Applies
 
@@ -26,6 +28,10 @@ and a general cleanup, drift, or deduplication request routes to `process/skill-
 
 Classify the target's layout per the table in `process/skill-housekeeping.md` - collection,
 astra member, spec skill, plugin package, or foreign - before anything else.
+
+A request naming a single surface - "only the evals", "just the description" -
+scopes the whole run to that surface: measurement, findings, and mutations stay inside it
+and every other surface reports out of scope.
 
 A foreign target receives a proposal report only, never a mutation.
 
@@ -53,8 +59,8 @@ Stages 1-4 are read-only - nothing mutates before the plan resolves.
 
 ### 1. Intake
 
-Record the operation, mode, target path,
-and resolved layout in a run ledger at `work/<YYYY-MM>/<YYYY-MM-DD>/optimize-run-<id>/state.json`
+Record the operation, mode, target path, resolved layout,
+and resolved scope in a run ledger at `work/<YYYY-MM>/<YYYY-MM-DD>/optimize-run-<id>/state.json`
 inside this repository's gitignored workspace.
 
 Record any request-carried directives - "keep the description under 500 chars",
@@ -65,9 +71,14 @@ Record any request-carried directives - "keep the description under 500 chars",
 Run `python3 <skill-root>/scripts/audit-skill.py --load-profile <target>` and
 `python3 <skill-root>/scripts/validate-skill.py --profile <detected>`.
 
+When the evals surface is in scope, run
+`python3 <skill-root>/scripts/compact-evals.py <target>` as well.
+
 Record the baseline surfaces the profile reports: `description_chars`, router bytes and lines,
 per- `## ` section bytes, per-directory totals, and index presence,
 plus the baseline validation verdict.
+An evals-scoped run records `entries`, `expectations`, `bytes`,
+and the compaction candidates instead of the load profile.
 
 ### 3. Diagnose
 
@@ -76,6 +87,8 @@ the restructure patterns, and the layout variants.
 
 Classify every surfaced issue by finding class,
 and assign each a confidence per the matrix in `references/skill-hygiene.md`.
+The evals finding classes apply when the evals surface is in scope -
+entry merges and suite compaction always take human approval per the apply-gate table.
 
 Structure the target's own contract mandates is not a finding - recorded variance resolves
 `FALSE_POSITIVE` the same way it does in housekeeping.
@@ -86,6 +99,8 @@ Produce the dry-run report: every finding, its class and confidence, the pattern
 the gate tier it requires, and the estimated byte delta per surface.
 
 Present the plan per the interaction mode.
+The plan closes by asking the apply scope through the host's question mechanism -
+which findings or targets to apply - never by naming the options in reply prose alone.
 A bare "audit" or "check" phrasing ends here - no mutation is proposed or applied without
 the plan's approval.
 

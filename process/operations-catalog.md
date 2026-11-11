@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Response contract for requests that ask for the skill's complete list of operations
+>
 > **Key items:** catalog triggers, canonical operations table, inline delivery
 
 This file defines the answer produced when the request asks what operations the skill

@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Enablement procedure for requests that activate the skill without naming a task
+>
 > **Key items:** bare activation, referent resolution, update check, enablement response,
 > standby contract, mode hand-off
 

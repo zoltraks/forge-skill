@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Index of the evidence and convention references under `references/`
+>
 > **Key items:** load triggers, authority levels
 
 Load a reference only when the pipeline phase that needs it runs - phase 0 loads the two contract

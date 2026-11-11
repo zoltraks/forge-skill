@@ -4,6 +4,7 @@
 
 > **Scope:** Writing the routing surface of a generated skill - the description and keyword lists
 > that decide activation
+>
 > **Key items:** inclusion scope, exclusion scope, near misses, description shape
 
 The frontmatter `description` is the only always-visible text - it decides whether the skill loads

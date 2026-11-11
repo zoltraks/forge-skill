@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Standby-for-specification mode for developing this skill.
+>
 > **Key items:** trigger, start-up check, readiness report, specification, boundaries.
 
 This file is the contract for a development request aimed at forge-skill.

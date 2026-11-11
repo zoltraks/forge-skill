@@ -4,6 +4,7 @@
 
 > **Scope:** How generated skill content is written - process-driven design, calibrated control,
 > and reusable instruction patterns
+>
 > **Key items:** procedures over declarations, specificity to fragility, defaults not menus,
 > pattern catalog, skill granularity
 

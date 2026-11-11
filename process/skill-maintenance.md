@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Procedure for requests that target the forge-skill repository itself
+>
 > **Key items:** mode distinction, governing set, registration contract, validation gate
 
 This file defines the intake and execution rules for changes to the skill's own files.

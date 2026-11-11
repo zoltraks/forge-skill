@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Index of the repository-governance documents under `docs/`
+>
 > **Key items:** which document owns each rule
 
 | Document          | Owns                                                        |

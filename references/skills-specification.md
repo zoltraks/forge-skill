@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** The portable Agent Skills format a generated skill conforms to
+>
 > **Key items:** canonical source, frontmatter fields, naming limits, progressive disclosure,
 > file references, validation
 

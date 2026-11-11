@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Evidence intake for skill creation - the bounded plan and extraction pass
+>
 > **Key items:** research brief, source inventory, bounded plan, extraction, citation identity,
 > graceful degradation
 

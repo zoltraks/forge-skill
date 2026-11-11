@@ -4,6 +4,7 @@
 
 > **Scope:** What a generated skill contains - the file contract per layout
 > profile and the fill rules
+>
 > **Key items:** astra, spec, and plugin contracts, template map, fill rules, compatibility matrices
 
 This file defines the artifact Forge produces per layout profile - the profiles and selection rules

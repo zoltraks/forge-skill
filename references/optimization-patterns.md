@@ -4,6 +4,7 @@
 
 > **Scope:** The context-diet taxonomy and restructure recipe for optimizing an existing
 > skill's context consumption
+>
 > **Key items:** load-surface model, measurement surfaces, finding classes, restructure patterns,
 > layout variants, verification contract
 
@@ -23,6 +24,10 @@ A skill occupies context on three levels:
 - **Resources** - bundled files load on demand. They cost only when a route, procedure,
   or index names them.
 
+`evals/evals.json` is a resource with a per-run cost - when the regression suite executes,
+every prompt and expectation list enters the review context.
+Compacting the suite trims what each run loads without trimming what it covers.
+
 Optimization moves weight down the model: out of metadata into the router where it belongs,
 out of the router into on-demand resources,
 and out of unconditional load paths into conditional ones.
@@ -40,20 +45,36 @@ The token budgets in `references/skill-hygiene.md` set the targets - ~100 tokens
 - `dir_bytes{}` - per top-level directory totals, the on-demand corpus size.
 - `indexes[]` - resource directories carrying a `README.md` index.
 
+For the evals surface, `scripts/compact-evals.py <target>` reports `entries`,
+`expectations`, `bytes`, the candidate findings below, and an `est_savings_bytes` estimate.
+
 Baselines are recorded before diagnosis - the report's byte deltas compare against them.
 
 ## Finding Classes
 
-| Class                 | Signal                                                        | Default confidence |
-|-----------------------|---------------------------------------------------------------|--------------------|
-| `description-overrun` | `description` over ~700 chars, or over the 1024-char limit    | `HIGH`             |
-| `catalog-duplication` | Per-file resource listings in `SKILL.md` duplicating indexes  | `HIGH`             |
-| `missing-index`       | Resource directory without a `README.md` index                | `HIGH` (astra)     |
-| `unconditional-load`  | Instructions that bulk-read directories or unnamed files      | `MEDIUM`           |
-| `trigger-bloat`       | Exhaustive trigger-phrase catalogs in the router              | `HIGH`             |
-| `contents-overhead`   | Line-numbered Contents, or Contents on a file under 300 lines | `HIGH`             |
-| `inline-detail`       | Large detail blocks in the router that belong in a resource   | `MEDIUM`           |
-| `monolith-reference`  | Reference over ~10 KB with no section-level load note         | `MEDIUM`           |
+| Class                   | Signal                                                        | Default confidence |
+|-------------------------|---------------------------------------------------------------|--------------------|
+| `description-overrun`   | `description` over ~700 chars, or over the 1024-char limit    | `HIGH`             |
+| `catalog-duplication`   | Per-file resource listings in `SKILL.md` duplicating indexes  | `HIGH`             |
+| `missing-index`         | Resource directory without a `README.md` index                | `HIGH` (astra)     |
+| `unconditional-load`    | Instructions that bulk-read directories or unnamed files      | `MEDIUM`           |
+| `trigger-bloat`         | Exhaustive trigger-phrase catalogs in the router              | `HIGH`             |
+| `contents-overhead`     | Line-numbered Contents, or Contents on a file under 300 lines | `HIGH`             |
+| `inline-detail`         | Large detail blocks in the router that belong in a resource   | `MEDIUM`           |
+| `monolith-reference`    | Reference over ~10 KB with no section-level load note         | `MEDIUM`           |
+| `eval-prompt-duplicate` | Two entries carrying identical prompts                        | `HIGH`             |
+| `eval-overlap`          | Prompt pair differing only in phrasing or a mode flag         | `MEDIUM`           |
+| `eval-expectation-dup`  | One check repeated inside an entry                            | `HIGH` / `MEDIUM`  |
+| `eval-unobservable`     | Check not observable from the reply or run output             | `MEDIUM`           |
+| `eval-mechanical`       | Check a validator or unit test already guarantees             | `MEDIUM`           |
+
+`eval-expectation-dup` classifies `HIGH` verbatim and `MEDIUM` near-verbatim -
+`scripts/compact-evals.py` reports both shapes, plus `shared_expectation` lines spanning
+entries that are informational only: a check repeated across distinct entries is usually
+deliberate, because each entry is evaluated standalone.
+
+A compaction finding never asks to drop a behavioral surface - one entry stays per distinct
+route, mode, gate, or boundary the suite covered.
 
 `catalog-duplication` fires when the router enumerates files a directory index can own - an
 operations route table is registration, not duplication, and never classifies as this finding.
@@ -89,6 +110,14 @@ roster or a spec router's workflow table is the contract, not bloat.
 - **Load-discipline clause** - the router states it plainly:
   load only the file a route names plus the files it names in turn, indexes resolve names on
   demand, nothing bulk-reads.
+- **Evals compaction** - prompt-duplicate entries merge into one carrying the union of their
+  expected-output facets and expectations, near-verbatim checks consolidate into a single check,
+  and checks a validator or unit test already guarantees drop out.
+  The schema survives the rewrite: `skill_name` matches the router frontmatter,
+  ids stay unique and sequential, `files` keeps its array,
+  and the file's own JSON indent convention, literal non-ASCII,
+  plus the trailing newline are preserved.
+  `est_savings_bytes` is an upper bound - union edits keep part of the merged weight.
 
 ## Layout Variants
 
@@ -101,7 +130,8 @@ roster or a spec router's workflow table is the contract, not bloat.
 | `plugin`  | Optimize the wrapped `spec` skill payload, never the manifest |
 | `foreign` | Report only - patterns are proposed, nothing is applied       |
 
-A collection target audits per member. Findings land as proposals inside each member's own
+A collection target audits per member.
+Findings land as proposals inside each member's own
 repository - the collection's membership contract decides where mutations run,
 per `process/skill-housekeeping.md`.
 
@@ -125,3 +155,6 @@ A run is verified when:
   <detected>` pass as before, or better.
 - The byte delta per surface is reported against the recorded baseline - description, `SKILL.md`,
   and each touched directory.
+- An evals compaction verifies its coverage set - the behavioral surfaces each entry covered
+  before the rewrite are enumerated, the compacted suite still covers all of them,
+  and a compaction that drops coverage is a defect, not a diet.

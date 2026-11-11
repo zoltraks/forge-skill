@@ -3,6 +3,7 @@
 ## Purpose
 
 > **Scope:** Behavioral regression prompts for forge-skill
+>
 > **Key items:** schema, coverage, execution honesty
 
 `evals.json` holds prompts exercised after changes that alter skill behavior - routing,
@@ -15,14 +16,16 @@ gates, interaction modes.
   "expected_output": "...", "files": [], "expectations": ["..."] } ] }
 ```
 
-`skill_name` must match the `SKILL.md` frontmatter `name`. Each eval carries a unique integer `id`,
+`skill_name` must match the `SKILL.md` frontmatter `name`.
+
+Each eval carries a unique integer `id`,
 a `prompt`, an `expected_output` description, and an `expectations` list of observable checks.
 
 ## Coverage
 
 The suite covers: bare activation, single-skill creation, collection creation, analyze-only,
 near-miss routing, each interaction mode (`autonomous`, `fully autonomous`, `verbose` stacked),
-resume, update-skill, JSON exchange, and permission boundaries.
+resume, update-skill, JSON exchange, evals compaction, and permission boundaries.
 
 ## Execution
 
