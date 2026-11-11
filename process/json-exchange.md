@@ -77,6 +77,18 @@ optional `when`, `type`, `menu`, `open`,
 - `default` - the option letter or suggested text applied when the answer stays empty - for
   `selection`, the array of letters that are pre-checked.
 
+The same menu rules apply to the emitted document and to interactive questions asked without JSON:
+
+- A question lists at most four entries, ending with a cancel-class entry - `Cancel` or a
+  member-owned label such as `Pause`, `Skip`, or `Stop`.
+  A cancel-class answer means no answer - the operation pauses for the next user prompt,
+  and a later `repeat` re-asks the last question and continues.
+- Five or more candidates page the question - a non-final page ends with a `Next` continuation
+  entry, the final page carries the cancel entry, and a page asks only after `Next` was selected.
+  The emitted document still carries the full menu - paging is a prompt-side mechanism only.
+- A `Proceed` entry may replace the cancel entry where skipping is meaningful - it accepts every
+  recommendation and answers the current and all remaining questions at once.
+
 ```json
 {
     "description": "Intake parameters for <target>",
@@ -150,6 +162,7 @@ Answers arriving as prompt selections or natural-language responses are equivale
 A returned document that resolves every pending surface is applied without re-asking.
 
 Validation failures - an `answer` letter outside `menu`, a `selection` carrying no entry,
+a `selection` mixing a no-answer entry (`None` or the cancel entry) with content entries,
 a `choice` answer that ignores `Cancel` - re-emit the document in diagnostic mode with the failure
 named, then continue the question flow.
 

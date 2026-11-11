@@ -28,9 +28,11 @@ grep the class heading and read that section only.
 | `skill-hygiene.md`         | Housekeeping and healing runs - audit taxonomy and gates  |
 | `optimization-patterns.md` | Optimization runs - load surfaces, findings, patterns     |
 | `platform-paths.md`        | Multi-root inventory, precedence, and portability rules   |
+| `interaction-contract.md`  | Housekeeping and healing runs - question-surface findings |
 
 ## Authority
 
 `layout-profiles.md`, `astra-conventions.md`,
-and `skills-specification.md` are contractual - generated output must satisfy the profile they
-define. The rest are methodological guidance the agent applies with judgment.
+and `skills-specification.md` are contractual - generated output must satisfy the
+profile they define.
+The rest are methodological guidance the agent applies with judgment.

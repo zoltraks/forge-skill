@@ -65,8 +65,8 @@ Classify before fixing:
 | Soft    | Rules differ in specificity but can coexist | An explicit precedence statement in the corpus         |
 | Phantom | Wording differs, intent is identical        | Deduplication candidate, not a contradiction           |
 
-Never average contradictions. Determine which rule reflects current observed behavior,
-and when behavior is itself inconsistent,
+Never average contradictions.
+Determine which rule reflects current observed behavior, and when behavior is itself inconsistent,
 record a known ambiguity with a decision boundary instead of silently choosing.
 
 ### Single Ownership
@@ -102,7 +102,8 @@ that convention applied, not a defect.
 A `work/` path inside a shipped file divides by direction.
 An instruction that directs generated artifacts, run state,
 or scratch into the gitignored workspace states the workspace convention itself,
-it is not a violation. A shipped file that reads from, links to,
+it is not a violation.
+A shipped file that reads from, links to,
 or otherwise depends on workspace content is a defect - the workspace never ships.
 
 ### Mechanical False-Positive Classes
@@ -138,8 +139,13 @@ A gap is information the skill should provide but does not:
 - Missing operations surface - the skill does not clearly state its supported operations:
   an `astra` -layout member lacking `process/operations-catalog.md`,
   or a `SKILL.md` carrying no operations enumeration on any other layout.
+- Missing interaction contract - a skill that asks its user confirmations or selections carries no
+  recorded rules for how those questions are shaped and answered: menu shape, cancel class,
+  multi-answer exclusivity, resume. Detection signals, the canonical vocabulary,
+  and the per-layout repair shapes live in `references/interaction-contract.md`.
 
-A gap is reported as a gap. Missing domain content is named, never invented.
+A gap is reported as a gap.
+Missing domain content is named, never invented.
 
 Shared-surface drift is a gap class of its own: a missing shared procedure file,
 or a shared file missing a required skeleton section per the collection's member contract,
@@ -188,7 +194,8 @@ Artifacts also coexist legitimately when the corpus records why.
 A documented deprecation marker - `superseded by`, `deprecated`,
 kept for compatibility - makes a file a sanctioned compatibility twin, never a dedup candidate.
 Two tools whose documented scopes differ - a single-check validator beside a one-command battery -
-are recorded distinct roles, not overlap. Both classify `FALSE_POSITIVE`.
+are recorded distinct roles, not overlap.
+Both classify `FALSE_POSITIVE`.
 
 Batch generation deduplicates during generation,
 merging similar content before separate skills form, per `process/research-synthesis.md`.
@@ -206,8 +213,8 @@ backed by `references/optimization-patterns.md` - this table stays the budget au
 | References                       | Loaded on demand               | Conditional pointers only            |
 
 The description is routing logic, not prose marketing: it answers what the skill does,
-when to use it, and when not to use it. Explicit negative constraints are the strongest fix
-for trigger misfires.
+when to use it, and when not to use it.
+Explicit negative constraints are the strongest fix for trigger misfires.
 
 Conditional pointers beat blanket references - "if the API returns 403,
 read `references/auth-errors.md`", never "see `references/` for details".
@@ -240,6 +247,7 @@ Every finding carries a confidence class that gates its resolution:
 | Contradiction resolution                | Never                        | Always                       |
 | Semantic merge                          | Never                        | Always                       |
 | Missing operations catalog              | Never                        | Always                       |
+| Interaction-contract repair             | Never                        | Always                       |
 | Behavioral change, even framed as a fix | Never                        | Always, plus replay evidence |
 
 ## Safety Rules

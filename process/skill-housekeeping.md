@@ -103,6 +103,8 @@ Load `references/skill-hygiene.md` - it defines every class below.
   semantic dedup candidates, description and progressive-disclosure weaknesses.
   Recorded variance resolves per `references/skill-hygiene.md` - recorded in the member's own docs
   or a resolved collection contract classifies `FALSE_POSITIVE`, unrecorded divergence is a finding.
+- Interaction-contract findings - a skill missing or partially carrying question-surface rules -
+  load `references/interaction-contract.md` for the detection classes and per-layout repair shapes.
 - Classify every finding `HIGH`, `MEDIUM`, or `FALSE_POSITIVE` per the confidence matrix.
 
 ### 4. Plan
@@ -125,8 +127,8 @@ On approval, apply only the approved items, and only through this order:
    a substitution tool's exit status.
 3. Re-validate before the next mutation - the file may have changed since the audit.
 
-Ownership duplicates become short pointers to the single owner. Removals are archived,
-never deleted. A mutation whose snapshot fails does not run.
+Ownership duplicates become short pointers to the single owner.
+Removals are archived, never deleted. A mutation whose snapshot fails does not run.
 
 ### 6. Verify
 
@@ -152,9 +154,9 @@ A collection adds index-level checks on top of per-member audits:
   ahead of its pin is a pending re-pin to report, never a checkout to rewind.
 - Collection documents carry a single version source per the collection's versioning rules.
 
-Member mutations obey the target collection's own membership contract. For submodule members,
-per-member findings produce proposals to apply inside the member's own repository - the collection
-never patches member checkouts on its own authority.
+Member mutations obey the target collection's own membership contract.
+For submodule members, per-member findings produce proposals to apply inside the member's own
+repository - the collection never patches member checkouts on its own authority.
 Tracked members mutate in place under the collection's rules.
 
 ## Multi-Root

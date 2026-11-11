@@ -1,11 +1,23 @@
 # Changelog
 
+## [0.4.3] - 2026-11-11
+
+### Added
+
+- `references/interaction-contract.md` - the question-surface contract for skill projects:
+  menu shape, paging, cancel class, multi-answer exclusivity, proceed variant, resume,
+  and JSON parity, plus detection classes and per-layout repair shapes.
+- `references/skill-hygiene.md` - a missing-interaction-contract gap class and its apply gate.
+- `process/skill-housekeeping.md` - the audit stage loads the interaction-contract reference for
+  question-surface findings.
+- `evals/evals.json` - eval 360 locks the detection and repair behavior.
+
 ## [0.4.2] - 2026-11-10
 
 ### Changed
 
 - `process/operation-timing.md` - the context-usage surface is pinned to the compact operations
-  table with no report headings; a fuller context-usage report emits only when context usage is
+  table with no report headings - a fuller context-usage report emits only when context usage is
   specifically requested, and a counter the environment does not expose is omitted entirely,
   never reported as `unknown` or another placeholder.
 
@@ -14,23 +26,25 @@
 ### Fixed
 
 - `scripts/check-update.py` - the fetch no longer overrides the repository's configured
-  `core.sshCommand` with a blanket `GIT_SSH_COMMAND` default, which discarded the pinned
-  credential and produced intermittent `FETCH-FAILED` verdicts under the wrong identity.
+  `core.sshCommand` with a blanket `GIT_SSH_COMMAND` default,
+  which discarded the pinned credential and produced intermittent `FETCH-FAILED` verdicts
+  under the wrong identity.
   The script now resolves `core.sshCommand` and appends `BatchMode` to OpenSSH commands.
 
 ### Changed
 
-- `process/development.md`, `process/session-review.md` - naming `improvement` as a mode on a
-  work request arms continuous improvement during the work itself, never the session-history
-  gather, which still runs only on the named `improve` operation.
+- `process/development.md`, `process/session-review.md` - naming `improvement` as a mode on a work
+  request arms continuous improvement during the work itself, never the session-history gather,
+  which still runs only on the named `improve` operation.
 
 ## [0.3.7] - 2026-11-08
 
 ### Changed
 
-- `process/operation-timing.md` - verbose, diagnostic, and timing reports now close with an
-  operations table carrying `Operation`, `Time`, and `Context` columns, and the driving agent
-  and model are named once per session or on request in a separate paragraph.
+- `process/operation-timing.md` - verbose, diagnostic,
+  and timing reports now close with an operations table carrying `Operation`, `Time`,
+  and `Context` columns, and the driving agent and model are named once per session or on request in
+  a separate paragraph.
 
 ## [0.3.1] - 2026-11-05
 

@@ -77,6 +77,10 @@ names do not belong in the rule corpus.
 1. Create `references/<two-words>.md`.
 2. Register it in `references/README.md` with its load trigger.
 3. Update the `README.md` tree.
+4. A contract-bearing reference - one that defines what an audit detects and how a repair
+   shapes it - also registers a gap class and apply gate in `references/skill-hygiene.md`,
+   a load pointer in the procedure that audits it, and a regression prompt in
+   `evals/evals.json`.
 
 ## Adding A Template
 

@@ -449,6 +449,31 @@
         "applies improvements during the work through the member's own maintenance path",
         "reviews no session history that precedes the mode request"
       ]
+    },
+    {
+      "id": 360,
+      "prompt": "Audit the example-checks skill for missing user-question instructions and repair the gap.",
+      "expected_output": "Detects the interaction-contract finding per references/interaction-contract.md, classifies it present, partial, or absent with the missing rules named, proposes the repair shape matching the target's layout, and gates the mutation on approval.",
+      "files": [],
+      "expectations": [
+        "the audit checks whether the target records rules for option questions - menu shape, paging, cancel class, multi-answer exclusivity, resume, JSON parity",
+        "a partial contract names each unrecorded rule rather than flagging the whole contract",
+        "the repair shape matches the target's layout - member-owned sections for an astra member, a smallest compatible insert for a spec skill, report-only for a foreign target",
+        "no contract edit lands without approval - the repair is behavior-touching",
+        "a skill with no question surfaces classifies FALSE_POSITIVE"
+      ]
+    },
+    {
+      "id": 361,
+      "prompt": "ask me which of seven template candidates to render",
+      "expected_output": "A paged option question - the first page offers three candidates plus `Next`, the final page asks only after `Next` was selected and carries the remaining candidates plus the cancel entry.",
+      "files": [],
+      "expectations": [
+        "a menu over five or more candidates pages with a `Next` continuation entry",
+        "the final page carries the cancel entry and asks only after `Next` was selected",
+        "a cancel-class answer pauses for the next prompt and `repeat` re-asks the last question",
+        "a `selection` answer mixing a no-answer entry with content entries warns and re-asks"
+      ]
     }
   ]
 }
