@@ -18,10 +18,15 @@ and the minimal contract for the `spec` profile lives in `references/skills-spec
 A compatible member carries:
 
 - `SKILL.md` - the runtime router with YAML frontmatter (`name`, `description`, `license`,
-  `compatibility`, `metadata.version`), modes, a once-per-session update check, trigger keywords,
-  an operations table, a resource map pointing at each directory's `README.md` index,
-  and boundaries. Under 500 lines - keep it lean, per-file catalogs live in the
-  indexes, not the router.
+  `compatibility`, `metadata.version`), modes, an explicit upstream update check, trigger keywords,
+  a shared Task Entry table, an operations table,
+  a resource map pointing at each directory's `README.md` index, and boundaries.
+  Under 500 lines - keep it lean, per-file catalogs live in the indexes, not the router.
+  Task Entry covers activation, catalog, task execution, development, improvement,
+  and verbose reporting. Link the local procedure for each route and resolve the operation and
+  target before opening task resources. Read every applicable prerequisite before its phase starts
+  and defer later phases. Directory indexes help locate unspecified files.
+  A procedure that calls a script should document how to invoke it and verify its result.
 - `AGENTS.md` - the maintenance entry point: governing documents, boundaries, local workspace,
   validation, improvement.
 - `process/skill-activation.md` - bare-activation standby: Purpose, When This Applies, Procedure,
@@ -35,7 +40,7 @@ A compatible member carries:
   presentation-only authority.
 - `process/operation-timing.md` - elapsed-time report armed by default on every operation with a
   `no timing` per-request opt-out: the response closes with `<description> operation took <m:ss>`
-  and a bare activation times its update check.
+  and a bare activation times its local readiness check.
   Operations past three minutes add a stage breakdown table,
   backgrounded commands get a ~60-second output heartbeat,
   and verbose reports carry an agent/model identity block resolved through the marker ladder.

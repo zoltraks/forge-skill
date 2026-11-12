@@ -214,9 +214,14 @@ def audit_skill(root: Path, with_profile: bool = False) -> dict:
             "ok" if (root / "process" / "operations-catalog.md").is_file()
             else "missing-catalog"
         )
+    elif record["layout"] == "collection" and "process/operations-catalog.md" in referenced_paths(text):
+        record["operations_surface"] = (
+            "ok" if (root / "process" / "operations-catalog.md").is_file()
+            else "missing-catalog"
+        )
     else:
         has_enum = re.search(
-            r"(?im)^\s*(#+\s*.*operations|\|\s*operation)", text
+            r"(?im)^\s*(#+\s*.*operations|\|\s*operation\b)", text
         )
         record["operations_surface"] = "ok" if has_enum else "unstated"
 

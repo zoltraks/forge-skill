@@ -91,10 +91,15 @@ token estimates, and copy relationships.
 
 ### 3. Audit
 
-Load `references/skill-hygiene.md` - it defines every class below.
+Load `references/skill-hygiene.md` for finding classes and
+`references/instruction-patterns.md` for the Operation Review.
+Trace the affected routes, report any sampled scope, and include evidence for each finding.
 
-- Run `scripts/validate-skill.py --profile <detected>` on each skill,
-  plus the target's own validator when it ships one.
+- Record portable conformance, Forge profile validation, and the owner's validator separately.
+  Apply the collection checks below to collection indexes. Apply the resolved profile to members.
+  Preserve raw diagnostics. Before proposing a repair, check whether the owner or collection
+  records an exception. If the applicable contract is unclear, propose resolving ownership or
+  documenting the variance instead of renaming files or migrating a schema on tool output alone.
 - Mechanical findings come from the audit script: broken references, orphans, drift verdicts,
   token overruns, operations-surface absence.
   Known false-positive classes - workspace-direction references, external-root references,
@@ -110,8 +115,21 @@ Load `references/skill-hygiene.md` - it defines every class below.
 
 ### 4. Plan
 
-Produce the dry-run report: every finding, its class, the proposed fix, the gate tier it requires,
-and the snapshot that precedes it.
+Produce the dry-run report with one row per repair. Separate confirmed defects, optional
+improvements, and tool diagnostics resolved as documented variance. Include each reviewed target
+even if it has no confirmed defect.
+
+| Proposal field | Required detail                                                                        |
+|----------------|----------------------------------------------------------------------------------------|
+| Evidence       | Location, applicable rule, observed behavior or static trace, and confidence           |
+| Change         | Owning repository, files or procedure to change, and smallest useful fix               |
+| Priority       | Required reading, authority, and behavioral correctness first. Context savings second. |
+| Acceptance     | Observable result, positive and adjacent cases as relevant, and checks to rerun        |
+| Apply gate     | Required decision, dependencies, and snapshot or rollback scope                        |
+
+For a phased workflow, state what must be read before the dependent action and what stays deferred.
+For a tooling discrepancy, include a failing fixture and a valid adjacent case when practical.
+Distinguish proposed verification from checks actually run.
 
 Present the plan per the interaction mode.
 Nothing mutates before this point - a bare "audit" or "check" request ends here by design.
@@ -134,6 +152,8 @@ Removals are archived, never deleted. A mutation whose snapshot fails does not r
 ### 6. Verify
 
 Re-run `scripts/validate-skill.py` and the audit script on the mutated tree.
+Re-trace each changed route and compare it with the audit evidence.
+For behavior changes, replay affected scenarios and record the actual result separately.
 
 For every archived item, exercise the round trip once - `archive-skill.py list` resolves the
 snapshot and a `restore` dry-run confirms the recorded restore path - before

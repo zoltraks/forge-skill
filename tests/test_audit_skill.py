@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 import tempfile
@@ -111,6 +112,25 @@ class AuditSkillTests(unittest.TestCase):
             self.assertIn("layout=collection", result.stdout)
             self.assertIn("skill=member-one", result.stdout)
             self.assertIn("skill=member-two", result.stdout)
+
+    def test_collection_checks_its_routed_catalog(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            root = Path(scratch) / "my-collection"
+            root.mkdir()
+            (root / "SKILL.md").write_text(
+                "---\nname: my-collection\ndescription: Collection.\n---\n"
+                "# Index\nList capabilities with [catalog](process/operations-catalog.md).\n",
+                encoding="utf-8",
+            )
+            make_skill(root / "skills", "member-one")
+            missing = run_audit(str(root))
+            self.assertIn("operations_surface=missing-catalog", missing.stdout)
+            catalog = root / "process" / "operations-catalog.md"
+            catalog.parent.mkdir()
+            catalog.write_text("# Operations Catalog\n", encoding="utf-8")
+            present = run_audit("--json", str(root))
+            self.assertEqual(present.returncode, 0, present.stderr)
+            self.assertEqual(json.loads(present.stdout)["targets"][0]["operations_surface"], "ok")
 
     def test_discover_reports_exact_duplicate(self) -> None:
         with tempfile.TemporaryDirectory() as scratch:

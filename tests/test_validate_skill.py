@@ -60,6 +60,34 @@ class ValidateSkillTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn("PASS", result.stdout)
 
+    def test_compass_canonical_names_are_scoped(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch), "compass-skill")
+            references = skill / "references"
+            references.mkdir()
+            (references / "PREPARATION.md").write_text("# Canonical asset\n")
+            self.assertEqual(run_validator(skill).returncode, 0)
+            (references / "OTHER.md").write_text("# Other asset\n")
+            result = run_validator(skill)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("references/OTHER.md is not lowercase kebab-case", result.stdout)
+            self.assertNotIn("references/PREPARATION.md is not lowercase kebab-case", result.stdout)
+
+    def test_vista_evals_validate_the_member_format(self) -> None:
+        with tempfile.TemporaryDirectory() as scratch:
+            skill = make_skill(Path(scratch), "vista-skill")
+            evals = skill / "evals" / "evals.json"
+            case = {"id": "example", "query": "Design a site.", "should_trigger": True,
+                    "expectations": ["Select the design route."]}
+            evals.write_text(json.dumps([case]))
+            self.assertEqual(run_validator(skill).returncode, 0)
+            case["should_trigger"] = "true"
+            evals.write_text(json.dumps([case, case]))
+            result = run_validator(skill)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("no boolean should_trigger", result.stdout)
+            self.assertIn("duplicate string id", result.stdout)
+
     def test_missing_directory_fails(self) -> None:
         result = run_validator(Path("/nonexistent-skill-dir"))
         self.assertEqual(result.returncode, 1)

@@ -64,10 +64,9 @@ Under JSON exchange a genuine ambiguity emits as the `mode-selection` `choice` p
 
 ## Procedure
 
-1. Run the once-per-session Skill Update Check from `SKILL.md` - the gate applies in every mode.
-2. Confirm the router state - the loaded `SKILL.md` is the enabled state,
+1. Confirm the router state - the loaded `SKILL.md` is the enabled state,
    re-read it when it may have changed during the session.
-3. Answer with the enablement response below, then wait for the next request.
+2. Answer with the enablement response below, then wait for the next request.
 
 ## Enablement Response
 
@@ -140,4 +139,4 @@ Write the response in the language of the request.
 Enable mode is the standby state. It precedes operation mode and maintenance mode.
 
 A task-bearing request that follows enters operation mode or maintenance mode per the mode rules in
-`SKILL.md`, without repeating the update check this session.
+`SKILL.md`.

@@ -75,6 +75,11 @@ Organize results by iteration:
 `benchmark.json` aggregates pass rates and deltas,
 and a `feedback.json` per case captures human review notes.
 
+For routing and disclosure cases, record the selected operation and file-open order.
+Grade whether each applicable prerequisite was read before the dependent action.
+Also record which later-phase or unrelated resources were opened early.
+Label walkthroughs as static checks and runtime traces as executed evidence.
+
 A with-skill gain is weighed against its token and time cost - a better result that triples cost is
 a different trade than a better result at the same cost.
 

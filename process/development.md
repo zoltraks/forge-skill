@@ -4,7 +4,7 @@
 
 > **Scope:** Standby-for-specification mode for developing this skill.
 >
-> **Key items:** trigger, start-up check, readiness report, specification, boundaries.
+> **Key items:** trigger, local readiness check, readiness report, specification, boundaries.
 
 This file is the contract for a development request aimed at forge-skill.
 
@@ -21,8 +21,7 @@ development mode is the named operation, never the default reading.
 
 ## Procedure
 
-1. Run the once-per-session `scripts/check-update.py` per `SKILL.md` - a skill whose check cannot
-   fast-forward is reported, never blocking the rest.
+1. Use the installed checkout.
 2. Report readiness - repository state, version,
    and any uncommitted in-flight work the tree carries.
 3. Wait for the described change.
@@ -47,5 +46,5 @@ maintenance path, and the flag alone never routes to the session-history gather.
   while "improve forge-skill" gathers lessons.
 - An `improvement` flag on the request arms the working mode above - it never triggers the
   session-review gather on its own.
-- Timing follows `process/operation-timing.md` - the start-up check is the operation the readiness
+- Timing follows `process/operation-timing.md` - the local readiness check is the operation the readiness
   report's closing line times.

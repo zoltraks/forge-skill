@@ -68,5 +68,7 @@ documents, never invented content. A skill shipped over gaps says where they are
 
 The update operation uses this file's machinery read-only: extract the new source's candidates,
 map them against the existing skill's sections,
-and deliver a proposed fold-in - which files gain what and why.
+and deliver a proposed fold-in identifying which files gain what and why.
+Apply the Operation Review in `references/instruction-patterns.md` to the proposed routes.
+Include affected prerequisites and a regression case for each proposed behavior change.
 Automatic rewriting of an existing skill is deferred, the proposal is the deliverable.

@@ -82,6 +82,9 @@ and the compaction candidates instead of the load profile.
 
 ### 3. Diagnose
 
+For router or procedure changes, record the affected phase and its prerequisites using
+the Operation Review in `references/instruction-patterns.md`.
+
 Load `references/optimization-patterns.md` - it defines the load-surface model, the finding classes,
 the restructure patterns, and the layout variants.
 
@@ -122,6 +125,8 @@ Re-run `--load-profile` and both validators on the mutated tree.
 
 Confirm the verification contract of `references/optimization-patterns.md` - every routed path
 resolves, every registered resource stays indexed, and no operation row, gate, or boundary was lost.
+Re-trace the affected phases and verify that each prerequisite remains reachable before use.
+Report behavioral evidence and estimated byte savings separately.
 
 ### 7. Report
 

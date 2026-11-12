@@ -249,13 +249,17 @@ def strip_code(content: str) -> str:
     return re.sub(r"`[^`\n]*`", "", without_fences)
 
 
-def validate_naming(root: Path, issues: list[str]) -> None:
+def validate_naming(root: Path, issues: list[str], profile: str) -> None:
+    compass_assets = {"COMPONENT.md", "MEMORY.md", "PREPARATION.md"}
     advisory: list[str] = []
     for directory in ("process", "references"):
         base = root / directory
         if not base.is_dir():
             continue
         for path in sorted(base.glob("*.md")):
+            if (profile == "astra" and root.name == "compass-skill"
+                    and directory == "references" and path.name in compass_assets):
+                continue
             if path.name in NAMING_EXEMPTIONS:
                 continue
             stem = path.stem
@@ -287,6 +291,29 @@ def validate_evals(root: Path, fields: dict[str, str], issues: list[str],
         data = json.loads(evals_file.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
         issue(f"evals/evals.json is not valid JSON: {error}", issues)
+        return
+    if profile == "astra" and root.name == fields.get("name") == "vista-skill" and isinstance(data, list):
+        identifiers = set()
+        if not data:
+            issue("Vista evals must contain at least one case", issues)
+        for position, item in enumerate(data, start=1):
+            if not isinstance(item, dict):
+                issue(f"Vista eval {position} is not an object", issues)
+                continue
+            identifier = item.get("id")
+            if not isinstance(identifier, str) or not identifier.strip() or identifier in identifiers:
+                issue(f"Vista eval {position} has a missing or duplicate string id", issues)
+            else:
+                identifiers.add(identifier)
+            if not isinstance(item.get("query"), str) or not item["query"].strip():
+                issue(f"Vista eval {position} has no query", issues)
+            if not isinstance(item.get("should_trigger"), bool):
+                issue(f"Vista eval {position} has no boolean should_trigger", issues)
+            expectations = item.get("expectations")
+            if not isinstance(expectations, list) or not expectations or any(
+                not isinstance(value, str) or not value.strip() for value in expectations
+            ):
+                issue(f"Vista eval {position} has no valid expectations", issues)
         return
     if not isinstance(data, dict) or not isinstance(data.get("evals"), list):
         issue("evals/evals.json must contain an evals array", issues)
@@ -346,7 +373,7 @@ def main() -> int:
         validate_frontmatter(root, fields, issues, args.profile)
         validate_body(root, body, issues)
         validate_structure(root, issues, args.profile)
-        validate_naming(root, issues)
+        validate_naming(root, issues, args.profile)
         validate_evals(root, fields, issues, args.profile)
         validate_json_files(root, issues)
 

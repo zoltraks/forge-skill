@@ -3,7 +3,7 @@
 ## Purpose
 
 > **Scope:** Standby-for-specification mode for developing this skill.
-> **Key items:** trigger, start-up check, readiness report, specification,
+> **Key items:** trigger, local readiness check, readiness report, specification,
 > boundaries.
 
 This file is the contract for a development request aimed at {{skill-name}}.
@@ -22,8 +22,7 @@ reading.
 
 ## Procedure
 
-1. Run the once-per-session `scripts/check-update.py` per `SKILL.md` - a skill
-   whose check cannot fast-forward is reported, never blocking the rest.
+1. Use the installed checkout.
 2. Report readiness - repository state, version, and any uncommitted in-flight
    work the tree carries.
 3. Wait for the described change.
@@ -42,5 +41,5 @@ and `docs/STYLE.md` through `process/skill-maintenance.md`.
   before.
 - Session review stays a separate operation - development mode delivers a
   described change, while "improve {{skill-name}}" gathers lessons.
-- Timing follows `process/operation-timing.md` - the start-up check is the
+- Timing follows `process/operation-timing.md` - the local readiness check is the
   operation the readiness report's closing line times.

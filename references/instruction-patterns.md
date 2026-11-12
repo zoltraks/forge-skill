@@ -11,8 +11,32 @@
 A generated skill teaches the agent how to approach a class of problems,
 not what to produce for one instance.
 
-Load this file in phase 2 when designing a generated skill's router and procedures - it is the
-quality bar the rule corpus is written against.
+Use the review below when designing a new skill, auditing an existing one, or verifying a patch.
+
+## Operation Review
+
+For each affected operation, trace the route from the request to verification.
+Record the request, selected procedure, phase, required file, and any condition that activates it.
+Follow the actual route against the proposed or current tree. Record missing links and conflicting
+requirements with their file locations. Treat an operation as unverified if its trace is incomplete.
+
+| Check             | Pass condition                                                                                                                                        |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Scope and trigger | A realistic request selects the intended operation. A close out-of-scope request does not.                                                            |
+| Entry and phase   | The agent can locate the first procedure directly and tell when each later phase begins.                                                              |
+| Required reading  | Each phase names its prerequisites. Conditional files identify their trigger. Every applicable prerequisite is available before the dependent action. |
+| Context           | Named files open directly. Indexes help select unspecified resources. Later phases, unrelated examples, and optional material stay deferred.          |
+| Tool use          | The procedure identifies the tool, invocation, prerequisites, inputs, outputs, side effects, and success or failure signal.                           |
+| Verification      | The operation states what to check and how to respond to a failed check or missing prerequisite.                                                      |
+| Compatibility     | Apply the target's resolved profile and repository rules. Astra-specific structure applies only to Astra members.                                     |
+
+Prioritize missing prerequisites, unclear sequencing, and behavioral regressions over context cost.
+When reducing context, move required material behind an explicit phase or condition and re-trace it.
+Record static route checks and model replays separately.
+
+Authoring rationale comes from the
+[Agent Skills specification](https://agentskills.io/specification) and
+[creator guidance](https://agentskills.io/skill-creation/best-practices).
 
 ## Procedures Over Declarations
 

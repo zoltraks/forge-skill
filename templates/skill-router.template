@@ -17,6 +17,25 @@ metadata:
 > **Type:** Root router
 > **Purpose:** {{skill-purpose}}
 
+## Task Entry
+
+| Request              | First step                                                                                                                                                                      |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Bare activation      | Follow [activation](process/skill-activation.md) and wait for a task.                                                                                                           |
+| List capabilities    | Read the [operations catalog](process/operations-catalog.md).                                                                                                                   |
+| Perform a task       | Identify the requested operation and target, then load its procedure and the resources it calls for.                                                                            |
+| Develop this skill   | Follow [development](process/development.md) and use [repository instructions](AGENTS.md) for maintenance.                                                                      |
+| Use improvement mode | Apply improvements surfaced by the work through the owning skill's maintenance procedure. A separate session-review request starts [session review](process/session-review.md). |
+| Use verbose mode     | Follow [timing and reporting](process/operation-timing.md) and expose pending questions through [JSON exchange](process/json-exchange.md).                                      |
+
+Read the selected procedure before acting. At each phase, read every file required for that
+phase, including conditional files once their conditions apply. Use a directory index when you
+need to discover a path. Defer later-phase material until that phase begins.
+
+Use the skill's procedures for its own files and the target repository's instructions for artifacts.
+When a procedure calls for a script, use its documented invocation and check the result. Read
+script source when reviewing, modifying, or diagnosing the script, or when its behavior is unclear.
+
 ## Modes
 
 - **Enable mode** - a bare activation phrase ("use {{skill-name}}", "work with
@@ -27,7 +46,7 @@ metadata:
   files - follow `process/skill-maintenance.md`, confirm readiness, and wait
   for the named operation.
 
-The update check below runs once per session in every mode.
+Use the installed skill for local operations.
 
 Load only the file a route names plus the files that file names in turn - the
 Resource Map's directory indexes resolve names on demand and are never bulk-read.
@@ -52,7 +71,7 @@ approval or is skipped per the mode rules.
 
 ## Skill Update Check
 
-Before any other step, once per session, run `python <skill-root>/scripts/check-update.py`,
+When explicitly asked to check upstream for this package, run `python <skill-root>/scripts/check-update.py`,
 where `<skill-root>` is the directory holding this `SKILL.md` - never the edited subject.
 
 Use `python3` when `python` is not on PATH.
@@ -89,6 +108,7 @@ when unsure. The merge fast-forwards to the reported `tip_sha`, never a later ti
 {{operations-table}}
 | ask for parameters "as JSON" or name a diagnostic mode                    | `process/json-exchange.md`                        |
 | name a verbose, informational, diagnostic, or timing mode on an operation | `process/operation-timing.md`                     |
+| check upstream for this skill                                             | Run the Skill Update Check above.                 |
 | list all operations or show all capabilities                              | `process/operations-catalog.md`                   |
 | change, extend, fix, or review this skill repository                      | `process/skill-maintenance.md` - maintenance mode |
 

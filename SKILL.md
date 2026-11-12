@@ -19,7 +19,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.4.5"
+  version: "0.4.6"
   author: Filip Golewski
 ---
 
@@ -45,6 +45,25 @@ archive before mutation, evidence before promotion.
 
 You keep mechanical work in scripts and judgment in the rule corpus.
 
+## Task Entry
+
+| Request              | First step                                                                                                                                                                      |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Bare activation      | Follow [activation](process/skill-activation.md) and wait for a task.                                                                                                           |
+| List capabilities    | Read the [operations catalog](process/operations-catalog.md).                                                                                                                   |
+| Perform a task       | Identify the requested operation and target, then load its procedure and the resources it calls for.                                                                            |
+| Develop this skill   | Follow [development](process/development.md) and use [repository instructions](AGENTS.md) for maintenance.                                                                      |
+| Use improvement mode | Apply improvements surfaced by the work through the owning skill's maintenance procedure. A separate session-review request starts [session review](process/session-review.md). |
+| Use verbose mode     | Follow [timing and reporting](process/operation-timing.md) and expose pending questions through [JSON exchange](process/json-exchange.md).                                      |
+
+Read the selected procedure before acting. At each phase, read every file required for that
+phase, including conditional files once their conditions apply. Use a directory index when you
+need to discover a path. Defer later-phase material until that phase begins.
+
+Use the skill's procedures for its own files and the target repository's instructions for artifacts.
+When a procedure calls for a script, use its documented invocation and check the result. Read
+script source when reviewing, modifying, or diagnosing the script, or when its behavior is unclear.
+
 ## Modes
 
 - **Enable mode** - a bare activation phrase ("use forge", "work with forge")
@@ -53,7 +72,7 @@ You keep mechanical work in scripts and judgment in the rule corpus.
 - **Maintenance mode** - "work on forge-skill" targets this package's own files - follow
   `process/skill-maintenance.md`, confirm readiness, and wait for the named operation.
 
-The update check below runs once per session in every mode.
+Use the installed skill for local operations.
 
 Load only the file a route names plus the files that file names in turn - the Resource Map's
 directory indexes resolve names on demand and are never bulk-read.
@@ -81,7 +100,8 @@ A separately gated action still requires its own approval or is skipped per the 
 
 ## Skill Update Check
 
-Before any other step, once per session, run `python <skill-root>/scripts/check-update.py`,
+When explicitly asked to check upstream for this package,
+run `python <skill-root>/scripts/check-update.py`,
 where `<skill-root>` is the directory holding this `SKILL.md` - never the edited subject.
 
 Use `python3` when `python` is not on PATH.
@@ -144,14 +164,16 @@ request mentions forge, and the target's own rules govern the target's files.
 | analyze a source for a future skill                           | `process/research-gathering.md` + `process/source-conversion.md`                                     |
 | generate a skill from an existing analysis or run state       | `process/forge-workflow.md` phases 2-4                                                               |
 | update an existing skill with a new source                    | `process/research-synthesis.md` - proposal only                                                      |
+| audit skill instructions, routing, or progressive disclosure  | `process/skill-housekeeping.md` - read-only audit                                                    |
 | housekeep, clean, or reorganize a skill or collection         | `process/skill-housekeeping.md`                                                                      |
 | optimize, slim, or reduce a named skill's context cost        | `process/skill-optimization.md`                                                                      |
 | compact or deduplicate a named skill's evals                  | `process/skill-optimization.md` + `scripts/compact-evals.py`                                         |
 | inventory skills across platform roots or check for drift     | `process/skill-housekeeping.md` + `audit-skill.py --discover`                                        |
 | repair, heal, fix, or improve a named external skill          | `process/skill-healing.md`                                                                           |
-| check a skill against the generation contract                 | `scripts/validate-skill.py` + `references/astra-conventions.md`                                      |
+| check a skill against the generation contract                 | `scripts/validate-skill.py` with the resolved layout profile                                         |
 | audit or repair a skill's question-surface contract           | `process/skill-housekeeping.md` or `process/skill-healing.md` + `references/interaction-contract.md` |
 | ask for intake parameters "as JSON" or name a diagnostic mode | `process/json-exchange.md`                                                                           |
+| check upstream for this skill                                 | Run the Skill Update Check above.                                                                    |
 | list all operations or show all capabilities                  | `process/operations-catalog.md`                                                                      |
 | name a verbose, informational, diagnostic, or timing mode     | `process/operation-timing.md`                                                                        |
 | inspect or re-render generation templates                     | `templates/` + `process/skill-template.md`                                                           |

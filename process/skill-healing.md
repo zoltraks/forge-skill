@@ -60,6 +60,8 @@ contract of `process/forge-workflow.md`.
 
 Score the skill against its own constraints: its `SKILL.md` contract, its evals where present,
 and the named defect or regression.
+Use the Operation Review in `references/instruction-patterns.md` for the affected path.
+Capture the original route, applicable reads, and observed failure before proposing a patch.
 
 Use structured failure tags - "missed-trigger", "contradiction",
 "stale- reference", "prose-question" - not regex heuristics over prose.
@@ -76,6 +78,9 @@ Each candidate records what it changes and the failure tag it addresses.
 Verify every candidate against an external verifier (below) before it touches the target:
 re-run the failing path, the target's own validation suite, or the recorded trace.
 
+For a changed route, replay the original case and an adjacent case.
+Check that required files were read before use and that deferred files stayed unopened.
+Use structural validation as supporting evidence for behavior changes.
 A patch that improves the target metric without regressing others passes the gate.
 A patch with no measurable improvement is not promoted - report it as inconclusive
 rather than applying it.

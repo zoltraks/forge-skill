@@ -23,36 +23,34 @@ Answer it directly instead of reproducing the table.
 The catalog is a query surface, not a task - no pipeline phase, housekeeping stage,
 or run-state machinery runs.
 
-When the catalog request is the session's first action,
-the once-per-session Skill Update Check from `SKILL.md` runs first.
-
-When it follows an activation or another task, the check is not repeated.
+Use the installed catalog for this query.
 
 ## The Catalog
 
 Answer with the operations table below, reproduced inline and re-aligned to source width when the
 request's language changes the cell text.
 
-| Family   | Operation          | What it covers                                              |
-|----------|--------------------|-------------------------------------------------------------|
-| Create   | create a skill     | research a topic and generate a complete skill document set |
-| Create   | spec skill         | portable, minimal, spec-conformant package                  |
-| Create   | plugin package     | Claude Code plugin or marketplace entry                     |
-| Create   | collection         | generate an index plus independently owned member skills    |
-| Source   | analyze a source   | convert and survey a document into an evidence report       |
-| Source   | convert a source   | local source conversion through an approved converter       |
-| Source   | generate from run  | render a skill from recorded analysis or resumed run state  |
-| Source   | update with source | propose folding a new source into an existing skill         |
-| Layout   | migrate layouts    | adopt into astra, export to spec, package as plugin         |
-| Govern   | housekeep          | clean or reorganize a skill or collection                   |
-| Govern   | optimize           | context-diet restructure of a named skill                   |
-| Govern   | inventory          | multi-root skill discovery and drift check                  |
-| Govern   | heal               | evidence-gated repair of a named external skill             |
-| Govern   | validate           | check a skill against the generation contract               |
-| Enable   | enablement         | bare-activation standby with version and operations table   |
-| Enable   | self-update check  | once-per-session upstream check                             |
-| Enable   | operations catalog | this table                                                  |
-| Maintain | skill maintenance  | changes and session reviews of this skill repository        |
+| Family   | Operation          | What it covers                                                    |
+|----------|--------------------|-------------------------------------------------------------------|
+| Create   | create a skill     | research a topic and generate a complete skill document set       |
+| Create   | spec skill         | portable, minimal, spec-conformant package                        |
+| Create   | plugin package     | Claude Code plugin or marketplace entry                           |
+| Create   | collection         | generate an index plus independently owned member skills          |
+| Source   | analyze a source   | convert and survey a document into an evidence report             |
+| Source   | convert a source   | local source conversion through an approved converter             |
+| Source   | generate from run  | render a skill from recorded analysis or resumed run state        |
+| Source   | update with source | propose folding a new source into an existing skill               |
+| Layout   | migrate layouts    | adopt into astra, export to spec, package as plugin               |
+| Govern   | audit              | read-only evaluation of instructions, routes, and package hygiene |
+| Govern   | housekeep          | clean or reorganize a skill or collection                         |
+| Govern   | optimize           | context-diet restructure of a named skill                         |
+| Govern   | inventory          | multi-root skill discovery and drift check                        |
+| Govern   | heal               | evidence-gated repair of a named external skill                   |
+| Govern   | validate           | check a skill against the generation contract                     |
+| Enable   | enablement         | bare-activation standby with version and operations table         |
+| Enable   | self-update check  | explicit upstream check                                           |
+| Enable   | operations catalog | this table                                                        |
+| Maintain | skill maintenance  | changes and session reviews of this skill repository              |
 
 ## Response
 

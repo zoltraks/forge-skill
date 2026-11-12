@@ -24,10 +24,7 @@ Answer it directly instead of reproducing the table.
 The catalog is a query surface, not a task - no document-type resolution,
 parameter resolution, or methodology loading runs.
 
-When the catalog request is the session's first action, the once-per-session
-Skill Update Check from `SKILL.md` runs first.
-
-When it follows an activation or another task, the check is not repeated.
+Use the installed catalog for this query.
 
 ## The Catalog
 

@@ -495,6 +495,39 @@
         "The compacted suite still covers every routed operation, gate, and boundary it covered before.",
         "A snapshot archives the original file before the rewrite."
       ]
+    },
+    {
+      "id": 366,
+      "prompt": "Create a portable skill for reviewing invoice spreadsheets. Some sheets need an extra reconciliation reference.",
+      "expected_output": "The staged portable skill routes directly to the selected operation and reads reconciliation guidance only when relevant.",
+      "files": [],
+      "expectations": [
+        "The compatibility check uses the spec profile without requiring Astra-specific files.",
+        "The staged route identifies required reads and names the condition that activates reconciliation.",
+        "The report distinguishes a static walkthrough from an executed behavioral evaluation."
+      ]
+    },
+    {
+      "id": 367,
+      "prompt": "Audit an existing skill where the publish phase reads a policy file only after publishing.",
+      "expected_output": "A read-only audit identifies the prerequisite ordering defect and cites the responsible procedure.",
+      "files": [],
+      "expectations": [
+        "The report identifies the affected route, phase, policy path, and dependent action.",
+        "A passing structural validator does not clear the ordering defect.",
+        "The audit does not modify the target."
+      ]
+    },
+    {
+      "id": 368,
+      "prompt": "Slim down this skill router by moving its deployment checklist to a phase-specific reference.",
+      "expected_output": "The optimization keeps the checklist mandatory before deployment and records context savings separately.",
+      "files": [],
+      "expectations": [
+        "The old and proposed routes preserve all prerequisites before the dependent action.",
+        "The deployment checklist remains deferred until its phase begins.",
+        "The report separates byte savings, static validation, and behavioral replay results."
+      ]
     }
   ]
 }

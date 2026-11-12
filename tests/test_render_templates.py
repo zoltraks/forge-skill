@@ -162,6 +162,15 @@ class RenderTemplatesTests(unittest.TestCase):
                 "--context", str(context), "--target", str(target), "--write",
             )
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            router = (target / "SKILL.md").read_text(encoding="utf-8")
+            task_entry = router.split("## Task Entry", 1)[1].split("\n## ", 1)[0]
+            for procedure in (
+                "skill-activation", "operations-catalog", "development",
+                "session-review", "operation-timing", "json-exchange",
+            ):
+                self.assertIn(f"(process/{procedure}.md)", task_entry)
+            self.assertIn("read every file required", task_entry)
+            self.assertIn("Defer later-phase material", task_entry)
             validator = subprocess.run(
                 [sys.executable, str(REPO_ROOT / "scripts" / "validate-skill.py"),
                  str(target)],

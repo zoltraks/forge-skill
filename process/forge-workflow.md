@@ -121,9 +121,12 @@ Map the synthesized knowledge onto the skill contract:
    instructions follow `references/instruction-patterns.md`,
    the trigger surface follows `references/trigger-design.md`,
    and the eval set follows `references/evaluation-design.md`.
-4. Fill the profile-scoped compatibility matrix from `process/skill-template.md` - every row passes
+4. Apply the Operation Review in `references/instruction-patterns.md` to each designed route.
+   Record the mandatory reads, conditions, and verification step in `architecture.md`.
+   Include a realistic match and near miss in the eval plan.
+5. Fill the profile-scoped compatibility matrix from `process/skill-template.md` - every row passes
    or carries a recorded reason.
-5. Write the template input JSON: every placeholder value the renderer needs,
+6. Write the template input JSON: every placeholder value the renderer needs,
    each derived from verified evidence or an explicit default - never filler.
 
 Output: `architecture.md` and `template-input.json` in the run workspace.
@@ -137,19 +140,24 @@ Checkpoint: the design summary resolves per the interaction mode.
    `single` set, `spec` renders the `spec` set,
    and `plugin` renders the `spec` set into `skills/<skill-name>/` plus the `plugin` set into the
    plugin root. A marketplace request adds the `marketplace` set into the marketplace root.
-2. Run `scripts/validate-skill.py --profile <profile>` on each staged skill - a failed stage never
-   reaches the target. An editorial Markdown battery applies over every staged Markdown file where
-   the host provides one - long context values and prose wrapping around inserted placeholders are
-   recurring defects, and a `description: >-` frontmatter scalar past 100 characters needs manual
-   folding the renderer does not do.
-3. Write the staged tree to the approved target directory.
+2. Run `scripts/validate-skill.py --profile <profile>` on each staged skill (use `spec` for plugin
+   members). A failed stage never reaches the target.
+   An editorial Markdown battery applies over every staged Markdown file where the host provides one
+   - long context values and prose wrapping around inserted placeholders are recurring defects,
+   and a `description: >-` frontmatter scalar past 100 characters needs manual folding the
+   renderer does not do.
+3. Trace the staged routes against the architecture review. Correct missing prerequisites,
+   unresolved conditions, and broken paths before delivery.
+   Run available behavioral cases per `references/evaluation-design.md`. Record skipped cases
+   and report static trace results separately from model replay.
+4. Write the staged tree to the approved target directory.
    An existing target needs its own approval, or is skipped in fully autonomous mode.
 
 ## Phase 4: Finalization
 
 1. Run the validation suite on the final tree:
-   `scripts/validate-skill.py --profile <profile>` on each skill root,
-   plus a second pass confirming every registered resource exists and every
+   `scripts/validate-skill.py --profile <profile>` on each skill root (use `spec` for plugin
+   members), plus a second pass confirming every registered resource exists and every
    referenced path resolves.
 2. Report the artifact inventory, the `Decisions:` recap, validation results,
    and the next steps - which include the user-side commit and publish actions Forge never performs.
