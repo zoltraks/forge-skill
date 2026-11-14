@@ -126,6 +126,34 @@ and the human classification stays the same:
   not by path or stem. The audit counts a file as referenced when its leading `<word>-<number>`
   identifier appears in the corpus, so such records no longer surface as orphans.
 
+### Role-Directory Placeholders
+
+A placeholder inconsistency exists when a skill records that a directory role's physical name
+varies - through a naming-convention section, resolved-directory phrasing, a `<role>` token
+vocabulary, or default-mapping qualifiers - and prescriptive prose elsewhere names one concrete
+path for that role as if it were fixed.
+
+Detection classes:
+
+- **Prescriptive hardcode** - an instruction, stage step, or template field names a literal path
+  such as `docs/review/<version>/` where the skill's own convention resolves the role per
+  repository. The defect is the instruction, not the labeled example beside it.
+- **Missing token vocabulary** - the skill records variance but has no `<role>` vocabulary and
+  keeps repeating long resolved-directory fallbacks, where a recorded token would carry the
+  mapping once.
+
+Sanctioned shapes classify `FALSE_POSITIVE`: a concrete path inside a labeled default-mapping
+table or scaffold command block, an example-convention list showing name variants such as
+`docs/reviews/` or `docs/Reviews/`, and any literal path in a skill that records no naming
+variance - there the concrete name is the convention itself.
+
+The repair follows the skill's own vocabulary: the recorded `<role>` token where one exists,
+"the resolved <role> directory" phrasing where it does not,
+or a proposal to define the token set when variance is recorded without one.
+
+Prescriptive hardcodes classify `MEDIUM` - the fix shape varies and the
+prescriptive-versus-example boundary needs human confirmation.
+
 ## Gap Classes
 
 A gap is information the skill should provide but does not:
@@ -249,6 +277,7 @@ Every finding carries a confidence class that gates its resolution:
 | Semantic merge                          | Never                        | Always                       |
 | Missing operations catalog              | Never                        | Always                       |
 | Interaction-contract repair             | Never                        | Always                       |
+| Role-directory placeholder repair       | Never                        | Always                       |
 | Evals suite compaction                  | Never                        | Always                       |
 | Behavioral change, even framed as a fix | Never                        | Always, plus replay evidence |
 

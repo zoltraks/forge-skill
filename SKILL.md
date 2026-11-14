@@ -19,7 +19,7 @@ compatibility: >-
   required for local sources, remote fetching, cloning, and package
   installation require explicit approval.
 metadata:
-  version: "0.4.6"
+  version: "0.4.7"
   author: Filip Golewski
 ---
 
@@ -164,7 +164,7 @@ request mentions forge, and the target's own rules govern the target's files.
 | analyze a source for a future skill                           | `process/research-gathering.md` + `process/source-conversion.md`                                     |
 | generate a skill from an existing analysis or run state       | `process/forge-workflow.md` phases 2-4                                                               |
 | update an existing skill with a new source                    | `process/research-synthesis.md` - proposal only                                                      |
-| audit skill instructions, routing, or progressive disclosure  | `process/skill-housekeeping.md` - read-only audit                                                    |
+| audit skill instructions, routing, placeholder consistency, or progressive disclosure | `process/skill-housekeeping.md` - read-only audit                            |
 | housekeep, clean, or reorganize a skill or collection         | `process/skill-housekeeping.md`                                                                      |
 | optimize, slim, or reduce a named skill's context cost        | `process/skill-optimization.md`                                                                      |
 | compact or deduplicate a named skill's evals                  | `process/skill-optimization.md` + `scripts/compact-evals.py`                                         |

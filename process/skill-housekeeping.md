@@ -111,6 +111,8 @@ Trace the affected routes, report any sampled scope, and include evidence for ea
   or a resolved collection contract classifies `FALSE_POSITIVE`, unrecorded divergence is a finding.
 - Interaction-contract findings - a skill missing or partially carrying question-surface rules -
   load `references/interaction-contract.md` for the detection classes and per-layout repair shapes.
+- Placeholder-consistency findings - prescriptive prose naming a concrete directory path where
+  the skill records naming-convention variance - classify per `references/skill-hygiene.md`.
 - Classify every finding `HIGH`, `MEDIUM`, or `FALSE_POSITIVE` per the confidence matrix.
 
 ### 4. Plan

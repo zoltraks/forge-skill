@@ -528,6 +528,18 @@
         "The deployment checklist remains deferred until its phase begins.",
         "The report separates byte savings, static validation, and behavioral replay results."
       ]
+    },
+    {
+      "id": 369,
+      "prompt": "Audit a skill that records a naming-convention section allowing plural, nested, or capitalized role-directory names while its workflow prose instructs 'record the verdict in docs/review/<version>/'.",
+      "expected_output": "The read-only audit reports a placeholder-consistency finding per references/skill-hygiene.md - prescriptive prose hardcodes one physical name where the skill's own convention leaves the role's name variable - and proposes the placeholder-token or resolved-directory repair while excluding labeled default-mapping examples.",
+      "files": [],
+      "expectations": [
+        "The finding cites the prescriptive line and the variance-recording section as evidence.",
+        "Concrete paths inside labeled default-mapping tables or scaffold examples classify FALSE_POSITIVE and are not reported as defects.",
+        "The repair proposal follows the skill's recorded placeholder vocabulary or resolved-directory phrasing.",
+        "The finding classifies MEDIUM and the audit does not modify the target."
+      ]
     }
   ]
 }

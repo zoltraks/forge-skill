@@ -1,5 +1,38 @@
 # Changelog
 
+## [0.4.7] - 2026-11-14
+
+### Added
+
+- `references/skill-hygiene.md` - the role-directory placeholder consistency class:
+  prescriptive-hardcode and missing-token-vocabulary detection, sanctioned false-positive
+  shapes, vocabulary-following repair shapes, and a human-approval apply gate.
+- `process/skill-housekeeping.md` - the placeholder-consistency audit check.
+- `evals/evals.json` - eval 369 locks the placeholder-consistency finding and its exclusions.
+
+### Changed
+
+- `SKILL.md` - the audit operations row names placeholder consistency.
+- `CHANGELOG.md` - the `[0.4.6]` entry is anchored retroactively, the 0.4.6 set shipped
+  without it.
+
+## [0.4.6] - 2026-11-13
+
+### Added
+
+- `SKILL.md` - a shared task-entry router table and the explicit upstream update check.
+- Operation reviews across `process/forge-workflow.md`, `process/skill-housekeeping.md`,
+  `process/skill-healing.md`, and `process/skill-optimization.md` - staged-route verification
+  covering route prerequisites, conditional reads, and deferred context.
+- `evals/evals.json` - regression evals for the staged-route reviews.
+
+### Changed
+
+- `process/operations-catalog.md`, `process/development.md`, `process/skill-activation.md`,
+  `process/operation-timing.md`, `process/research-synthesis.md`,
+  `references/astra-conventions.md`, `references/evaluation-design.md`,
+  `references/instruction-patterns.md` - alignment with the router and review contracts.
+
 ## [0.4.5] - 2026-11-11
 
 ### Added
